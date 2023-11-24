@@ -5,7 +5,7 @@ import Page3 from "../utils/Page3";
 import Page4 from "../utils/Page4";
 
 export const routes = [
-    { path: "/report", component: Home },
+    { path: "/", component: Home },
     // navigation page
     { path: "/page1", component: Page1 },
     { path: "/page2", component: Page2 },

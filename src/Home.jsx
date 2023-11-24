@@ -42,7 +42,7 @@ const Home = () => {
         // Component 3
         pdf.addPage();
         const img3 = await generateImage(pageRefs.page3);
-        pdf.addImage(img3, 'PNG', 0, 0);
+        pdf.addImage(img3, 'JPG', 0, 0);
 
         // Component 4
         pdf.addPage();
