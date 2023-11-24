@@ -2,6 +2,22 @@ import React, { useEffect, useState } from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from "../services/configService";
+function layNgayThangNamHomNay() {
+    const ngayHienTai = new Date();
+    const ngay = ngayHienTai.getDate();
+    const thang = ngayHienTai.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0
+    const nam = ngayHienTai.getFullYear();
+
+    // Format ngày, tháng, năm nếu cần
+    const ngayThangNam = `${ngay}/${thang}/${nam}`;
+
+    return ngayThangNam;
+}
+
+// Sử dụng hàm
+const homNay = layNgayThangNamHomNay();
+
+
 const Page1 = () => {
     const [newsForeign, setNewsForeign] = useState();
     const [newsDomestic, setNewsDomestic] = useState();
@@ -52,13 +68,13 @@ const Page1 = () => {
     return (
         <div className="h-[1480px] w-[800px]  ">
             <div className="header">
-                <Header date={"21/11/2023"} type={1} />
+                <Header date={homNay} type={1} />
             </div>
             <div className="content-top w-[790px] h-[430px] z-10 relative mt-5  ">
                 <div
                     className={` flex justify-between w-full h-[80%] bg-worldBackground bg-no-repeat bg-cover bg-center `}
                 >
-                    <div className="content-top_left w-[48%]">
+                    <div className="content-top_left w-[45%] translate-x-[15px] ">
                         <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1 ">
                             QUỐC TẾ
                         </h2>
@@ -89,11 +105,11 @@ const Page1 = () => {
                 </div>
             </div>
 
-            <div className="content-bot w-[790px] h-[461px] z-10 relative  flex  bg-cityBackground bg-no-repeat bg-cover ">
+            <div className="content-bot w-[790px] h-[461px] z-10 relative  flex justify-between  bg-cityBackground bg-no-repeat bg-cover ">
                 <div>
 
                 </div>
-                <div className="content-bot_left h-full w-[48%] translate-y-[-60px] ">
+                <div className="content-bot_left h-full w-[45%] translate-y-[-60px] ">
                     <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
                         DOANH NGHIỆP
                     </h2>
