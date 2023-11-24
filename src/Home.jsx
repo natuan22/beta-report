@@ -7,7 +7,6 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 const Home = () => {
-    const [queryImgStock, setQueryImgStock] = useState('')
     const pageRefs = {
         page1: useRef(null),
         page2: useRef(null),
@@ -37,18 +36,17 @@ const Home = () => {
         // Component 2
         pdf.addPage();
         const img2 = await generateImage(pageRefs.page2);
-        pdf.addImage(img2, 'PNG', 0, -5);
+        pdf.addImage(img2, 'PNG', 0, 0);
 
         // Component 3
         pdf.addPage();
         const img3 = await generateImage(pageRefs.page3);
-        pdf.addImage(img3, 'JPG', 0, 0);
+        pdf.addImage(img3, 'PNG', 0, 0);
 
         // Component 4
         pdf.addPage();
         const img4 = await generateImage(pageRefs.page4);
         pdf.addImage(img4, 'PNG', 0, 0);
-
         pdf.save('BetaNews.pdf');
     };
 
@@ -57,9 +55,6 @@ const Home = () => {
     }, []);
 
 
-    const handleOnChangQueryImg = () => {
-
-    }
 
 
     return (
@@ -81,7 +76,6 @@ const Home = () => {
 
 
             <div>
-                <input type="text" />
                 <button onClick={generatePDF}>Tạo PDF</button>
             </div>
         </div>

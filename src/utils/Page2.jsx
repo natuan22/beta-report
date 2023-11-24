@@ -3,7 +3,6 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from '../services/configService';
 import { getColorBaseOnValue } from '../helper/getColorBaseOnValue';
-const url = 'http://192.168.9.145:3002/'
 const Page2 = () => {
     const [rate, setRate] = useState()
     const [interestRate, setInterestRate] = useState()
@@ -96,7 +95,7 @@ const Page2 = () => {
                                 return (
                                     <tr>
                                         <td className='text-center px-2 py-1 font-bold flex items-center'>
-                                            <img src={`${url}${item.img}`} alt="icon" width={20} height={20} />
+                                            <img src={`/${item.code}.png`} alt="icon" width={20} height={20} />
                                             {item.code}
                                         </td>
                                         <td className='text-center px-2 py-1'>{(item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}</td>
@@ -170,7 +169,7 @@ const Page2 = () => {
                 </div>
             </div>
 
-            <div className="content-bot w-[790px] h-[300px] z-10 relative ml-2  ">
+            <div className="content-bot w-[790px] h-[320px] z-10 relative ml-2  ">
                 <div className='w-[760px] translate-x-[10px]'>
                     <h2 className='text-[16px] font-bold text-[#0155B7] text-center m-1'>Thị trường chứng khoán Việt Nam và Quốc tế</h2>
                     <table className='bg-transparent border-collapse w-[100%]'>

@@ -59,7 +59,7 @@ const Page1 = () => {
                     className={` flex justify-between w-full h-[80%] bg-worldBackground bg-no-repeat bg-cover bg-center `}
                 >
                     <div className="content-top_left w-[48%]">
-                        <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center">
+                        <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1 ">
                             QUỐC TẾ
                         </h2>
                         <div className="newsForeign ">
@@ -73,7 +73,7 @@ const Page1 = () => {
                         </div>
                     </div>
                     <div className="content-top_right w-[48%] bg-vnBackground bg-no-repeat bg-[length:220px_260px] bg-right-bottom  mr-5 ">
-                        <h2 className="titile font-[800] text-[20px] text-[#0155B7]  text-center">
+                        <h2 className="titile font-[800] text-[20px] text-[#0155B7]  text-center border-1 border-x-0 border-solid border-collapse border-[#116DDF] py-1">
                             TRONG NƯỚC
                         </h2>
                         <div className="newsDomestic ">
@@ -94,7 +94,7 @@ const Page1 = () => {
 
                 </div>
                 <div className="content-bot_left h-full w-[48%] translate-y-[-60px] ">
-                    <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center">
+                    <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
                         DOANH NGHIỆP
                     </h2>
                     <div className="newsEnterpise">
@@ -110,7 +110,7 @@ const Page1 = () => {
                     </div>
                 </div>
                 <div className="content-bot_left h-full w-[48%] ml-3 translate-y-[-60px]">
-                    <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center">
+                    <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1" >
                         LỊCH SỰ KIỆN
                     </h2>
                     <div className="events">
