@@ -74,7 +74,7 @@ const Home = () => {
 
 
 
-            <button onClick={generatePDF}>Tạo PDF và Xuất Hình Ảnh</button>
+            <button onClick={generatePDF}>Tạo PDF</button>
         </div>
     );
 };
