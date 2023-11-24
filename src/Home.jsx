@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Page1 from './utils/Page1';
 import Page2 from './utils/Page2';
 import Page3 from './utils/Page3';
@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 const Home = () => {
+    const [queryImgStock, setQueryImgStock] = useState('')
     const pageRefs = {
         page1: useRef(null),
         page2: useRef(null),
@@ -55,6 +56,12 @@ const Home = () => {
         // Do any additional setup if needed
     }, []);
 
+
+    const handleOnChangQueryImg = () => {
+
+    }
+
+
     return (
         <div>
             {/* Các components được bao bọc trong div với ref để sử dụng html2canvas */}
@@ -73,8 +80,10 @@ const Home = () => {
 
 
 
-
-            <button onClick={generatePDF}>Tạo PDF</button>
+            <div>
+                <input type="text" />
+                <button onClick={generatePDF}>Tạo PDF</button>
+            </div>
         </div>
     );
 };
