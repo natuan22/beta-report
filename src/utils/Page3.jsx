@@ -20,7 +20,6 @@ const Page3 = () => {
         fetchData();
     }, []);
 
-    console.log(data);
     return (
         <div className="h-[1480px] w-[800px] ">
             <div className="header">

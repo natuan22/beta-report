@@ -5,12 +5,11 @@ import Page3 from './utils/Page3';
 import Page4 from './utils/Page4';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import { https } from './services/configService';
 import { homNay } from './helper/getDate';
 import { Button } from '@mui/material';
 
 const Home = () => {
-    const [dataNewsDomestic, setDataNewsDomestic] = useState()
+
     const pageRefs = {
         page1: useRef(null),
         page2: useRef(null),
@@ -18,77 +17,89 @@ const Home = () => {
         page4: useRef(null),
     };
 
-    const generateImage = async (pageRef) => {
-        const canvas = await html2canvas(pageRef.current, { width: 800, height: 1480 }); // Kích thước A4
+
+    const generateImage = async (pageRef, height) => {
+        const canvas = await html2canvas(pageRef.current, { width: 800, height }); // Kích thước A4
         return canvas.toDataURL('image/png');
     };
 
-    // const downloadImage = async (pageNumber) => {
-    //     const image = await generateImage(pageRefs[`page${pageNumber}`]);
-    //     const link = document.createElement('a');
-    //     link.href = image;
-    //     link.download = `Page${pageNumber}.png`;
-    //     link.click();
-    // };
+    const downloadImages = async () => {
+        const img1 = await generateImage(pageRefs.page1, 1121);
+        const img2 = await generateImage(pageRefs.page2, 1121);
+        const img3 = await generateImage(pageRefs.page3, 1121);
+        const img4 = await generateImage(pageRefs.page4, 1121);
 
-    const generatePDF = async () => {
-        const pdf = new jsPDF()
-        // Component 1
-        const img1 = await generateImage(pageRefs.page1);
-        pdf.addImage(img1, 'PNG', 0, 0);
+        const link1 = document.createElement('a');
+        link1.href = img1;
+        link1.download = 'BetaMorningNews-Trang1.png';
+        link1.click();
 
-        // Component 2
-        pdf.addPage();
-        const img2 = await generateImage(pageRefs.page2);
-        pdf.addImage(img2, 'PNG', 0, 0);
+        const link2 = document.createElement('a');
+        link2.href = img2;
+        link2.download = 'BetaMorningNews-Trang2.png';
+        link2.click();
 
-        // Component 3
-        pdf.addPage();
-        const img3 = await generateImage(pageRefs.page3);
-        pdf.addImage(img3, 'PNG', 0, 0);
+        const link3 = document.createElement('a');
+        link3.href = img3;
+        link3.download = 'BetaMorningNews-Trang3.png';
+        link3.click();
 
-        // Component 4
-        pdf.addPage();
-        const img4 = await generateImage(pageRefs.page4);
-        pdf.addImage(img4, 'PNG', 0, 0);
-        pdf.save(`BetaNews-${homNay}.pdf`);
+        const link4 = document.createElement('a');
+        link4.href = img4;
+        link4.download = 'BetaMorningNews-Trang4.png';
+        link4.click();
     };
 
-    useEffect(() => {
-        const fetchDataNewsDomestic = async () => {
-            try {
-                const response = await https.get('api/v1/report/tin-quoc-te')
+    const generatePDF = async () => {
+        const pdf = new jsPDF();
+        const img1 = await generateImage(pageRefs.page1, 1480);
+        const img2 = await generateImage(pageRefs.page2, 1480);
+        const img3 = await generateImage(pageRefs.page3, 1480);
+        const img4 = await generateImage(pageRefs.page4, 1480);
 
-                setDataNewsDomestic(response.data.data)
+        pdf.addImage(img1, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img2, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img3, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img4, 'PNG', 0, 0);
+        pdf.save(`BetaMorningNews-${homNay}.pdf`);
+    };
 
-            } catch (err) {
-                console.log(err)
 
-            }
-        }
-    }, []);
+
+
+
+
 
 
 
 
     return (
-        <div>
-            <div ref={pageRefs.page1}>
-                <Page1 />
-            </div>
-            <div ref={pageRefs.page2}>
-                <Page2 />
-            </div>
-            <div ref={pageRefs.page3}>
-                <Page3 />
-            </div>
-            <div ref={pageRefs.page4}>
-                <Page4 />
-            </div>
+        <div >
 
-            <div className='grid place-items-center '>
-                <Button onClick={generatePDF} variant="contained">
+            <div>
+                <div ref={pageRefs.page1}>
+                    <Page1 />
+                </div>
+                <div ref={pageRefs.page2}>
+                    <Page2 />
+                </div>
+                <div ref={pageRefs.page3}>
+                    <Page3 />
+                </div>
+                <div ref={pageRefs.page4}>
+                    <Page4 />
+                </div>
+
+            </div>
+            <div className='flex justify-evenly w-[50%] mb-5'>
+                <Button color="success" onClick={generatePDF} variant="contained">
                     Tạo PDF
+                </Button>
+                <Button color="primary" onClick={downloadImages} variant="contained">
+                    Tải ảnh
                 </Button>
             </div>
         </div>

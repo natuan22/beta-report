@@ -3,6 +3,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from "../services/configService";
 import { homNay } from "../helper/getDate";
+import DialogNews from "../component/DialogNews";
 
 
 
@@ -54,7 +55,14 @@ const Page1 = () => {
     }, []);
 
     return (
-        <div className="h-[1480px] w-[800px]  ">
+        <div className="h-[1480px] w-[800px] relative  ">
+            <div className="absolute top-[30%] right-0 translate-x-[300px] ">
+                <div className="flex flex-col justify-between h-[200px]">
+                    <DialogNews type={'quốc tế'} query={'quoc-te'} />
+                    <DialogNews type={'trong nước'} query={'trong-nuoc'} />
+                    <DialogNews type={'doanh nghiệp'} query={'doanh-nghiep'} />
+                </div>
+            </div>
             <div className="header">
                 <Header date={homNay} type={1} />
             </div>
