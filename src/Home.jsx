@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { https } from './services/configService';
 import { homNay } from './helper/getDate';
+import { Button } from '@mui/material';
 
 const Home = () => {
     const [dataNewsDomestic, setDataNewsDomestic] = useState()
@@ -72,7 +73,6 @@ const Home = () => {
 
     return (
         <div>
-            {/* Các components được bao bọc trong div với ref để sử dụng html2canvas */}
             <div ref={pageRefs.page1}>
                 <Page1 />
             </div>
@@ -86,11 +86,10 @@ const Home = () => {
                 <Page4 />
             </div>
 
-
-
-            <div>
-                <button onClick={generatePDF}>Tạo PDF</button>
-
+            <div className='grid place-items-center '>
+                <Button onClick={generatePDF} variant="contained">
+                    Tạo PDF
+                </Button>
             </div>
         </div>
     );
