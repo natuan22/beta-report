@@ -77,8 +77,10 @@ const Page1 = () => {
                         <div className="newsForeign ">
                             <ul>
                                 {newsForeign?.map((item) => (
-                                    <li className="text-[14px] font-semibold mt-3">
-                                        {item.title}
+                                    <li className="text-[14px] font-semibold mt-3 ">
+                                        <span className="line-clamp-2">
+                                            {item.title}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
