@@ -169,7 +169,7 @@ const Page2 = () => {
                 </div>
             </div>
 
-            <div className="content-bot w-[790px] h-[320px] z-10 relative ml-2  ">
+            <div className="content-bot w-[790px] h-[300px] z-10 relative ml-2  ">
                 <div className='w-[760px] translate-x-[10px]'>
                     <h2 className='text-[16px] font-bold text-[#0155B7] text-center m-1'>Thị trường chứng khoán Việt Nam và Quốc tế</h2>
                     <table className='bg-transparent border-collapse w-[100%]'>
@@ -205,4 +205,4 @@ const Page2 = () => {
     )
 }
 
-export default Page2
+export default Page2    

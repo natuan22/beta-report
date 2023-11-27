@@ -2,20 +2,8 @@ import React, { useEffect, useState } from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from "../services/configService";
-function layNgayThangNamHomNay() {
-    const ngayHienTai = new Date();
-    const ngay = ngayHienTai.getDate();
-    const thang = ngayHienTai.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0
-    const nam = ngayHienTai.getFullYear();
+import { homNay } from "../helper/getDate";
 
-    // Format ngày, tháng, năm nếu cần
-    const ngayThangNam = `${ngay}/${thang}/${nam}`;
-
-    return ngayThangNam;
-}
-
-// Sử dụng hàm
-const homNay = layNgayThangNamHomNay();
 
 
 const Page1 = () => {
@@ -109,7 +97,7 @@ const Page1 = () => {
                 <div>
 
                 </div>
-                <div className="content-bot_left h-full w-[45%] translate-y-[-60px] ">
+                <div className="content-bot_left h-full w-[45%] translate-y-[-60px]  ">
                     <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
                         DOANH NGHIỆP
                     </h2>
@@ -125,7 +113,7 @@ const Page1 = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="content-bot_left h-full w-[48%] ml-3 translate-y-[-60px]">
+                <div className="content-bot_left h-full w-[48%] ml-3 translate-y-[-60px] translate-x-[-15px]">
                     <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1" >
                         LỊCH SỰ KIỆN
                     </h2>

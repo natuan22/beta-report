@@ -5,8 +5,11 @@ import Page3 from './utils/Page3';
 import Page4 from './utils/Page4';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { https } from './services/configService';
+import { homNay } from './helper/getDate';
 
 const Home = () => {
+    const [dataNewsDomestic, setDataNewsDomestic] = useState()
     const pageRefs = {
         page1: useRef(null),
         page2: useRef(null),
@@ -19,13 +22,13 @@ const Home = () => {
         return canvas.toDataURL('image/png');
     };
 
-    const downloadImage = async (pageNumber) => {
-        const image = await generateImage(pageRefs[`page${pageNumber}`]);
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = `Page${pageNumber}.png`;
-        link.click();
-    };
+    // const downloadImage = async (pageNumber) => {
+    //     const image = await generateImage(pageRefs[`page${pageNumber}`]);
+    //     const link = document.createElement('a');
+    //     link.href = image;
+    //     link.download = `Page${pageNumber}.png`;
+    //     link.click();
+    // };
 
     const generatePDF = async () => {
         const pdf = new jsPDF()
@@ -47,11 +50,21 @@ const Home = () => {
         pdf.addPage();
         const img4 = await generateImage(pageRefs.page4);
         pdf.addImage(img4, 'PNG', 0, 0);
-        pdf.save('BetaNews.pdf');
+        pdf.save(`BetaNews-${homNay}.pdf`);
     };
 
     useEffect(() => {
-        // Do any additional setup if needed
+        const fetchDataNewsDomestic = async () => {
+            try {
+                const response = await https.get('api/v1/report/tin-quoc-te')
+
+                setDataNewsDomestic(response.data.data)
+
+            } catch (err) {
+                console.log(err)
+
+            }
+        }
     }, []);
 
 
@@ -77,6 +90,7 @@ const Home = () => {
 
             <div>
                 <button onClick={generatePDF}>Tạo PDF</button>
+
             </div>
         </div>
     );
