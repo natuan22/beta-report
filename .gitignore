@@ -7,7 +7,6 @@
 
 
 #service
-/configService.js
 
 # testing
 /coverage
