@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = 'https://binfo.bsi.com.vn/'
+const apiUrl = process.env.local.REACT_APP_BASE_URL;
 
 export const https = axios.create({
     baseURL: apiUrl,
