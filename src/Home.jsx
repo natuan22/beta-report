@@ -31,7 +31,6 @@ const Home = () => {
         const img2 = await generateImage(pageRefs.page2, 1121);
         const img3 = await generateImage(pageRefs.page3, 1121);
         const img4 = await generateImage(pageRefs.page4, 1121);
-        const img5 = await generateImage(pageRefs.page5, 1121);
 
         const link1 = document.createElement('a');
         link1.href = img1;
@@ -53,21 +52,30 @@ const Home = () => {
         link4.download = 'BetaMorningNews-Trang4.png';
         link4.click();
 
+
+    };
+    const downloadImageMarketMorning = async () => {
+        const img5 = await generateImage(pageRefs.page5, 1121);
         const link5 = document.createElement('a');
         link5.href = img5;
-        link5.download = 'BetaMorningNews-Trang5.png';
+        link5.download = `Kết-phiên-sáng-${homNay}`;
         link5.click();
-    };
+    }
+    const generatePDFMarketMorning = async () => {
+        const pdf = new jsPDF();
+        const img5 = await generateImage(pageRefs.page5, 1480);
 
+        pdf.addImage(img5, 'PNG', 0, 0);
 
+        pdf.save(`Kết-phiên-sáng-${homNay}.pdf`);
 
+    }
     const generatePDF = async () => {
         const pdf = new jsPDF();
         const img1 = await generateImage(pageRefs.page1, 1480);
         const img2 = await generateImage(pageRefs.page2, 1480);
         const img3 = await generateImage(pageRefs.page3, 1480);
         const img4 = await generateImage(pageRefs.page4, 1480);
-        // const img5 = await generateImage(pageRefs.page5, 1480);
 
         pdf.addImage(img1, 'PNG', 0, 0);
         pdf.addPage();
@@ -76,8 +84,6 @@ const Home = () => {
         pdf.addImage(img3, 'PNG', 0, 0);
         pdf.addPage();
         pdf.addImage(img4, 'PNG', 0, 0);
-        // pdf.addPage();
-        // pdf.addImage(img5, 'PNG', 0, 0);
 
         pdf.save(`BetaMorningNews-${homNay}.pdf`);
     };
@@ -113,10 +119,10 @@ const Home = () => {
                 </Button>
 
 
-                <Button color="primary" onClick={generatePDF} variant="contained">
+                <Button color="primary" onClick={generatePDFMarketMorning} variant="contained">
                     Tạo PDF kết phiên sáng
                 </Button>
-                <Button color="primary" onClick={downloadImages} variant="contained">
+                <Button color="primary" onClick={downloadImageMarketMorning} variant="contained">
                     Tải ảnh kết phiên sáng
                 </Button>
             </div>

@@ -8,7 +8,6 @@ const getLineCorlor = (value) => {
     if (value < 0) return 'red'
 }
 const SplineChart = ({ data }) => {
-    console.log(data)
     const dataRender = data.chart.map(item => item.value)
     const chartOptions = {
         accessibility: {
@@ -52,7 +51,7 @@ const SplineChart = ({ data }) => {
             <h3 className='m-1 font-semibold text-[25px]'>{data.code}</h3>
             <p className={`${getColorBaseOnValue(data.change)} font-semibold m-1 text-[25px]`}>{data.change.toFixed(2)} <span className='text-[21px]'>điểm</span> </p>
             <p className={`${getColorBaseOnValue(data.perChange)} font-semibold m-1 text-[25px]`}>{data.perChange.toFixed(2)}%</p>
-            <div className='h-[150px] w-[230px] grid place-items-center  '>
+            <div className='h-[130px] w-[230px] grid place-items-center  '>
                 <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '100%', width: '90%' } }} />
             </div>
         </div>
