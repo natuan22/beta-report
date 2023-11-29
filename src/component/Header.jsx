@@ -5,7 +5,7 @@ import imgHeaderRight2 from '../app/asset/img/imgHeader2.png'
 
 
 
-const Header1 = ({ date, type }) => {
+const Header = ({ date, type }) => {
     return (
         <Fragment>
 
@@ -72,5 +72,5 @@ const Header1 = ({ date, type }) => {
     );
 };
 
-export default Header1;
+export default Header;
 

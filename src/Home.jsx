@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { homNay } from './helper/getDate';
 import { Button } from '@mui/material';
+import Page5 from './utils/Page5';
 
 const Home = () => {
 
@@ -15,10 +16,12 @@ const Home = () => {
         page2: useRef(null),
         page3: useRef(null),
         page4: useRef(null),
+        page5: useRef(null),
     };
 
 
     const generateImage = async (pageRef, height) => {
+        if (!pageRef.current) return null;
         const canvas = await html2canvas(pageRef.current, { width: 800, height }); // Kích thước A4
         return canvas.toDataURL('image/png');
     };
@@ -28,6 +31,7 @@ const Home = () => {
         const img2 = await generateImage(pageRefs.page2, 1121);
         const img3 = await generateImage(pageRefs.page3, 1121);
         const img4 = await generateImage(pageRefs.page4, 1121);
+        const img5 = await generateImage(pageRefs.page5, 1121);
 
         const link1 = document.createElement('a');
         link1.href = img1;
@@ -48,7 +52,14 @@ const Home = () => {
         link4.href = img4;
         link4.download = 'BetaMorningNews-Trang4.png';
         link4.click();
+
+        const link5 = document.createElement('a');
+        link5.href = img5;
+        link5.download = 'BetaMorningNews-Trang5.png';
+        link5.click();
     };
+
+
 
     const generatePDF = async () => {
         const pdf = new jsPDF();
@@ -56,6 +67,7 @@ const Home = () => {
         const img2 = await generateImage(pageRefs.page2, 1480);
         const img3 = await generateImage(pageRefs.page3, 1480);
         const img4 = await generateImage(pageRefs.page4, 1480);
+        // const img5 = await generateImage(pageRefs.page5, 1480);
 
         pdf.addImage(img1, 'PNG', 0, 0);
         pdf.addPage();
@@ -64,16 +76,11 @@ const Home = () => {
         pdf.addImage(img3, 'PNG', 0, 0);
         pdf.addPage();
         pdf.addImage(img4, 'PNG', 0, 0);
+        // pdf.addPage();
+        // pdf.addImage(img5, 'PNG', 0, 0);
+
         pdf.save(`BetaMorningNews-${homNay}.pdf`);
     };
-
-
-
-
-
-
-
-
 
 
     return (
@@ -92,14 +99,25 @@ const Home = () => {
                 <div ref={pageRefs.page4}>
                     <Page4 />
                 </div>
-
+                <div ref={pageRefs.page5}>
+                    <Page5 />
+                </div>
             </div>
             <div className='flex justify-evenly w-[50%] mb-5'>
                 <Button color="success" onClick={generatePDF} variant="contained">
                     Tạo PDF
                 </Button>
-                <Button color="primary" onClick={downloadImages} variant="contained">
+
+                <Button color="success" onClick={downloadImages} variant="contained">
                     Tải ảnh
+                </Button>
+
+
+                <Button color="primary" onClick={generatePDF} variant="contained">
+                    Tạo PDF kết phiên sáng
+                </Button>
+                <Button color="primary" onClick={downloadImages} variant="contained">
+                    Tải ảnh kết phiên sáng
                 </Button>
             </div>
         </div>

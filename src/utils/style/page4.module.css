@@ -1,6 +1,0 @@
-.text-blend {
-  background-color: #3490dc; /* Màu nền của văn bản */
-  color: white; /* Màu chữ */
-  padding: 10px;
-  mix-blend-mode: multiply; /* Chọn chế độ blend mode tùy chọn */
-}
