@@ -6,8 +6,10 @@
 .pnp.js
 
 
-#service
-/configService.js
+#services
+/services/configService.js
+
+
 # testing
 /coverage
 
