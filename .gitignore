@@ -7,7 +7,7 @@
 
 
 #services
-/services/configService.js
+/src/services/configService.js
 
 
 # testing
