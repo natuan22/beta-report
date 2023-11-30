@@ -4,7 +4,8 @@ const Footer = ({ pageNum }) => {
     return (
         <div className='h-[50px] w-[800px] bg-gradient-to-r from-blue-900 to-[#0054B4] relative' >
             <div className='flex items-center justify-between translate-y-[-18px] p-2 '>
-                <p className='text-[12px] text-white font-bold ml-2 leading-4'>Trang {pageNum}</p>
+                {pageNum === 5 ? <p className='text-[12px] text-white font-bold ml-2 leading-4'></p> : <p className='text-[12px] text-white font-bold ml-2 leading-4'>Trang {pageNum}</p>}
+
                 <p className='text-[14px] text-white font-bold mr-2 leading-4'>Đồng hành cùng BETA</p>
             </div>
 

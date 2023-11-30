@@ -118,8 +118,8 @@ const Page1 = () => {
                         <ul>
                             {
                                 newsEnterprise?.map(item => (
-                                    <li className="mb-2 ">
-                                        <span className="text-[12px] text-[#064BAD] font-bold">{item.ticker}:</span> <span className="text-[12px] font-semibold ">{item.title}</span>
+                                    <li className="mb-1 ">
+                                        <span className="text-[12px] text-[#064BAD] font-bold">{item.ticker}:</span> <span className="text-[12px] font-semibold  ">{item.title}</span>
                                     </li>
                                 ))
                             }
