@@ -116,7 +116,6 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
         }
     }
 
-    console.log(newsSelected.length)
 
     const handleDeleteNews = (index) => {
         // Sử dụng SweetAlert để xác nhận việc xóa
