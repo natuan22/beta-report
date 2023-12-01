@@ -263,7 +263,7 @@ const Page5 = () => {
                             so với phiên giao dịch sáng trước. Độ rộng thị trường nghiêng về
                             sắc{" "}
                             {dataContribute.advance > dataContribute.decline ? (
-                                <span className="text-green-500 font-semibold">xanh</span>
+                                <span className="text-green-500 font-semibold">xanh </span>
                             ) : (
                                 <span className="text-red-500 font-semibold">đỏ </span>
                             )}
