@@ -7,29 +7,15 @@ import DialogNews from "../component/DialogNews";
 
 
 
+
+
 const Page1 = () => {
-    const [newsForeign, setNewsForeign] = useState();
-    const [newsDomestic, setNewsDomestic] = useState();
+    const [newsForeign, setNewsForeign] = useState(JSON.parse(localStorage.getItem(`selectedNews-quoc-te`)) || []);
+    const [newsDomestic, setNewsDomestic] = useState(JSON.parse(localStorage.getItem(`selectedNews-trong-nuoc`)) || []);
     const [newsEnterprise, setNewsEnterprise] = useState();
     const [events, setEvents] = useState();
-
+    console.log({ newsForeign })
     useEffect(() => {
-        const fetchDataForeign = async () => {
-            try {
-                const response = await https.get("/api/v1/report/tin-quoc-te");
-                setNewsForeign(response.data.data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-        const fetchDataDomestic = async () => {
-            try {
-                const response = await https.get("/api/v1/report/tin-trong-nuoc");
-                setNewsDomestic(response.data.data);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
 
         const fetchDataEnterprise = async () => {
             try {
@@ -48,19 +34,27 @@ const Page1 = () => {
             } catch (err) { }
         };
 
-        fetchDataForeign();
-        fetchDataDomestic();
         fetchDataEnterprise();
         fetchDataEvent();
     }, []);
 
+
+
+    const handleCatchDataNews = (arrNews, type) => {
+        if (type === 'trong-nuoc') {
+            setNewsDomestic(arrNews)
+        } else if (type === 'quoc-te') {
+            setNewsForeign(arrNews)
+        }
+    }
+
+
     return (
         <div className="h-[1480px] w-[800px] relative  ">
             <div className="absolute top-[30%] right-0 translate-x-[300px] ">
-                <div className="flex flex-col justify-between h-[200px]">
-                    <DialogNews type={'quốc tế'} query={'quoc-te'} />
-                    <DialogNews type={'trong nước'} query={'trong-nuoc'} />
-                    <DialogNews type={'doanh nghiệp'} query={'doanh-nghiep'} />
+                <div className="flex flex-col justify-between h-[100px]">
+                    <DialogNews handleCatchDataNews={handleCatchDataNews} type={'quốc tế'} query={'quoc-te'} />
+                    <DialogNews handleCatchDataNews={handleCatchDataNews} type={'trong nước'} query={'trong-nuoc'} />
                 </div>
             </div>
             <div className="header">
@@ -74,34 +68,41 @@ const Page1 = () => {
                         <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1 ">
                             QUỐC TẾ
                         </h2>
-                        <div className="newsForeign ">
-                            <ul>
-                                {newsForeign?.map((item) => (
-                                    <li className="text-[14px] font-semibold mt-3 ">
-                                        <span className="line-clamp-2">
-                                            {item.title}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {newsForeign.length > 0 ?
+                            <div className="newsForeign ">
+                                <ul>
+                                    {newsForeign?.map((item) => (
+                                        <li className="text-[14px] font-semibold mt-3 ">
+                                            <span className="line-clamp-2">
+                                                {item}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            : <p className="text-center mt-10 font-semibold">Vui lòng chọn tin tức....</p>}
+
                     </div>
                     <div className="content-top_right w-[48%] bg-vnBackground bg-no-repeat bg-[length:220px_260px] bg-right-bottom  mr-5 ">
                         <h2 className="titile font-[800] text-[20px] text-[#0155B7]  text-center border-1 border-x-0 border-solid border-collapse border-[#116DDF] py-1">
                             TRONG NƯỚC
                         </h2>
-                        <div className="newsDomestic ">
-                            <ul>
-                                {newsDomestic?.map((item) => (
-                                    <li className="text-[14px] font-semibold mt-3">
-                                        <span className="line-clamp-2">
-                                            {item.title}
+                        {newsDomestic.length > 0 ?
+                            <div className="newsDomestic ">
+                                <ul>
+                                    {newsDomestic?.map((item) => (
+                                        <li className="text-[14px] font-semibold mt-3">
+                                            <span className="line-clamp-2">
+                                                {item}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
 
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                            : <p className="text-center mt-10 font-semibold">Vui lòng chọn tin tức....</p>}
+
                     </div>
                 </div>
             </div>

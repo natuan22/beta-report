@@ -40,7 +40,7 @@ const Page5 = () => {
         fetchData();
         fetchDataTopContribute();
     }, []);
-    console.log(dataContribute);
+
 
     return (
         <div className="h-[1480px] w-[800px] relative  ">
