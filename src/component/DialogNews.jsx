@@ -75,7 +75,7 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
             try {
                 const response = await https.get(`api/v1/report/tin-${query}`, {
                     params: {
-                        quantity: 30
+                        quantity: 100
                     }
                 });
                 setDataNews(response.data.data);
@@ -201,7 +201,7 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
                                                     type="text"
                                                     value={editValue}
                                                     onChange={(e) => setEditValue(e.target.value)}
-                                                    className=" w-[70%] h-[25px]   focus:outline-0 "
+                                                    className=" w-[75%] h-[25px]   focus:outline-0 "
                                                 />
                                             </div>
 
