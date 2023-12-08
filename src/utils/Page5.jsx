@@ -164,7 +164,7 @@ const Page5 = () => {
             <div className="content-mid mt-4 h-[120px] flex flex-col justify-center items-center">
                 <div className=" w-[95%] flex flex-col justify-between h-full ">
                     <p className="text-[22px] font-semibold border-1 border-dashed border-collapse border-[#064BAD] px-4 py-1 rounded-2xl w-fit m-0 ">
-                        TOP ĐÓNG GÓP ĐIỂM SỐ
+                        TOP ĐÓNG GÓP ĐIỂM SỐ CHO VN-INDEX
                     </p>
                     {dataContribute ? (
                         <div className="text-justify indent-[15px]">
