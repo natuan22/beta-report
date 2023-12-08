@@ -27,7 +27,6 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
     const [newsSelected, setNewsSelected] = useState([])
     const [editingIndex, setEditingIndex] = useState(-1);
     const [editValue, setEditValue] = useState("");
-    const [maxSelection, setMaxSelection] = useState(6);
     const handleToggleEdit = (index) => {
         setEditingIndex(index);
         setEditValue(newsSelected[index]);
@@ -48,11 +47,8 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
     };
 
     const handleClickOpen = () => {
-        // Kiểm tra giá trị của query để xác định số lượng tối đa có thể chọn
-        const maxSelection = query === 'doanh-nghiep' ? 10 : 6;
 
         setOpen(true);
-        setMaxSelection(maxSelection); // Thêm một state để lưu số lượng tối đa
     };
 
     const handleClose = () => {
@@ -92,23 +88,21 @@ export default function DialogNews({ type, query, handleCatchDataNews }) {
     }, []);
 
     const handleSelectNews = (title) => {
-        if (newsSelected.length < maxSelection) {
-            if (!newsSelected.includes(title)) {
-                setNewsSelected(prevNewsSelected => [...prevNewsSelected, title]);
-                success('Thêm tin thành công');
-            } else {
-                warning("Tiêu đề đã được chọn trước đó.");
-            }
+
+        if (!newsSelected.includes(title)) {
+            setNewsSelected(prevNewsSelected => [...prevNewsSelected, title]);
+            success('Thêm tin thành công');
         } else {
-            warning(`Bạn chỉ có thể chọn tối đa ${maxSelection} tin.`);
+            warning("Tiêu đề đã được chọn trước đó.");
         }
+
     };
 
     const handleAddNews = () => {
         if (editingIndex !== -1) {
             return warning('Vui lòng hoàn tất chỉnh sửa')
-        } else if (newsSelected.length !== maxSelection) {
-            return warning(`Vui lòng chọn đủ ${maxSelection} tin.`);
+        } else if (newsSelected.length < 1) {
+            return warning(`Vui lòng chọn tin.`);
         } else {
             localStorage.setItem(`selectedNews-${query}`, JSON.stringify(newsSelected));
             handleCatchDataNews(newsSelected, query)

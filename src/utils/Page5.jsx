@@ -142,10 +142,10 @@ const Page5 = () => {
                                                 return (
                                                     <div className=" w-[50%] text-center flex my-3  ">
                                                         <p className="w-[40%] font-semibold m-0">
-                                                            {item.code}
+                                                            {item.code}:
                                                         </p>
                                                         <p className=" m-0">
-                                                            : {(item.netVal / 1000000000).toFixed(2)} tỷ
+                                                            {(item.netVal / 1000000000).toFixed(2)} tỷ
                                                         </p>
                                                     </div>
                                                 );
