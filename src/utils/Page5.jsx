@@ -49,7 +49,7 @@ const Page5 = () => {
             </div>
             <div className="w-full flex flex-col items-center">
                 <div className="content-top w-[780px] flex justify-around">
-                    <div className="content-top_left w-[65%]">
+                    <div className="content-top_left w-[62%]">
                         <h2 className="text-center text-[#E88C08] m-1">
                             DIỄN BIẾN KẾT PHIÊN SÁNG
                         </h2>
@@ -73,7 +73,7 @@ const Page5 = () => {
                         )}
                     </div>
                     {dataHose ? (
-                        <div className="content-top_right w-[30%]  z-10 ">
+                        <div className="content-top_right w-[33%]  z-10 ">
                             <h2 className="text-center m-1 text-[#E88C08]">TẠI HOSE</h2>
                             <div className="marketWidth">
                                 <p className="text-[20px] font-semibold m-0">ĐỘ RỘNG</p>
@@ -119,15 +119,14 @@ const Page5 = () => {
                                         </div>
                                         <div className="flex flex-wrap p-2  ">
                                             {dataHose.buy.map((item) => {
-                                                return (
-                                                    <div className=" w-[50%]  text-center my-3 ">
-                                                        <span className=" w-[40%] font-semibold m-0">
-                                                            {item.code}
-                                                        </span>
-                                                        <span className="">
-                                                            : {(item.netVal / 1000000000).toFixed(2)}
-                                                        </span>
-                                                    </div>
+                                                return (<div className=" w-[50%]  text-center my-3 ">
+                                                    <span className=" w-[40%] font-semibold m-0">
+                                                        {item.code}
+                                                    </span>
+                                                    <span className="">
+                                                        : {(item.netVal / 1000000000).toFixed(2)} tỷ
+                                                    </span>
+                                                </div>
                                                 );
                                             })}
                                         </div>
@@ -146,7 +145,7 @@ const Page5 = () => {
                                                             {item.code}
                                                         </p>
                                                         <p className=" m-0">
-                                                            :{(item.netVal / 1000000000).toFixed(2)}
+                                                            : {(item.netVal / 1000000000).toFixed(2)} tỷ
                                                         </p>
                                                     </div>
                                                 );
@@ -160,7 +159,7 @@ const Page5 = () => {
                         <div>Loading.....</div>
                     )}
                 </div>
-            </div>
+            </div >
 
             <div className="content-mid mt-4 h-[120px] flex flex-col justify-center items-center">
                 <div className=" w-[95%] flex flex-col justify-between h-full ">
@@ -296,7 +295,7 @@ const Page5 = () => {
             <div className="mt-1">
                 <Footer pageNum={5} />
             </div>
-        </div>
+        </div >
     );
 };
 
