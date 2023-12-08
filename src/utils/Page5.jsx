@@ -49,7 +49,7 @@ const Page5 = () => {
             </div>
             <div className="w-full flex flex-col items-center">
                 <div className="content-top w-[780px] flex justify-around">
-                    <div className="content-top_left w-[62%]">
+                    <div className="content-top_left w-[65%]">
                         <h2 className="text-center text-[#E88C08] m-1">
                             DIỄN BIẾN KẾT PHIÊN SÁNG
                         </h2>
@@ -73,7 +73,7 @@ const Page5 = () => {
                         )}
                     </div>
                     {dataHose ? (
-                        <div className="content-top_right w-[33%]  z-10 ">
+                        <div className="content-top_right w-[30%]  z-10 ">
                             <h2 className="text-center m-1 text-[#E88C08]">TẠI HOSE</h2>
                             <div className="marketWidth">
                                 <p className="text-[20px] font-semibold m-0">ĐỘ RỘNG</p>
@@ -115,7 +115,7 @@ const Page5 = () => {
                                     <div className="buy border-1 border-dashed border-collapse border-[#22C55E] h-[140px]">
                                         <div className="text-center">
                                             <span className="text-green-500 font-bold">MUA</span>
-                                            <span className="ml-2">ròng mạnh</span>
+                                            <span className="ml-2">ròng mạnh (tỷ đồng)</span>
                                         </div>
                                         <div className="flex flex-wrap p-2  ">
                                             {dataHose.buy.map((item) => {
@@ -124,7 +124,7 @@ const Page5 = () => {
                                                         {item.code}
                                                     </span>
                                                     <span className="">
-                                                        : {(item.netVal / 1000000000).toFixed(2)} tỷ
+                                                        : {(item.netVal / 1000000000).toFixed(2)}
                                                     </span>
                                                 </div>
                                                 );
@@ -134,7 +134,7 @@ const Page5 = () => {
                                     <div className="sell border-1 border-dashed border-collapse border-[#FF0000] mt-5 h-[140px]">
                                         <div className="text-center">
                                             <span className="text-red-500 font-bold">BÁN </span>
-                                            <span className="ml-2">ròng mạnh</span>
+                                            <span className="ml-2">ròng mạnh (tỷ đồng)</span>
                                         </div>
 
                                         <div className="flex flex-wrap p-2 ">
@@ -145,7 +145,7 @@ const Page5 = () => {
                                                             {item.code}:
                                                         </p>
                                                         <p className=" m-0">
-                                                            {(item.netVal / 1000000000).toFixed(2)} tỷ
+                                                            {(item.netVal / 1000000000).toFixed(2)}
                                                         </p>
                                                     </div>
                                                 );
