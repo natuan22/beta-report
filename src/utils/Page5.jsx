@@ -201,7 +201,7 @@ const Page5 = () => {
                             )}
                             <span>
                                 {" "}
-                                Ở chiều ngược lại, các mã{" "}
+                                Ở chiều ngược lại, các mã đóng góp{" "}
                                 {dataContribute.change > 0 ? "giảm" : "tăng"} nổi bật là:{" "}
                             </span>
                             {dataContribute.change > 0 ? (
