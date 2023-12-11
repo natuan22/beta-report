@@ -4,7 +4,6 @@ import { homNay } from "../helper/getDate";
 import Footer from "../component/Footer";
 import { https } from "../services/configService";
 import SplineChart from "../component/SplineChart";
-
 const Page5 = () => {
     const [data, setData] = useState();
     const [dataHose, setDataHose] = useState();
@@ -168,7 +167,7 @@ const Page5 = () => {
                     </p>
                     {dataContribute ? (
                         <div className="text-justify indent-[15px]">
-                            <span className="indent-4">Dẫn đầu nhóm cổ phiếu </span>
+                            <span className="indent-4">Dẫn đầu nhóm cổ phiếu đóng góp </span>
                             {dataContribute.change > 0 ? (
                                 <>
                                     <span>tăng là:</span>
