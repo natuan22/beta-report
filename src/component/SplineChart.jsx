@@ -37,7 +37,7 @@ const SplineChart = ({ data }) => {
                     value: data.prevClosePrice,
                     color: 'gray',
                     dashStyle: 'dot', // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
-                    width: 1,
+                    width: 2,
                     zIndex: 2,
                     // label: {
                     //     text: (data.prevClosePrice.toFixed(2)),
@@ -55,7 +55,11 @@ const SplineChart = ({ data }) => {
             ],
             gridLineWidth: 0, // Ẩn lưới của trục y
             labels: {
-                enabled: false, // Ẩn giá trị của trục y
+                enabled: true, // Ẩn giá trị của trục y
+                style: {
+                    fontSize: '12px', // Chỉnh kích thước font chữ của giá trị
+                    fontWeight: 'bold'
+                },
             },
         },
         legend: {
@@ -84,9 +88,6 @@ const SplineChart = ({ data }) => {
                 },
             ],
         },
-
-
-
         ],
 
     };
@@ -104,4 +105,4 @@ const SplineChart = ({ data }) => {
     )
 }
 
-export default SplineChart
+export default SplineChart  
