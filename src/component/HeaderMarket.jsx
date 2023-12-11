@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import logo from "../app/asset/img/logo.png";
-import imgHeaderRight from '../app/asset/img/imgHeader.png'
+import imgHeaderRight from '../app/asset/img/logoMorning.png'
 
 const HeaderMarket = ({ date, type }) => {
     return (
@@ -31,11 +31,11 @@ const HeaderMarket = ({ date, type }) => {
                             </p>
                         </div>
                     </div>
-                    <div className="absolute bottom-0 left-[-30px] h-[2px] bg-[#66a0e9] w-[673px] translate-y-[9px] z-10"></div>
-                    <div className="absolute bottom-0 right-0 h-[2px] bg-[#66a0e9] w-[203px] translate-y-[9px] translate-x-[385px] z-10"></div>
+                    <div className="absolute bottom-0 left-[-30px] h-[2px] bg-[#66a0e9] w-[685px] translate-y-[9px] z-10"></div>
+                    <div className="absolute bottom-0 right-0 h-[2px] bg-[#66a0e9] w-[192px] translate-y-[9px] translate-x-[385px] z-10"></div>
                 </div>
-                <div className="header-right translate-x-[4px] translate-y-[23px]">
-                    <img src={imgHeaderRight} alt="img" width='100%' height='100%' />
+                <div className="header-right translate-x-[15px] translate-y-[23px]  ">
+                    <img src={imgHeaderRight} alt="img" width='211px' height='141px' />
                 </div>
             </div>
 

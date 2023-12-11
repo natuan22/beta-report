@@ -175,7 +175,6 @@ const Page5 = () => {
                                     {dataContribute.stock_advance.map((item, index) => {
                                         const isLastItem =
                                             index === dataContribute.stock_advance.length - 1;
-
                                         return (
                                             <span className="text-green-500 ml-1 font-semibold">
                                                 {item.code}

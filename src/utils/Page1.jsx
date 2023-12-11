@@ -46,16 +46,19 @@ const Page1 = () => {
                         handleCatchDataNews={handleCatchDataNews}
                         type={"quốc tế"}
                         query={"quoc-te"}
+                        idQuery={0}
                     />
                     <DialogNews
                         handleCatchDataNews={handleCatchDataNews}
                         type={"trong nước"}
                         query={"trong-nuoc"}
+                        idQuery={1}
                     />
                     <DialogNews
                         handleCatchDataNews={handleCatchDataNews}
                         type={"doanh nghiệp"}
                         query={"doanh-nghiep"}
+                        idQuery={2}
                     />
                 </div>
             </div>
