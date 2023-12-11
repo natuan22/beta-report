@@ -95,8 +95,8 @@ const SplineChart = ({ data }) => {
     return (
         <div className='flex flex-col items-center   '>
             <h3 className='m-1 font-semibold text-[25px]'>{data.code}</h3>
-            <p className={`${getColorBaseOnValue(data.change)} font-semibold m-1 text-[25px]`}>{getArrow(data.change)}{data.closePrice.toFixed(2)}  </p>
-            <p className={`${getColorBaseOnValue(data.perChange)} font-semibold m-1 text-[25px]`}>({data.change.toFixed(2)} | {data.perChange.toFixed(2)}%)</p>
+            <p className={`${getColorBaseOnValue(data.change)} font-semibold m-1 text-[25px]`}>{getArrow(data.change)}{data.closePrice?.toFixed(2)}  </p>
+            <p className={`${getColorBaseOnValue(data.perChange)} font-semibold m-1 text-[25px]`}>({data.change?.toFixed(2)} | {data.perChange?.toFixed(2)}%)</p>
             <div className='h-[130px] w-[230px] grid place-items-center  '>
                 <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '100%', width: '100%' } }} />
             </div>
