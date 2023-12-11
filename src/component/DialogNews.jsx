@@ -47,7 +47,6 @@ export default function DialogNews({
                     id
                 }
             })
-
             setFormData({
                 ...formData,
                 value: response.data.data
@@ -135,7 +134,6 @@ export default function DialogNews({
             handleCatchDataNews(formData.value?.map(item => item.title), query);
         } else {
             handleCatchDataNews([], query)
-            warning(`Bạn đã xóa hết tin  ${type}`)
         }
     }, [formData])
 
