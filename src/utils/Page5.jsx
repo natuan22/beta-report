@@ -118,11 +118,11 @@ const Page5 = () => {
                                         </div>
                                         <div className="flex flex-wrap p-2  ">
                                             {dataHose.buy.map((item) => {
-                                                return (<div className=" w-[50%]  text-center my-3 ">
-                                                    <span className=" w-[40%] font-semibold m-0">
+                                                return (<div className=" w-[100%] flex justify-evenly">
+                                                    <span className=" w-[40%] font-semibold m-0 text-center">
                                                         {item.code}
                                                     </span>
-                                                    <span className="">
+                                                    <span className="w-[40%] m-0">
                                                         : {(item.netVal / 1000000000).toFixed(2)}
                                                     </span>
                                                 </div>
@@ -136,15 +136,15 @@ const Page5 = () => {
                                             <span className="ml-2">ròng mạnh (tỷ đồng)</span>
                                         </div>
 
-                                        <div className="flex flex-wrap p-2 ">
+                                        <div className="flex  flex-wrap p-2 ">
                                             {dataHose.sell.map((item) => {
                                                 return (
-                                                    <div className=" w-[50%] text-center flex my-3  ">
-                                                        <p className="w-[40%] font-semibold m-0">
-                                                            {item.code}:
+                                                    <div className=" w-[100%] flex justify-evenly  ">
+                                                        <p className="w-[40%] font-semibold m-0 text-center">
+                                                            {item.code}
                                                         </p>
-                                                        <p className=" m-0">
-                                                            {(item.netVal / 1000000000).toFixed(2)}
+                                                        <p className=" w-[40%] m-0">
+                                                            :  {(item.netVal / 1000000000).toFixed(2)}
                                                         </p>
                                                     </div>
                                                 );
@@ -176,9 +176,7 @@ const Page5 = () => {
                                             index === dataContribute.stock_advance.length - 1;
                                         return (
                                             <span className="text-green-500 ml-1 font-semibold">
-                                                {item.code}
-                                                (+{item.point.toFixed(2)} điểm)
-                                                {isLastItem ? "." : ","}
+                                                {item.code} (+{item.point.toFixed(2)} điểm){isLastItem ? "." : ","}
                                             </span>
                                         );
                                     })}
@@ -189,7 +187,6 @@ const Page5 = () => {
                                     {dataContribute.stock_decline.map((item, index) => {
                                         const isLastItem =
                                             index === dataContribute.stock_decline.length - 1;
-
                                         return (
                                             <span className="text-red-500 ml-1 font-semibold">
                                                 {item.code} ({item.point.toFixed(2)} điểm)
