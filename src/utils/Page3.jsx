@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import iconDeco from "../app/asset/img/iconDeco.png";
 import { https } from "../services/configService";
 import DialogIdentify from "../component/DialogIdentify";
+import DialogAddStock from "../component/DialogAddStock";
 
 const Page3 = () => {
     const [data, setData] = useState();
@@ -23,8 +24,13 @@ const Page3 = () => {
 
     return (
         <div className="h-[1480px] w-[800px] relative ">
-            <div className="absolute top-[15%] right-[-40%]">
-                <DialogIdentify />
+            <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
+                <div>
+                    <DialogIdentify />
+                </div>
+                <div>
+                    <DialogAddStock />
+                </div>
             </div>
             <div className="header">
                 <Header date={"21/11/2023"} type={2} />
