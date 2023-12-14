@@ -3,6 +3,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import iconDeco from "../app/asset/img/iconDeco.png";
 import { https } from "../services/configService";
+import DialogIdentify from "../component/DialogIdentify";
 
 const Page3 = () => {
     const [data, setData] = useState();
@@ -21,7 +22,10 @@ const Page3 = () => {
     }, []);
 
     return (
-        <div className="h-[1480px] w-[800px] ">
+        <div className="h-[1480px] w-[800px] relative ">
+            <div className="absolute top-[15%] right-[-40%]">
+                <DialogIdentify />
+            </div>
             <div className="header">
                 <Header date={"21/11/2023"} type={2} />
             </div>

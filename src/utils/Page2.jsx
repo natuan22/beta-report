@@ -3,6 +3,10 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from '../services/configService';
 import { getColorBaseOnValue } from '../helper/getColorBaseOnValue';
+import formatNumber from '../helper/formatNumber';
+
+
+
 const Page2 = () => {
     const [rate, setRate] = useState()
     const [interestRate, setInterestRate] = useState()
@@ -98,7 +102,7 @@ const Page2 = () => {
                                             <img src={`/${item.code}.png`} alt="icon" width={20} height={20} />
                                             {item.code}
                                         </td>
-                                        <td className='text-center px-2 py-1'>{(item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}</td>
+                                        <td className='text-center px-2 py-1'>{formatNumber(item.price)}</td>
                                         <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{(item.day).toFixed(2)}</td>
                                         <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{(item.month).toFixed(2)}</td>
                                         <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{(item.year).toFixed(2)}</td>
@@ -127,7 +131,7 @@ const Page2 = () => {
                             {interestRate?.map(item => (
                                 <tr>
                                     <td className='text-center px-1 py-3 font-semibold'>{item.code}</td>
-                                    <td className='text-center px-2 py-3'>{(item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}</td>
+                                    <td className='text-center px-2 py-3'>{formatNumber(item.price)}</td>
                                     <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-3`}>{(item.day).toFixed(2)}</td>
                                     <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-3`}>{(item.month).toFixed(2)}</td>
                                     <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-3`}>{(item.year).toFixed(2)}</td>
@@ -157,7 +161,7 @@ const Page2 = () => {
                             {goodsPrice?.map(item => (
                                 <tr>
                                     <td className='text-left pl-2 py-1 font-semibold '>{item.name}</td>
-                                    <td className='text-center px-2 py-1'>{(item.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                    <td className='text-center px-2 py-1'>{formatNumber(item.price)}</td>
                                     <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{(item.day).toFixed(2)}</td>
                                     <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{(item.month).toFixed(2)}</td>
                                     <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{(item.year).toFixed(2)}</td>

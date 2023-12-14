@@ -1,4 +1,5 @@
 import Home from "../Home";
+import ReportAfternoon from "../report/ReportAfternoon";
 import Page1 from "../utils/Page1";
 import Page2 from "../utils/Page2";
 import Page3 from "../utils/Page3";
@@ -13,4 +14,5 @@ export const routes = [
     { path: "/page3", component: Page3 },
     { path: "/page4", component: Page4 },
     { path: "/page5", component: Page5 },
+    { path: "/ban-tin-chieu", component: ReportAfternoon },
 ];

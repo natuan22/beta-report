@@ -16,7 +16,6 @@ const Page1 = () => {
         JSON.parse(localStorage.getItem(`selectedNews-doanh-nghiep`)) || []
     );
     const [events, setEvents] = useState();
-    console.log({ newsForeign });
     useEffect(() => {
         const fetchDataEvent = async () => {
             try {
@@ -133,8 +132,6 @@ const Page1 = () => {
                                         // Phần sau dấu ':' (trim() để loại bỏ khoảng trắng ở đầu và cuối)
                                         afterColon = parts[1].trim();
 
-                                        console.log("Trước dấu : ", beforeColon);
-                                        console.log("Sau dấu : ", afterColon);
                                     } else {
                                         console.log("Không tìm thấy dấu : trong chuỗi.");
                                     }

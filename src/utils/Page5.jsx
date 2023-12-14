@@ -4,6 +4,7 @@ import { homNay } from "../helper/getDate";
 import Footer from "../component/Footer";
 import { https } from "../services/configService";
 import SplineChart from "../component/SplineChart";
+import formatNumber from "../helper/formatNumber";
 const Page5 = () => {
     const [data, setData] = useState();
     const [dataHose, setDataHose] = useState();
@@ -123,7 +124,7 @@ const Page5 = () => {
                                                         {item.code}
                                                     </span>
                                                     <span className="w-[40%] m-0">
-                                                        : {(item.netVal / 1000000000).toFixed(2)}
+                                                        : {(formatNumber(item.netVal / 1000000000))}
                                                     </span>
                                                 </div>
                                                 );
@@ -144,7 +145,7 @@ const Page5 = () => {
                                                             {item.code}
                                                         </p>
                                                         <p className=" w-[40%] m-0">
-                                                            :  {(item.netVal / 1000000000).toFixed(2)}
+                                                            :  {formatNumber(item.netVal / 1000000000)}
                                                         </p>
                                                     </div>
                                                 );
@@ -176,7 +177,7 @@ const Page5 = () => {
                                             index === dataContribute.stock_advance.length - 1;
                                         return (
                                             <span className="text-green-500 ml-1 font-semibold">
-                                                {item.code} (+{item.point.toFixed(2)} điểm){isLastItem ? "." : ","}
+                                                {item.code} (+{formatNumber(item.point)} điểm){isLastItem ? "." : ","}
                                             </span>
                                         );
                                     })}
@@ -189,7 +190,7 @@ const Page5 = () => {
                                             index === dataContribute.stock_decline.length - 1;
                                         return (
                                             <span className="text-red-500 ml-1 font-semibold">
-                                                {item.code} ({item.point.toFixed(2)} điểm)
+                                                {item.code} ({formatNumber(item.point)} điểm)
                                                 {isLastItem ? "." : ","}
                                             </span>
                                         );
@@ -209,7 +210,7 @@ const Page5 = () => {
 
                                         return (
                                             <span className="text-red-500 ml-1 font-semibold">
-                                                {item.code} {""}({item.point.toFixed(2)} điểm)
+                                                {item.code} {""}({formatNumber(item.point)} điểm)
                                                 {isLastItem ? "." : ","}
                                             </span>
                                         );
@@ -248,9 +249,9 @@ const Page5 = () => {
                             điểm (<span className={`font-semibold ${dataContribute.perChange > 0 ? "text-green-500" : "text-red-500"}`}>{dataContribute.perChange.toFixed(2)}%</span>) trong đó ghi nhận
                             tổng giá trị giao dịch đạt{" "}
                             <span className="font-semibold">
-                                {(dataContribute.totalVal / 1000000000000).toFixed(2)}
+                                {(dataContribute.totalVal / 10000000000).toFixed(2)}
                             </span>{" "}
-                            nghìn tỉ, {dataContribute.perChangeVal > 0 ? "tăng" : "giảm"}{" "}
+                            tỷ, {dataContribute.perChangeVal > 0 ? "tăng" : "giảm"}{" "}
                             <span className={`font-semibold ${dataContribute.perChangeVal > 0 ? "text-green-500" : "text-red-500"}`}>
                                 {dataContribute.perChangeVal.toFixed(2)}%
                             </span>{" "}
