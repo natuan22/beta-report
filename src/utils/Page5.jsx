@@ -245,15 +245,15 @@ const Page5 = () => {
                         <p>
                             VN-INDEX chốt phiên sáng nay{" "}
                             {dataContribute.change > 0 ? "tăng" : "giảm"}{" "}
-                            <span className={`font-semibold ${dataContribute.change > 0 ? "text-green-500" : "text-red-500"}`}>{dataContribute.change}</span>{" "}
-                            điểm (<span className={`font-semibold ${dataContribute.perChange > 0 ? "text-green-500" : "text-red-500"}`}>{dataContribute.perChange.toFixed(2)}%</span>) trong đó ghi nhận
+                            <span className={`font-semibold ${dataContribute.change > 0 ? "text-green-500" : "text-red-500"}`}>{formatNumber(dataContribute.change)}</span>{" "}
+                            điểm (<span className={`font-semibold ${dataContribute.perChange > 0 ? "text-green-500" : "text-red-500"}`}>{formatNumber(dataContribute.perChange)}%</span>) trong đó ghi nhận
                             tổng giá trị giao dịch đạt{" "}
                             <span className="font-semibold">
-                                {(dataContribute.totalVal / 10000000000).toFixed(2)}
+                                {(formatNumber(dataContribute.totalVal / 10000000000))}
                             </span>{" "}
-                            tỷ, {dataContribute.perChangeVal > 0 ? "tăng" : "giảm"}{" "}
+                            tỷ đồng, {dataContribute.perChangeVal > 0 ? "tăng" : "giảm"}{" "}
                             <span className={`font-semibold ${dataContribute.perChangeVal > 0 ? "text-green-500" : "text-red-500"}`}>
-                                {dataContribute.perChangeVal.toFixed(2)}%
+                                {formatNumber(dataContribute.perChangeVal)}%
                             </span>{" "}
                             so với phiên giao dịch sáng trước. Độ rộng thị trường nghiêng về
                             sắc{" "}
