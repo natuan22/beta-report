@@ -173,7 +173,29 @@ export default function DialogNews({
             }
         });
     };
-
+    const handleDeleteAllNews = () => {
+        // Sử dụng SweetAlert để xác nhận việc xóa tất cả
+        Swal.fire({
+            title: "Bạn chắc chắn muốn xóa tất cả tin này?",
+            text: "Thao tác này không thể hoàn tác!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Xác nhận",
+            cancelButtonText: "Hủy",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Xác nhận xóa tất cả tin và cập nhật state
+                const updatedformData = { ...formData };
+                updatedformData.value = [];
+                setFormData(updatedformData);
+                success("Đã xóa tất cả tin thành công!");
+                // Gọi API saveNews với formData mới (rỗng)
+                saveNews(updatedformData);
+            }
+        });
+    };
     return (
         <Fragment>
             {contextHolder}
@@ -302,7 +324,7 @@ export default function DialogNews({
                         </button>
                     </div>
                     <div className="absolute right-[11%] bottom-[30px] z-10">
-                        <Button variant="contained" color="warning">
+                        <Button variant="contained" color="warning" onClick={handleDeleteAllNews}>
                             Xóa tất cả
                         </Button>
                     </div>
