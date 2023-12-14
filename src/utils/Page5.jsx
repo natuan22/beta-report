@@ -249,7 +249,7 @@ const Page5 = () => {
                             điểm (<span className={`font-semibold ${dataContribute.perChange > 0 ? "text-green-500" : "text-red-500"}`}>{formatNumber(dataContribute.perChange)}%</span>) trong đó ghi nhận
                             tổng giá trị giao dịch đạt{" "}
                             <span className="font-semibold">
-                                {(formatNumber(dataContribute.totalVal / 10000000000))}
+                                {(formatNumber(dataContribute.totalVal / 1000000000))}
                             </span>{" "}
                             tỷ đồng, {dataContribute.perChangeVal > 0 ? "tăng" : "giảm"}{" "}
                             <span className={`font-semibold ${dataContribute.perChangeVal > 0 ? "text-green-500" : "text-red-500"}`}>
