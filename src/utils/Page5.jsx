@@ -97,7 +97,7 @@ const Page5 = () => {
                                     <p className="my-0 indent-[15px] font-semibold">
                                         Mua ròng:
                                         <span className="text-green-500 text-[20px] font-semibold mx-2  ">
-                                            {(dataHose.netVal / 1000000000).toFixed(2)}
+                                            {(formatNumber(dataHose.netVal / 1000000000))}
                                         </span>
                                         tỷ đồng
                                     </p>
@@ -105,7 +105,7 @@ const Page5 = () => {
                                     <p className="my-0 indent-[15px] font-semibold">
                                         Bán ròng:
                                         <span className="text-red-500 text-[20px] font-semibold mx-2  ">
-                                            {(dataHose.netVal / 1000000000).toFixed(2)}
+                                            {(formatNumber(dataHose.netVal / 1000000000))}
                                         </span>
                                         tỷ đồng
                                     </p>
