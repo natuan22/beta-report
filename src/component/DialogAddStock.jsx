@@ -1,55 +1,83 @@
-import React, { Fragment, forwardRef, useState } from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import Slide from "@mui/material/Slide";
+import React, { Fragment, useState } from "react";
+import { Button, Modal } from "antd";
+import InputFormBuy from "./utils/InputFormBuy";
+import { FaPlus } from "react-icons/fa6";
+import InputFormSell from "./utils/InputFormSell";
 import { message } from "antd";
 
-const Transition = forwardRef(function Transition(props, ref) {
-    return <Slide direction="down" ref={ref} {...props} />;
-});
-
-
-export default function DialogAddStock() {
+const DialogAddStock = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [components, setComponents] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
-    const [open, setOpen] = useState(false);
-    const [text1, setText1] = useState("");
-    const [text2, setText2] = useState("");
-
-    const handleClickOpen = () => {
-        setOpen(true);
+    const warning = (text) => {
+        messageApi.open({
+            type: "warning",
+            content: text,
+        });
+    };
+    const showModal = () => {
+        setIsModalOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleOk = () => {
+        setIsModalOpen(false);
     };
 
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
+    const addComponent = (type) => {
+        if (components.length < 4) {
+            const newComponent =
+                type === "buy" ? (
+                    <InputFormBuy key={components.length} />
+                ) : (
+                    <InputFormSell key={components.length} />
+                );
+            setComponents((prevComponents) => [...prevComponents, newComponent]);
+        } else {
+            warning("Tối đa 4 mã");
+        }
+    };
 
     return (
-        <Fragment>
+        <>
             {contextHolder}
-            <Button variant="contained" onClick={handleClickOpen}>
+            <Button type="primary" onClick={showModal}>
                 Thêm cổ phiếu khuyến nghị
             </Button>
-            <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-                sx={{
-                    "& .MuiPaper-root": {
-                        maxWidth: "1300px",
-                        maxHeight: "95%",
-                    },
-                }}
+            <Modal
+                width={1600}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
             >
-                <DialogContent className="">
-                    <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg ">
+                <div className="w-full grid place-items-center">
+                    <div className="flex justify-evenly w-[30%] ">
+                        <div>
+                            <Button onClick={() => addComponent("buy")}>
+                                <FaPlus />
+                                <span className="ml-2">Mua</span>
+                            </Button>
+                        </div>
+                        <div>
+                            <Button onClick={() => addComponent("sell")}>
+                                <FaPlus />
+                                <span className="ml-2">Bán</span>
+                            </Button>
+                        </div>
                     </div>
-                </DialogContent>
-            </Dialog>
-        </Fragment>
+                </div>
+
+                <div className="flex justify-evenly mt-5">
+                    {components.map((component, index) => (
+                        <Fragment key={index}>{component}</Fragment>
+                    ))}
+                </div>
+            </Modal>
+        </>
     );
-}
+};
+
+export default DialogAddStock;

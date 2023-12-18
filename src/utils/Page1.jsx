@@ -47,7 +47,7 @@ const Page1 = () => {
                         query={"quoc-te"}
                         idQuery={0}
                     />
-                    <DialogNews
+                    {/* <DialogNews
                         handleCatchDataNews={handleCatchDataNews}
                         type={"trong nước"}
                         query={"trong-nuoc"}
@@ -58,7 +58,7 @@ const Page1 = () => {
                         type={"doanh nghiệp"}
                         query={"doanh-nghiep"}
                         idQuery={2}
-                    />
+                    /> */}
                 </div>
             </div>
             <div className="header">

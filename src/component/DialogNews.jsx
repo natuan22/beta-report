@@ -47,6 +47,7 @@ export default function DialogNews({
                     id
                 }
             })
+            setNewsSelected(response.data.data.map(item => item.title))
             setFormData({
                 ...formData,
                 value: response.data.data
@@ -111,11 +112,11 @@ export default function DialogNews({
 
     }, []);
 
+
     const handleSelectNews = (title) => {
         if (!newsSelected.includes(title)) {
             setNewsSelected((prevNewsSelected) => [...prevNewsSelected, title]);
             success("Thêm tin thành công");
-
         } else {
             warning("Tiêu đề đã được chọn trước đó.");
         }

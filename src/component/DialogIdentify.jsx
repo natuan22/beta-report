@@ -1,23 +1,53 @@
-import React, { Fragment, forwardRef, useState } from "react";
+import React, { Fragment, forwardRef, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Slide from "@mui/material/Slide";
 import { message } from "antd";
 import Textarea from "./utils/Textarea";
+import { https } from "../services/configService";
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
 const MAX_WORDS = 150; // Số từ tối đa cho mỗi TextArea
+const saveText = async (data) => {
+    try {
+        const response = await https.post('/api/v1/report/luu-nhan-dinh-thi-truong', data)
+    } catch (err) {
+        console.log(err)
+    }
+}
 
-export default function DialogIdentify() {
+export default function DialogIdentify({ catchText }) {
     const [messageApi, contextHolder] = message.useMessage();
     const [open, setOpen] = useState(false);
     const [text1, setText1] = useState("");
     const [text2, setText2] = useState("");
+    const [textArr, setTextArr] = useState({
+        text: []
+    })
+    const success = (text) => {
+        messageApi.open({
+            type: "success",
+            content: text,
+        });
+    };
+    useEffect(() => {
+        const getText = async () => {
+            try {
+                const response = await https.get('/api/v1/report/nhan-dinh-thi-truong-redis')
+                setText1(response.data.data?.text[0])
+                setText2(response.data.data?.text[1])
+                catchText(response.data.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
 
+        getText()
+    }, [textArr])
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -45,6 +75,19 @@ export default function DialogIdentify() {
         }
     };
 
+
+    const handleAddText = async () => {
+        if (text1.trim() !== "" && text2.trim() !== "") {
+            const newTextArr = [text1, text2];
+            await saveText({ text: newTextArr });
+            // Cập nhật textArr sau khi gọi API thành công
+            setTextArr((prev) => ({
+                text: newTextArr,
+            }));
+            success('Thêm nhận định thành công')
+        }
+    };
+
     return (
         <Fragment>
             {contextHolder}
@@ -64,8 +107,8 @@ export default function DialogIdentify() {
                     },
                 }}
             >
-                <DialogContent className="">
-                    <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg ">
+                <DialogContent className="relative">
+                    <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg  ">
                         <div className="flex flex-col h-full items-center justify-center">
                             <Textarea
                                 value={text1}
@@ -77,9 +120,10 @@ export default function DialogIdentify() {
                                 minRows={4}
                                 placeholder="Nhập vào nội dung đoạn 1"
                             />
+
                         </div>
                     </div>
-                    <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg ">
+                    <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg  ">
                         <div className="flex flex-col h-full items-center justify-center">
                             <Textarea
                                 value={text2}
@@ -91,7 +135,13 @@ export default function DialogIdentify() {
                                 minRows={4}
                                 placeholder="Nhập vào nội dung đoạn 2"
                             />
+
                         </div>
+                    </div>
+                    <div className="absolute bottom-[30px] right-[50%] translate-x-[50%]">
+                        <Button onClick={handleAddText} variant="contained" size="medium" color="info" >
+                            Thêm nhận định
+                        </Button>
                     </div>
                 </DialogContent>
             </Dialog>
