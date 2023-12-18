@@ -3,9 +3,8 @@ import {
     Form,
     Input,
 } from 'antd';
-import Button from "@mui/material/Button";
 import { useFormik } from 'formik';
-const InputForm = () => {
+const InputFormBuy = () => {
     const { handleSubmit, handleChange } =
         useFormik({
             initialValues: {
@@ -61,4 +60,4 @@ const InputForm = () => {
         </Form>
     );
 };
-export default InputForm;
+export default InputFormBuy;

@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import InputFormBuy from "./utils/InputFormBuy";
 import { FaPlus } from "react-icons/fa6";
 import InputFormSell from "./utils/InputFormSell";
 import { message } from "antd";
+import Button from "@mui/material/Button";
 
 const DialogAddStock = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,11 +41,16 @@ const DialogAddStock = () => {
             warning("Tối đa 4 mã");
         }
     };
+    const removeComponent = (index) => {
+        const updatedComponents = [...components];
+        updatedComponents.splice(index, 1);
+        setComponents(updatedComponents);
+    };
 
     return (
         <>
             {contextHolder}
-            <Button type="primary" onClick={showModal}>
+            <Button variant="contained" onClick={showModal}>
                 Thêm cổ phiếu khuyến nghị
             </Button>
             <Modal
@@ -70,9 +76,15 @@ const DialogAddStock = () => {
                     </div>
                 </div>
 
-                <div className="flex justify-evenly mt-5">
+                <div className="flex  mt-5 ">
                     {components.map((component, index) => (
-                        <Fragment key={index}>{component}</Fragment>
+                        <Fragment key={index} >
+                            <div>
+                                <Button onClick={() => removeComponent(index)} variant="outlined" color="warning" >x</Button>
+                            </div>
+                            {component}
+
+                        </Fragment>
                     ))}
                 </div>
             </Modal>
