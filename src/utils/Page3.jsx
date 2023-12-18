@@ -1,22 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import iconDeco from "../app/asset/img/iconDeco.png";
+import { https } from "../services/configService";
 import DialogIdentify from "../component/DialogIdentify";
 import DialogAddStock from "../component/DialogAddStock";
 
 const Page3 = () => {
     const [data, setData] = useState();
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await https.get("api/v1/report/nhan-dinh-thi-truong");
+                setData(response.data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    const catchText = (arrText) => {
-        setData(arrText)
-    }
+        fetchData();
+    }, []);
+
     return (
         <div className="h-[1480px] w-[800px] relative ">
             <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
                 <div>
-                    <DialogIdentify catchText={catchText} />
+                    <DialogIdentify />
                 </div>
                 <div>
                     <DialogAddStock />
@@ -73,7 +83,7 @@ const Page3 = () => {
                     </h2>
                 </div>
 
-                {/* <div className={`stockRecommend   w-[800px] ${data?.stock.length > 2 ? 'flex flex-wrap items-center justify-center' : 'flex flex-col justify-center items-center'}`}>
+                <div className={`stockRecommend   w-[800px] ${data?.stock.length > 2 ? 'flex flex-wrap items-center justify-center' : 'flex flex-col justify-center items-center'}`}>
                     {data?.stock.map((item) => {
                         return (
                             <div className="stock-card flex  items-center   w-[47%] my-[5px] border-1 border-collapse border-solid border-[#116DDF] mr-2 rounded-lg  ">
@@ -97,7 +107,7 @@ const Page3 = () => {
                             </div>
                         );
                     })}
-                </div> */}
+                </div>
             </div>
 
             <div className="">

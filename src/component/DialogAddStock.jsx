@@ -10,6 +10,12 @@ const DialogAddStock = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [components, setComponents] = useState([]);
     const [messageApi, contextHolder] = message.useMessage();
+    const [arrStock, setArrStock] = useState({
+        stock_buy: [],
+        stock_sell: []
+    })
+    const catchStockInput = (stock) => {
+    }
     const warning = (text) => {
         messageApi.open({
             type: "warning",
