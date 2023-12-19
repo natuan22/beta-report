@@ -2,25 +2,42 @@ import React from 'react';
 import {
     Form,
     Input,
-    Button
+    InputNumber,
+    Select,
 } from 'antd';
+import { message } from "antd";
+
 import { useFormik } from 'formik';
-const InputFormSell = () => {
-    const { handleSubmit, setFieldValue, handleChange, errors, touched } =
+const InputFormSell = ({ catchStockInput, isBuy }) => {
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = (text) => {
+        messageApi.open({
+            type: "success",
+            content: text,
+        });
+    };
+    const { handleSubmit, setFieldValue, handleChange, } =
         useFormik({
             initialValues: {
                 code: '',
                 buyPrice: 0,
                 sellPrice: 0,
                 rate: 0,
-                profit: 0,
-                time: ''
+                profit: '',
+                time: '',
+                isBuy
             },
             onSubmit: (values) => {
-
+                console.log(values)
+                catchStockInput("stock_buy", values);
+                success('Thêm mã thành công')
             },
         });
-
+    const handleSelect = (name) => {
+        return (value) => {
+            setFieldValue(name, value);
+        };
+    };
     return (
         <Form
             labelCol={{
@@ -32,10 +49,11 @@ const InputFormSell = () => {
             layout="horizontal"
             size='default'
             style={{
-                width: 600,
+                width: 400,
             }}
             onSubmitCapture={handleSubmit}
         >
+            {contextHolder}
             <Form.Item label='Mã'>
                 <Input name='code' onChange={handleChange} /> {/* Thiết lập chiều rộng mong muốn */}
             </Form.Item>
@@ -49,7 +67,10 @@ const InputFormSell = () => {
                 <Input name='rate' onChange={handleChange} />
             </Form.Item>
             <Form.Item label="Chốt lời/lỗ">
-                <Input name='profit' onChange={handleChange} />
+                <Select name='profit' onChange={handleSelect('profit')}>
+                    <Select.Option value="Chốt lời">Chốt lời</Select.Option>
+                    <Select.Option value="Cắt lỗ">Cắt lỗ</Select.Option>
+                </Select>
             </Form.Item>
             <Form.Item label="Thời gian">
                 <Input name='time' onChange={handleChange} />

@@ -4,6 +4,7 @@ import jsPDF from 'jspdf'
 import { currentDate } from '../helper/getDateAfternoonNew'
 import { Button } from '@mui/material'
 import AfternoonPage1 from './page1/AfternoonPage1'
+import { homNay } from '../helper/getDate'
 
 const ReportAfternoon = () => {
     const pageRefs = {
@@ -32,7 +33,7 @@ const ReportAfternoon = () => {
         pdf.addImage(img1, 'PNG', 0, 0)
         pdf.addPage()
 
-        pdf.save(`BetaAfternoonNews-${currentDate}.pdf`)
+        pdf.save(`BetaAfternoonNews-${homNay}.pdf`)
     }
 
     return (

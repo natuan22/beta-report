@@ -2,23 +2,39 @@ import React from 'react';
 import {
     Form,
     Input,
+    InputNumber,
 } from 'antd';
+import { message } from "antd";
+
 import { useFormik } from 'formik';
-const InputFormBuy = () => {
+const InputFormBuy = ({ catchStockInput, isBuy }) => {
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = (text) => {
+        messageApi.open({
+            type: "success",
+            content: text,
+        });
+    };
+
     const { handleSubmit, handleChange } =
         useFormik({
             initialValues: {
                 code: '',
-                entryPrice: 0,
-                targetPrice: 0,
-                stopLossPrice: 0,
+                buyPrice: 0,
+                sellPrice: 0,
+                rate: 0,
                 profit: 0,
-                time: ''
+                time: '',
+                isBuy
             },
             onSubmit: (values) => {
-                console.log(values)
+
+                catchStockInput("stock_buy", values);
+                success('Thêm mã thành công')
             },
         });
+
+
     return (
         <Form
             labelCol={{
@@ -30,21 +46,22 @@ const InputFormBuy = () => {
             layout="horizontal"
             size='default'
             style={{
-                width: 600,
+                width: 400,
             }}
             onSubmitCapture={handleSubmit}
         >
+            {contextHolder}
             <Form.Item label='Mã'>
                 <Input name='code' onChange={handleChange} />
             </Form.Item>
             <Form.Item label="Giá khuyến nghị">
-                <Input name='entryPrice' onChange={handleChange} />
+                <Input name='buyPrice' onChange={handleChange} />
             </Form.Item>
             <Form.Item label="Giá mục tiêu">
-                <Input name='targetPrice' onChange={handleChange} />
+                <Input name='sellPrice' onChange={handleChange} />
             </Form.Item>
             <Form.Item label="Giá ngừng lỗ">
-                <Input name='stopLossPrice' onChange={handleChange} />
+                <Input name='rate' onChange={handleChange} />
             </Form.Item>
             <Form.Item label="Lãi kỳ vọng">
                 <Input name='profit' onChange={handleChange} />
