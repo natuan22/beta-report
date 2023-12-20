@@ -11,7 +11,7 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const MAX_WORDS = 150; // Số từ tối đa cho mỗi TextArea
+const MAX_WORDS = 170; // Số từ tối đa cho mỗi TextArea
 const saveText = async (data) => {
     try {
         const response = await https.post('/api/v1/report/luu-nhan-dinh-thi-truong', data)
@@ -28,6 +28,9 @@ export default function DialogIdentify({ catchText }) {
     const [textArr, setTextArr] = useState({
         text: []
     })
+    const [wordCount1, setWordCount1] = useState(0)
+    const [wordCount2, setWordCount2] = useState(0)
+
     const success = (text) => {
         messageApi.open({
             type: "success",
@@ -40,6 +43,8 @@ export default function DialogIdentify({ catchText }) {
                 const response = await https.get('/api/v1/report/nhan-dinh-thi-truong-redis')
                 setText1(response.data.data?.text[0])
                 setText2(response.data.data?.text[1])
+                setWordCount1(countWords(response.data.data?.text[0]) - 1)
+                setWordCount2(countWords(response.data.data?.text[1]) - 1)
                 catchText(response.data.data)
             } catch (err) {
                 console.log(err)
@@ -65,6 +70,7 @@ export default function DialogIdentify({ catchText }) {
         const newText = event.target.value;
         if (countWords(newText) <= MAX_WORDS) {
             setText1(newText);
+            setWordCount1(countWords(newText) - 1)
         }
     };
 
@@ -72,6 +78,7 @@ export default function DialogIdentify({ catchText }) {
         const newText = event.target.value;
         if (countWords(newText) <= MAX_WORDS) {
             setText2(newText);
+            setWordCount2(countWords(newText) - 1)
         }
     };
 
@@ -110,6 +117,9 @@ export default function DialogIdentify({ catchText }) {
                 <DialogContent className="relative">
                     <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg  ">
                         <div className="flex flex-col h-full items-center justify-center">
+                            <div className="text-center mt-2 text-gray-500">
+                                Số từ: {wordCount1}/{MAX_WORDS}
+                            </div>
                             <Textarea
                                 value={text1}
                                 onChange={handleTextChange1}
@@ -125,6 +135,9 @@ export default function DialogIdentify({ catchText }) {
                     </div>
                     <div className="w-[1000px] h-[400px] shadow-md p-2 rounded-lg  ">
                         <div className="flex flex-col h-full items-center justify-center">
+                            <div className="text-center mt-2 text-gray-500">
+                                Số từ: {wordCount2}/{MAX_WORDS}
+                            </div>
                             <Textarea
                                 value={text2}
                                 onChange={handleTextChange2}

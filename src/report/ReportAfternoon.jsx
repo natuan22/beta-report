@@ -5,10 +5,18 @@ import { currentDate } from '../helper/getDateAfternoonNew'
 import { Button } from '@mui/material'
 import AfternoonPage1 from './page1/AfternoonPage1'
 import { homNay } from '../helper/getDate'
+import Page4 from '../utils/Page4'
+import AfternoonPage2 from './page2/AfternoonPage2'
+import AfternoonPage3 from './page3/AfternoonPage3'
+import AfternoonPage4 from './page4/AfternoonPage4'
 
 const ReportAfternoon = () => {
     const pageRefs = {
-        page1: useRef(null)
+        page1: useRef(null),
+        page2: useRef(null),
+        page3: useRef(null),
+        page4: useRef(null),
+        page5: useRef(null)
     }
 
     const generateImage = async (pageRefs, height) => {
@@ -41,6 +49,18 @@ const ReportAfternoon = () => {
             <div>
                 <div ref={pageRefs.page1}>
                     <AfternoonPage1 />
+                </div>
+                <div ref={pageRefs.page2}>
+                    <AfternoonPage2 />
+                </div>
+                <div ref={pageRefs.page3}>
+                    <AfternoonPage3 />
+                </div>
+                <div ref={pageRefs.page4}>
+                    <AfternoonPage4 />
+                </div>
+                <div ref={pageRefs.page5}>
+                    <Page4 page={5} />
                 </div>
             </div>
             <div className='flex justify-evenly w-[50%] mb-5'>
