@@ -30,6 +30,24 @@ const AfternoonPage1 = () => {
         getData()
     }, [])
 
+    const renderStockAdvance = (stockAdvance) => {
+        stockAdvance?.map(item => {
+            return (
+                <span>
+                    {item.code} (+{item.value})
+                </span>
+            )
+        })
+    }
+    const renderStockDecline = (stockDecline) => {
+        stockDecline?.map(item => {
+            return (
+                <span>
+                    {item.code} (-{item.value})
+                </span>
+            )
+        })
+    }
 
 
 
@@ -67,29 +85,26 @@ const AfternoonPage1 = () => {
                                 <p className="text-[#00429B] font-bold underline underline-offset-1">Điểm nhấn chính:</p>
                                 <ul className="leading-[23px] translate-x-[-10px] text-sm text-justify font-[500]">
                                     <li className="mt-2">
-                                        VN-Index +5,46 điểm (xx%), đóng cửa tại mức 1.052,25 điểm.
-                                        HNX-Index +0,95 điểm (xx%), đóng cửa tại mức 206,67 điểm.
+                                        VN-Index {data.change} điểm ({(+data.perChange).toFixed(2)}%), đóng cửa tại mức {data.closePrice} điểm.
+                                        HNX-Index {data.hnxChange} điểm ({data.hnxPerChange}%), đóng cửa tại mức {data.hnxClosePrice} điểm.
                                     </li>
 
-                                    <li>Biên độ dao động ngày : ±8 điểm (1.070-1.078).</li>
+                                    <li>Biên độ dao động ngày : {(+(data.highPrice - data.lowPrice)).toFixed(2)} điểm .</li>
 
                                     <li className="mt-2">
-                                        Ngành đóng góp tăng nổi bật cho VN-Index: Ngân hàng (8,37 điểm).
-                                    </li>
-
-                                    <li className="mt-2">
-                                        Ngành đóng góp giảm nổi bật cho VN-Index: Bất động sản (-3,02
-                                        điểm).
+                                        Ngành đóng góp tăng nổi bật cho VN-Index: {data.industryAdvance?.code} ({(+data.industryAdvance?.value).toFixed(2)} điểm).
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp tăng điểm nổi bật: VCB (+2,37), HPG (+0,58),
-                                        BID (+0,57), NVL (+0,39), CTG (+0,3).
+                                        Ngành đóng góp giảm nổi bật cho VN-Index: {data.industryDecline?.code} ({(+data.industryDecline?.value).toFixed(2)} điểm).
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp giảm điểm nổi bật: VHM (-0,65), MSN (-0,46),
-                                        SAB (-0,29), PLX (-0,21), VNM (-0,21).
+                                        Cổ phiếu đóng góp tăng điểm nổi bật: {renderStockAdvance(data?.stockAdvance)}.
+                                    </li>
+
+                                    <li className="mt-2">
+                                        Cổ phiếu đóng góp giảm điểm nổi bật: {renderStockDecline(data?.stockDecline)}.
                                     </li>
 
                                     <li className="mt-2">
@@ -131,7 +146,7 @@ const AfternoonPage1 = () => {
 
 
             <div className="mt-[1px]" >
-                <FooterAfternoon />
+                <FooterAfternoon pageNum={1} />
             </div>
         </div>
     );

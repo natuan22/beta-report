@@ -2,7 +2,6 @@ import React from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { FaArrowUpLong, FaArrowDownLong } from "react-icons/fa6"
-import moment from 'moment/moment';
 
 const getLineCorlor = (value) => {
     if (value > 0) return '#039B3B'
@@ -13,7 +12,6 @@ const getArrow = (value) => {
     if (value > 0) return <FaArrowUpLong />
 }
 const LineChart = ({ dataLineChart }) => {
-    console.log(dataLineChart)
     const dataRender = dataLineChart.chart?.map(item => ([item.time, item.value]))
     const chartOptions = {
         accessibility: {
@@ -110,19 +108,7 @@ const LineChart = ({ dataLineChart }) => {
         <div className='flex flex-col items-center   '>
             <div className='h-[265px] w-[350px]   grid place-items-center  '>
                 <HighchartsReact highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '70%', width: '100%' } }} />
-                <div>
-                    <div>
-                        <p></p>
-                        <p></p>
-                    </div>
-                    <div>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    </div>
-                </div>
+
             </div>
         </div>
     )

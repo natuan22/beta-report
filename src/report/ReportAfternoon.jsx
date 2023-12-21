@@ -5,10 +5,10 @@ import { currentDate } from '../helper/getDateAfternoonNew'
 import { Button } from '@mui/material'
 import AfternoonPage1 from './page1/AfternoonPage1'
 import { homNay } from '../helper/getDate'
-import Page4 from '../utils/Page4'
 import AfternoonPage2 from './page2/AfternoonPage2'
 import AfternoonPage3 from './page3/AfternoonPage3'
 import AfternoonPage4 from './page4/AfternoonPage4'
+import AfternoonPage5 from './page5/AfternoonPage5'
 
 const ReportAfternoon = () => {
     const pageRefs = {
@@ -60,7 +60,7 @@ const ReportAfternoon = () => {
                     <AfternoonPage4 />
                 </div>
                 <div ref={pageRefs.page5}>
-                    <Page4 page={5} />
+                    <AfternoonPage5 page={5} />
                 </div>
             </div>
             <div className='flex justify-evenly w-[50%] mb-5'>
