@@ -26,20 +26,54 @@ const ReportAfternoon = () => {
     }
     const downloadImages = async () => {
         const img1 = await generateImage(pageRefs.page1, 1121)
-
+        const img2 = await generateImage(pageRefs.page2, 1121)
+        const img3 = await generateImage(pageRefs.page3, 1121);
+        const img4 = await generateImage(pageRefs.page4, 1121);
+        const img5 = await generateImage(pageRefs.page5, 1121);
 
         const link1 = document.createElement('a')
         link1.href = img1
         link1.download = 'BetaAfternoonNews-Trang1.png'
         link1.click()
+
+        const link2 = document.createElement('a')
+        link2.href = img2
+        link2.download = 'BetaAfternoonNews-Trang2.png'
+        link2.click()
+
+        const link3 = document.createElement('a')
+        link3.href = img3
+        link3.download = 'BetaAfternoonNews-Trang3.png'
+        link3.click()
+
+        const link4 = document.createElement('a')
+        link4.href = img4
+        link4.download = 'BetaAfternoonNews-Trang4.png'
+        link4.click()
+        const link5 = document.createElement('a')
+        link5.href = img5
+        link5.download = 'BetaAfternoonNews-Trang5.png'
+        link5.click()
     }
 
     const generatePDF = async () => {
         const pdf = new jsPDF()
         const img1 = await generateImage(pageRefs.page1, 1480)
+        const img2 = await generateImage(pageRefs.page2, 1480);
+        const img3 = await generateImage(pageRefs.page3, 1480);
+        const img4 = await generateImage(pageRefs.page4, 1480);
+        const img5 = await generateImage(pageRefs.page5, 1480);
 
         pdf.addImage(img1, 'PNG', 0, 0)
         pdf.addPage()
+        pdf.addImage(img2, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img3, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img4, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img5, 'PNG', 0, 0);
+
 
         pdf.save(`BetaAfternoonNews-${homNay}.pdf`)
     }
@@ -60,7 +94,7 @@ const ReportAfternoon = () => {
                     <AfternoonPage4 />
                 </div>
                 <div ref={pageRefs.page5}>
-                    <AfternoonPage5 page={5} />
+                    <AfternoonPage5 />
                 </div>
             </div>
             <div className='flex justify-evenly w-[50%] mb-5'>

@@ -4,14 +4,21 @@ import FooterAfternoon from "../utils/component/FooterAfternoon";
 import ColumnChart from "../utils/component/ColumnChart";
 import { https } from "../../services/configService";
 import LineChart from "../utils/component/LineChart";
+import formatNumber from "../../helper/formatNumber";
 
-
+const getSymbol = (value) => {
+    if (value > 0) {
+        return (<span>+</span>)
+    } else {
+        return (<span>-</span>)
+    }
+}
 
 const AfternoonPage1 = () => {
     const [dataColumnChart1, setDataColumnChart1] = useState([])
     const [dataColumnChart2, setDataColumnChart2] = useState([])
     const [dataColumnChart3, setDataColumnChart3] = useState([])
-    const [data, setData] = useState([])
+    const [data, setData] = useState()
 
     const getData = async () => {
         try {
@@ -28,26 +35,8 @@ const AfternoonPage1 = () => {
 
     useEffect(() => {
         getData()
-    }, [])
 
-    const renderStockAdvance = (stockAdvance) => {
-        stockAdvance?.map(item => {
-            return (
-                <span>
-                    {item.code} (+{item.value})
-                </span>
-            )
-        })
-    }
-    const renderStockDecline = (stockDecline) => {
-        stockDecline?.map(item => {
-            return (
-                <span>
-                    {item.code} (-{item.value})
-                </span>
-            )
-        })
-    }
+    }, [])
 
 
 
@@ -85,48 +74,67 @@ const AfternoonPage1 = () => {
                                 <p className="text-[#00429B] font-bold underline underline-offset-1">Điểm nhấn chính:</p>
                                 <ul className="leading-[23px] translate-x-[-10px] text-sm text-justify font-[500]">
                                     <li className="mt-2">
-                                        VN-Index {data.change} điểm ({(+data.perChange).toFixed(2)}%), đóng cửa tại mức {data.closePrice} điểm.
-                                        HNX-Index {data.hnxChange} điểm ({data.hnxPerChange}%), đóng cửa tại mức {data.hnxClosePrice} điểm.
+                                        VN-Index {data.change} điểm ({formatNumber(data.perChange)}%), đóng cửa tại mức {formatNumber(data.closePrice)} điểm.
+                                        HNX-Index {formatNumber(data.hnxChange)} điểm ({formatNumber(data.hnxPerChange)}%), đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.
                                     </li>
 
-                                    <li>Biên độ dao động ngày : {(+(data.highPrice - data.lowPrice)).toFixed(2)} điểm .</li>
+                                    <li>Biên độ dao động ngày : {getSymbol(data.highPrice - data.lowPrice)}{formatNumber(data.highPrice - data.lowPrice)} điểm .</li>
 
                                     <li className="mt-2">
-                                        Ngành đóng góp tăng nổi bật cho VN-Index: {data.industryAdvance?.code} ({(+data.industryAdvance?.value).toFixed(2)} điểm).
-                                    </li>
-
-                                    <li className="mt-2">
-                                        Ngành đóng góp giảm nổi bật cho VN-Index: {data.industryDecline?.code} ({(+data.industryDecline?.value).toFixed(2)} điểm).
+                                        Ngành đóng góp tăng nổi bật cho VN-Index: {data.industryAdvance?.code} ({formatNumber(data.industryAdvance?.value)} điểm).
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp tăng điểm nổi bật: {renderStockAdvance(data?.stockAdvance)}.
+                                        Ngành đóng góp giảm nổi bật cho VN-Index: {data.industryDecline?.code} ({formatNumber(+data.industryDecline?.value)} điểm).
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp giảm điểm nổi bật: {renderStockDecline(data?.stockDecline)}.
+                                        Cổ phiếu đóng góp tăng điểm nổi bật: {data.stockAdvance.map((item, index) => (
+                                            <span key={item.code}>
+                                                {item.code} (+{formatNumber(item.value)})
+                                                {index !== data.stockAdvance.length - 1 ? ', ' : ''}
+                                            </span>
+                                        ))} .
                                     </li>
 
                                     <li className="mt-2">
-                                        Tổng giá trị giao dịch của VN-Index đạt 8.430 tỷ đồng, tăng
-                                        3,49% so với phiên trước.
+                                        Cổ phiếu đóng góp giảm điểm nổi bật: {data.stockDecline.map((item, index) => (
+                                            <span key={item.code}>
+                                                {item.code} ({formatNumber(item.value)})
+                                                {index !== data.stockDecline.length - 1 ? ', ' : ''}
+                                            </span>
+                                        ))} .
                                     </li>
 
                                     <li className="mt-2">
-                                        Độ rộng thị trường: 245 mã tăng, 63 mã tham chiếu, 138 mã giảm
+                                        Tổng giá trị giao dịch của VN-Index đạt {formatNumber(data.totalVal / 1000000000)} tỷ đồng, tăng
+                                        {""} {formatNumber(data.perChangeTotalVal)}% so với phiên trước.
                                     </li>
 
                                     <li className="mt-2">
-                                        Giao dịch ròng của khối ngoại: mua ròng 171,17 tỷ đồng trên sàn
-                                        HOSE, tiêu điểm là HPG (63,03 tỷ), VHM (50,19 tỷ), SSI (34,87
-                                        tỷ). Ở chiều ngược lại, khối ngoại bán ròng mạnh tại các cổ
-                                        phiếu VIC (-34,08 tỷ), DXG (-22,12 tỷ), HCM (-11,23 tỷ).
+                                        Độ rộng thị trường: {data.advances} mã tăng, {data.noChange} mã tham chiếu, {data.declines} mã giảm
+                                    </li>
+
+                                    <li className="mt-2">
+                                        Giao dịch ròng của khối ngoại: mua ròng {formatNumber(data.netVal / 1000000000)} tỷ đồng trên sàn
+                                        HOSE, tiêu điểm là {data.topBuy.map((item, index) => (
+                                            <span key={item.code}>
+                                                {item.code} ({formatNumber(item.value / 1000000000)})
+                                                {index !== data.topBuy.length - 1 ? ', ' : ''}
+                                            </span>
+                                        ))}. Ở chiều ngược lại, khối ngoại bán ròng mạnh tại các cổ
+                                        phiếu {data.topSell.map((item, index) => (
+                                            <span key={item.code}>
+                                                {item.code} ({formatNumber(item.value / 1000000000)})
+                                                {index !== data.topSell.length - 1 ? ', ' : ''}
+                                            </span>
+                                        ))}.
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div className="content-right w-[45%] h-[960px] flex flex-col items-center justify-evenly ">
-                            <div className="content-right_lineChart  w-full">
+                            <div className="content-right_lineChart h-[250px]   w-full">
                                 <LineChart dataLineChart={data} />
                             </div>
                             <div className="content-right_columnChart1 w-full ">

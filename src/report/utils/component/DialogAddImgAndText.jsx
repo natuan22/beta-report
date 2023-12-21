@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Modal } from "antd";
+import { Form, Modal } from "antd";
 import { FaPlus } from "react-icons/fa6";
 import { message } from "antd";
 import Button from "@mui/material/Button";
+import Textarea from "../../../component/utils/Textarea";
+import FormInput from "./FormInput";
 
 
-const DialogAddImg = ({ catchStock }) => {
+const DialogAddImgAndText = ({ catchStock }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -35,19 +37,22 @@ const DialogAddImg = ({ catchStock }) => {
         <>
             {contextHolder}
             <Button variant="contained" onClick={showModal}>
-                Thêm hình
+                Thêm hình và nhận định
             </Button>
             <Modal
                 width={1600}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
-                cancelText="Xóa tất cả"
+                cancelText="Đóng"
             >
+                <div className="h-[650px] grid place-items-center">
+                    <FormInput />
 
+                </div>
             </Modal>
         </>
     );
 };
 
-export default DialogAddImg;
+export default DialogAddImgAndText;
