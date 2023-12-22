@@ -3,7 +3,7 @@ import logo from '../../../app/asset/img/logoAfternoon.png'
 import { currentDate } from '../../../helper/getDateAfternoonNew'
 const HeaderAfternoon = () => {
     return (
-        <div className='w-[800px] bg-gradient-to-r from-[#143964]  to-[#0055B6] relative  h-[106px]'>
+        <div className='w-[800px] bg-gradient-to-r from-[#143964]  to-[#0055B6] relative  h-[96px]'>
             <div className='flex items-center justify-around'>
                 <div className='logo'>
                     <img src={logo} alt='logo' />

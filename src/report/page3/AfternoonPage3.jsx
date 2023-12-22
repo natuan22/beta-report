@@ -7,6 +7,8 @@ import { https } from "../../services/configService";
 import ColumnChartPage3 from "./component/ColumnChartPage3";
 import formatNumber from "../../helper/formatNumber";
 import { FaDownLong, FaUpLong } from "react-icons/fa6"
+import ColumnChartAfternoon from "./component/ColumnChartAfternoon";
+import MultipleColumnChart from "./component/MultipleColumnChart";
 
 const getArrow = (value) => {
     if (value < 0) return <span className="text-red-500"> <FaDownLong /></span>;
@@ -16,7 +18,11 @@ const getArrow = (value) => {
 const AfternoonPage3 = () => {
     const [dataColumChartLeft, setDataColumnChartLeft] = useState([])
     const [dataColumChartRight, setDataColumnChartRight] = useState([])
+    const [dataColumnForeign, setDataColumnForeign] = useState([])
+    const [dataColumnIndividual, setDataColumnIndividual] = useState([])
     const [dataTable, setDataTable] = useState([])
+    const [dataMultipleColumn1, setDataMultipleColumn1] = useState([])
+    const [dataMultipleColumn2, setDataMultipleColumn2] = useState([])
     const getData = async (type) => {
         try {
             const response = await https.get('/api/v1/report/dong-tien-rong', {
@@ -41,10 +47,41 @@ const AfternoonPage3 = () => {
             console.log(err)
         }
     }
+    const getData2 = async (type) => {
+        try {
+            const response = await https.get('api/v1/report/top-mua-ban-rong', {
+                params: {
+                    type
+                }
+            })
+            if (type === 0) {
+                setDataColumnForeign(response.data.data)
+            } else if (type === 1) {
+                setDataColumnIndividual(response.data.data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+    const getDataMultipleColumn = async () => {
+        try {
+            const response = await https.get('api/v1/report/bien-dong-gtgd')
+
+            setDataMultipleColumn1(response.data.data.slice(0, 4));
+            setDataMultipleColumn2(response.data.data.slice(4));
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
     useEffect(() => {
         getData(0)
         getData(1)
         getDataTable()
+        getData2(0)
+        getData2(1)
+        getDataMultipleColumn()
     }, [])
     return (
         <div className="h-[1480px] w-[800px] relative">
@@ -52,8 +89,8 @@ const AfternoonPage3 = () => {
                 <HeaderAfternoon />
             </div>
 
-            <div className="absolute top-[115px] z-10 w-full flex flex-col items-center" >
-                <div>
+            <div className="absolute top-[100px] z-10 w-full flex flex-col items-center" >
+                <div className="relative">
                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                         <div className="bg-[#E88C08] h-[20px] w-[25px] "></div>
                         <div className="w-[700px] bg-[#0155B7] h-[20px]"></div>
@@ -62,13 +99,16 @@ const AfternoonPage3 = () => {
                         <div className="bg-[#E88C08] h-[20px] w-[25px] "></div>
                         <div className="w-[700px] bg-[#0155B7] h-[20px]"></div>
                     </div>
+                    <div className="absolute top-0 left-[50%]  translate-x-[-50%] translate-y-[-10%]">
+                        <h2 className="text-white text-[15px]">Thống kê giao dịch </h2>
+                    </div>
                 </div>
-
             </div>
+
 
             <div className="content  h-[926px] mt-[55px] w-full flex flex-col items-center ">
                 <div className="w-[750px] flex">
-                    <div className="content-left w-[60%]">
+                    <div className="content-left w-[50%]">
                         <div className="table">
                             <table className="bg-transparent w-[100%] border-[#0155B7] border-solid border-1 border-collapse">
                                 <thead className="bg-[#0155B7] border-1 border-[#0155B7] border-solid border-collapse">
@@ -76,10 +116,10 @@ const AfternoonPage3 = () => {
                                         <th className="font-semibold px-2 py-1 text-left w-[120px]    ">
                                             Phân ngành
                                         </th>
-                                        <th className="font-semibold px-1 py-1   ">%D</th>
-                                        <th className="font-semibold px-1 py-1   ">%W</th>
-                                        <th className="font-semibold px-1 py-1   ">%M</th>
-                                        <th className="font-semibold px-1 py-1   ">Độ rộng ngành</th>
+                                        <th className="font-semibold px-1 py-1 text-[12px]   ">%D</th>
+                                        <th className="font-semibold px-1 py-1  text-[12px]  ">%W</th>
+                                        <th className="font-semibold px-1 py-1 text-[12px]   ">%M</th>
+                                        <th className="font-semibold px-1 py-1  text-[12px]  ">Độ rộng ngành</th>
                                     </tr>
                                 </thead>
                                 <tbody className="">
@@ -105,7 +145,7 @@ const AfternoonPage3 = () => {
                                                 <td className={`text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px] `}>
                                                     {getArrow(item.month_change_percent)} {formatNumber(item.month_change_percent)} %
                                                 </td>
-                                                <td className={`text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px] `}>
+                                                <td className={`text-center  w-[10%] px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px] `}>
                                                     <div className="flex">
                                                         <div
                                                             className="bg-purple-500 h-2.5"
@@ -156,18 +196,19 @@ const AfternoonPage3 = () => {
                             <ColumnChartPage3 title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartLeft} />
                         </div>
                     </div>
-                    <div className="content-right  w-[40%] flex flex-col items-center justify-between">
-                        <div className="columnChart-1">
-                            <ColumnChartPage3 title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartLeft} />
+                    <div className="content-right  w-[50%] flex flex-col items-center justify-center">
+                        <div className="columnChart-1 w-full">
+                            <MultipleColumnChart legend={false} title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'ĐVT: tỷ VNĐ'} data={dataMultipleColumn1} />
+                            <MultipleColumnChart legend={true} title={''} unit={''} data={dataMultipleColumn2} />
                         </div>
-                        <div className="columnChart-2">
-                            <ColumnChartPage3 title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartLeft} />
+                        <div className="columnChart-2 w-full">
+                            <ColumnChartAfternoon title={'Top ngành mua bán ròng khối ngoại'} unit={'tỷ VNĐ'} data={dataColumnForeign} />
                         </div>
-                        <div className="columnChart-3">
-                            <ColumnChartPage3 title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartLeft} />
+                        <div className="columnChart-3 w-full">
+                            <ColumnChartAfternoon title={'Top ngành mua bán ròng tự doanh'} unit={'tỷ VNĐ'} data={dataColumnIndividual} />
                         </div>
-                        <div className="columnChart-4">
-                            <ColumnChartPage3 title={'Dòng tiền ròng khối ngoại qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartLeft} />
+                        <div className="columnChart-4 w-full">
+                            <ColumnChartPage3 title={'Dòng tiền ròng tự doanh qua 20 phiên gần nhất'} unit={'tỷ VNĐ'} data={dataColumChartRight} />
                         </div>
                     </div>
                 </div>

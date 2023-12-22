@@ -9,7 +9,6 @@ import moment from 'moment/moment';
 const AreaChart = () => {
     const [data, setData] = useState([])
     const max = Math.ceil(Math.max(...data.map(item => (item.value / 1000000000))));
-    console.log(max)
     useEffect(() => {
         const getData = async () => {
             try {
@@ -22,7 +21,6 @@ const AreaChart = () => {
         getData()
     }, [])
 
-    console.log(data)
     const options = {
         accessibility: {
             enabled: false,
@@ -50,7 +48,9 @@ const AreaChart = () => {
             categories: data?.map(item => moment(item.date).format("DD/MM")).reverse()
         },
         yAxis: {
-
+            title: {
+                text: ''
+            },
             labels: {
                 style: {
                     color: '#000',

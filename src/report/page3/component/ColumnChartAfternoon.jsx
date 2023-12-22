@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-const ColumnChart = ({ data, unit, title, color, currency, tickInterval, isChart3 }) => {
-    const max = Math.ceil(Math.max(...data.map(item => (item.value / currency))));
-    const [min, setMin] = useState(0);
+const ColumnChartAfternoon = ({ data, title, unit }) => {
+    const max = Math?.ceil(Math?.max(...data?.map(item => (item.value / 1000000000))));
+    const min = Math?.floor(Math?.min(...data?.map(item => (item.value / 1000000000))))
 
-    useEffect(() => {
-        if (isChart3) {
-            setMin(0);
-        } else {
-            const calculatedMin = Math.floor(Math.min(...data.map(item => (item.value / currency))));
-            setMin(calculatedMin);
-        }
-    }, [data, currency, isChart3]);
     const options = {
         accessibility: {
             enabled: false,
@@ -26,53 +18,55 @@ const ColumnChart = ({ data, unit, title, color, currency, tickInterval, isChart
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">${title}</p>
-                    <span style="color: #000; font-size: 10px; font-weight: bold;">ĐVT: ${unit}</span>
+                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">${title} <span style="color: #000; font-size: 10px; font-weight: bold;"> (${unit})</span></p>
+                    
             </div>`
         },
         xAxis: {
             categories: data.map(item => item.code),
             labels: {
+                enabled: true,
+
                 step: 1,
-                rotation: -45,
+                rotation: -30,
                 align: 'center',
                 style: {
-                    color: '#000',
-                    fontWeight: 'bold',
-                    fontSize: 10,
+                    color: '#000',// màu cho các nhãn trục x
+                    fontSize: 8,
+                    fontWeight: 600
                 }
-            },
+            }
+
         },
         yAxis: {
+            visible: true,
             title: {
                 text: '',
             },
             labels: {
                 enabled: false,
-
                 style: {
                     fontSize: '10px',
                     fontWeight: 'bold'
                 }
             },
             opposite: true,
-            gridLineWidth: 0.5,
-            min,
+            gridLineWidth: 1,
             max,
-            tickInterval
+            min,
+            tickInterval: Math.ceil(max / 5)
         },
         series: [
             {
                 name: '',
                 data: data.map(item => {
-
-
                     return {
                         name: item.code,
-                        y: +(item.value / `${currency}`).toFixed(1),
-                        color: item.value > 0 ? `${color}` : "#EF5350"
+                        y: +(item.value / `${1000000000}`).toFixed(1),
+                        color: item.value > 0 ? '#26A69A' : "#EF5350"
                     }
                 }),
+                color: '#1B68BB'
             },
 
         ],
@@ -94,11 +88,12 @@ const ColumnChart = ({ data, unit, title, color, currency, tickInterval, isChart
             }
         },
     };
+
     return (
-        <div className='h-[250px]  '>
+        <div className='h-[200px]'>
             <HighchartsReact highcharts={Highcharts} options={options} containerProps={{ style: { height: '100%', width: '100%' } }} />
         </div>
     )
 }
 
-export default ColumnChart
+export default ColumnChartAfternoon

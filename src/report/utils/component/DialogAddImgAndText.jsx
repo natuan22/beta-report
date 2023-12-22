@@ -3,11 +3,10 @@ import { Form, Modal } from "antd";
 import { FaPlus } from "react-icons/fa6";
 import { message } from "antd";
 import Button from "@mui/material/Button";
-import Textarea from "../../../component/utils/Textarea";
 import FormInput from "./FormInput";
 
 
-const DialogAddImgAndText = ({ catchStock }) => {
+const DialogAddImgAndText = ({ onSubmitSuccess, getImgFromInput }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -47,7 +46,7 @@ const DialogAddImgAndText = ({ catchStock }) => {
                 cancelText="Đóng"
             >
                 <div className="h-[650px] grid place-items-center">
-                    <FormInput />
+                    <FormInput getImgFromInput={getImgFromInput} handleOk={handleOk} onSubmitSuccess={onSubmitSuccess} />
 
                 </div>
             </Modal>

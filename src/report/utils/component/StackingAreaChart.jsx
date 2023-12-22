@@ -93,7 +93,9 @@ const StackingAreaChart = () => {
             },
         },
         yAxis: {
-
+            title: {
+                text: ''
+            },
             labels: {
                 style: {
                     color: localStorage.getItem('color'),
