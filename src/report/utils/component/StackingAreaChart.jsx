@@ -71,7 +71,7 @@ const StackingAreaChart = () => {
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">Tỷ trọng dòng tiền các nhóm NĐT qua 60 phiên gần nhất</p>
+                    <p style="color: #00429B; font-size: 12px; font-weight: bold;margin: 0px">Tỷ trọng dòng tiền các nhóm NĐT qua 60 phiên gần nhất</p>
                     <span style="color: #000; font-size: 10px; font-weight: bold;">ĐVT: %</span>
             </div>`,
             margin: -10
@@ -99,11 +99,14 @@ const StackingAreaChart = () => {
             labels: {
                 style: {
                     color: localStorage.getItem('color'),
+                    fontSize: '10px',
+                    fontWeight: 600
                 },
                 formatter: function () {
                     return this.value + "%";
                 },
             },
+            opposite: true,
             gridLineWidth: 0.5,
         },
         legend: {

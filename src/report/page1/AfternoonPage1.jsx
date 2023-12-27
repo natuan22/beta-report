@@ -5,131 +5,235 @@ import ColumnChart from "../utils/component/ColumnChart";
 import { https } from "../../services/configService";
 import LineChart from "../utils/component/LineChart";
 import formatNumber from "../../helper/formatNumber";
+import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
+import DialogAddText from "./component/DialogAddText";
 
 const getSymbol = (value) => {
     if (value > 0) {
-        return (<span>+</span>)
+        return <span>+</span>;
     } else {
-        return (<span>-</span>)
+        return <span>-</span>;
     }
-}
+};
+const getText = (value) => {
+    if (value > 0) {
+        return <span>tăng</span>;
+    } else {
+        return <span>giảm</span>;
+    }
+};
 
 const AfternoonPage1 = () => {
-    const [dataColumnChart1, setDataColumnChart1] = useState([])
-    const [dataColumnChart2, setDataColumnChart2] = useState([])
-    const [dataColumnChart3, setDataColumnChart3] = useState([])
-    const [data, setData] = useState()
-
+    const [dataColumnChart1, setDataColumnChart1] = useState([]);
+    const [dataColumnChart2, setDataColumnChart2] = useState([]);
+    const [dataColumnChart3, setDataColumnChart3] = useState([]);
+    const [data, setData] = useState();
+    const [text, setText] = useState([]);
     const getData = async () => {
         try {
-            const response = await https.get('/api/v1/report/ban-tin-chieu-1')
-            setDataColumnChart1(response.data.data.chartTopMarket)
-            setDataColumnChart2(response.data.data.chartTopForeign)
-            setDataColumnChart3(response.data.data.chartTopTotalVal)
-            setData(response.data.data)
+            const response = await https.get("/api/v1/report/ban-tin-chieu-1");
+            setDataColumnChart1(response.data.data.chartTopMarket);
+            setDataColumnChart2(response.data.data.chartTopForeign);
+            setDataColumnChart3(response.data.data.chartTopTotalVal);
+            setData(response.data.data);
+            setText(response.data.data.text)
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
-    }
-
+    };
 
     useEffect(() => {
-        getData()
-
-    }, [])
-
-
+        getData();
+    }, []);
 
     return (
         <div className="h-[1480px] w-[800px]">
             <div className="header">
                 <HeaderAfternoon />
             </div>
-            {data ?
-                <div className="content  w-full flex flex-col justify-center items-center  mt-[20px]">
-                    <div className="flex w-[780px]">
+            {data ? (
+                <div className="content  w-full flex flex-col justify-center items-center  mt-[20px] relative">
+                    <div className="absolute right-0 top-0 translate-x-[300px]">
+                        <DialogAddText getData={getData} />
+                    </div>
+                    <div className="flex w-[760px]">
                         <div className="content-left w-[55%] ">
-                            <div className="content-left_top">
-                                <h2 className="text-[#0D4381] text-[35px] font-bold m-0">GIẢM TỐC ĐỘT NGỘT</h2>
-                                <p className="text-[#00429B] font-bold text-[18px] my-2 text-justify">
-                                    Thị trường hạ nhiệt sau nhiều phiên tăng nóng, khối ngoại tiếp đà
-                                    bán ròng mạnh
-                                </p>
-                                <p className="my-2 text-justify">
-                                    <span className="text-[#00429B] font-bold">Diễn biến thị trường: </span>
-                                    <span className="leading-[15px] ">
-                                        Sau nhiều phiên tăng điểm bùng nổ, diễn biến chung tại các chỉ
-                                        số chính có phần giảm tốc khi thị trường rung lắc mạnh trong
-                                        vùng giá quan trọng. Dù mở cửa trong không khí tích cực đưa thị
-                                        trường tăng điểm mạnh, tuy nhiên áp lực bán dâng cao đã khiến
-                                        nhiều cổ phiếu Largecap khởi đầu đà giảm điểm. Việc thị trường
-                                        mất đi trụ đỡ khiến các chỉ số chính đánh mất mốc tham chiếu và
-                                        giằng co cho đến hết phiên giao dịch. Thị trường phân hóa mạnh
-                                        trong trạng thái cân bằng, do đó độ rộng thị trường dường như
-                                        không quá cách biệt với 268 mã giảm/223 mã cổ phiếu tăng.
-                                    </span>
-                                </p>
-                            </div>
+                            {text.length > 0 ?
+                                <div className="content-left_top max-h-[354px]">
+                                    <h2 className="text-[#0D4381] text-[35px] font-bold m-0">
+                                        {text[0]}
+                                    </h2>
+                                    <p className="text-[#00429B] font-bold text-[15px] my-2 text-justify">
+                                        {text[1]}
+                                    </p>
+                                    <p className="my-2 text-justify">
+                                        <span className="text-[#00429B] font-bold">
+                                            Diễn biến thị trường:{" "}
+                                        </span>
+                                        <span className="leading-[15px] text-[14px]  ">
+                                            {text[2]}
+                                        </span>
+                                    </p>
+                                </div>
+                                :
+                                <div className="max-h-[354px]">Loading...</div>}
+
                             <div className="content-left-bot">
-                                <p className="text-[#00429B] font-bold underline underline-offset-1">Điểm nhấn chính:</p>
+                                <p className="text-[#00429B] font-bold underline underline-offset-1">
+                                    Điểm nhấn chính:
+                                </p>
                                 <ul className="leading-[23px] translate-x-[-10px] text-sm text-justify font-[500]">
                                     <li className="mt-2">
-                                        VN-Index {data.change} điểm ({formatNumber(data.perChange)}%), đóng cửa tại mức {formatNumber(data.closePrice)} điểm.
-                                        HNX-Index {formatNumber(data.hnxChange)} điểm ({formatNumber(data.hnxPerChange)}%), đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.
+                                        VN-Index {getText(data.perChange)}{" "}
+                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                            {formatNumber(data.change)}
+                                        </span>{" "}
+                                        điểm{" "}
+                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                            ({formatNumber(data.perChange)}%)
+                                        </span>
+                                        , đóng cửa tại mức {formatNumber(data.closePrice)} điểm.
+                                        HNX-Index {getText(data.hnxPerChange)}{" "}
+                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                            {formatNumber(data.hnxChange)}
+                                        </span>{" "}
+                                        điểm{" "}
+                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                            ({formatNumber(data.hnxPerChange)}%)
+                                        </span>{" "}
+                                        , đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.
                                     </li>
 
-                                    <li>Biên độ dao động ngày : {getSymbol(data.highPrice - data.lowPrice)}{formatNumber(data.highPrice - data.lowPrice)} điểm .</li>
-
-                                    <li className="mt-2">
-                                        Ngành đóng góp tăng nổi bật cho VN-Index: {data.industryAdvance?.code} ({formatNumber(data.industryAdvance?.value)} điểm).
+                                    <li>
+                                        Biên độ dao động ngày :{" "}
+                                        {getSymbol(data.highPrice - data.lowPrice)}
+                                        {formatNumber(data.highPrice - data.lowPrice)} điểm (
+                                        {formatNumber(data.highPrice)} -{" "}
+                                        {formatNumber(data.lowPrice)}) .
                                     </li>
 
                                     <li className="mt-2">
-                                        Ngành đóng góp giảm nổi bật cho VN-Index: {data.industryDecline?.code} ({formatNumber(+data.industryDecline?.value)} điểm).
+                                        Ngành đóng góp tăng nổi bật cho VN-Index:{" "}
+                                        {data.industryAdvance?.code} (
+                                        <span className="text-green-500">
+                                            {" "}
+                                            {formatNumber(data.industryAdvance?.value)} điểm
+                                        </span>
+                                        ).
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp tăng điểm nổi bật: {data.stockAdvance.map((item, index) => (
+                                        Ngành đóng góp giảm nổi bật cho VN-Index:{" "}
+                                        {data.industryDecline?.code} (
+                                        <span className="text-red-500">
+                                            {formatNumber(+data.industryDecline?.value)} điểm
+                                        </span>
+                                        ).
+                                    </li>
+
+                                    <li className="mt-2">
+                                        Cổ phiếu đóng góp tăng điểm nổi bật:{" "}
+                                        {data.stockAdvance.map((item, index) => (
                                             <span key={item.code}>
-                                                {item.code} (+{formatNumber(item.value)})
-                                                {index !== data.stockAdvance.length - 1 ? ', ' : ''}
+                                                {item.code}{" "}
+                                                <span className="text-green-500">
+                                                    (+{formatNumber(item.value)})
+                                                </span>
+                                                {index !== data.stockAdvance.length - 1 ? ", " : ""}
                                             </span>
-                                        ))} .
+                                        ))}{" "}
+                                        .
                                     </li>
 
                                     <li className="mt-2">
-                                        Cổ phiếu đóng góp giảm điểm nổi bật: {data.stockDecline.map((item, index) => (
+                                        Cổ phiếu đóng góp giảm điểm nổi bật:{" "}
+                                        {data.stockDecline.map((item, index) => (
                                             <span key={item.code}>
-                                                {item.code} ({formatNumber(item.value)})
-                                                {index !== data.stockDecline.length - 1 ? ', ' : ''}
+                                                {item.code}{" "}
+                                                <span className="text-red-500">
+                                                    ({formatNumber(item.value)})
+                                                </span>
+                                                {index !== data.stockDecline.length - 1 ? ", " : ""}
                                             </span>
-                                        ))} .
+                                        ))}{" "}
+                                        .
                                     </li>
 
                                     <li className="mt-2">
-                                        Tổng giá trị giao dịch của VN-Index đạt {formatNumber(data.totalVal / 1000000000)} tỷ đồng, tăng
-                                        {""} {formatNumber(data.perChangeTotalVal)}% so với phiên trước.
+                                        Tổng giá trị giao dịch của VN-Index đạt{" "}
+                                        {formatNumber(data.totalVal / 1000000000)} tỷ đồng,{" "}
+                                        {getText(data.perChangeTotalVal)}
+                                        {""}{" "}
+                                        <span
+                                            className={`${getColorBaseOnValue(
+                                                data.perChangeTotalVal
+                                            )}`}
+                                        >
+                                            {formatNumber(data.perChangeTotalVal)}%
+                                        </span>{" "}
+                                        so với phiên trước.
                                     </li>
 
                                     <li className="mt-2">
-                                        Độ rộng thị trường: {data.advances} mã tăng, {data.noChange} mã tham chiếu, {data.declines} mã giảm
+                                        Độ rộng thị trường:{" "}
+                                        <span className="text-green-500">{data.advances}</span> mã
+                                        tăng,{" "}
+                                        <span className="text-yellow-500">{data.noChange}</span> mã
+                                        tham chiếu,{" "}
+                                        <span className="text-red-500">{data.declines}</span> mã
+                                        giảm
                                     </li>
-
-                                    <li className="mt-2">
-                                        Giao dịch ròng của khối ngoại: mua ròng {formatNumber(data.netVal / 1000000000)} tỷ đồng trên sàn
-                                        HOSE, tiêu điểm là {data.topBuy.map((item, index) => (
-                                            <span key={item.code}>
-                                                {item.code} ({formatNumber(item.value / 1000000000)})
-                                                {index !== data.topBuy.length - 1 ? ', ' : ''}
-                                            </span>
-                                        ))}. Ở chiều ngược lại, khối ngoại bán ròng mạnh tại các cổ
-                                        phiếu {data.topSell.map((item, index) => (
-                                            <span key={item.code}>
-                                                {item.code} ({formatNumber(item.value / 1000000000)})
-                                                {index !== data.topSell.length - 1 ? ', ' : ''}
-                                            </span>
-                                        ))}.
-                                    </li>
+                                    {data.netVal > 0 ? (
+                                        <li className="mt-2">
+                                            Giao dịch ròng của khối ngoại: mua ròng{" "}
+                                            <span className={`text-green-500`}>
+                                                {formatNumber(data.netVal / 1000000000)}
+                                            </span>{" "}
+                                            tỷ đồng trên sàn HOSE, tiêu điểm là{" "}
+                                            {data.topBuy.map((item, index) => (
+                                                <span key={item.code}>
+                                                    {item.code} ({formatNumber(item.value / 1000000000)}{" "}
+                                                    tỷ đồng )
+                                                    {index !== data.topBuy.length - 1 ? ", " : ""}
+                                                </span>
+                                            ))}
+                                            . Ở chiều ngược lại, khối ngoại bán ròng mạnh tại các cổ
+                                            phiếu{" "}
+                                            {data.topSell.map((item, index) => (
+                                                <span key={item.code}>
+                                                    {item.code} ({formatNumber(item.value / 1000000000)}{" "}
+                                                    tỷ đồng )
+                                                    {index !== data.topSell.length - 1 ? ", " : ""}
+                                                </span>
+                                            ))}
+                                            .
+                                        </li>
+                                    ) : (
+                                        <li className="mt-2">
+                                            Giao dịch ròng của khối ngoại: bán ròng{" "}
+                                            <span className={`text-red-500`}>
+                                                {formatNumber(data.netVal / 1000000000)}
+                                            </span>{" "}
+                                            tỷ đồng trên sàn HOSE, tiêu điểm là{" "}
+                                            {data.topSell.map((item, index) => (
+                                                <span key={item.code}>
+                                                    {item.code} ({formatNumber(item.value / 1000000000)}{" "}
+                                                    tỷ đồng )
+                                                    {index !== data.topBuy.length - 1 ? ", " : ""}
+                                                </span>
+                                            ))}
+                                            . Ở chiều ngược lại, khối ngoại mua ròng mạnh tại các cổ
+                                            phiếu{" "}
+                                            {data.topBuy.map((item, index) => (
+                                                <span key={item.code}>
+                                                    {item.code} ({formatNumber(item.value / 1000000000)}{" "}
+                                                    tỷ đồng )
+                                                    {index !== data.topSell.length - 1 ? ", " : ""}
+                                                </span>
+                                            ))}
+                                            .
+                                        </li>
+                                    )}
                                 </ul>
                             </div>
                         </div>
@@ -138,22 +242,47 @@ const AfternoonPage1 = () => {
                                 <LineChart dataLineChart={data} />
                             </div>
                             <div className="content-right_columnChart1 w-full ">
-                                <ColumnChart isChart3={false} tickInterval={0.5} data={dataColumnChart1} unit={'điểm'} currency={1} color='#26A69A' title={'Nhóm dẫn dắt thị trường sàn HOSE'} />
+                                <ColumnChart
+                                    isChart3={false}
+                                    tickInterval={0.5}
+                                    data={dataColumnChart1}
+                                    unit={"điểm"}
+                                    currency={1}
+                                    color="#26A69A"
+                                    title={"Nhóm dẫn dắt thị trường sàn HOSE"}
+                                />
                             </div>
                             <div className="content-right_columnChart2 w-full ">
-                                <ColumnChart isChart3={false} tickInterval={50} data={dataColumnChart2} unit={'tỷ VND'} currency={1000000000} color='#26A69A' title={'Top Khối ngoại giao dịch ròng sàn HOSE'} />
+                                <ColumnChart
+                                    isChart3={false}
+                                    tickInterval={50}
+                                    data={dataColumnChart2}
+                                    unit={"tỷ VND"}
+                                    currency={1000000000}
+                                    color="#26A69A"
+                                    title={"Top Khối ngoại giao dịch ròng sàn HOSE"}
+                                />
                             </div>
                             <div className="content-right_columnChart3  w-full">
-                                <ColumnChart isChart3={true} tickInterval={100} min={0} data={dataColumnChart3} unit={'tỷ VND'} currency={1000000000} color='#1B68BB' title={'Top giá trị giao dịch sàn HOSE'} />
+                                <ColumnChart
+                                    isChart3={true}
+                                    tickInterval={100}
+                                    min={0}
+                                    data={dataColumnChart3}
+                                    unit={"tỷ VND"}
+                                    currency={1000000000}
+                                    color="#1B68BB"
+                                    title={"Top giá trị giao dịch sàn HOSE"}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
-                :
-                <div>Loading....</div>}
+            ) : (
+                <div>Loading....</div>
+            )}
 
-
-            <div className="mt-[1px]" >
+            <div className="mt-[11px]">
                 <FooterAfternoon pageNum={1} />
             </div>
         </div>

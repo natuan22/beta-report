@@ -85,14 +85,27 @@ const AfternoonPage4 = () => {
 
 
             <div className='content h-[900px] w-full flex flex-col items-center '>
-                <div className='w-[99%]'>
-                    <div className='content w-[760px] '>
-                        <div className='content-top flex  justify-around translate-x-[-6px] '>
+
+                <div className='w-[95%] translate-x-[-13px]  '>
+                    <div className='content w-[760px] mt-2 '>
+                        <div className='content-top flex  justify-center translate-x-[-10px]  '>
 
                             <div className='content-top_left w-[235px]'>
-                                <h2 className='text-[13px] font-bold text-[#0155B7] text-center my-1'>Tỷ giá</h2>
-                                <table className='bg-transparent border-collapse h-[337px]   '>
-                                    <thead className='bg-[#0155B7]  text-[12px]  border-1 border-[#0155B7] border-solid border-collapse'>
+
+                                <div className="absolute z-[-2] translate-x-2 ">
+                                    <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[195px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                    <div className="skew-x-[-35deg] flex">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[195px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                </div>
+
+                                <h2 className='text-[12px] font-bold text-[#000] w-full text-center my-1 '>Tỷ giá</h2>
+                                <table className='bg-transparent border-collapse h-[297px] mt-2   '>
+                                    <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white '>
                                             <th className='font-semibold px-1 py-1 text-[px] '>Ngoại tệ</th>
                                             <th className='font-semibold px-1 py-1 text-[px] '>Thị giá</th>
@@ -101,18 +114,22 @@ const AfternoonPage4 = () => {
                                             <th className='font-semibold px-1 py-1  text-[px]'>%YtD</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-                                        {rate?.map(item => {
+                                    <tbody className="border border-[#0155B7] border-solid border-collapse ">
+                                        {rate?.slice(0, 7)?.map(item => {
                                             return (
                                                 <tr>
-                                                    <td className='text-center px-2 py-1 font-bold flex items-center text-[12px]'>
-                                                        <img src={`/${item.code}.png`} alt="icon" width={20} height={20} />
-                                                        {item.code}
+                                                    <td className='text-center  font-bold flex items-center text-[12px] h-full'>
+                                                        <div className='flex items-center justify-evenly'>
+                                                            <img src={`/${item.code}.png`} alt="icon" width={20} height={20} />
+                                                            <p className='m-0'>
+                                                                {item.code}
+                                                            </p>
+                                                        </div>
                                                     </td>
-                                                    <td className='text-center px-2 py-1 text-[12px]'>{formatNumber(item.price)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 py-1`}>{(item.day).toFixed(2)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 py-1`}>{(item.month).toFixed(2)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center px-1 py-1`}>{(item.year).toFixed(2)}</td>
+                                                    <td className='text-center  text-[12px] px-1'>{formatNumber(item.price)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 `}>{(item.day).toFixed(2)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 `}>{(item.month).toFixed(2)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center px-1 `}>{(item.year).toFixed(2)}</td>
                                                 </tr>
                                             )
                                         }
@@ -121,29 +138,40 @@ const AfternoonPage4 = () => {
                                 </table>
                             </div>
 
-                            <div className='content-top_mid w-[234px] '>
-                                <h2 className='text-[13px] font-bold text-[#0155B7] text-center my-1'>Lãi suất bình quân liên ngân hàng</h2>
-                                <table className='bg-transparent border-collapse h-[337px]  '>
-                                    <thead className='bg-[#0155B7]  text-[12px]  border-1 border-[#0155B7] border-solid border-collapse'>
+                            <div className='content-top_mid w-[260px] translate-x-[-9px] '>
+
+                                <div className="absolute z-[-2] translate-x-2 ">
+                                    <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[235px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                    <div className="skew-x-[-35deg] flex">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[235px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                </div>
+                                <h2 className='text-[12px] font-bold text-[#000] text-center my-1 w-full'>Lãi suất bình quân liên ngân hàng</h2>
+                                <table className='bg-transparent border-collapse h-[297px] w-full mt-2  '>
+                                    <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white  '>
                                             <th className='font-semibold px-1 py-1 text-[10px] ' >Kỳ hạn</th>
-                                            <th className='font-semibold px-1 py-1 text-[10px]  ' >Mức lãi suất</th>
+                                            <th className='font-semibold px-1 py-1 text-[10px] ' >Mức lãi suất</th>
                                             <th className='font-semibold px-1 py-1 text-[10px] ' >%D</th>
                                             <th className='font-semibold px-1 py-1 text-[10px] ' >%1M</th>
                                             <th className='font-semibold px-1 py-1  text-[10px]' >%YtD</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
+                                    <tbody className="border border-[#0155B7] border-solid border-collapse ">
                                         {interestRate?.map(item => {
                                             return (
                                                 <tr>
-                                                    <td className='text-center px-2 py-1 font-bold  items-center text-[12px]' >
+                                                    <td className='text-center font-bold  items-center text-[12px] w-[60px] ' >
                                                         {item.code}
                                                     </td>
-                                                    <td className='text-center px-2 py-1 text-[12px] '>{formatNumber(item.price)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 py-1`}>{(item.day).toFixed(2)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 py-1`}>{(item.month).toFixed(2)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center px-1 py-1`}>{(item.year).toFixed(2)}</td>
+                                                    <td className='text-center  text-[12px] px-1  '>{formatNumber(item.price)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center  px-1 `}>{(item.day).toFixed(2)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1  `}>{(item.month).toFixed(2)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center  px-2 `}>{(item.year).toFixed(2)}</td>
                                                 </tr>
                                             )
                                         }
@@ -152,10 +180,20 @@ const AfternoonPage4 = () => {
                                 </table>
                             </div>
 
-                            <div className='content-top_right w-[235px] translate-x-[-7px]'>
-                                <h2 className='text-[13px] font-bold text-[#0155B7] text-center m-1'>Giá hàng hóa</h2>
-                                <table className='bg-transparent border-collapse   '>
-                                    <thead className='bg-[#0155B7]  text-[12px]  border-1 border-[#0155B7] border-solid border-collapse'>
+                            <div className='content-top_right w-[235px] '>
+                                <div className="absolute z-[-2] translate-x-2 ">
+                                    <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[250px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                    <div className="skew-x-[-35deg] flex">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[250px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                </div>
+                                <h2 className='text-[12px] font-bold text-[#000] text-center w-full m-1'>Giá hàng hóa</h2>
+                                <table className='bg-transparent border-collapse  mt-2 h-[297px] '>
+                                    <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white '>
                                             <th className='font-semibold px-1 py-1 text-[px] '>Hàng hóa</th>
                                             <th className='font-semibold px-1 py-1 text-[px] '>Thị giá</th>
@@ -164,8 +202,8 @@ const AfternoonPage4 = () => {
                                             <th className='font-semibold px-1 py-1  text-[px]'>%YtD</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-                                        {goodsPrice?.map(item => {
+                                    <tbody className="border border-[#0155B7] border-solid border-collapse ">
+                                        {goodsPrice?.slice(0, 7).map(item => {
                                             return (
                                                 <tr>
                                                     <td className='text-center px-2 py-1 font-bold  items-center text-[12px]' >
@@ -205,13 +243,22 @@ const AfternoonPage4 = () => {
                                     idQuery={2}
                                 />
                             </div>
-                            <div className="content-top w-[790px] h-[250px] z-10 relative mt-1  ">
-                                <div
-                                    className={` flex justify-between w-full h-[80%]  `}
-                                >
+                            <div className="content-top w-[790px] h-[250px] z-10 relative mt-5  ">
+                                <div className={` flex justify-around w-full h-[80%]  `}>
                                     <div className="content-top_left w-[45%]  ">
-                                        <h2 className="titile font-[800] text-[15px] text-[#0155B7] text-center  py-1 m-0 ">
-                                            QUỐC TẾ
+                                        <div className="absolute z-[-2] translate-x-[58px] translate-y-1 ">
+                                            <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                                <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                                <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                            </div>
+                                            <div className="skew-x-[-35deg] flex">
+                                                <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                                <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                            </div>
+                                        </div>
+
+                                        <h2 className="titile font-[800] text-[12px] translate-x-[15px] text-[#000] text-center  my-2 m-0 ">
+                                            TIN QUỐC TẾ
                                         </h2>
                                         {newsForeign.length > 0 ? (
                                             <div className="newsForeign ">
@@ -229,9 +276,20 @@ const AfternoonPage4 = () => {
                                             </p>
                                         )}
                                     </div>
-                                    <div className="content-top_right w-[50%]   mr-5 ">
-                                        <h2 className="titile font-[800] text-[15px] text-[#0155B7]  text-center m-0  py-1">
-                                            TRONG NƯỚC
+                                    <div className="content-top_right w-[45%]   mr-5 ">
+
+                                        <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+                                            <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                                <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                                <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                            </div>
+                                            <div className="skew-x-[-35deg] flex">
+                                                <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                                <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                            </div>
+                                        </div>
+                                        <h2 className="titile font-[800] text-[12px] text-[#000] text-center  my-2 m-0 ">
+                                            TIN TRONG NƯỚC
                                         </h2>
                                         {newsDomestic.length > 0 ? (
                                             <div className="newsDomestic ">
@@ -253,37 +311,47 @@ const AfternoonPage4 = () => {
                             </div>
                         </div>
 
-                        <div className='content-bot flex justify-around'>
+                        <div className='content-bot flex justify-around mt-2'>
 
-                            <div className="content-bot_left  w-[48%] ml-3 ">
-                                <h2 className="titile font-[800] text-[15px] text-[#0155B7] text-center m-0  py-1">
+                            <div className="content-bot_left  w-[45%] ml-3 ">
+                                <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+                                    <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                    <div className="skew-x-[-35deg] flex">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                </div>
+                                <h2 className="titile font-[800] text-[12px] text-[#000]  text-center  my-2 m-0">
                                     LỊCH SỰ KIỆN
                                 </h2>
                                 <div className="events">
-                                    <table className=" bg-transparent border-collapse w-full   ">
-                                        <thead className="bg-[#0155B7]  border-1 border-[#0155B7] border-solid border-collapse">
+                                    <table className=" bg-transparent border border-[#0155B7]  border-solid border-collapse  ">
+                                        <thead className="text-black border border-[#0155B7]  border-solid border-collapse  ">
                                             <tr>
-                                                <th className="text-white font-semibold text-[12px] leading-8 text-start pl-2 w-[80px]  ">
-                                                    Mã cổ phiếu
+                                                <th className=" font-semibold text-[12px] leading-8 text-center  w-[60px] border border-[#0155B7] border-y-0  border-solid border-collapse    ">
+                                                    Mã CP
                                                 </th>
-                                                <th className="text-white font-semibold text-[12px] leading-8 text-center">
+                                                <th className=" font-semibold text-[12px] leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse  ">
                                                     Ngày GDKHQ
                                                 </th>
-                                                <th className="text-white font-semibold text-[12px] leading-8 text-center ">
+                                                <th className=" font-semibold text-[12px]  leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse   ">
                                                     Nội dung
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
+                                        <tbody className=" ">
                                             {events?.slice(0, 8)?.map((item) => (
-                                                <tr>
-                                                    <td className="text-[12px] font-bold text-center py-1  px-2">
+                                                <tr className=''>
+                                                    <td className="text-[12px] font-bold text-center py-1  px-2 border border-[#0155B7] border-y-0  border-solid border-collapse ">
                                                         {item.ticker}
                                                     </td>
-                                                    <td className="text-[12px] font-bold text-center py-1  px-2">
+                                                    <td className="text-[12px] font-bold text-center py-1  px-2 border border-[#0155B7] border-y-0  border-solid border-collapse  ">
                                                         {item.date}
                                                     </td>
-                                                    <td className="text-[12px] font-semibold  px-2">
+                                                    <td className="text-[12px] font-semibold  px-2 border border-[#0155B7] border-y-0  border-solid border-collapse  ">
                                                         {item.title}
                                                     </td>
                                                 </tr>
@@ -293,8 +361,18 @@ const AfternoonPage4 = () => {
                                 </div>
                             </div>
                             <div className="content-bot_left h-full w-[45%]  ">
-                                <h2 className="titile font-[800] text-[15px] text-[#0155B7] text-center m-0  py-1">
-                                    DOANH NGHIỆP
+                                <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+                                    <div className="skew-x-[35deg] flex translate-y-[1px]">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                    <div className="skew-x-[-35deg] flex">
+                                        <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
+                                        <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                    </div>
+                                </div>
+                                <h2 className="titile font-[800] text-[12px] text-[#000] text-center translate-x-[10px]  my-2 m-0">
+                                    TIN DOANH NGHIỆP
                                 </h2>
                                 {newsEnterprise.length > 0 ? (
                                     <div className="newsEnterpise">
@@ -335,15 +413,12 @@ const AfternoonPage4 = () => {
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
 
 
             </div>
 
-            <div className='footer mt-[90px]'>
+            <div className='footer mt-[92px]'>
                 <FooterAfternoon pageNum={4} />
             </div>
         </div>

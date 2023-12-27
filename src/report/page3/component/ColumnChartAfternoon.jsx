@@ -5,7 +5,6 @@ import HighchartsReact from 'highcharts-react-official';
 const ColumnChartAfternoon = ({ data, title, unit }) => {
     const max = Math?.ceil(Math?.max(...data?.map(item => (item.value / 1000000000))));
     const min = Math?.floor(Math?.min(...data?.map(item => (item.value / 1000000000))))
-
     const options = {
         accessibility: {
             enabled: false,
@@ -18,25 +17,29 @@ const ColumnChartAfternoon = ({ data, title, unit }) => {
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">${title} <span style="color: #000; font-size: 10px; font-weight: bold;"> (${unit})</span></p>
+                    <p style="color: #00429B; font-size: 12px; font-weight: bold;margin: 0px">${title} <span style="color: #000; font-size: 10px; font-weight: bold;"> (${unit})</span></p>
                     
             </div>`
         },
         xAxis: {
+            enabled: true,
             categories: data.map(item => item.code),
+            useHTML: true, // Cho phép sử dụng HTML trong nhãn
             labels: {
-                enabled: true,
+                formatter: function () {
+                    const labelValue = this.value;
+                    const words = labelValue.split(' ');
+                    const modifiedWords = words.map(word => word.replace(/(phụ|tùng)/g, ''));
 
-                step: 1,
-                rotation: -30,
+                    if (modifiedWords.length > 2) {
+                        modifiedWords[2] = modifiedWords[2].replace(modifiedWords[2], `<br/>${modifiedWords[2]}`);
+                    }
+
+                    return `<div style="color: black; font-size: 10px; font-weight: 600">${modifiedWords.join(' ')}</div>`;
+                },
+                rotation: 0,
                 align: 'center',
-                style: {
-                    color: '#000',// màu cho các nhãn trục x
-                    fontSize: 8,
-                    fontWeight: 600
-                }
-            }
-
+            },
         },
         yAxis: {
             visible: true,

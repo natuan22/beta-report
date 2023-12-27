@@ -156,11 +156,11 @@ const LineChart = ({ dataLineChart }) => {
                     </p>
                 </div>
                 <div className="flex h-[15px] text-[10px] font-bold justify-evenly w-[90%] ">
-                    <p className="m-0">Tăng: {dataLineChart.advances} </p>
-                    <p className="m-0">Giảm: {dataLineChart.declines} </p>
-                    <p className="m-0">Tham chiếu: {dataLineChart.noChange}</p>
-                    <p className="m-0">Trần: {dataLineChart.ceilingStocks} </p>
-                    <p className="m-0">Sàn: {dataLineChart.floorStocks}</p>
+                    <p className="m-0"><span className="text-green-500">Tăng:</span> {dataLineChart.advances} </p>
+                    <p className="m-0"><span className="text-[#EF4444]">Giảm:</span> {dataLineChart.declines} </p>
+                    <p className="m-0"><span className="text-[#A3862D]">Tham chiếu:</span> {dataLineChart.noChange}</p>
+                    <p className="m-0"><span className="text-[#7F3CCD]">Trần:</span> {dataLineChart.ceilingStocks} </p>
+                    <p className="m-0"><span className="text-[#05B8BF]">Sàn:</span> {dataLineChart.floorStocks}</p>
                 </div>
             </div>
         </div>

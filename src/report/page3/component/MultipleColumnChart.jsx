@@ -5,7 +5,6 @@ import HighchartsReact from "highcharts-react-official";
 
 
 const MultipleColumnChart = ({ data, legend, title, unit }) => {
-    console.log(data)
 
     const totalVal = data?.map(
         (item) => +(item.totalVal / 1000000000)
@@ -30,27 +29,27 @@ const MultipleColumnChart = ({ data, legend, title, unit }) => {
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">${title} <span style="color: #000; font-size: 10px; font-weight: bold;"> ${unit}</span></p>
+                    <p style="color: #00429B; font-size: 12px; font-weight: bold;margin: 0px">${title} <span style="color: #000; font-size: 10px; font-weight: bold;"> ${unit}</span></p>
                     
             </div>`
         },
         xAxis: {
+            enabled: true,
             categories: data.map(item => item.code),
+            useHTML: true, // Cho phép sử dụng HTML trong nhãn
             labels: {
-                enabled: true,
+                formatter: function () {
+                    const labelValue = this.value;
+                    const words = labelValue.split(' ');
+                    if (words.length > 2) {
+                        words[2] = words[2].replace(words[2], `<br/>${words[2]}`);
+                    }
+                    return `<div style="color: black; font-size: 10px; font-weight: 600">${words.join(' ')}</div>`;
+                },
                 rotation: 0,
                 align: 'center',
-                style: {
-                    color: '#000',// màu cho các nhãn trục x
-                    fontSize: 8,
-                    fontWeight: 600
-                }
             },
-            title: {
-                style: {
-                    color: localStorage.getItem('color') // màu cho tiêu đề trục x
-                }
-            }
+
         },
         yAxis: [
             {
@@ -116,7 +115,7 @@ const MultipleColumnChart = ({ data, legend, title, unit }) => {
 
 
     return (
-        <div className='h-[160px]'>
+        <div className='h-[154px]'>
             <HighchartsReact highcharts={Highcharts} options={options} containerProps={{ style: { height: '100%', width: '100%' } }} />
         </div>
     )

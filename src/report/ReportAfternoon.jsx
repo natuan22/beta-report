@@ -1,7 +1,6 @@
 import html2canvas from 'html2canvas'
 import React, { useRef } from 'react'
 import jsPDF from 'jspdf'
-import { currentDate } from '../helper/getDateAfternoonNew'
 import { Button } from '@mui/material'
 import AfternoonPage1 from './page1/AfternoonPage1'
 import { homNay } from '../helper/getDate'
@@ -9,6 +8,7 @@ import AfternoonPage2 from './page2/AfternoonPage2'
 import AfternoonPage3 from './page3/AfternoonPage3'
 import AfternoonPage4 from './page4/AfternoonPage4'
 import AfternoonPage5 from './page5/AfternoonPage5'
+import { formattedDate } from '../helper/getDateAfternoon'
 
 const ReportAfternoon = () => {
     const pageRefs = {
@@ -75,7 +75,7 @@ const ReportAfternoon = () => {
         pdf.addImage(img5, 'PNG', 0, 0);
 
 
-        pdf.save(`BetaAfternoonNews-${homNay}.pdf`)
+        pdf.save(`${formattedDate}.dailyreport.pdf`)
     }
 
     return (

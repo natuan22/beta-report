@@ -17,7 +17,7 @@ const ColumnChartPage3 = ({ data, title, unit }) => {
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 14px; font-weight: bold;margin: 0px">${title}</p>
+                    <p style="color: #00429B; font-size: 12px; font-weight: bold;margin: 0px">${title}</p>
                     <span style="color: #000; font-size: 10px; font-weight: bold;">ĐVT: ${unit}</span>
             </div>`
         },
