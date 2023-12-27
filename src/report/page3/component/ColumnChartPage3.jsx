@@ -44,9 +44,10 @@ const ColumnChartPage3 = ({ data, title, unit }) => {
         },
         series: [
             {
-                name: '',
-                data: data.map(item => (item.value / 1000000000)),
-                color: '#1B68BB'
+                data: data.map(item => ({
+                    y: item.value / 1000000000,
+                    color: item.value < 0 ? '#FF0000' : '#1B68BB', // Chọn màu dựa trên giá trị
+                })),
             },
 
         ],

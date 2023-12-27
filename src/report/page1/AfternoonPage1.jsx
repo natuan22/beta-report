@@ -82,7 +82,7 @@ const AfternoonPage1 = () => {
                                 <p className="text-[#00429B] font-bold underline underline-offset-1">
                                     Điểm nhấn chính:
                                 </p>
-                                <ul className="leading-[23px] translate-x-[-10px] text-sm text-justify font-[500]">
+                                <ul className="leading-[23px] translate-x-[-15px] text-sm text-justify font-[500] ">
                                     <li className="mt-2">
                                         VN-Index {getText(data.perChange)}{" "}
                                         <span className={`${getColorBaseOnValue(data.change)}`}>
