@@ -92,18 +92,20 @@ const AfternoonPage4 = () => {
 
                             <div className='content-top_left w-[235px]'>
 
-                                <div className="absolute z-[-2] translate-x-2 ">
+                                <div className="absolute z-[-2] translate-x-1 ">
                                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[195px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[203px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                     <div className="skew-x-[-35deg] flex">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[195px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[203px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                 </div>
+                                <div className='w-[213px] h-[24px] grid place-items-center'>
+                                    <h2 className='text-[12px] font-bold text-[#000] text-center my-1 '>Tỷ giá</h2>
+                                </div>
 
-                                <h2 className='text-[12px] font-bold text-[#000] w-full text-center my-1 '>Tỷ giá</h2>
                                 <table className='bg-transparent border-collapse h-[297px] mt-2   '>
                                     <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white '>
@@ -140,17 +142,23 @@ const AfternoonPage4 = () => {
 
                             <div className='content-top_mid w-[260px] translate-x-[-9px] '>
 
-                                <div className="absolute z-[-2] translate-x-2 ">
+                                <div className="absolute z-[-2] translate-x-1  ">
                                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[235px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[245px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                     <div className="skew-x-[-35deg] flex">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[235px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[245px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                 </div>
-                                <h2 className='text-[12px] font-bold text-[#000] text-center my-1 w-full'>Lãi suất bình quân liên ngân hàng</h2>
+
+                                <div className='w-[255px] h-[24px] grid place-items-center'>
+
+                                    <h2 className='text-[12px] font-bold text-[#000] text-center my-1 '>Lãi suất bình quân liên ngân hàng</h2>
+                                </div>
+
+
                                 <table className='bg-transparent border-collapse h-[297px] w-full mt-2  '>
                                     <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white  '>
@@ -181,17 +189,21 @@ const AfternoonPage4 = () => {
                             </div>
 
                             <div className='content-top_right w-[235px] '>
-                                <div className="absolute z-[-2] translate-x-2 ">
+                                <div className="absolute z-[-2] translate-x-1 ">
                                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[250px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[255px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                     <div className="skew-x-[-35deg] flex">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[250px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[255px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                 </div>
-                                <h2 className='text-[12px] font-bold text-[#000] text-center w-full m-1'>Giá hàng hóa</h2>
+
+                                <div className='w-[265px] h-[24px] grid place-items-center'>
+                                    <h2 className='text-[12px] font-bold text-[#000] text-center m-1'>Giá hàng hóa</h2>
+                                </div>
+
                                 <table className='bg-transparent border-collapse  mt-2 h-[297px] '>
                                     <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                         <tr className='text-white '>
@@ -246,20 +258,24 @@ const AfternoonPage4 = () => {
                             <div className="content-top w-[790px] h-[250px] z-10 relative mt-5  ">
                                 <div className={` flex justify-around w-full h-[80%]  `}>
                                     <div className="content-top_left w-[45%]  ">
-                                        <div className="absolute z-[-2] translate-x-[58px] translate-y-1 ">
+
+                                        <div className="absolute z-[-2]  translate-y-1 ">
                                             <div className="skew-x-[35deg] flex translate-y-[1px]">
                                                 <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                                <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                                <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                             </div>
                                             <div className="skew-x-[-35deg] flex">
                                                 <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                                <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                                <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                             </div>
                                         </div>
 
-                                        <h2 className="titile font-[800] text-[12px] translate-x-[15px] text-[#000] text-center  my-2 m-0 ">
-                                            TIN QUỐC TẾ
-                                        </h2>
+                                        <div className='w-[355px] h-[24px] grid place-items-center'>
+                                            <h2 className="titile font-[800] text-[12px]  text-[#000] text-center  my-2 m-0 ">
+                                                TIN QUỐC TẾ
+                                            </h2>
+                                        </div>
+
                                         {newsForeign.length > 0 ? (
                                             <div className="newsForeign ">
                                                 <ul className='my-0'>
@@ -278,19 +294,21 @@ const AfternoonPage4 = () => {
                                     </div>
                                     <div className="content-top_right w-[45%]   mr-5 ">
 
-                                        <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+                                        <div className="absolute z-[-2]  translate-y-1 ">
                                             <div className="skew-x-[35deg] flex translate-y-[1px]">
                                                 <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                                <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                                <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                             </div>
                                             <div className="skew-x-[-35deg] flex">
                                                 <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                                <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                                <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                             </div>
                                         </div>
-                                        <h2 className="titile font-[800] text-[12px] text-[#000] text-center  my-2 m-0 ">
-                                            TIN TRONG NƯỚC
-                                        </h2>
+                                        <div className='w-[355px] h-[24px] grid place-items-center'>
+                                            <h2 className="titile font-[800] text-[12px]  text-[#000] text-center  my-2 m-0 ">
+                                                TIN TRONG NƯỚC
+                                            </h2>
+                                        </div>
                                         {newsDomestic.length > 0 ? (
                                             <div className="newsDomestic ">
                                                 <ul className='my-0'>
@@ -313,31 +331,35 @@ const AfternoonPage4 = () => {
 
                         <div className='content-bot flex justify-around mt-2'>
 
-                            <div className="content-bot_left  w-[45%] ml-3 ">
-                                <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+                            <div className="content-bot_left  w-[45%]  ">
+
+                                <div className="absolute z-[-2]  translate-y-1 ">
                                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                     <div className="skew-x-[-35deg] flex">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[270px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                 </div>
-                                <h2 className="titile font-[800] text-[12px] text-[#000]  text-center  my-2 m-0">
-                                    LỊCH SỰ KIỆN
-                                </h2>
-                                <div className="events">
+
+                                <div className='w-[355px] h-[24px] grid place-items-center'>
+                                    <h2 className="titile font-[800] text-[12px]  text-[#000] text-center  my-2 m-0 ">
+                                        LỊCH SỰ KIỆN
+                                    </h2>
+                                </div>
+                                <div className="events mt-5">
                                     <table className=" bg-transparent border border-[#0155B7]  border-solid border-collapse  ">
                                         <thead className="text-black border border-[#0155B7]  border-solid border-collapse  ">
                                             <tr>
-                                                <th className=" font-semibold text-[12px] leading-8 text-center  w-[60px] border border-[#0155B7] border-y-0  border-solid border-collapse    ">
+                                                <th className=" font-bold text-[12px] leading-8 text-center  w-[60px] border border-[#0155B7] border-y-0  border-solid border-collapse    ">
                                                     Mã CP
                                                 </th>
-                                                <th className=" font-semibold text-[12px] leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse  ">
+                                                <th className=" font-bold text-[12px] leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse  ">
                                                     Ngày GDKHQ
                                                 </th>
-                                                <th className=" font-semibold text-[12px]  leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse   ">
+                                                <th className=" font-bold text-[12px]  leading-8 text-center border border-[#0155B7] border-y-0  border-solid border-collapse   ">
                                                     Nội dung
                                                 </th>
                                             </tr>
@@ -361,19 +383,22 @@ const AfternoonPage4 = () => {
                                 </div>
                             </div>
                             <div className="content-bot_left h-full w-[45%]  ">
-                                <div className="absolute z-[-2] translate-x-[40px] translate-y-1 ">
+
+                                <div className="absolute z-[-2]  translate-y-1 ">
                                     <div className="skew-x-[35deg] flex translate-y-[1px]">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                     <div className="skew-x-[-35deg] flex">
                                         <div className="bg-[#FFB243] h-[12px] w-[10px] "></div>
-                                        <div className="w-[280px] bg-[#9CC9FE] h-[12px]"></div>
+                                        <div className="w-[345px] bg-[#9CC9FE] h-[12px]"></div>
                                     </div>
                                 </div>
-                                <h2 className="titile font-[800] text-[12px] text-[#000] text-center translate-x-[10px]  my-2 m-0">
-                                    TIN DOANH NGHIỆP
-                                </h2>
+                                <div className='w-[355px] h-[24px] grid place-items-center'>
+                                    <h2 className="titile font-[800] text-[12px]  text-[#000] text-center  my-2 m-0 ">
+                                        TIN DOANH NGHIỆP
+                                    </h2>
+                                </div>
                                 {newsEnterprise.length > 0 ? (
                                     <div className="newsEnterpise">
                                         <ul>

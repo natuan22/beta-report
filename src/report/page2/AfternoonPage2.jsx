@@ -14,7 +14,13 @@ const AfternoonPage2 = () => {
         try {
             const response = await https.get("api/v1/report/ban-tin-chieu-2");
             setData(response.data.data);
-            setImgSrc(`${imgURL}/${response.data.data.image}`)
+
+            const img = new Image();
+            img.src = `${imgURL}/${response.data.data.image}`;
+            img.onload = () => {
+                setImgSrc(img.src);
+                // Tiếp tục với các bước khác, ví dụ: tạo file PDF
+            };
         } catch (err) {
             console.log(err);
         }
@@ -94,8 +100,8 @@ const AfternoonPage2 = () => {
                         </div>
                         <div className="content-bot w-full flex flex-col items-center justify-center">
                             <div className="content-bot_img my-2">
-                                {/* <img src={imgSrc} width={675} height={367} alt="img" /> */}
-                                <img src={banner} width={675} height={367} alt="img" />
+                                <img src={imgSrc} width={675} height={367} alt="img" />
+                                {/* <img src={banner} width={675} height={367} alt="img" /> */}
                             </div>
                             <div className="content-bot_text1 min-h-[239px]">
                                 <p className="my-1 text-[#00429B] underline text- underline-offset-1 font-bold">Nhận định thị trường:</p>

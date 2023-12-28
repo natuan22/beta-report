@@ -100,7 +100,7 @@ const DialogAddText = ({ getData }) => {
                         </Form.Item>
 
                         <Form.Item label="Tác vụ">
-                            <button class="text-white bg-gradient-to-br  from-purple-600 to-blue-500 hover:bg-gradient-to-bl border-0 focus:outline-0     font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                            <button type="submit" class="text-white bg-gradient-to-br  from-purple-600 to-blue-500 hover:bg-gradient-to-bl border-0 focus:outline-0     font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                                 Thêm
                             </button>
                         </Form.Item>

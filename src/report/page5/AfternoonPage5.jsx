@@ -12,7 +12,7 @@ const AfternoonPage5 = () => {
                 <img src={banner} alt="banner" width={760} height={350} />
             </div>
             <div className="content flex flex-col items-center mt-2">
-                <div className=" h-[620px] w-[760px]">
+                <div className=" h-[620px] w-[750px]">
                     <div className="intro">
                         <p className="text-[#0155B7] font-bold text-[18px] m-0">
                             GIỚI THIỆU

@@ -67,12 +67,12 @@ const AfternoonPage1 = () => {
                                         {text[1]}
                                     </p>
                                     <p className="my-2 text-justify">
-                                        <span className="text-[#00429B] font-bold">
+                                        <p className="text-[#00429B] font-bold m-0">
                                             Diễn biến thị trường:{" "}
-                                        </span>
-                                        <span className="leading-[15px] text-[14px]  ">
+                                        </p>
+                                        <p className="leading-[20px] m-0 text-[14px] indent-[15px]  ">
                                             {text[2]}
-                                        </span>
+                                        </p>
                                     </p>
                                 </div>
                                 :
@@ -106,7 +106,7 @@ const AfternoonPage1 = () => {
 
                                     <li>
                                         Biên độ dao động ngày :{" "}
-                                        {getSymbol(data.highPrice - data.lowPrice)}
+
                                         {formatNumber(data.highPrice - data.lowPrice)} điểm (
                                         {formatNumber(data.highPrice)} -{" "}
                                         {formatNumber(data.lowPrice)}) .
@@ -193,7 +193,7 @@ const AfternoonPage1 = () => {
                                             {data.topBuy.map((item, index) => (
                                                 <span key={item.code}>
                                                     {item.code} ({formatNumber(item.value / 1000000000)}{" "}
-                                                    tỷ đồng )
+                                                    tỷ đồng)
                                                     {index !== data.topBuy.length - 1 ? ", " : ""}
                                                 </span>
                                             ))}
@@ -202,7 +202,7 @@ const AfternoonPage1 = () => {
                                             {data.topSell.map((item, index) => (
                                                 <span key={item.code}>
                                                     {item.code} ({formatNumber(item.value / 1000000000)}{" "}
-                                                    tỷ đồng )
+                                                    tỷ đồng)
                                                     {index !== data.topSell.length - 1 ? ", " : ""}
                                                 </span>
                                             ))}

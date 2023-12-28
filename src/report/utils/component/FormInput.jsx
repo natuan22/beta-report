@@ -126,6 +126,7 @@ const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput }) => {
                 </Form.Item>
                 <Form.Item label="Tác vụ">
                     <button
+                        type="submit"
                         class="text-white bg-gradient-to-br  from-purple-600 to-blue-500 hover:bg-gradient-to-bl border-0     font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                     >
                         Thêm
