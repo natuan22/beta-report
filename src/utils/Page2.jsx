@@ -195,7 +195,7 @@ const Page2 = () => {
                                     <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{formatNumber(item.day)}</td>
                                     <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{formatNumber(item.month)}</td>
                                     <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{formatNumber(item.year)}</td>
-                                    <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>{formatNumber(item.year)}</td>
+                                    <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>{formatNumber(item.ytd)}</td>
                                 </tr>
                             ))}
                         </tbody>
