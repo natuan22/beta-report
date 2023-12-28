@@ -82,11 +82,11 @@ const AfternoonPage2 = () => {
                                             <td className={` ${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>
                                                 {formatNumber(item.month)}
                                             </td>
-                                            <td className={` ${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>
-                                                {formatNumber(item.year)}
-                                            </td>
                                             <td className={` ${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>
                                                 {formatNumber(item.ytd)}
+                                            </td>
+                                            <td className={` ${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>
+                                                {formatNumber(item.year)}
                                             </td>
                                             <td className={`  text-right px-1 py-1`}>
                                                 <p className="m-0 translate-x-[-18px]">

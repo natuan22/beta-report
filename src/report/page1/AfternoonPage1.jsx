@@ -160,18 +160,18 @@ const AfternoonPage1 = () => {
                                     </li>
 
                                     <li className="mt-2">
-                                        Tổng giá trị giao dịch của VN-Index đạt{" "}
-                                        {formatNumber(data.totalVal / 1000000000)} tỷ đồng,{" "}
-                                        {getText(data.perChangeTotalVal)}
+                                        Tổng giá trị giao dịch khớp lệnh của VN-Index đạt{" "}
+                                        {formatNumber(data.omVal / 1000000000)} tỷ đồng,{" "}
+                                        {getText(data.perOmVal)}
                                         {""}{" "}
                                         <span
                                             className={`${getColorBaseOnValue(
-                                                data.perChangeTotalVal
+                                                data.perOmVal
                                             )}`}
                                         >
-                                            {formatNumber(data.perChangeTotalVal)}%
+                                            {formatNumber(data.perOmVal)}%
                                         </span>{" "}
-                                        so với phiên trước.
+                                        so với phiên trước. Bên cạnh đó, giá trị giao dịch thỏa thuận là {formatNumber(data.ptVal / 1000000000)} tỷ đồng.
                                     </li>
 
                                     <li className="mt-2">
