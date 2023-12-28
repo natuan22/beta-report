@@ -162,10 +162,10 @@ const Page2 = () => {
                                 <tr>
                                     <td className='text-left pl-2 py-1 font-semibold '>{item.name}</td>
                                     <td className='text-center px-2 py-1'>{formatNumber(item.price)}</td>
-                                    <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{(item.day).toFixed(2)}</td>
-                                    <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{(item.month).toFixed(2)}</td>
-                                    <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{(item.year).toFixed(2)}</td>
-                                    <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>{(item.ytd).toFixed(2)}</td>
+                                    <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{formatNumber(item.day)}</td>
+                                    <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{formatNumber(item.month)}</td>
+                                    <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>{formatNumber(item.ytd)}</td>
+                                    <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{formatNumber(item.year)}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -194,8 +194,8 @@ const Page2 = () => {
                                     <td className='text-center px-2 py-1'>{(formatNumber(item.price))}</td>
                                     <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>{formatNumber(item.day)}</td>
                                     <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1`}>{formatNumber(item.month)}</td>
-                                    <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{formatNumber(item.year)}</td>
                                     <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1`}>{formatNumber(item.ytd)}</td>
+                                    <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1`}>{formatNumber(item.year)}</td>
                                 </tr>
                             ))}
                         </tbody>
