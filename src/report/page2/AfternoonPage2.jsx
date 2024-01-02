@@ -100,8 +100,8 @@ const AfternoonPage2 = () => {
                         </div>
                         <div className="content-bot w-full flex flex-col items-center justify-center">
                             <div className="content-bot_img my-2">
-                                <img src={imgSrc} width={675} height={367} alt="img" />
-                                {/* <img src={banner} width={675} height={367} alt="img" /> */}
+                                {/* <img src={imgSrc} width={675} height={367} alt="img" /> */}
+                                <img src={banner} width={675} height={367} alt="img" />
                             </div>
                             <div className="content-bot_text1 min-h-[239px]">
                                 <p className="my-1 text-[#00429B] underline text- underline-offset-1 font-bold">Nhận định thị trường:</p>

@@ -5,6 +5,7 @@ import Page2 from "../utils/Page2";
 import Page3 from "../utils/Page3";
 import Page4 from "../utils/Page4";
 import Page5 from "../utils/Page5";
+import WeekNews from "../week/WeekNews";
 
 export const routes = [
     { path: "/", component: Home },
@@ -15,4 +16,5 @@ export const routes = [
     { path: "/page4", component: Page4 },
     { path: "/page5", component: Page5 },
     { path: "/ban-tin-chieu", component: ReportAfternoon },
+    { path: "/ban-tin-tuan", component: WeekNews },
 ];

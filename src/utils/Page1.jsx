@@ -88,7 +88,7 @@ const Page1 = () => {
                             </p>
                         )}
                     </div>
-                    <div className="content-top_right w-[48%] bg-vnBackground bg-no-repeat bg-[length:220px_260px] bg-right-bottom  mr-5 ">
+                    <div className="content-top_right w-[45%] bg-vnBackground bg-no-repeat bg-[length:220px_260px] bg-right-bottom  mr-5 ">
                         <h2 className="titile font-[800] text-[20px] text-[#0155B7]  text-center border-1 border-x-0 border-solid border-collapse border-[#116DDF] py-1">
                             TRONG NƯỚC
                         </h2>
@@ -112,7 +112,7 @@ const Page1 = () => {
             </div>
 
             <div className="content-bot w-[790px] h-[461px] z-10 relative  flex justify-between  bg-cityBackground bg-no-repeat bg-cover ">
-                <div className="content-bot_left h-full w-[45%] translate-y-[-60px]  ">
+                <div className="content-bot_left h-full w-[45%] translate-y-[-60px] translate-x-[15px]  ">
                     <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
                         DOANH NGHIỆP
                     </h2>
@@ -153,7 +153,7 @@ const Page1 = () => {
                         </p>
                     )}
                 </div>
-                <div className="content-bot_left h-full w-[48%] ml-3 translate-y-[-60px] translate-x-[-15px]">
+                <div className="content-bot_left h-full w-[45%] ml-3 translate-y-[-60px] translate-x-[-15px]">
                     <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
                         LỊCH SỰ KIỆN
                     </h2>
@@ -170,7 +170,7 @@ const Page1 = () => {
                                 </tr>
                             </thead>
                             <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-                                {events?.map((item) => (
+                                {events?.slice(0, 13).map((item) => (
                                     <tr>
                                         <td className="text-[12px] font-bold text-center py-1  px-2">
                                             {item.ticker}
