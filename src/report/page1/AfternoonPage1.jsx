@@ -94,11 +94,11 @@ const AfternoonPage1 = () => {
                                         </span>
                                         , đóng cửa tại mức {formatNumber(data.closePrice)} điểm.
                                         HNX-Index {getText(data.hnxPerChange)}{" "}
-                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                        <span className={`${getColorBaseOnValue(data.hnxChange)}`}>
                                             {formatNumber(data.hnxChange)}
                                         </span>{" "}
                                         điểm{" "}
-                                        <span className={`${getColorBaseOnValue(data.change)}`}>
+                                        <span className={`${getColorBaseOnValue(data.hnxChange)}`}>
                                             ({formatNumber(data.hnxPerChange)}%)
                                         </span>{" "}
                                         , đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.

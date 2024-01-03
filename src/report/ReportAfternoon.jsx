@@ -8,6 +8,7 @@ import AfternoonPage3 from './page3/AfternoonPage3'
 import AfternoonPage4 from './page4/AfternoonPage4'
 import AfternoonPage5 from './page5/AfternoonPage5'
 import { formattedDate } from '../helper/getDateAfternoon'
+import NavBar from '../app/component/NavBar'
 
 const ReportAfternoon = () => {
     const pageRefs = {
@@ -78,7 +79,10 @@ const ReportAfternoon = () => {
     }
 
     return (
-        <div>
+        <div className=' relative'>
+            <div className='absolute right-[20%] top-[35px]'>
+                <NavBar />
+            </div>
             <div>
                 <div ref={pageRefs.page1}>
                     <AfternoonPage1 />

@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import { homNay } from './helper/getDate';
 import { Button } from '@mui/material';
 import Page5 from './utils/Page5';
+import NavBar from './app/component/NavBar';
 
 const Home = () => {
 
@@ -90,8 +91,10 @@ const Home = () => {
 
 
     return (
-        <div >
-
+        <div className='relative' >
+            <div className='absolute right-[20%] top-[1%]'>
+                <NavBar />
+            </div>
             <div>
                 <div ref={pageRefs.page1}>
                     <Page1 />
