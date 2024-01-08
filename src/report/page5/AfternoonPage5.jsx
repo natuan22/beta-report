@@ -2,6 +2,7 @@ import React from "react";
 import banner from "../../app/asset/img/banner.png";
 import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 import FooterAfternoon from "../utils/component/FooterAfternoon";
+
 const AfternoonPage5 = () => {
     return (
         <div className="h-[1480px] w-[800px]  ">

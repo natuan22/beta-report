@@ -9,6 +9,7 @@ const HeaderWeek = () => {
 
                 <div className='header-left flex flex-col items-center  relative  '>
                     <div className='header-left_top flex translate-x-1 '>
+
                         <img src={logo} alt="logo" width={144} height={55} />
                         <div className='title ml-2'>
                             <p className='m-0 text-[#E88C08] text-[23px] font-bold'>Công ty cổ phần chứng khoán BETA</p>
