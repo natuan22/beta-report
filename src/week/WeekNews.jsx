@@ -184,9 +184,9 @@ const WeekNews = () => {
                     <Page12Week />
                 </div>
             </div>
-            {/* <div className="absolute top-[100px] right-[40%]">
+            <div className="absolute top-[100px] right-[40%]">
                 <Button variant="contained" color="success" onClick={generatePDF}>Tạo PDF</Button>
-            </div> */}
+            </div>
         </div>
     );
 };
