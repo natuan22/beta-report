@@ -23,7 +23,6 @@ const Page1 = () => {
                 setEvents(response.data.data);
             } catch (err) { }
         };
-
         fetchDataEvent();
     }, []);
 

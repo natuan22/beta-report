@@ -4,23 +4,25 @@ import { useFormik } from "formik";
 import { https } from "../../../services/configService";
 const { TextArea } = Input;
 
-const saveImg = async (file) => {
-    try {
-        const res = await https.post("api/v1/report/upload-image-report", file);
-        console.log(res);
-    } catch (err) {
-        console.log(err);
-    }
-};
-const saveText = async (text) => {
-    try {
-        const res = await https.post("/api/v1/report/luu-nhan-dinh-thi-truong-chieu", text);
-        console.log(res);
-    } catch (err) {
-        console.log(err);
-    }
-};
-const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput }) => {
+
+
+const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput, query, queryImg }) => {
+    const saveText = async (text) => {
+        try {
+            const res = await https.post(`/api/v1/report/luu-nhan-dinh-thi-truong-${query}`, text);
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const saveImg = async (file) => {
+        try {
+            const res = await https.post(`api/v1/report/upload-image-report-${queryImg}`, file);
+            console.log(res);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const [imgSrc, setImgSrc] = useState(null);
     const { handleSubmit, setFieldValue, handleChange } = useFormik({
         initialValues: {

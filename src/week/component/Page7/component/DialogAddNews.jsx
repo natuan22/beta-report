@@ -3,20 +3,20 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Slide from "@mui/material/Slide";
-import { https } from "../services/configService";
 import { message } from "antd";
 import FormGroup from "@mui/material/FormGroup";
 import { FaFileCirclePlus, FaCheck, FaX } from "react-icons/fa6";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
-import "./styles/btnStyle.css";
+import "../../../../component/styles/btnStyle.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
+import { https } from "../../../../services/configService";
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
 });
 
-export default function DialogNews({
+export default function DialogAddNews({
     type,
     query,
     handleCatchDataNews,
@@ -25,13 +25,56 @@ export default function DialogNews({
     const [messageApi, contextHolder] = message.useMessage();
     const [open, setOpen] = useState(false);
     const [dataNews, setDataNews] = useState();
-    const [newsSelected, setNewsSelected] = useState([]);
-    const [editingIndex, setEditingIndex] = useState(-1);
-    const [editValue, setEditValue] = useState("");
+    const [arrSelectedNews, setArrSelectedNews] = useState([])
     const [formData, setFormData] = useState({
         id: idQuery,
         value: [],
     });
+
+    const [editingIndex, setEditingIndex] = useState(null);
+    const [editTitle, setEditTitle] = useState("");
+    const [editSubTitle, setEditSubTitle] = useState("");
+
+    const handleToggleEdit = (index, title, subTitle) => {
+        setEditingIndex(index);
+        setEditTitle(title);
+        setEditSubTitle(subTitle);
+    };
+
+    const handleEditConfirm = (index) => {
+        const updatedArr = [...formData.value];
+        updatedArr[index].title = editTitle;
+        updatedArr[index].sub_title = editSubTitle;
+
+        setArrSelectedNews(updatedArr);
+        setEditingIndex(null);
+        setEditTitle("");
+        setEditSubTitle("");
+    };
+
+    const handleCancelEdit = () => {
+        setEditingIndex(null);
+        setEditTitle("");
+        setEditSubTitle("");
+    };
+
+
+    const getNews = async (id) => {
+        try {
+            const res = await https.get('/api/v1/report/tin-tuc-redis?', {
+                params: {
+                    id
+                }
+            })
+            setArrSelectedNews(res.data.data.map(item => ({ title: item.title, sub_title: item.sub_title, href: '' })))
+            setFormData({
+                ...formData,
+                value: res.data.data
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
     const saveNews = async (data) => {
         try {
             const response = await https.post('/api/v1/report/luu-tin', data)
@@ -40,40 +83,26 @@ export default function DialogNews({
             console.log(err)
         }
     }
-    const getNews = async (id) => {
-        try {
-            const response = await https.get('/api/v1/report/tin-tuc-redis?', {
-                params: {
-                    id
-                }
-            })
-            setNewsSelected(response.data.data.map(item => item.title))
-            setFormData({
-                ...formData,
-                value: response.data.data
-            })
-        } catch (err) {
-            console.log(err)
-        }
-    }
-    const handleToggleEdit = (index) => {
-        setEditingIndex(index);
-        setEditValue(formData.value[index].title);
-    };
-    const handleCancelEdit = () => {
-        setEditingIndex(-1);
-    };
 
-    const handleEditConfirm = (index) => {
-        // Xử lý khi người dùng xác nhận chỉnh sửa
-        const updatedNewsSelected = [...newsSelected];
-        updatedNewsSelected[index] = editValue;
-        setNewsSelected(updatedNewsSelected);
-        success(`Chỉnh sửa thành công tin số ${index + 1}`);
-        // Kết thúc chế độ chỉnh sửa
-        setEditingIndex(-1);
-        setEditValue("");
-    };
+
+    useEffect(() => {
+        const fetchDataNews = async () => {
+            try {
+                const response = await https.get(`api/v1/report/tin-${query}`, {
+                    params: {
+                        quantity: 100,
+                    },
+                });
+                setDataNews(response.data.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchDataNews();
+
+    }, []);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -94,6 +123,19 @@ export default function DialogNews({
             content: text,
         });
     };
+
+    const handleAddNews = (news) => {
+        // Kiểm tra xem tin tức đã tồn tại trong mảng chưa
+        const isNewsExist = arrSelectedNews.some(item => item.title === news.title);
+
+        if (!isNewsExist) {
+            // Nếu tin tức chưa tồn tại, thêm tin tức vào mảng
+            setArrSelectedNews(prevArr => [...prevArr, news]);
+            success("Đã thêm tin tức thành công");
+        } else {
+            warning("Tin tức đã được chọn trước đó");
+        }
+    };
     useEffect(() => {
         const fetchDataNews = async () => {
             try {
@@ -111,92 +153,48 @@ export default function DialogNews({
         getNews(idQuery)
 
     }, []);
-
-
-    const handleSelectNews = (title) => {
-        if (!newsSelected.includes(title)) {
-            setNewsSelected((prevNewsSelected) => [...prevNewsSelected, title]);
-            success("Thêm tin thành công");
-        } else {
-            warning("Tiêu đề đã được chọn trước đó.");
-        }
-    };
     useEffect(() => {
         setFormData({
             ...formData,
-            value: newsSelected.map(item => ({ title: item, href: '' }))
+            value: arrSelectedNews.map(item => ({ title: item.title, sub_title: item.sub_title, href: '' }))
         })
 
-
-    }, [newsSelected])
+    }, [arrSelectedNews])
 
     useEffect(() => {
         if (formData.value?.length > 0) {
-            handleCatchDataNews(formData.value?.map(item => item.title), query);
+            handleCatchDataNews(formData.value?.map(item => ({ title: item.title, sub_title: item.sub_title, href: '' })), query);
         } else {
             handleCatchDataNews([], query)
         }
     }, [formData])
 
+    const handleDeleteNews = (index) => {
+        const confirmDelete = window.confirm("Bạn có chắc muốn xóa tin tức này không?");
 
-    const handleAddNews = async () => {
-        if (editingIndex !== -1) {
+        if (confirmDelete) {
+            setArrSelectedNews((prevArr) => {
+                const newArr = [...prevArr];
+                newArr.splice(index, 1);
+                return newArr;
+            });
+        }
+    };
+
+    const handleAddNewsBtn = async () => {
+        if (editingIndex !== null) {
             return warning("Vui lòng hoàn tất chỉnh sửa");
         } else {
             await saveNews(formData)
             await getNews(idQuery)
 
-            handleCatchDataNews(formData.value?.map(item => item.title), query);
+            handleCatchDataNews(formData.value?.map(item => {
+                return ({ title: item.title, sub_title: item.sub_title, href: '' })
+            }), query);
             setOpen(false);
             success(`Thêm bản tin ${type} thành công`);
         }
-    };
-
-    const handleDeleteNews = (index) => {
-        // Sử dụng SweetAlert để xác nhận việc xóa
-        Swal.fire({
-            title: "Bạn chắc chắn muốn xóa tin này?",
-            text: "Thao tác này không thể hoàn tác!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Xác nhận",
-            cancelButtonText: "Hủy",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Xác nhận xóa tin và cập nhật state
-                const updatedformData = { ...formData };
-                updatedformData.value.splice(index, 1);
-                console.log(updatedformData)
-                setFormData(updatedformData);
-                success("Đã xóa tin thành công!");
-            }
-        });
-    };
-    const handleDeleteAllNews = () => {
-        // Sử dụng SweetAlert để xác nhận việc xóa tất cả
-        Swal.fire({
-            title: "Bạn chắc chắn muốn xóa tất cả tin này?",
-            text: "Thao tác này không thể hoàn tác!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Xác nhận",
-            cancelButtonText: "Hủy",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Xác nhận xóa tất cả tin và cập nhật state
-                const updatedformData = { ...formData };
-                updatedformData.value = [];
-                setFormData(updatedformData);
-                success("Đã xóa tất cả tin thành công!");
-                // Gọi API saveNews với formData mới (rỗng)
-                saveNews(updatedformData);
-            }
-        });
-    };
+    }
     return (
         <Fragment>
             {contextHolder}
@@ -224,22 +222,29 @@ export default function DialogNews({
                         <FormGroup>
                             {dataNews?.map((item, index) => {
                                 return (
-                                    <div className="mb-2 flex items-center hover:bg-slate-300 duration-500 p-1 rounded-lg ">
+                                    <div className="mb-2 flex items-center justify-evenly hover:bg-slate-300 duration-500 p-1 rounded-lg ">
                                         <div className="w-[80%]">
                                             <span className="font-semibold"> {index + 1}</span>.{" "}
-                                            {item.title}
+                                            <span className="font-bold">
+                                                {item.title}
+                                            </span>
+                                            <div>
+                                                <p className="my-1 indent-5">
+                                                    {item.sub_title}
+                                                </p>
+                                            </div>
                                         </div>
                                         <div>
                                             <Button
                                                 onClick={() => {
-                                                    handleSelectNews(item.title);
+                                                    handleAddNews(item)
                                                 }}
                                             >
                                                 <FaFileCirclePlus className="text-[30px]" />
                                             </Button>
                                         </div>
                                     </div>
-                                );
+                                )
                             })}
                         </FormGroup>
                     </div>
@@ -247,27 +252,42 @@ export default function DialogNews({
                         <h2 className=" sticky top-0 bg-white z-10 text-center font-semibold border-b-1 border-x-0 border-t-0 border-solid border-collapse border-blue-500 m-0">
                             Tin đã chọn
                         </h2>
-
                         <div className=" p-2  h-[400px] mt-1 rounded-xl ">
                             {formData.value?.map((item, index) => (
                                 <div
-                                    className="flex items-center justify-between hover:bg-slate-300 duration-500 rounded-xl p-1"
+                                    className="flex items-center  mb-2  justify-between h-[120px] hover:bg-slate-300  duration-500 rounded-xl p-1"
                                     key={index}
                                 >
                                     {index === editingIndex ? (
-                                        <div className="flex w-full">
-                                            <div className=" w-[80%] flex  items-center py-3 ">
-                                                <input
-                                                    type="text"
-                                                    value={editValue}
-                                                    onChange={(e) => setEditValue(e.target.value)}
-                                                    className="w-full h-[25px]   focus:outline-0 "
-                                                />
+                                        <div className="flex  w-full h-full ">
+                                            <div className="w-[100%] h-full  flex flex-col items-start justify-evenly  ">
+                                                <div className="w-[80%] flex  ">
+                                                    <span className="font-bold ">
+                                                        {editingIndex + 1}.{' '}
+                                                    </span>
+                                                    <input
+                                                        type="text"
+                                                        value={editTitle}
+                                                        onChange={(e) => setEditTitle(e.target.value)}
+                                                        placeholder="Tiêu đề"
+                                                        className="w-full m-0 h-[25px] focus:outline-0"
+                                                    />
+                                                </div>
+                                                <div className="w-[80%] translate-x-[13px]   ">
+                                                    <textarea
+                                                        type="text"
+                                                        value={editSubTitle}
+                                                        onChange={(e) => setEditSubTitle(e.target.value)}
+                                                        placeholder="Mô tả"
+                                                        className="w-full h-[55px] focus:outline-0"
+                                                    />
+                                                </div>
                                             </div>
 
                                             <div className="w-[20%] flex items-center z-0">
                                                 <div className="mr-2">
                                                     <Button
+                                                        color="success"
                                                         variant="outlined"
                                                         onClick={() => handleEditConfirm(index)}
                                                     >
@@ -276,6 +296,7 @@ export default function DialogNews({
                                                 </div>
                                                 <div>
                                                     <Button
+                                                        color="error"
                                                         variant="outlined"
                                                         onClick={() => handleCancelEdit()}
                                                     >
@@ -286,15 +307,18 @@ export default function DialogNews({
                                         </div>
                                     ) : (
                                         <div className="flex  items-center justify-between w-full">
-                                            <p className=" w-[80%]">
-                                                <span className="font-semibold">{index + 1}. </span>
-                                                {item.title}
-                                            </p>
-                                            <div className="w-[20%] flex items-center z-0">
+                                            <div className="w-[80%] flex">
+                                                <p className="font-semibold">{index + 1}. </p>
+                                                <div>
+                                                    <p className=" font-bold">{item.title}</p>
+                                                    <p className="text-justify">{item.sub_title}</p>
+                                                </div>
+                                            </div>
+                                            <div className="w-[15%] flex items-center z-0 ">
                                                 <div className="mr-2">
                                                     <Button
                                                         variant="outlined"
-                                                        onClick={() => handleToggleEdit(index, item.title)}
+                                                        onClick={() => handleToggleEdit(index, item.title, item.sub_title)}
                                                     >
                                                         <AiFillEdit />
                                                     </Button>
@@ -317,15 +341,14 @@ export default function DialogNews({
                     <div>
                         <button
                             onClick={() => {
-                                handleAddNews();
+                                handleAddNewsBtn()
                             }}
-                            className="button mt-5"
-                        >
+                            className="button mt-5">
                             Thêm tin
                         </button>
                     </div>
                     <div className="absolute right-[11%] bottom-[30px] z-10">
-                        <Button variant="contained" color="warning" onClick={handleDeleteAllNews}>
+                        <Button variant="contained" color="warning" >
                             Xóa tất cả
                         </Button>
                     </div>

@@ -3,12 +3,12 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import formatNumber from "../../../../helper/formatNumber";
 import moment from "moment/moment";
+import formatNumberChart from "../../../../helper/formatNumberChart";
 const ChartTopForeignTotal = ({ data, title }) => {
 
     const max = Math.ceil(Math.max(...data.map((item) => item.netVal / 1000000000)));
-    const min = Math.floor(Math.min(...data.map((item) => item.netVal / 1000000000)));
-
-
+    const min = Math.floor(Math.min(...data.map((item) => item.value / 1000000000)));
+    console.log(data)
     const options = {
         accessibility: {
             enabled: false,
@@ -58,9 +58,7 @@ const ChartTopForeignTotal = ({ data, title }) => {
                         fontWeight: "bold",
                     },
                 },
-                max,
-                min,
-                tickInterval: max / 2,
+
                 opposite: true,
                 gridLineWidth: 0.5,
             },
@@ -69,7 +67,7 @@ const ChartTopForeignTotal = ({ data, title }) => {
                     text: "",
                 },
                 labels: {
-                    enabled: false,
+                    enabled: true,
                     style: {
                         fontSize: "10px",
                         fontWeight: "bold",
@@ -88,21 +86,45 @@ const ChartTopForeignTotal = ({ data, title }) => {
                     color: item.netVal >= 0 ? "#26A69A" : "#EF5350",
                 })),
                 yAxis: 0,
-                color: "#ff0000"
+                color: "#ff0000",
+                dataLabels: {
+                    enabled: true, // Bật hiển thị label cho cột
+                    formatter: function () {
+                        return formatNumberChart(this.y);
+                    },
+                    style: {
+                        color: '#000',
+                        fontSize: '10px',
+                        fontWeight: 'bold',
+                        textOutline: '1px contrast',
+                    },
+                },
             },
             {
                 type: "line",
                 name: "",
-                data: data.map((item) => ({
-                    y: item.value,
+                data: data.map((item, index) => ({
+                    y: item.value / 1000000000,
                     marker: {
                         symbol: item.value >= 0 ? 'triangle' : 'triangle-down',
                         fillColor: 'none', // Màu sắc của marker
                         lineColor: item.value >= 0 ? '#089C00' : '#FF0000', // Màu sắc đường viền của marker
                         lineWidth: 1, // Độ rộng của đường viền của marker
                     },
+                    dataLabels: {
+                        enabled: index === data.length - 1, // Chỉ hiển thị label cho điểm cuối cùng
+                        formatter: function () {
+                            return formatNumberChart(this.y);
+                        },
+                        style: {
+                            color: '#000',
+                            fontSize: '10px',
+                            fontWeight: 'bold',
+                        },
+                    },
                 })),
-                yAxis: 1,
+
+                yAxis: 0,
                 color: "#0155B7"
             },
         ],

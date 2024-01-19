@@ -14,7 +14,7 @@ const Page5Week = () => {
     const getDataChartMulti = async () => {
         try {
             const res = await https.get('/api/v1/report/bien-dong-gtgd?type=1')
-            setDataChartMulti(res.data.data``)
+            setDataChartMulti(res.data.data)
         } catch (err) {
             console.log(err)
         }
@@ -54,7 +54,7 @@ const Page5Week = () => {
             </div>
 
 
-            <div className='content  h-[980px] w-full flex flex-col items-center mt-[30px]'>
+            <div className='content  h-[950px] w-full flex flex-col items-center mt-[10px]'>
                 {/* cont-top */}
                 <div className='relative'>
                     <div className='flex'>
@@ -68,15 +68,15 @@ const Page5Week = () => {
                         <div className='h-[12px] w-[700px] bg-[#0155B7]'></div>
                         <div className='h-[12px] w-[46px] bg-[#E88C08] skew-x-[45deg] translate-x-[-16px]' ></div>
                     </div>
-                    <div className='absolute z-10 top-0 left-0'>
-                        <h2 className='m-0 text-white text-[12px]  font-semibold'>
+                    <div className='absolute z-10 top-0 left-0 w-full'>
+                        <h2 className='m-0 text-white text-[12px] text-center leading-[24px]  font-semibold'>
                             Biến động GTGD một số ngành quan trọng (tỷ VNĐ)
                         </h2>
                     </div>
                 </div>
 
                 <div className='multiColumn h-[230px] '>
-                    <ChartMultiColumn />
+                    <ChartMultiColumn data={dataChartMulti} />
                 </div>
 
                 {/* cont-mid */}
@@ -92,15 +92,15 @@ const Page5Week = () => {
                         <div className='h-[12px] w-[700px] bg-[#0155B7]'></div>
                         <div className='h-[12px] w-[46px] bg-[#E88C08] skew-x-[45deg] translate-x-[-16px]' ></div>
                     </div>
-                    <div className='absolute z-10 top-0 left-0'>
-                        <h2 className='m-0 text-white text-[12px]  font-semibold'>
+                    <div className='absolute z-10 top-0 left-0 w-full' >
+                        <h2 className='m-0 text-white text-[12px] text-center leading-[24px]  font-semibold'>
                             GTGD ròng của các nhóm nhà đầu tư (tỷ VNĐ)
                         </h2>
                     </div>
                 </div>
 
                 <div className='chartNetVal h-[215px]'>
-                    <ChartNetVal />
+                    <ChartNetVal data={dataNetVal} />
                 </div>
 
                 {/* cont-bot */}
@@ -116,14 +116,14 @@ const Page5Week = () => {
                         <div className='h-[12px] w-[700px] bg-[#0155B7]'></div>
                         <div className='h-[12px] w-[46px] bg-[#E88C08] skew-x-[45deg] translate-x-[-16px]' ></div>
                     </div>
-                    <div className='absolute z-10 top-0 left-0'>
-                        <h2 className='m-0 text-white text-[12px]  font-semibold'>
+                    <div className='absolute z-10 top-0 left-0 w-full'>
+                        <h2 className='m-0 text-white text-[12px] text-center leading-[24px]  font-semibold'>
                             Lịch sự kiện
                         </h2>
                     </div>
                 </div>
-                <div className='tableEvent h-[350px]'>
-                    <TableEvent />
+                <div className='tableEvent h-[330px] w-[760px] mt-[10px]'>
+                    <TableEvent data={dataTableEvent} />
                 </div>
             </div>
 

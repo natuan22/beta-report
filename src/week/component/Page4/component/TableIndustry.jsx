@@ -21,21 +21,22 @@ const getArrow = (value) => {
 const TableIndustry = ({ dataTable }) => {
     return (
         <div >
-            <table className="bg-transparent  w-[420px] h-[520px]   border-[#0155B7] border-solid border-1 border-collapse">
+            <table className="bg-transparent  w-[420px] h-[460px]   border-[#0155B7] border-solid border-1 border-collapse">
 
                 <thead className="bg-[#0155B7] border-1 border-[#0155B7] border-solid border-collapse">
                     <tr className="text-white">
                         <th className="font-semibold px-2 py-1 text-left     ">
                             Phân ngành
                         </th>
-                        <th className="font-semibold px-1 py-1 text-[12px]    ">
-                            %D
-                        </th>
+
                         <th className="font-semibold px-1 py-1  text-[12px]    ">
                             %W
                         </th>
                         <th className="font-semibold px-1 py-1 text-[12px]     ">
                             %M
+                        </th>
+                        <th className="font-semibold px-1 py-1 text-[12px]    ">
+                            %YtD
                         </th>
                         <th className="font-semibold px-1 py-1  text-[12px]  ">
                             Độ rộng ngành
@@ -62,25 +63,25 @@ const TableIndustry = ({ dataTable }) => {
                                 key={index}
                                 className="  text-[13px] font-semibold"
                             >
-                                <td className="text-left  py-1 font-bold  text-[11px] text-[#00429B]  px-1 ">
+                                <td className="text-left  py-1 font-bold  text-[11px] text-[#00429B]  px-1 border border-solid border-collapse border-[#0155B7] border-y-0 border-l-0 border-r ">
                                     {item.industry}
                                 </td>
-                                <td className="text-center px-1 py-1  text-[11px]  ">
-                                    <div>
-                                        {getArrow(item.day_change_percent)}
-                                        <span className="m-0">{formatNumber(item.day_change_percent)}%</span>
-                                    </div>
-                                </td>
-                                <td className={`text-center px-1 py-1  text-[11px]    `}>
+                                <td className="text-center px-1 py-1  text-[11px] border border-solid border-collapse border-[#0155B7] border-y-0 border-l-0 border-r  ">
                                     <div>
                                         {getArrow(item.week_change_percent)}
-                                        <span className="m-0"> {formatNumber(item.week_change_percent)}%</span>
+                                        <span className="m-0">{formatNumber(item.week_change_percent)}%</span>
                                     </div>
                                 </td>
-                                <td className={`text-center px-1 py-1  text-[11px]   `}>
+                                <td className={`text-center px-1 py-1  text-[11px] border border-solid border-collapse border-[#0155B7] border-y-0 border-l-0 border-r    `}>
                                     <div>
                                         {getArrow(item.month_change_percent)}
-                                        <span className="m-0">{formatNumber(item.month_change_percent)}%</span>
+                                        <span className="m-0"> {formatNumber(item.month_change_percent)}%</span>
+                                    </div>
+                                </td>
+                                <td className={`text-center px-1 py-1  text-[11px] border border-solid border-collapse border-[#0155B7] border-y-0 border-l-0 border-r   `}>
+                                    <div>
+                                        {getArrow(item.ytd)}
+                                        <span className="m-0">{formatNumber(item.ytd)}%</span>
                                     </div>
                                 </td>
                                 <td

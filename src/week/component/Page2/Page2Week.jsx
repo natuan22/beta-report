@@ -33,7 +33,6 @@ const Page2Week = () => {
     const handleGetTextInpur = (text) => {
         setText(text)
     }
-    console.log(text)
     return (
         <div className="h-[1480px] w-[800px] relative">
             <div className="header rotate-0">
@@ -43,7 +42,7 @@ const Page2Week = () => {
                 <AddText handleGetTextInpur={handleGetTextInpur} />
             </div>
             {data ? (
-                <div className="content h-[950px] w-full flex flex-col items-center mt-[25px]">
+                <div className="content h-[945px] w-full flex flex-col items-center mt-[25px]">
                     <div className="w-[790px] ">
                         <div className="content-top flex items-center justify-evenly w-full h-[460px]">
                             <div className="content-top_lef  w-[364px] h-[455px] bg-[#EF9C211C] px-3 py-1 ">

@@ -46,7 +46,7 @@ const DialogAddImgAndText = ({ onSubmitSuccess, getImgFromInput }) => {
                 cancelText="Đóng"
             >
                 <div className="h-[650px] grid place-items-center">
-                    <FormInput getImgFromInput={getImgFromInput} handleOk={handleOk} onSubmitSuccess={onSubmitSuccess} />
+                    <FormInput queryImg={''} query={'chieu'} getImgFromInput={getImgFromInput} handleOk={handleOk} onSubmitSuccess={onSubmitSuccess} />
 
                 </div>
             </Modal>

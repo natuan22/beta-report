@@ -2,12 +2,13 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import formatNumber from "../../../../helper/formatNumber";
+import formatNumberChart from "../../../../helper/formatNumberChart";
 const ChartTopTotal = ({ data, title }) => {
 
     const max = Math.ceil(Math.max(...data.map((item) => item.totalVal / 1000000000)));
     const min = Math.floor(Math.min(...data.map((item) => item.totalVal / 1000000000)));
     const triangleIcon =
-        '<svg style="transform:translateY(5px)"  width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#FF0000" stroke-width="1"/></svg>';
+        '<svg style="transform:translateY(5px)"  width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#26a69a" stroke-width="1"/></svg>';
     const triangleIconUp =
         '<svg style="transform:rotate(180deg)" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#FF0000" stroke-width="1"/></svg>';
 
@@ -120,7 +121,7 @@ const ChartTopTotal = ({ data, title }) => {
                 dataLabels: {
                     enabled: false,
                     formatter: function () {
-                        return `<div style="text-align: center; color: #000; font-size: 8px; font-weight: bold;">${formatNumber(this.point.perChange)}%</div>`;
+                        return `<div style="text-align: center; color: #000; font-size: 8px; font-weight: bold;">${formatNumberChart(this.point.perChange)}%</div>`;
                     },
                     style: {
                         color: "#000",
@@ -142,11 +143,11 @@ const ChartTopTotal = ({ data, title }) => {
                 dataLabels: {
                     enabled: true, // Bật hiển thị label
                     formatter: function () {
-                        return formatNumber(this.y); // Sử dụng hàm formatNumber để định dạng lại giá trị y
+                        return formatNumberChart(this.y) + '%'; // Sử dụng hàm formatNumber để định dạng lại giá trị y
                     }, // Định dạng của label (ở đây sử dụng giá trị y của điểm dữ liệu)
                     style: {
                         color: '#000', // Màu sắc của label
-                        fontSize: '10px', // Kích thước của label
+                        fontSize: '8px', // Kích thước của label
                         fontWeight: 'bold', // Độ đậm của label
                     },
                 },

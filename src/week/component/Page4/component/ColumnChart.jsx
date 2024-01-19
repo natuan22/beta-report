@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import formatNumber from '../../../../helper/formatNumber';
 
 const CustomBarChart = ({ data, title, unit, height }) => {
+    const vnIndexIndex = data?.findIndex(item => item.name === 'VNINDEX');
     const chartConfig = {
         accessibility: {
             enabled: false,
@@ -16,7 +17,7 @@ const CustomBarChart = ({ data, title, unit, height }) => {
         title: {
             useHTML: true,
             text: `<div style=" text-align: center" >
-                    <p style="color: #00429B; font-size: 13px; font-weight: bold;margin: 0px">${title}</p>
+                    <p style="color: #00429B; font-size: 12px; font-weight: bold;margin: 0px; text-align:center">${title}</p>
                     <span style="color: #000; font-size: 10px; font-weight: bold;">ĐVT: ${unit}</span>
             </div>`
         },
@@ -65,8 +66,19 @@ const CustomBarChart = ({ data, title, unit, height }) => {
                     return `<div style="color: black; font-size: 11px; font-weight: 600; margin-top:10px">${words.join(' ')}</div>`;
                 },
                 rotation: 0,
-                align: 'center',
+                align: 'right',
             },
+            plotBands: [{
+                from: vnIndexIndex - 0.4,
+                to: vnIndexIndex + 0.4,
+                color: 'transparent', // Màu của vùng được bọc viền
+                borderWidth: 2, // Độ rộng của đường viền\
+                borderColor: '#E88C08', // Màu của đường viền
+                dashStyle: 'dot', // Loại đường nét đứt
+
+            }],
+
+
         }],
         yAxis: {
             gridLineWidth: 1,

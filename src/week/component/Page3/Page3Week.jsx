@@ -9,6 +9,8 @@ import DialogAddImgAndTextWeek from './component/DialogAddImgAndTextWeek'
 
 const Page3Week = () => {
     const [data, setData] = useState();
+    const [imgSrc, setImgSrc] = useState();
+
     const getData = async () => {
         try {
             const response = await https.get("api/v1/report/ban-tin-tuan-2");
@@ -24,6 +26,12 @@ const Page3Week = () => {
             console.log(err);
         }
     };
+    const getImgFromInput = (src) => {
+        setImgSrc(src)
+    }
+    const onSubmitSuccess = () => {
+        getData();
+    };
     useEffect(() => {
         getData();
     }, []);
@@ -33,7 +41,7 @@ const Page3Week = () => {
                 <HeaderWeek />
             </div>
             <div className='absolute top-0 right-0 translate-x-[250px] translate-y-[250px]'>
-                <DialogAddImgAndTextWeek />
+                <DialogAddImgAndTextWeek onSubmitSuccess={onSubmitSuccess} getImgFromInput={getImgFromInput} />
             </div>
             <div className='content h-[950px] w-full flex flex-col items-center mt-[20px]'>
                 {data ? (
@@ -46,7 +54,6 @@ const Page3Week = () => {
                                             Chỉ số
                                         </th>
                                         <th className="font-semibold px-1 py-1 w-[100px] ">Điểm số</th>
-                                        <th className="font-semibold px-1 py-1 ">%D</th>
                                         <th className="font-semibold px-1 py-1 ">%W</th>
                                         <th className="font-semibold px-1 py-1 ">%1M</th>
                                         <th className="font-semibold px-1 py-1 ">%YtD</th>
@@ -65,9 +72,7 @@ const Page3Week = () => {
                                                     {formatNumber(item.price)}
                                                 </p>
                                             </td>
-                                            <td className={` ${getColorBaseOnValue(item.day)} text-center px-1 py-1`}>
-                                                {formatNumber(item.day)}
-                                            </td>
+
                                             <td className={` ${getColorBaseOnValue(item.week)} text-center px-1 py-1`}>
                                                 {formatNumber(item.week)}
                                             </td>
