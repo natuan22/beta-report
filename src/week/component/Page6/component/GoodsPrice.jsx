@@ -6,7 +6,7 @@ const GoodsPrice = ({ data }) => {
     return (
         <div>
             <table className='bg-transparent border-collapse w-[370px] h-[245px] text-[11px]'>
-                <thead className='bg-[#0155B7]  border-1 border-[#0155B7] border-solid border-collapse'>
+                <thead className='bg-[#0155B7]  border border-[#0155B7] border-solid border-collapse'>
                     <tr className='text-white '>
                         <th className='font-semibold px-2 py-1 text-left w-[120px] '>Hàng hóa</th>
                         <th className='font-semibold px-1 py-1 '>Thị giá</th>
@@ -16,7 +16,7 @@ const GoodsPrice = ({ data }) => {
                         <th className='font-semibold px-1 py-1 '>%YoY</th>
                     </tr>
                 </thead>
-                <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
+                <tbody className="border border-[#0155B7] border-solid border-collapse ">
                     {data?.slice(0, 8)?.map(item => (
                         <tr>
                             <td className='text-left pl-2 py-1 font-semibold text-[11px] '>{item.name}</td>

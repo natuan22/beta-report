@@ -6,7 +6,7 @@ const InterestRateTable = ({ data }) => {
     return (
         <div>
             <table className='bg-transparent border-collapse w-[370px]   text-[11px] h-[245px]'>
-                <thead className='bg-[#0155B7]  border-1 border-[#0155B7] border-solid border-collapse'>
+                <thead className='bg-[#0155B7]  border border-[#0155B7] border-solid border-collapse'>
                     <tr className='text-white '>
                         <th className='font-semibold px-1 py-1 '>Kỳ hạn</th>
                         <th className='font-semibold px-1 py-1 '>Mức lãi suất</th>
@@ -15,7 +15,7 @@ const InterestRateTable = ({ data }) => {
                         <th className='font-semibold px-1 py-1 '>%YtD</th>
                     </tr>
                 </thead>
-                <tbody className="border-1 border-[#0155B7] border-solid border-collapse  ">
+                <tbody className="border border-[#0155B7] border-solid border-collapse  ">
                     {data?.map(item => (
                         <tr>
                             <td className='text-center px-1 py-3 font-semibold text-[11px]'>{item.code}</td>

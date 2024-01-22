@@ -7,7 +7,6 @@ const RateLineChart = ({ data }) => {
 
     const [timeLine, setTimeLine] = useState()
     const [dataChart, setDataChart] = useState()
-
     useEffect(() => {
         if (data?.length > 0) {
             const uniqueDates = [...new Set(data?.map(item => moment(item.date).format('DD/MM')))];
@@ -130,7 +129,7 @@ const RateLineChart = ({ data }) => {
 
 
     return (
-        <div className='w-[370px]  h-[290px]'>
+        <div className='w-[370px]  h-[290px]  border border-solid border-collapse border-[#0155B7] translate-x-[-10px]'>
             <HighchartsReact highcharts={Highcharts} options={options} containerProps={{ style: { height: '100%', width: '100%' } }} />
 
         </div>

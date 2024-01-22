@@ -46,7 +46,7 @@ const Page3Week = () => {
             <div className='content h-[950px] w-full flex flex-col items-center mt-[20px]'>
                 {data ? (
                     <div className="w-[95%]">
-                        <div className="content-top my-[10px] flex flex-col items-center">
+                        <div className="content-top my-[10px] flex flex-col items-center h-[160px]">
                             <table className="bg-transparent border-collapse w-[95%]">
                                 <thead className="bg-[#0155B7]  border-1 border-[#0155B7] border-solid border-collapse">
                                     <tr className="text-white ">
@@ -96,19 +96,19 @@ const Page3Week = () => {
                             </table>
                         </div>
                         <div className="content-bot w-full flex flex-col items-center justify-center">
-                            <div className="content-bot_img my-2">
+                            <div className="content-bot_img mt-[25px] mb-[10px]">
                                 {/* <img src={imgSrc} width={675} height={367} alt="img" /> */}
-                                <img src={banner} width={675} height={367} alt="img" />
+                                <img src={banner} width={675} height={347} alt="img" />
                             </div>
-                            <div className="content-bot_text1 min-h-[239px]">
-                                <p className="my-1 text-[#00429B] underline text- underline-offset-1 font-bold">Nhận định thị trường:</p>
-                                <p className="my-2 indent-[20px] text-justify leading-[22px] ">
+                            <div className="content-bot_text1 min-h-[235x]">
+                                <p className="my-1 text-[#00429B] underline  underline-offset-1 font-bold">Nhận định thị trường:</p>
+                                <p className="my-1 indent-[20px] text-justify leading-[22px] ">
                                     {data?.text[[0]]}
                                 </p>
                             </div>
 
                             <div className="min-h-[140px]">
-                                <p className=" my-2 content-bot_text2  indent-[22px]  text-justify leading-[20px]">
+                                <p className=" my-2 content-bot_text2   indent-[22px]  text-justify leading-[20px]">
                                     {data?.text[[1]]}
                                 </p>
                             </div>

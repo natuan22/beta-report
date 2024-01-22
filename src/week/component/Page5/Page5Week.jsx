@@ -54,7 +54,7 @@ const Page5Week = () => {
             </div>
 
 
-            <div className='content  h-[950px] w-full flex flex-col items-center mt-[10px]'>
+            <div className='content  h-[945px] w-full flex flex-col items-center mt-[10px]'>
                 {/* cont-top */}
                 <div className='relative'>
                     <div className='flex'>

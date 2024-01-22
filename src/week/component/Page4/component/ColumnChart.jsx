@@ -72,9 +72,9 @@ const CustomBarChart = ({ data, title, unit, height }) => {
                 from: vnIndexIndex - 0.4,
                 to: vnIndexIndex + 0.4,
                 color: 'transparent', // Màu của vùng được bọc viền
-                borderWidth: 2, // Độ rộng của đường viền\
+                borderWidth: 1, // Độ rộng của đường viền\
                 borderColor: '#E88C08', // Màu của đường viền
-                dashStyle: 'dot', // Loại đường nét đứt
+                dashStyle: 'dash', // Loại đường nét đứt
 
             }],
 

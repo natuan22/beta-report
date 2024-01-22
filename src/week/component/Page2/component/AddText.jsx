@@ -23,10 +23,13 @@ const AddText = ({ handleGetTextInpur }) => {
 
     const { handleSubmit, handleChange } = useFormik({
         initialValues: {
-            text: "",
+            title: "",
+            subTitle: "",
+            content: "",
         },
         onSubmit: (values) => {
-            saveText(values)
+            console.log({ text: [values.title, values.subTitle, values.content] })
+            saveText({ text: [values.title, values.subTitle, values.content] })
             handleGetTextInpur(values.text)
         },
     });
@@ -64,7 +67,7 @@ const AddText = ({ handleGetTextInpur }) => {
                 onCancel={handleCancel}
                 cancelText="Đóng"
             >
-                <div className="h-[650px] grid place-items-center">
+                <div className="h-[400px] grid place-items-center">
                     <Form
                         labelCol={{
                             span: 4,
@@ -78,11 +81,19 @@ const AddText = ({ handleGetTextInpur }) => {
                         }}
                         onSubmitCapture={handleSubmit}
                     >
-                        <Form.Item label="Nhận định">
+                        <Form.Item label="Title">
+                            <Input onChange={handleChange} name="title" />
+                        </Form.Item>
+
+                        <Form.Item label="Sub title">
+                            <Input onChange={handleChange} name="subTitle" />
+                        </Form.Item>
+
+                        <Form.Item label="Content">
                             <TextArea
-                                name="text"
                                 onChange={handleChange}
-                                placeholder="Nhập vào nhận định"
+                                name="content"
+                                placeholder="Nhận định 1"
                                 rows={4}
                                 style={{
                                     height: 200,
@@ -91,10 +102,7 @@ const AddText = ({ handleGetTextInpur }) => {
                         </Form.Item>
 
                         <Form.Item label="Tác vụ">
-                            <button
-                                type="submit"
-                                class="text-white bg-gradient-to-br  from-purple-600 to-blue-500 hover:bg-gradient-to-bl border-0     font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                            >
+                            <button type="submit" class="text-white bg-gradient-to-br  from-purple-600 to-blue-500 hover:bg-gradient-to-bl border-0 focus:outline-0     font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                                 Thêm
                             </button>
                         </Form.Item>

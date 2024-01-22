@@ -4,7 +4,7 @@ import FooterWeek from '../../utils/FooterWeek'
 
 const Page9Week = () => {
     return (
-        <div className='h-[1480px] w-[800px]'>
+        <div className='h-[800px] w-[1480px]'>
             <div className='header h-[135px]'>
                 <HeaderWeek />
             </div>
@@ -28,7 +28,7 @@ const Page9Week = () => {
                     </div>
                 </div>
 
-                <div className='table-cont w-[780px] mt-5'>
+                <div className='table-cont w-[780px] mt-5 '>
                     <table className="bg-transparent border-collapse w-full">
                         <thead className="bg-[#0155B7]  border-1 border-[#0155B7] border-solid border-collapse">
                             <tr className="text-white ">

@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../app/asset/img/logoWeek.png'
 import imgHeader from '../../app/asset/img/headerWeek.png'
+import getTimeWeek from '../../helper/getTimeWeek'
 const HeaderWeek = () => {
     return (
         <div className='h-[120px] w-[800px]'>
@@ -30,7 +31,7 @@ const HeaderWeek = () => {
 
                 <div className='absolute bottom-[-14px] right-[155px]'>
                     <span className='text-[23px] font-[500] text-[#0055B6]'>
-                        Tuần: 18.12 - 22.12.2023
+                        Tuần: {getTimeWeek()}
                     </span>
                 </div>
 

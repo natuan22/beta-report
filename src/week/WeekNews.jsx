@@ -30,79 +30,80 @@ const WeekNews = () => {
         page11: useRef(null),
         page12: useRef(null),
     };
-    const generateImage = async (ref, height) => {
+    const generateImage = async (ref, height, width) => {
         if (!ref.current) return null;
         const canvas = await html2canvas(ref.current, { width: 800, height });
         return canvas.toDataURL('image/png');
     }
 
-    const downloadImages = async () => {
-        const img1 = await generateImage(pageRefs.page1, 1121)
-        const img2 = await generateImage(pageRefs.page2, 1121)
-        const img3 = await generateImage(pageRefs.page3, 1121)
-        const img4 = await generateImage(pageRefs.page4, 1121)
-        const img5 = await generateImage(pageRefs.page5, 1121)
-        const img6 = await generateImage(pageRefs.page6, 1121)
-        const img7 = await generateImage(pageRefs.page7, 1121)
-        const img8 = await generateImage(pageRefs.page8, 1121)
-        const img9 = await generateImage(pageRefs.page9, 1121)
-        const img10 = await generateImage(pageRefs.page10, 1121)
-        const img11 = await generateImage(pageRefs.page11, 1121)
-        const img12 = await generateImage(pageRefs.page12, 1121)
+    // const downloadImages = async () => {
+    //     const img1 = await generateImage(pageRefs.page1, 1121)
+    //     const img2 = await generateImage(pageRefs.page2, 1121)
+    //     const img3 = await generateImage(pageRefs.page3, 1121)
+    //     const img4 = await generateImage(pageRefs.page4, 1121)
+    //     const img5 = await generateImage(pageRefs.page5, 1121)
+    //     const img6 = await generateImage(pageRefs.page6, 1121)
+    //     const img7 = await generateImage(pageRefs.page7, 1121)
+    //     const img8 = await generateImage(pageRefs.page8, 1121)
+    //     const img9 = await generateImage(pageRefs.page9, 1121)
+    //     const img10 = await generateImage(pageRefs.page10, 1121)
+    //     const img11 = await generateImage(pageRefs.page11, 1121)
+    //     const img12 = await generateImage(pageRefs.page12, 1121)
 
 
-        const link1 = document.createElement('a')
-        link1.href = img1
-        link1.download = 'BetaWeekNews-Trang1.png'
-        link1.click()
-        const link2 = document.createElement('a')
-        link2.href = img2
-        link2.download = 'BetaWeekNews-Trang1.png'
-        link2.click()
-        const link3 = document.createElement('a')
-        link3.href = img3
-        link3.download = 'BetaWeekNews-Trang1.png'
-        link3.click()
-        const link4 = document.createElement('a')
-        link4.href = img4
-        link4.download = 'BetaWeekNews-Trang1.png'
-        link4.click()
-        const link5 = document.createElement('a')
-        link5.href = img5
-        link5.download = 'BetaWeekNews-Trang1.png'
-        link5.click()
-        const link6 = document.createElement('a')
-        link6.href = img6
-        link6.download = 'BetaWeekNews-Trang1.png'
-        link6.click()
-        const link7 = document.createElement('a')
-        link7.href = img7
-        link7.download = 'BetaWeekNews-Trang1.png'
-        link7.click()
-        const link8 = document.createElement('a')
-        link8.href = img8
-        link8.download = 'BetaWeekNews-Trang1.png'
-        link8.click()
-        const link9 = document.createElement('a')
-        link9.href = img9
-        link9.download = 'BetaWeekNews-Trang1.png'
-        link9.click()
-        const link10 = document.createElement('a')
-        link10.href = img10
-        link10.download = 'BetaWeekNews-Trang1.png'
-        link10.click()
-        const link11 = document.createElement('a')
-        link11.href = img11
-        link11.download = 'BetaWeekNews-Trang1.png'
-        link11.click()
-        const link12 = document.createElement('a')
-        link12.href = img12
-        link12.download = 'BetaWeekNews-Trang1.png'
-        link12.click()
-    }
+    //     const link1 = document.createElement('a')
+    //     link1.href = img1
+    //     link1.download = 'BetaWeekNews-Trang1.png'
+    //     link1.click()
+    //     const link2 = document.createElement('a')
+    //     link2.href = img2
+    //     link2.download = 'BetaWeekNews-Trang1.png'
+    //     link2.click()
+    //     const link3 = document.createElement('a')
+    //     link3.href = img3
+    //     link3.download = 'BetaWeekNews-Trang1.png'
+    //     link3.click()
+    //     const link4 = document.createElement('a')
+    //     link4.href = img4
+    //     link4.download = 'BetaWeekNews-Trang1.png'
+    //     link4.click()
+    //     const link5 = document.createElement('a')
+    //     link5.href = img5
+    //     link5.download = 'BetaWeekNews-Trang1.png'
+    //     link5.click()
+    //     const link6 = document.createElement('a')
+    //     link6.href = img6
+    //     link6.download = 'BetaWeekNews-Trang1.png'
+    //     link6.click()
+    //     const link7 = document.createElement('a')
+    //     link7.href = img7
+    //     link7.download = 'BetaWeekNews-Trang1.png'
+    //     link7.click()
+    //     const link8 = document.createElement('a')
+    //     link8.href = img8
+    //     link8.download = 'BetaWeekNews-Trang1.png'
+    //     link8.click()
+    //     const link9 = document.createElement('a')
+    //     link9.href = img9
+    //     link9.download = 'BetaWeekNews-Trang1.png'
+    //     link9.click()
+    //     const link10 = document.createElement('a')
+    //     link10.href = img10
+    //     link10.download = 'BetaWeekNews-Trang1.png'
+    //     link10.click()
+    //     const link11 = document.createElement('a')
+    //     link11.href = img11
+    //     link11.download = 'BetaWeekNews-Trang1.png'
+    //     link11.click()
+    //     const link12 = document.createElement('a')
+    //     link12.href = img12
+    //     link12.download = 'BetaWeekNews-Trang1.png'
+    //     link12.click()
+    // }
 
     const generatePDF = async () => {
-        const pdf = new jsPDF();
+        const pdf = new jsPDF('portrait');
+        const pdfLandscape = new jsPDF('landscape', '', 'a4');
         const img1 = await generateImage(pageRefs.page1, 1480)
         const img2 = await generateImage(pageRefs.page2, 1480)
         const img3 = await generateImage(pageRefs.page3, 1480)
@@ -132,8 +133,8 @@ const WeekNews = () => {
         pdf.addImage(img7, 'PNG', 0, 0);
         pdf.addPage()
         pdf.addImage(img8, 'PNG', 0, 0);
-        pdf.addPage()
-        pdf.addImage(img9, 'PNG', 0, 0);
+        pdfLandscape.addPage()
+        pdfLandscape.addImage(img9, 'PNG', 0, 0);
         pdf.addPage()
         pdf.addImage(img10, 'PNG', 0, 0);
         pdf.addPage()
@@ -144,6 +145,7 @@ const WeekNews = () => {
 
         pdf.save('WeekNews.pdf');
     }
+
     return (
         <div className="relative">
             <div>

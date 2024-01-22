@@ -33,6 +33,7 @@ const Page2Week = () => {
     const handleGetTextInpur = (text) => {
         setText(text)
     }
+    console.log(text)
     return (
         <div className="h-[1480px] w-[800px] relative">
             <div className="header rotate-0">
@@ -45,14 +46,23 @@ const Page2Week = () => {
                 <div className="content h-[945px] w-full flex flex-col items-center mt-[25px]">
                     <div className="w-[790px] ">
                         <div className="content-top flex items-center justify-evenly w-full h-[460px]">
-                            <div className="content-top_lef  w-[364px] h-[455px] bg-[#EF9C211C] px-3 py-1 ">
-                                <p className="my-1 text-[#1B68BB] font-bold  underline underline-offset-1">
-                                    Diễn biến thị trường:{" "}
-                                </p>
-                                <p className="text-[11px] max-h-[401px] indent-[20px] text-justify my-1 leading-[24px] font-semibold ">
-                                    {text}
-                                </p>
-                            </div>
+                            {text?.length > 0 ?
+                                <div className="content-top_lef  w-[364px] h-[455px] bg-[#EF9C211C] px-3 py-1 ">
+                                    <h2 className="m-0 text-[18px] text-[#1B68BB] ">
+                                        {text[0]}
+                                    </h2>
+                                    <p className="m-0 text-[16px] text-[#1B68BB] font-bold">
+                                        {text[1]}
+                                    </p>
+                                    <p className="my-1 text-[#1B68BB] text-[13px] font-bold  underline underline-offset-1">
+                                        Diễn biến thị trường:{" "}
+                                    </p>
+                                    <p className="text-[13px] max-h-[401px] indent-[20px] text-justify my-1 leading-[24px] font-semibold ">
+                                        {text[2]}
+                                    </p>
+                                </div>
+                                : <div>Loading...</div>}
+
                             <div className="content-top_right w-[364px] h-[455px] bg-[#EF9C211C] px-3 py-1">
                                 <p className="my-1 text-[#1B68BB] font-bold  underline underline-offset-1">
                                     Điểm nhấn chính trong tuần:{" "}
@@ -168,7 +178,7 @@ const Page2Week = () => {
                                         </span>{" "}
                                         so với tuần trước. Bên cạnh đó, giá trị giao dịch thỏa thuận
                                         là <span>{formatNumber(data.ptVal / 1000000000)}</span> tỷ
-                                        đồng. Độ rộng thị trường:
+                                        đồng. Độ rộng thị trường:{' '}
                                         <span className="text-green-600">{data.advances}</span> mã
                                         tăng,{" "}
                                         <span className="text-[#fec01d]">{data.noChange}</span> mã
@@ -237,6 +247,7 @@ const Page2Week = () => {
                                         currency={1}
                                         title={"Nhóm dẫn dắt thị trường sàn HOSE qua 1 tuần"}
                                         data={data.chartTopMarket}
+                                        translateX={'213px'}
                                     />
                                 </div>
                                 <div className="chartTopForeign w-[370px] h-[237px]">
@@ -245,6 +256,7 @@ const Page2Week = () => {
                                         currency={1000000000}
                                         title={"Top NĐTNN giao dịch ròng sàn HOSE qua 1 tuần"}
                                         data={data.chartTopForeign}
+                                        translateX={'195px'}
                                     />
                                 </div>
                                 <div className="chartTopTotal w-[370px] h-[237px]">

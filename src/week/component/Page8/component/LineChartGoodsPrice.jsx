@@ -8,6 +8,9 @@ const LineChartGoodsPrice = ({ dataChart, name1, name2 }) => {
     const [dataRender, setDataRender] = useState()
     const [maxLeft, setMaxLeft] = useState()
     const [maxRight, setMaxRight] = useState()
+    const [minLeft, setMinLeft] = useState()
+    const [minRight, setMinRight] = useState()
+
     const [timeLine, setTimeLine] = useState()
     useEffect(() => {
         if (dataChart?.length > 0) {
@@ -41,7 +44,10 @@ const LineChartGoodsPrice = ({ dataChart, name1, name2 }) => {
     useEffect(() => {
         if (dataRender?.length > 0) {
             setMaxLeft(Math.ceil(Math.max(...dataRender[0].data?.map((item) => item))))
+            setMinLeft(Math?.floor(Math?.min(...dataRender[0].data?.map(item => (item)))))
             setMaxRight(Math.ceil(Math.max(...dataRender[1].data?.map((item) => item))))
+            setMinRight(Math?.floor(Math?.min(...dataRender[1].data?.map(item => (item)))))
+
         }
     }, [dataRender])
     const options = {
@@ -98,8 +104,7 @@ const LineChartGoodsPrice = ({ dataChart, name1, name2 }) => {
                 gridLineWidth: 0.5,
                 opposite: false,
                 max: maxLeft,
-                min: 0,
-                tickInterval: maxLeft / 4
+                min: minLeft,
             },
             {
                 title: {
@@ -119,8 +124,7 @@ const LineChartGoodsPrice = ({ dataChart, name1, name2 }) => {
                 opposite: true,
                 gridLineWidth: 0.5,
                 max: maxRight,
-                min: 0,
-                tickInterval: maxRight / 4
+                min: minRight,
             },
         ],
         legend: {

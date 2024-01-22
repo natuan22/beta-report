@@ -1,16 +1,14 @@
 import React from "react";
 import Highcharts from "highcharts";
+import { TbTriangleInverted } from "react-icons/tb";
+import { FiTriangle } from "react-icons/fi"
 import HighchartsReact from "highcharts-react-official";
-import formatNumber from "../../../../helper/formatNumber";
 import formatNumberChart from "../../../../helper/formatNumberChart";
 const ChartTopTotal = ({ data, title }) => {
 
     const max = Math.ceil(Math.max(...data.map((item) => item.totalVal / 1000000000)));
     const min = Math.floor(Math.min(...data.map((item) => item.totalVal / 1000000000)));
-    const triangleIcon =
-        '<svg style="transform:translateY(5px)"  width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#26a69a" stroke-width="1"/></svg>';
-    const triangleIconUp =
-        '<svg style="transform:rotate(180deg)" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#FF0000" stroke-width="1"/></svg>';
+
 
     const options = {
         accessibility: {
@@ -31,8 +29,7 @@ const ChartTopTotal = ({ data, title }) => {
 
                         <div style="display: flex;align-items: center;justify-content: space-evenly; ">
                         <div style="    transform: translateY(-2px);display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                            <span style="font-size: 14px; vertical-align: middle; color: red, ">${triangleIcon}</span>
-                            <span style="font-size: 14px; vertical-align: middle; color: red">${triangleIconUp}</span>
+                            
                         </div> 
                         <span style="font-size: 10px; vertical-align: middle; color: red, ">: +/-  % thay đổi giá</span>
                         </div>
@@ -67,7 +64,6 @@ const ChartTopTotal = ({ data, title }) => {
                 },
                 max,
                 min,
-                tickInterval: max / 2,
                 opposite: true,
                 gridLineWidth: 0.5,
             },
@@ -157,7 +153,13 @@ const ChartTopTotal = ({ data, title }) => {
     };
 
     return (
-        <div className="h-[250px]  ">
+        <div className="h-[250px] relative  ">
+            <div className='absolute top-0 left-0 translate-x-[176px] translate-y-[28px]'>
+                <div className="flex flex-col">
+                    <FiTriangle className="text-[#26a69a] text-[10px]  " />
+                    <TbTriangleInverted className="text-red-500  text-[10px]  " />
+                </div>
+            </div>
             <HighchartsReact
                 highcharts={Highcharts}
                 options={options}

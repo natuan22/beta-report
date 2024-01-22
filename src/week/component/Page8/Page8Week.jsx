@@ -25,7 +25,7 @@ const Page8Week = () => {
             <div className='header h-[135px]'>
                 <HeaderWeek />
             </div>
-            <div className='content h-[970px] mt-3 w-full flex flex-col items-center'>
+            <div className='content h-[945px] mt-3 w-full flex flex-col items-center'>
                 <div className='relative'>
                     <div className='flex'>
                         <div className='h-[12px] w-[46px] bg-[#E88C08] skew-x-[45deg] translate-x-4 '></div>
@@ -120,7 +120,7 @@ const Page8Week = () => {
                                         Chỉ số DXY và U.S.10Y
                                     </h2>
                                 </div>
-                                <LineChartGoodsPrice name1={'Dollar Index'} name2={'U.S.10Y'} dataChart={data.data_5} />
+                                <LineChartGoodsPrice name1={'Dollar Index (điểm)'} name2={'U.S.10Y (%)'} dataChart={data.data_5} />
                             </div>
                         </div>
 

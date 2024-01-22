@@ -87,8 +87,8 @@ const Page4Week = () => {
                 <div >
                     <div className='content-top w-[760px] flex items-start '>
                         <div className='content-top_left table w-[420px] h-[374px] relative'>
-                            <h2 className='text-[12px]  text-center text-[#00429B] m-0'>Thị trường chứng khoán Việt Nam và Quốc tế</h2>
-                            <table className='bg-transparent border-collapse h-[325px] mt-2  w-full '>
+                            <h2 className='text-[12px]  text-center text-[#00429B] m-0 translate-y-[4px]'>Thị trường chứng khoán Việt Nam và Quốc tế</h2>
+                            <table className='bg-transparent border-collapse h-[315px] mt-2  w-full '>
                                 <thead className='bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse'>
                                     <tr className='text-white '>
                                         <th className='font-semibold px-1 py-1 text-[12px] '>Chỉ số</th>
@@ -99,7 +99,7 @@ const Page4Week = () => {
                                         <th className='font-semibold px-1 py-1  text-[12px]'>%YoY</th>
                                     </tr>
                                 </thead>
-                                <tbody className="border-1 border-[#0155B7] border-solid border-collapse  ">
+                                <tbody className="border border-[#0155B7] border-solid border-collapse  ">
                                     {rate?.map(item => {
                                         return (
                                             <tr>
@@ -117,7 +117,7 @@ const Page4Week = () => {
                                     )}
                                 </tbody>
                             </table>
-                            <div className='absolute bottom-[50px] left-0 w-full h-[5px] bg-[#1B68BB] opacity-60'></div>
+                            <div className='absolute bottom-[55px] left-0 w-full h-[5px] bg-[#1B68BB] opacity-60'></div>
                         </div>
                         <div className=' chartMetric content-top_right chart  w-[340px] h-[374px]'>
                             <ColumnChart height={'100%'} title={'Hiệu suất sinh lời của các chỉ số trong tuần'} unit={'%'} data={dataChartMetric} />

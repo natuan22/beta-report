@@ -3,14 +3,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import formatNumber from "../../../../helper/formatNumber";
 import formatNumberChart from "../../../../helper/formatNumberChart";
-const ColumnChart = ({ data, title, unit, currency }) => {
+import { FiTriangle } from "react-icons/fi"
+import { TbTriangleInverted } from "react-icons/tb";
+
+const ColumnChart = ({ data, title, unit, currency, translateX }) => {
     const max = Math.ceil(Math.max(...data.map((item) => item.point / currency)));
     const min = Math.floor(Math.min(...data.map((item) => item.point / currency)));
-    const triangleIcon =
-        '<svg style="transform:translateY(5px)"  width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#26a69a" stroke-width="1"/></svg>';
-    const triangleIconUp =
-        '<svg style="transform:rotate(180deg)" width="8" height="8" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M4 0L8 8H0L4 0Z" fill="none" stroke="#FF0000" stroke-width="1"/></svg>';
-
+    // 
+    // 
     const options = {
         accessibility: {
             enabled: false,
@@ -25,13 +25,16 @@ const ColumnChart = ({ data, title, unit, currency }) => {
             text: `<div style=" text-align: center" >
                     <p style="color: #00429B; font-size: 13px; font-weight: bold;margin: 0px">${title}</p>
 
-                    <div style="display: flex;align-items: center;justify-content: space-evenly; ">
+                    <div style="display: flex;align-items: center;justify-content: space-around; ">
                         <p style="color: #000; font-size: 10px; font-weight: bold; ">ĐVT: ${unit} </p>
 
                         <div style="display: flex;align-items: center;justify-content: space-evenly; ">
                         <div style="    transform: translateY(-2px);display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                            <span style="font-size: 14px; vertical-align: middle; color: red, ">${triangleIcon}</span>
-                            <span style="font-size: 14px; vertical-align: middle; color: red">${triangleIconUp}</span>
+                        <span style="font-size: 14px; vertical-align: middle;  ">
+                        </span>
+                        <span style="font-size: 14px; vertical-align: middle; ">
+
+                        </span>
                         </div> 
                         <span style="font-size: 10px; vertical-align: middle; color: red, ">: +/-  % thay đổi giá</span>
                         </div>
@@ -156,7 +159,13 @@ const ColumnChart = ({ data, title, unit, currency }) => {
     };
 
     return (
-        <div className="h-[250px]  ">
+        <div className="h-[250px] relative ">
+            <div className={`absolute top-0 left-0 translate-x-[${translateX}] translate-y-[28px]`}>
+                <div className="flex flex-col">
+                    <FiTriangle className="text-[#26a69a] text-[10px]  " />
+                    <TbTriangleInverted className="text-red-500  text-[10px]  " />
+                </div>
+            </div>
             <HighchartsReact
                 highcharts={Highcharts}
                 options={options}

@@ -21,9 +21,9 @@ const getArrow = (value) => {
 const TableIndustry = ({ dataTable }) => {
     return (
         <div >
-            <table className="bg-transparent  w-[420px] h-[460px]   border-[#0155B7] border-solid border-1 border-collapse">
+            <table className="bg-transparent  w-[420px] h-[460px]   border-[#0155B7] border-solid border border-collapse">
 
-                <thead className="bg-[#0155B7] border-1 border-[#0155B7] border-solid border-collapse">
+                <thead className="bg-[#0155B7] border border-[#0155B7] border-solid border-collapse">
                     <tr className="text-white">
                         <th className="font-semibold px-2 py-1 text-left     ">
                             Phân ngành

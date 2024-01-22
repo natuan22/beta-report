@@ -67,7 +67,7 @@ const Page6Week = () => {
                 <HeaderWeek />
             </div>
 
-            <div className='content h-[950px] w-full mt-3 flex flex-col items-center'>
+            <div className='content h-[945px] w-full mt-3 flex flex-col items-center'>
                 <div className='relative'>
                     <div className='flex'>
                         <div className='h-[12px] w-[46px] bg-[#E88C08] skew-x-[45deg] translate-x-4 '></div>
@@ -86,7 +86,6 @@ const Page6Week = () => {
                         </h2>
                     </div>
                 </div>
-
                 <div className='cont-top flex justify-between w-[760px] h-[260px]'>
                     <div className='w-[370px] h-[245px]'>
                         <h2 className='my-1 text-[14px] text-[#0155B7] text-center '>Giá hàng hóa</h2>
@@ -110,13 +109,11 @@ const Page6Week = () => {
                         <RateLineChart data={dataRateLineChart} />
                     </div>
                 </div>
-                <div className='cont-bot w-[760px] h-[275px]'>
+                <div className='cont-bot w-[760px] h-[245px]'>
                     <h2 className='my-1 text-[14px] text-[#0155B7] text-left '>Lãi suất BQ liên Ngân hàng (%/năm)</h2>
-
                     <AverageRate data={dataAverageRateChart} />
                 </div>
             </div>
-
 
             <div className='footer'>
                 <FooterWeek pageNum={5} />

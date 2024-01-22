@@ -8,7 +8,6 @@ const ChartTopForeignTotal = ({ data, title }) => {
 
     const max = Math.ceil(Math.max(...data.map((item) => item.netVal / 1000000000)));
     const min = Math.floor(Math.min(...data.map((item) => item.value / 1000000000)));
-    console.log(data)
     const options = {
         accessibility: {
             enabled: false,
