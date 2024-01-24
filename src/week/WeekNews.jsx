@@ -14,6 +14,7 @@ import Page12Week from "./component/Page12/Page12Week";
 import { Button } from "@mui/material";
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import NavBar from "../app/component/NavBar";
 
 const WeekNews = () => {
     const pageRefs = {
@@ -84,6 +85,9 @@ const WeekNews = () => {
 
     return (
         <div className="relative">
+            <div className="absolute right-[250px] top-[50px]">
+                <NavBar />
+            </div>
             <div>
                 <div ref={pageRefs.page1}>
                     <Page1Week />
@@ -123,7 +127,7 @@ const WeekNews = () => {
                 </div>
 
             </div>
-            <div className="absolute top-[100px] right-[40%]">
+            <div className="absolute bottom-[100px] left-[10%]">
                 <Button variant="contained" color="success" onClick={generatePDF}>Tạo PDF</Button>
             </div>
         </div>
