@@ -17,7 +17,7 @@ const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput, query, queryImg
     };
     const saveImg = async (file) => {
         try {
-            const res = await https.post(`api/v1/report/upload-image-report-${queryImg}`, file);
+            const res = await https.post(`api/v1/report/upload-image-report${queryImg}`, file);
             console.log(res);
         } catch (err) {
             console.log(err);

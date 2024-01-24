@@ -45,7 +45,7 @@ const DialogAddImgAndTextWeek = ({ onSubmitSuccess, getImgFromInput }) => {
                 cancelText="Đóng"
             >
                 <div className="h-[650px] grid place-items-center">
-                    <FormInput queryImg={'2'} query={'tuan-trang-2'} getImgFromInput={getImgFromInput} handleOk={handleOk} onSubmitSuccess={onSubmitSuccess} />
+                    <FormInput queryImg={'-2'} query={'tuan-trang-2'} getImgFromInput={getImgFromInput} handleOk={handleOk} onSubmitSuccess={onSubmitSuccess} />
 
                 </div>
             </Modal>
