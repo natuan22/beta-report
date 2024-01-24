@@ -157,15 +157,15 @@ const ColumnChart = ({ data, title, unit, currency, translateX }) => {
             },
         },
     };
-
     return (
         <div className="h-[250px] relative ">
-            <div className={`absolute top-0 left-0 translate-x-[${translateX}] translate-y-[28px]`}>
+            {translateX != null ? <div className={`absolute top-0 left-0 translate-x-[${translateX}] translate-y-[28px]`}>
                 <div className="flex flex-col">
                     <FiTriangle className="text-[#26a69a] text-[10px]  " />
                     <TbTriangleInverted className="text-red-500  text-[10px]  " />
                 </div>
-            </div>
+            </div> : <div>Loading....</div>}
+
             <HighchartsReact
                 highcharts={Highcharts}
                 options={options}

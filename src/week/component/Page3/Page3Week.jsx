@@ -15,13 +15,6 @@ const Page3Week = () => {
         try {
             const response = await https.get("api/v1/report/ban-tin-tuan-2");
             setData(response.data.data);
-
-            // const img = new Image();
-            // img.src = `${imgURL}/${response.data.data.image}`;
-            // img.onload = () => {
-            //     setImgSrc(img.src);
-            //     // Tiếp tục với các bước khác, ví dụ: tạo file PDF
-            // };
         } catch (err) {
             console.log(err);
         }
@@ -35,6 +28,7 @@ const Page3Week = () => {
     useEffect(() => {
         getData();
     }, []);
+    console.log(imgSrc)
     return (
         <div className='h-[1480px] w-[800px] relative'>
             <div className='header'>
@@ -97,8 +91,7 @@ const Page3Week = () => {
                         </div>
                         <div className="content-bot w-full flex flex-col items-center justify-center">
                             <div className="content-bot_img mt-[25px] mb-[10px]">
-                                {/* <img src={imgSrc} width={675} height={367} alt="img" /> */}
-                                <img src={banner} width={675} height={347} alt="img" />
+                                <img src={imgSrc} width={675} height={367} alt="img" />
                             </div>
                             <div className="content-bot_text1 min-h-[235x]">
                                 <p className="my-1 text-[#00429B] underline  underline-offset-1 font-bold">Nhận định thị trường:</p>
