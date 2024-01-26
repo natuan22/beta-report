@@ -28,7 +28,6 @@ const Page3Week = () => {
     useEffect(() => {
         getData();
     }, []);
-    console.log(imgSrc)
     return (
         <div className='h-[1480px] w-[800px] relative'>
             <div className='header'>

@@ -33,7 +33,6 @@ const Page2Week = () => {
     const handleGetTextInpur = (text) => {
         setText(text)
     }
-    console.log(text)
     return (
         <div className="h-[1480px] w-[800px] relative">
             <div className="header rotate-0">

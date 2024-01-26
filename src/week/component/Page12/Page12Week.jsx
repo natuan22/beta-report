@@ -91,7 +91,7 @@ const Page12Week = () => {
 
 
             <div>
-                <FooterWeek pageNum={8} />
+                <FooterWeek pageNum={9} />
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
-const formatNumber = (number) => {
+const formatNumberWeek = (number) => {
     if (!number) return
-    const strNumber = number.toFixed(2);
+
+    const strNumber = String(number);
 
     // Tách phần âm, phần nguyên và phần thập phân
     const isNegative = strNumber.startsWith("-");
@@ -19,4 +20,4 @@ const formatNumber = (number) => {
 }
 
 
-export default formatNumber
+export default formatNumberWeek

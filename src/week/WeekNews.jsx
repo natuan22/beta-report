@@ -15,7 +15,8 @@ import { Button } from "@mui/material";
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import NavBar from "../app/component/NavBar";
-
+import getTimeWeek from "../helper/getTimeWeek";
+const weekDate = getTimeWeek()
 const WeekNews = () => {
     const pageRefs = {
         page1: useRef(null),
@@ -71,15 +72,15 @@ const WeekNews = () => {
         pdf.addImage(img8, 'JPEG', 0, 0);
         pdf.addPage(null, 'l')
         pdf.addImage(img9, 'JPEG', 0, 0);
-        pdf.addPage(null, 'p')
-        pdf.addImage(img10, 'JPEG', 0, 0);
-        pdf.addPage(null, 'p')
-        pdf.addImage(img11, 'JPEG', 0, 0);
+        // pdf.addPage(null, 'p')
+        // pdf.addImage(img10, 'JPEG', 0, 0);
+        // pdf.addPage(null, 'p')
+        // pdf.addImage(img11, 'JPEG', 0, 0);
         pdf.addPage(null, 'p')
         pdf.addImage(img12, 'JPEG', 0, 0);
 
 
-        pdf.save('WeekNews.pdf');
+        pdf.save(`Báo cáo tuần ${weekDate}.pdf`);
     }
 
 
@@ -116,12 +117,12 @@ const WeekNews = () => {
                 <div className="h-[1480px]" ref={pageRefs.page9}>
                     <Page9Week />
                 </div>
-                <div ref={pageRefs.page10}>
+                {/* <div ref={pageRefs.page10}>
                     <Page10Week />
                 </div>
                 <div ref={pageRefs.page11}>
                     <Page11Week />
-                </div>
+                </div> */}
                 <div ref={pageRefs.page12}>
                     <Page12Week />
                 </div>

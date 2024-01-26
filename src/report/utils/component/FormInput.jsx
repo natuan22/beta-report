@@ -48,6 +48,7 @@ const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput, query, queryImg
                     formData.append("File", values.img, values.img.name);
                 }
             }
+            console.log('values.img', values.img)
             try {
                 const res = await saveText({ text: arrText });
                 const res2 = await saveImg(formData);
@@ -75,11 +76,12 @@ const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput, query, queryImg
                 setImgSrc(e.target.result);// set hình base64
                 getImgFromInput(e.target.result)
             };
-
+            console.log('file', file)
             // truyền dữ liệu lên form
             setFieldValue("img", file);
         }
     };
+    console.log('imgSrc', typeof (imgSrc))
     return (
         <div className="flex flex-col items-center  w-full">
             <Form

@@ -157,6 +157,7 @@ const ColumnChart = ({ data, title, unit, currency, translateX }) => {
             },
         },
     };
+    console.log(translateX)
     return (
         <div className="h-[250px] relative ">
             {translateX != null ? <div className={`absolute top-0 left-0 translate-x-[${translateX}] translate-y-[28px]`}>
