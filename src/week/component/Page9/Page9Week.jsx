@@ -88,7 +88,7 @@ const Page9Week = () => {
                                             <td className=' py-1 px-1 '>{formatNumberWeek(Math.ceil(item.gia_thi_truong))}</td>
                                             <td className={`${getColorBaseOnValue(item.ty_suat_loi_nhuan)} py-1 px-1`}>{formatNumber(item.ty_suat_loi_nhuan * 100)}{percentIcon(item.ty_suat_loi_nhuan)}</td>
                                             <td className=' py-1 px-1 '>{formatNumberWeek(item.gia_ban)}</td>
-                                            <td className=' py-1 px-1 '>{formatNumber(item.ty_suat_sinh_loi_lo * 100)}{percentIcon(item.ty_suat_sinh_loi_lo)} </td>
+                                            <td className={`${getColorBaseOnValue(item.ty_suat_sinh_loi_lo)} py-1 px-1`}>{formatNumber(item.ty_suat_sinh_loi_lo * 100)}{percentIcon(item.ty_suat_sinh_loi_lo)} </td>
                                             <td className=' py-1 px-1 '>{item.thoi_gian_nam_giu}</td>
                                             <td className=' py-1 px-1 '>{item.ghi_chu_2}</td>
                                         </tr>
