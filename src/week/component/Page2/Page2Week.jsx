@@ -8,6 +8,7 @@ import ChartColumn from "./component/ChartColumn";
 import ChartTopTotal from "./component/ChartTopTotal";
 import ChartTopForeignTotal from "./component/ChartTopForeignTotal";
 import AddText from "./component/AddText";
+import ColumnChart1 from "./component/ChartColumn1";
 
 const getText = (value) => {
     if (value > 0) return <span>tăng</span>;
@@ -47,10 +48,10 @@ const Page2Week = () => {
                         <div className="content-top flex items-center justify-evenly w-full h-[460px]">
                             {text?.length > 0 ?
                                 <div className="content-top_lef  w-[364px] h-[455px] bg-[#EF9C211C] px-3 py-1 ">
-                                    <h2 className="m-0 text-[18px] text-[#1B68BB] ">
+                                    <h2 className="m-0 text-[23px] text-[#1B68BB] ">
                                         {text[0]}
                                     </h2>
-                                    <p className="m-0 text-[16px] text-[#1B68BB] font-bold">
+                                    <p className="m-0 text-[17px] text-[#1B68BB] font-bold">
                                         {text[1]}
                                     </p>
                                     <p className="my-1 text-[#1B68BB] text-[13px] font-bold  underline underline-offset-1">
@@ -250,7 +251,7 @@ const Page2Week = () => {
                                     />
                                 </div>
                                 <div className="chartTopForeign w-[370px] h-[237px]">
-                                    <ChartColumn
+                                    <ColumnChart1
                                         unit={"tỷ VNĐ"}
                                         currency={1000000000}
                                         title={"Top NĐTNN giao dịch ròng sàn HOSE qua 1 tuần"}

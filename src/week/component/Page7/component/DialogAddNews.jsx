@@ -61,7 +61,7 @@ export default function DialogAddNews({
 
     const getNews = async (id) => {
         try {
-            const res = await https.get('/api/v1/report/tin-tuc-redis?type=1', {
+            const res = await https.get('/api/v1/report/tin-tuc-redis', {
                 params: {
                     id
                 }

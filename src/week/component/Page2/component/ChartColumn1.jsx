@@ -6,7 +6,7 @@ import formatNumberChart from "../../../../helper/formatNumberChart";
 import { FiTriangle } from "react-icons/fi"
 import { TbTriangleInverted } from "react-icons/tb";
 
-const ColumnChart = ({ data, title, unit, currency, translateX }) => {
+const ColumnChart1 = ({ data, title, unit, currency, translateX }) => {
     const max = Math.ceil(Math.max(...data.map((item) => item.point / currency)));
     const min = Math.floor(Math.min(...data.map((item) => item.point / currency)));
     // 
@@ -160,7 +160,7 @@ const ColumnChart = ({ data, title, unit, currency, translateX }) => {
     console.log(translateX)
     return (
         <div className="h-[250px] relative ">
-            {translateX != null ? <div className={`absolute top-0 left-0 translate-x-[213px] translate-y-[28px]`}>
+            {translateX != null ? <div className={`absolute top-0 left-0 translate-x-[195px] translate-y-[28px]`}>
                 <div className="flex flex-col">
                     <FiTriangle className="text-[#26a69a] text-[10px]  " />
                     <TbTriangleInverted className="text-red-500  text-[10px]  " />
@@ -176,4 +176,4 @@ const ColumnChart = ({ data, title, unit, currency, translateX }) => {
     );
 };
 
-export default ColumnChart;
+export default ColumnChart1;
