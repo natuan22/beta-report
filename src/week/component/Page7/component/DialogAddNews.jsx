@@ -61,7 +61,7 @@ export default function DialogAddNews({
 
     const getNews = async (id) => {
         try {
-            const res = await https.get('/api/v1/report/tin-tuc-redis?', {
+            const res = await https.get('/api/v1/report/tin-tuc-redis?type=1', {
                 params: {
                     id
                 }
@@ -88,7 +88,7 @@ export default function DialogAddNews({
     useEffect(() => {
         const fetchDataNews = async () => {
             try {
-                const response = await https.get(`api/v1/report/tin-${query}`, {
+                const response = await https.get(`api/v1/report/tin-${query}?type=1 `, {
                     params: {
                         quantity: 100,
                     },
