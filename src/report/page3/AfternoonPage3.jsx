@@ -5,10 +5,10 @@ import AreaChart from "../utils/component/AreaChart";
 import StackingAreaChart from "../utils/component/StackingAreaChart";
 import { https } from "../../services/configService";
 import ColumnChartPage3 from "./component/ColumnChartPage3";
-import formatNumber from "../../helper/formatNumber";
 import { FaDownLong, FaUpLong } from "react-icons/fa6";
 import ColumnChartAfternoon from "./component/ColumnChartAfternoon";
 import MultipleColumnChart from "./component/MultipleColumnChart";
+import formatNumberMorning from "../../helper/formatNumberMorning";
 
 const getArrow = (value) => {
     if (value < 0)
@@ -163,7 +163,7 @@ const AfternoonPage3 = () => {
                                                 <td className="text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px]  flex flex-col items-center">
                                                     <div className="flex items-center justify-between w-[40px]">
                                                         {getArrow(item.day_change_percent)}
-                                                        <p className="m-0">{formatNumber(item.day_change_percent)}%</p>
+                                                        <p className="m-0">{formatNumberMorning(item.day_change_percent)}%</p>
                                                     </div>
                                                 </td>
                                                 <td
@@ -171,7 +171,7 @@ const AfternoonPage3 = () => {
                                                 >
                                                     <div className="flex items-center justify-between w-[40px]">
                                                         {getArrow(item.week_change_percent)}
-                                                        <p className="m-0"> {formatNumber(item.week_change_percent)}%</p>
+                                                        <p className="m-0"> {formatNumberMorning(item.week_change_percent)}%</p>
                                                     </div>
 
                                                 </td>
@@ -180,7 +180,7 @@ const AfternoonPage3 = () => {
                                                 >
                                                     <div className="flex items-center justify-between w-[40px] ">
                                                         {getArrow(item.month_change_percent)}
-                                                        <p className="m-0">{formatNumber(item.month_change_percent)}%</p>
+                                                        <p className="m-0">{formatNumberMorning(item.month_change_percent)}%</p>
                                                     </div>
 
                                                 </td>

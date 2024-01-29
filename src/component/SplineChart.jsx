@@ -94,7 +94,7 @@ const SplineChart = ({ data }) => {
 
 
     return (
-        <div className='flex flex-col items-center   '>
+        <div className='flex flex-col items-center    '>
             <h3 className='m-1 font-semibold text-[25px]'>{data.code}</h3>
             <p className={`${getColorBaseOnValue(data.change)} font-semibold m-1 text-[25px]`}>{getArrow(data.change)}{formatNumber(data.closePrice)}  </p>
             <p className={`${getColorBaseOnValue(data.perChange)} font-semibold m-1 text-[25px]`}>({formatNumber(data.change)} | {formatNumber(data.perChange)}%)</p>

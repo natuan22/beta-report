@@ -3,7 +3,7 @@ import HeaderAfternoon from '../utils/component/HeaderAfternoon'
 import FooterAfternoon from '../utils/component/FooterAfternoon'
 import { https } from '../../services/configService'
 import { getColorBaseOnValue } from '../../helper/getColorBaseOnValue'
-import formatNumber from '../../helper/formatNumber'
+import formatNumberMorning from '../../helper/formatNumberMorning'
 import DialogNews from '../../component/DialogNews'
 
 const AfternoonPage4 = () => {
@@ -128,10 +128,10 @@ const AfternoonPage4 = () => {
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td className='text-center  text-[12px] px-1'>{formatNumber(item.price)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 `}>{formatNumber(item.day)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 `}>{formatNumber(item.month)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center px-1 `}>{formatNumber(item.year)}</td>
+                                                    <td className='text-center  text-[12px] px-1'>{formatNumberMorning(item.price)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 `}>{formatNumberMorning(item.day)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 `}>{formatNumberMorning(item.month)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center px-1 `}>{formatNumberMorning(item.year)}</td>
                                                 </tr>
                                             )
                                         }
@@ -176,10 +176,10 @@ const AfternoonPage4 = () => {
                                                     <td className='text-center font-bold  items-center text-[12px] w-[60px] ' >
                                                         {item.code}
                                                     </td>
-                                                    <td className='text-center  text-[12px] px-1  '>{formatNumber(item.price)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center  px-1 `}>{formatNumber(item.day)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1  `}>{formatNumber(item.month)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center  px-2 `}>{formatNumber(item.year)}</td>
+                                                    <td className='text-center  text-[12px] px-1  '>{formatNumberMorning(item.price)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center  px-1 `}>{formatNumberMorning(item.day)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1  `}>{formatNumberMorning(item.month)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.year)} text-[12px] text-center  px-2 `}>{formatNumberMorning(item.year)}</td>
                                                 </tr>
                                             )
                                         }
@@ -221,10 +221,10 @@ const AfternoonPage4 = () => {
                                                     <td className='text-center px-2 py-1 font-bold  items-center text-[12px]' >
                                                         {item.name}
                                                     </td>
-                                                    <td className='text-center px-2 py-1 text-[12px] '>{formatNumber(item.price)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 py-1`}>{formatNumber(item.day)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 py-1`}>{formatNumber(item.month)}</td>
-                                                    <td className={`${getColorBaseOnValue(item.ytd)} text-[12px] text-center px-1 py-1`}>{formatNumber(item.ytd)}</td>
+                                                    <td className='text-center px-2 py-1 text-[12px] '>{formatNumberMorning(item.price)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-1 py-1`}>{formatNumberMorning(item.day)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.month)} text-[12px] text-center px-1 py-1`}>{formatNumberMorning(item.month)}</td>
+                                                    <td className={`${getColorBaseOnValue(item.ytd)} text-[12px] text-center px-1 py-1`}>{formatNumberMorning(item.ytd)}</td>
                                                 </tr>
                                             )
                                         }
