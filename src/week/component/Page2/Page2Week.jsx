@@ -247,7 +247,7 @@ const Page2Week = () => {
                                         currency={1}
                                         title={"Nhóm dẫn dắt thị trường sàn HOSE qua 1 tuần"}
                                         data={data.chartTopMarket}
-                                        translateX={'213px'}
+                                        translateX={''}
                                     />
                                 </div>
                                 <div className="chartTopForeign w-[370px] h-[237px]">
@@ -256,7 +256,7 @@ const Page2Week = () => {
                                         currency={1000000000}
                                         title={"Top NĐTNN giao dịch ròng sàn HOSE qua 1 tuần"}
                                         data={data.chartTopForeign}
-                                        translateX={'195px'}
+                                        translateX={''}
                                     />
                                 </div>
                                 <div className="chartTopTotal w-[370px] h-[237px]">
