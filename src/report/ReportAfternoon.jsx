@@ -9,6 +9,7 @@ import AfternoonPage4 from './page4/AfternoonPage4'
 import AfternoonPage5 from './page5/AfternoonPage5'
 import { formattedDate } from '../helper/getDateAfternoon'
 import NavBar from '../app/component/NavBar'
+import AfternoonPage6 from './page6/AfternoonPage6'
 
 const ReportAfternoon = () => {
     const pageRefs = {
@@ -16,7 +17,8 @@ const ReportAfternoon = () => {
         page2: useRef(null),
         page3: useRef(null),
         page4: useRef(null),
-        page5: useRef(null)
+        page5: useRef(null),
+        page6: useRef(null)
     }
 
     const generateImage = async (pageRefs, height) => {
@@ -62,7 +64,9 @@ const ReportAfternoon = () => {
         const img2 = await generateImage(pageRefs.page2, 1480);
         const img3 = await generateImage(pageRefs.page3, 1480);
         const img4 = await generateImage(pageRefs.page4, 1480);
+        const img6 = await generateImage(pageRefs.page6, 1480)
         const img5 = await generateImage(pageRefs.page5, 1480);
+
 
         pdf.addImage(img1, 'PNG', 0, 0)
         pdf.addPage()
@@ -71,6 +75,8 @@ const ReportAfternoon = () => {
         pdf.addImage(img3, 'PNG', 0, 0);
         pdf.addPage();
         pdf.addImage(img4, 'PNG', 0, 0);
+        pdf.addPage();
+        pdf.addImage(img6, 'PNG', 0, 0);
         pdf.addPage();
         pdf.addImage(img5, 'PNG', 0, 0);
 
@@ -95,6 +101,9 @@ const ReportAfternoon = () => {
                 </div>
                 <div ref={pageRefs.page4}>
                     <AfternoonPage4 />
+                </div>
+                <div ref={pageRefs.page6}>
+                    <AfternoonPage6 />
                 </div>
                 <div ref={pageRefs.page5}>
                     <AfternoonPage5 />
