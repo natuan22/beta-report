@@ -80,7 +80,7 @@ const WeekNews = () => {
         pdf.addImage(img12, 'JPEG', 0, 0);
 
 
-        pdf.save(`Báo cáo tuần ${weekDate}.pdf`);
+        pdf.save(`Baocaotuan${weekDate}.pdf`);
     }
 
 

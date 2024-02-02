@@ -7,4 +7,4 @@ export const routes = [
     // navigation page
     { path: "/ban-tin-chieu", component: ReportAfternoon },
     { path: "/ban-tin-tuan", component: WeekNews },
-];
+]; 
