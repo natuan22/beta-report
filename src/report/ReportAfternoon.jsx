@@ -31,8 +31,8 @@ const ReportAfternoon = () => {
         const img2 = await generateImage(pageRefs.page2, 1121)
         const img3 = await generateImage(pageRefs.page3, 1121);
         const img4 = await generateImage(pageRefs.page4, 1121);
+        const img6 = await generateImage(pageRefs.page6, 1121)
         const img5 = await generateImage(pageRefs.page5, 1121);
-
         const link1 = document.createElement('a')
         link1.href = img1
         link1.download = 'BetaAfternoonNews-Trang1.png'
@@ -54,8 +54,12 @@ const ReportAfternoon = () => {
         link4.click()
         const link5 = document.createElement('a')
         link5.href = img5
-        link5.download = 'BetaAfternoonNews-Trang5.png'
+        link5.download = 'BetaAfternoonNews-Trang6.png'
         link5.click()
+        const link6 = document.createElement('a')
+        link6.href = img6
+        link6.download = 'BetaAfternoonNews-Trang5.png'
+        link6.click()
     }
 
     const generatePDF = async () => {
