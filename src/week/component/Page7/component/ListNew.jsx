@@ -14,7 +14,7 @@ const ListNew = ({ data, type }) => {
                     return (
                         <div className=' min-h-[105px] ' >
                             <p className='my-1 text-justify font-bold text-[13px] min-h-[25px] '>{item.title}</p>
-                            <p className='mt-2 mb-0  text-justify font-semibold text-[11px] min-h-[80px] line-clamp-4 indent-4 leading-[17px]'>
+                            <p className='mt-2 mb-0  text-justify font-semibold text-[13px] min-h-[80px] line-clamp-4 indent-4 leading-[17px]'>
                                 {item.sub_title}
                             </p>
                         </div>
