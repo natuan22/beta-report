@@ -11,7 +11,6 @@ const FooterWeek = ({ pageNum }) => {
                     www.bsi.com.vn
                 </p>
             </div>
-
             <div className='w-full h-[4px] bg-gradient-to-r from-[#FFB454]  to-[#FF8659] absolute top-0  '></div>
         </div>
     )

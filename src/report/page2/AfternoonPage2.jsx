@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 import FooterAfternoon from "../utils/component/FooterAfternoon";
 import { https } from "../../services/configService";
-import formatNumber from "../../helper/formatNumber";
 import DialogAddImgAndText from "../utils/component/DialogAddImgAndText";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumberMorning from "../../helper/formatNumberMorning";

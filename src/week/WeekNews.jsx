@@ -83,7 +83,69 @@ const WeekNews = () => {
         pdf.save(`Baocaotuan${weekDate}.pdf`);
     }
 
+    const downloadImages = async () => {
+        const img1 = await generateImage(pageRefs.page1, 1121, 800)
+        const img2 = await generateImage(pageRefs.page2, 1121, 800)
+        const img3 = await generateImage(pageRefs.page3, 1121, 800)
+        const img4 = await generateImage(pageRefs.page4, 1121, 800)
+        const img5 = await generateImage(pageRefs.page5, 1121, 800)
+        const img6 = await generateImage(pageRefs.page6, 1121, 800)
+        const img7 = await generateImage(pageRefs.page7, 1121, 800)
+        const img8 = await generateImage(pageRefs.page8, 1121, 800)
+        const img9 = await generateImage(pageRefs.page9, 800, 1121)
+        const img10 = await generateImage(pageRefs.page12, 1121, 800)
 
+
+
+        const link1 = document.createElement('a')
+        link1.href = img1
+        link1.download = 'Baocaotuan-Trang1.png'
+        link1.click()
+
+        const link2 = document.createElement('a')
+        link2.href = img2
+        link2.download = 'Baocaotuan-Trang2.png'
+        link2.click()
+
+        const link3 = document.createElement('a')
+        link3.href = img3
+        link3.download = 'Baocaotuan-Trang3.png'
+        link3.click()
+
+        const link4 = document.createElement('a')
+        link4.href = img4
+        link4.download = 'Baocaotuan-Trang4.png'
+        link4.click()
+
+        const link5 = document.createElement('a')
+        link5.href = img5
+        link5.download = 'Baocaotuan-Trang5.png'
+        link5.click()
+
+        const link6 = document.createElement('a')
+        link6.href = img6
+        link6.download = 'Baocaotuan-Trang6.png'
+        link6.click()
+
+        const link7 = document.createElement('a')
+        link7.href = img7
+        link7.download = 'Baocaotuan-Trang7.png'
+        link7.click()
+
+        const link8 = document.createElement('a')
+        link8.href = img8
+        link8.download = 'Baocaotuan-Trang7.png'
+        link8.click()
+
+        const link9 = document.createElement('a')
+        link9.href = img9
+        link9.download = 'Baocaotuan-Trang7.png'
+        link9.click()
+        const link10 = document.createElement('a')
+        link10.href = img10
+        link10.download = 'Baocaotuan-Trang7.png'
+        link10.click()
+    }
     return (
         <div className="relative">
             <div className="absolute right-[250px] top-[50px]">
@@ -130,6 +192,7 @@ const WeekNews = () => {
             </div>
             <div className="absolute bottom-[100px] left-[10%]">
                 <Button variant="contained" color="success" onClick={generatePDF}>Tạo PDF</Button>
+                <Button variant="contained" color="success" onClick={downloadImages}>Tạo hình</Button>
             </div>
         </div>
     );

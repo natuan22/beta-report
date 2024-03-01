@@ -81,7 +81,6 @@ const FormInput = ({ onSubmitSuccess, handleOk, getImgFromInput, query, queryImg
             setFieldValue("img", file);
         }
     };
-    console.log('imgSrc', typeof (imgSrc))
     return (
         <div className="flex flex-col items-center  w-full">
             <Form
