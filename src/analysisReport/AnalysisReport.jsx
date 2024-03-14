@@ -97,9 +97,13 @@ const AnalysisReport = () => {
         </div>
       </div>
 
-      <div className="">
+      <div className="flex justify-evenly w-[50%] mb-5">
         <Button variant="contained" color="success" onClick={generatePDF}>
           Tạo PDF
+        </Button>
+
+        <Button color="success" onClick={downloadImages} variant="contained">
+          Tải ảnh
         </Button>
       </div>
     </div>

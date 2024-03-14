@@ -122,8 +122,8 @@ const AnalysisPage2 = ({ stock }) => {
               <div className="flex justify-between ">
                 <div className="h-[130px]">
                   <h2 className="m-0 mb-1 text-[17px]">
-                    Williams %R=
-                    <span className="font-normal text-[15px] ">(14)</span>=
+                    Williams %R
+                    <span className="font-normal text-[15px] "> (14)</span>
                   </h2>
                   <p className="m-0 mb-1">
                     Giá trị: {formatNumber(data.williams.value)}
