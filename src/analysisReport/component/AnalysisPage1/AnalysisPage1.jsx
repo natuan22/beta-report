@@ -350,7 +350,7 @@ const AnalysisPage1 = ({ stock }) => {
                     Lợi nhuận kỳ vọng
                   </p>
                   <p className="w-[5px] m-0">:</p>
-                  <p className="m-0 w-[110px] text-[13px] font-bold text-start">
+                  <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
                     {data && formatNumber(Number(data.loi_nhuan_ky_vong))} %
                   </p>
                 </div>

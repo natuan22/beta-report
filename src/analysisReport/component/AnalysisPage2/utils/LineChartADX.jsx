@@ -57,6 +57,66 @@ const LineChartADX = ({ data }) => {
       max,
       min,
       tickInterval: max / 2,
+      labels: {
+        enabled: false, // Ẩn nhãn của cột y
+      },
+      plotLines: [
+        {
+          value: 35,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 2,
+          zIndex: 2,
+          label: {
+            text: "35",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+        {
+          value: 25,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 2,
+          zIndex: 2,
+          label: {
+            text: "25",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+        {
+          value: 15,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 2,
+          zIndex: 2,
+          label: {
+            text: "15",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+      ],
+      gridLineWidth: 0, // Ẩn lưới của trục y
     },
     legend: {
       enabled: false, // Tắt chú thích (legend)
@@ -66,16 +126,19 @@ const LineChartADX = ({ data }) => {
         name: "",
         data: dataADX,
         color: "#023E8A",
+        lineWidth: 1,
       },
       {
         name: "",
         data: dataMDI,
-        color: "#00BF63",
+        color: "#FF0000",
+        lineWidth: 1,
       },
       {
         name: "",
         data: dataPDI,
-        color: "#F89637",
+        color: "#00BF63",
+        lineWidth: 1,
       },
     ],
   };
