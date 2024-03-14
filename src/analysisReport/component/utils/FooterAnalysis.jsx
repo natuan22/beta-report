@@ -14,6 +14,8 @@ const FooterAnalysis = ({ pageNum }) => {
                     www.bsi.com.vn
                 </p>
             </div>
+            <div className='absolute -bottom-[17px] bg-gradient-to-b from-[#143A65] to-[#0054B4] w-full h-[8px] '>
+            </div>
         </div>
     )
 }

@@ -12,7 +12,7 @@ const Page8Week = () => {
             const res = await https.get('api/v1/report/bien-dong-gia-ca-hang-hoa')
             setData(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 

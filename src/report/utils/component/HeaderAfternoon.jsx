@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../../../app/asset/img/logoAfternoon.png'
 import { currentDate } from '../../../helper/getDateAfternoonNew'
+
 const HeaderAfternoon = () => {
     return (
         <div className='w-[800px] bg-gradient-to-r from-[#143964]  to-[#0055B6] relative  h-[96px]'>

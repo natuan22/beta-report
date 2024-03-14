@@ -38,7 +38,7 @@ const AfternoonPage1 = () => {
             setData(response.data.data);
             setText(response.data.data.text)
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 

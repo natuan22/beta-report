@@ -11,7 +11,7 @@ const saveStock = async (arrStock) => {
     try {
         const response = await https.post('/api/v1/report/luu-co-phieu-khuyen-nghi', arrStock)
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -26,10 +26,10 @@ const DialogAddStock = ({ catchStock }) => {
     const getStock = async () => {
         try {
             const response = await https.get('/api/v1/report/nhan-dinh-thi-truong-redis')
-            console.log(response.data.data.stock_buy)
+            // console.log(response.data.data.stock_buy)
             catchStock(response.data.data.stock_buy)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const catchStockInput = (type, stock) => {

@@ -19,7 +19,7 @@ const Page6Week = () => {
             const res = await https.get('/api/v1/report/lai-suat-binh-quan-lien-ngan-hang')
             setDataAverageRateChart(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const getDataGoodsPrice = async () => {
@@ -27,7 +27,7 @@ const Page6Week = () => {
             const res = await https.get('/api/v1/report/hang-hoa')
             setDataGoodsPrice(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const getDataTableRate = async () => {
@@ -35,7 +35,7 @@ const Page6Week = () => {
             const res = await https.get('/api/v1/report/ty-gia')
             setDataTableRate(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const getDataRateLineChart = async () => {
@@ -43,7 +43,7 @@ const Page6Week = () => {
             const res = await https.get('/api/v1/report/ty-gia-usd-eur')
             setDataRateLineChart(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const getDataInterestRateTable = async () => {
@@ -51,7 +51,7 @@ const Page6Week = () => {
             const res = await https.get('/api/v1/report/lai-suat')
             setDataInterestRateTable(res.data.data)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     useEffect(() => {
