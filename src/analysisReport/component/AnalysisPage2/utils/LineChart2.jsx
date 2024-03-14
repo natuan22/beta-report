@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
-const LineChart = ({ data }) => {
+const LineChart = ({ data, type }) => {
   // Tạo mảng chứa các ngày
   const dates = data?.map((item) => moment(item.date).format("DD/MM"));
 
@@ -15,6 +15,88 @@ const LineChart = ({ data }) => {
   const max = Math.max(maxDataK, maxDataD);
   const tickInterval = max / 2;
   // Tạo mảng chứa dữ liệu cho đường 2 (d)
+
+  const plotLineValue = (type) => {
+    if (type === 1) {
+      return [
+        {
+          value: 80,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 1,
+          zIndex: 2,
+          label: {
+            text: "80",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+        {
+          value: 50,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 1,
+          zIndex: 2,
+          label: {
+            text: "50",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+        {
+          value: 20,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 1,
+          zIndex: 2,
+          label: {
+            text: "20",
+            align: "left",
+            x: -10,
+            y: 3,
+            style: {
+              color: "black",
+              fontSize: "8px",
+              fontWeight: 600,
+            },
+          },
+        },
+      ];
+    } else {
+      return [
+        {
+          value: 0,
+          color: "gray",
+          dashStyle: "dash", // Kiểu đường line (có thể là 'dash', 'dot', hoặc 'solid')
+          width: 1,
+          zIndex: 2,
+          label: {
+            text: "0",
+            align: "left",
+            x: -10,
+            y: 4,
+            style: {
+              color: "black",
+              fontSize: "11px",
+              fontWeight: 600,
+            },
+          },
+        },
+      ];
+    }
+  };
 
   const options = {
     accessibility: {
@@ -52,6 +134,11 @@ const LineChart = ({ data }) => {
       },
       max,
       tickInterval,
+      labels: {
+        enabled: false, // Ẩn nhãn của cột y
+      },
+      plotLines: plotLineValue(type),
+      gridLineWidth: 0, // Ẩn lưới của trục y
     },
     legend: {
       enabled: false,
@@ -65,11 +152,13 @@ const LineChart = ({ data }) => {
         name: "K",
         data: dataK,
         color: "#FF8700",
+        lineWidth: 1,
       },
       {
         name: "D",
         data: dataD,
         color: "#023E8A",
+        lineWidth: 1,
       },
     ],
   };

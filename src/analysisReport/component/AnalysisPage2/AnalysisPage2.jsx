@@ -14,7 +14,7 @@ import Table from "./utils/Table";
 const getColorBaseOnName = (value) => {
   if (value === "Tích cực") return "text-green-500";
   if (value === "Tiêu cực") return "text-red-500";
-  if (value === "Trung lập") return "text-yellow-500";
+  if (value === "Trung lập") return "text-yellow-400";
 };
 
 const AnalysisPage2 = ({ stock }) => {
@@ -91,7 +91,10 @@ const AnalysisPage2 = ({ stock }) => {
                     RSI <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.rsi.value)}
+                    Giá trị:{" "}
+                    <span className="font-semibold text-[#023E8A]">
+                      {formatNumber(data.rsi.value)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -100,7 +103,7 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <LineChart data={data.rsi.chart} />
+                <LineChart data={data.rsi.chart} type={1} />
               </div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
@@ -108,7 +111,10 @@ const AnalysisPage2 = ({ stock }) => {
                     CCI <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.cci.value)}
+                    Giá trị:{" "}
+                    <span className="font-semibold text-[#023E8A]">
+                      {formatNumber(data.cci.value)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -117,7 +123,7 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <LineChart data={data.cci.chart} />
+                <LineChart data={data.cci.chart} type={2} />
               </div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
@@ -126,7 +132,10 @@ const AnalysisPage2 = ({ stock }) => {
                     <span className="font-normal text-[15px] "> (14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.williams.value)}
+                    Giá trị:{" "}
+                    <span className="font-semibold text-[#023E8A]">
+                      {formatNumber(data.williams.value)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -137,15 +146,28 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <LineChart data={data.williams.chart} />
+                <LineChart data={data.williams.chart} type={3} />
               </div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
                   <h2 className="m-0 mb-1 text-[17px]">
                     ADX <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
-                  <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.adx.value.adx)}
+                  <p className="m-0 mb-1 mr-1">
+                    Giá trị:{" "}
+                    <span className="text-xs">
+                      <span className="text-[#023E8A] font-semibold">
+                        {formatNumber(data.adx.value.adx)}
+                      </span>
+                      <div className="ml-[49px]">
+                        <span className="text-[#00BF63] font-semibold">
+                          {formatNumber(data.adx.value.pdi)}
+                        </span>
+                        <span className="text-[#FF0000] px-1 font-semibold">
+                          {formatNumber(data.adx.value.mdi)}
+                        </span>
+                      </div>
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -158,11 +180,11 @@ const AnalysisPage2 = ({ stock }) => {
                   <div className="absolute -top-[13px] left-[55px] z-10">
                     <div className="grid grid-cols-3">
                       <div className="flex items-center justify-end w-[50px] pr-2">
-                        <div className="w-[15px] h-[3px] bg-[#F89637] mr-1"></div>
+                        <div className="w-[15px] h-[3px] bg-[#00BF63] mr-1"></div>
                         <p className="m-0 text-[12px] font-semibold">DI+</p>
                       </div>
                       <div className="flex items-center w-[50px]">
-                        <div className="w-[15px] h-[3px] bg-[#00BF63] mr-1"></div>
+                        <div className="w-[15px] h-[3px] bg-[#FF0000] mr-1"></div>
                         <p className="m-0 text-[12px] font-semibold">DI-</p>
                       </div>
                       <div className="flex items-center w-[50px]">
@@ -184,7 +206,13 @@ const AnalysisPage2 = ({ stock }) => {
                     <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.stochastic.value.k)}
+                    Giá trị:{" "}
+                    <span className="text-[#F89637] font-semibold">
+                      {formatNumber(data.stochastic.value.k)}
+                    </span>
+                    <span className="px-1 text-[#023E8A] font-semibold">
+                      {formatNumber(data.stochastic.value.d)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -208,7 +236,7 @@ const AnalysisPage2 = ({ stock }) => {
                       </div>
                     </div>
                   </div>
-                  <LineChart2 data={data.stochastic.chart} />
+                  <LineChart2 data={data.stochastic.chart} type={1} />
                 </div>
               </div>
               <div className="flex justify-between ">
@@ -218,7 +246,13 @@ const AnalysisPage2 = ({ stock }) => {
                     <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.stochasticRsi.value.k)}
+                    Giá trị:{" "}
+                    <span className="text-[#F89637] font-semibold">
+                      {formatNumber(data.stochasticRsi.value.k)}
+                    </span>
+                    <span className="px-1 text-[#023E8A] font-semibold">
+                      {formatNumber(data.stochasticRsi.value.d)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -244,7 +278,7 @@ const AnalysisPage2 = ({ stock }) => {
                       </div>
                     </div>
                   </div>
-                  <LineChart2 data={data.stochasticRsi.chart} />
+                  <LineChart2 data={data.stochasticRsi.chart} type={1} />
                 </div>
               </div>
               <div className="flex justify-between ">
@@ -253,7 +287,13 @@ const AnalysisPage2 = ({ stock }) => {
                     MACD <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.macd.value.macd)}
+                    Giá trị:{" "}
+                    <span className="text-[#F89637] font-semibold">
+                      {formatNumber(data.macd.value.macd)}
+                    </span>
+                    <span className="px-1 text-[#023E8A] font-semibold">
+                      {formatNumber(data.macd.value.signal)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -277,7 +317,7 @@ const AnalysisPage2 = ({ stock }) => {
                       </div>
                     </div>
                   </div>
-                  <LineChart2 data={data.macd.chart} />
+                  <LineChart2 data={data.macd.chart} type={""} />
                 </div>
               </div>
               <div className="flex justify-between ">
@@ -287,7 +327,10 @@ const AnalysisPage2 = ({ stock }) => {
                     <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
                   <p className="m-0 mb-1">
-                    Giá trị: {formatNumber(data.macdHistogram.value)}
+                    Giá trị:{" "}
+                    <span className="font-semibold text-[#023E8A]">
+                      {formatNumber(data.macdHistogram.value)}
+                    </span>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
@@ -300,7 +343,7 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <LineChart data={data.macdHistogram.chart} />
+                <LineChart data={data.macdHistogram.chart} type={""} />
               </div>
             </div>
           </div>
