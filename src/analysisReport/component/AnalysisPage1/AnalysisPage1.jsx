@@ -102,6 +102,8 @@ const AnalysisPage1 = ({ stock }) => {
       convertUrlToDataURL(`${resourceURL}${data.img}`).then((dataUrl) => {
         setImgSrc(dataUrl);
       });
+    } else {
+      setImgSrc("");
     }
   }, [data]);
 
@@ -273,7 +275,7 @@ const AnalysisPage1 = ({ stock }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end">
-                      {formatNumberPage3(data.nha_nuoc)}%
+                      {data.nha_nuoc !== 0 ? formatNumber(data.nha_nuoc) : "0"}%
                     </p>
                   </div>
                 </div>
