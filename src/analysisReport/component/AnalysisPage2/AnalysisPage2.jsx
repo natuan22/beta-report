@@ -10,6 +10,7 @@ import formatNumber from "../../../helper/formatNumber";
 import LineChart2 from "./utils/LineChart2";
 import LineChartADX from "./utils/LineChartADX";
 import Table from "./utils/Table";
+import ColumnChart from "./utils/ColumnChart";
 
 const getColorBaseOnName = (value) => {
   if (value === "Tích cực") return "text-green-500";
@@ -35,7 +36,7 @@ const AnalysisPage2 = ({ stock }) => {
     if (!stock && stock.split("")?.length < 3) return;
     getData();
   }, [stock]);
-  // console.log('data,', data)
+  // console.log("data,", data.macdHistogram.chart);
   return (
     <div className="h-[1480px] w-[800px] relative">
       <div className="header">
@@ -341,7 +342,7 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <LineChart data={data.macdHistogram.chart} type={""} />
+                <ColumnChart data={data.macdHistogram.chart} />
               </div>
             </div>
           </div>
