@@ -11,28 +11,35 @@ const FormInput = ({
   query,
   queryImg,
 }) => {
-  const saveText = async (text) => {
+  const saveDataAndFile = async (data) => {
     try {
-      const res = await https.post(
+      const formData = new FormData();
+      // Thêm dữ liệu văn bản
+      const arrText = [data.text1, data.text2];
+      arrText.forEach((text, index) => {
+        formData.append(`text[${index}]`, text);
+      });
+
+      // Thêm các trường khác
+      formData.append("img", data.img);
+
+      // Gửi yêu cầu POST
+      const response = await https.post(
         `/api/v1/report/luu-nhan-dinh-thi-truong-${query}`,
-        text
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      // console.log(res);
-    } catch (err) {
-      console.error(err);
+
+      // console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Error:", error.response.data);
     }
   };
-  const saveImg = async (file) => {
-    try {
-      const res = await https.post(
-        `api/v1/report/upload-image-report${queryImg}`,
-        file
-      );
-      // console.log(res);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
   const [imgSrc, setImgSrc] = useState(null);
   const { handleSubmit, setFieldValue, handleChange } = useFormik({
     initialValues: {
@@ -41,27 +48,8 @@ const FormInput = ({
       img: {},
     },
     onSubmit: async (values) => {
-      let arrText = [];
-
-      // Thêm giá trị text1 vào mảng arrText
-      arrText.push(values.text1);
-
-      // Thêm giá trị text2 vào mảng arrText
-      arrText.push(values.text2);
-
-      // create dataForm
-      let formData = new FormData();
-      for (let key in values) {
-        if (key !== "img") {
-          formData.append(key, values[key]);
-        } else {
-          formData.append("File", values.img, values.img.name);
-        }
-      }
-      //   console.log("values.img", values.img);
       try {
-        const res = await saveText({ text: arrText });
-        const res2 = await saveImg(formData);
+        const res = await saveDataAndFile(values);
         const res3 = await onSubmitSuccess();
       } catch (err) {
         console.error(err);

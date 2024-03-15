@@ -24,7 +24,7 @@ const LineChart = ({ data }) => {
     data: seriesData[code],
     color: index === 0 ? "#FF8700" : index === 1 ? "#00BF63" : "#147DF5", // Lấy màu cho từng loại mã code
   }));
-
+  // console.log(series);
   const options = {
     accessibility: {
       enabled: false,
@@ -70,6 +70,22 @@ const LineChart = ({ data }) => {
           },
         },
         crosshair: false,
+        tickInterval: Math.ceil(uniqueDates?.length / 6),
+        tickPositioner: function () {
+          const tickPositions = [];
+          const interval = Math.ceil(uniqueDates?.length / 5);
+
+          for (let i = 0; i < uniqueDates.length; i += interval) {
+            tickPositions.push(i);
+          }
+          if (
+            uniqueDates.length - 1 !==
+            tickPositions[tickPositions.length - 1]
+          ) {
+            tickPositions.push(uniqueDates.length - 1);
+          }
+          return tickPositions;
+        },
       },
     ],
     yAxis: {
