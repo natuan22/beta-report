@@ -16,7 +16,7 @@ const Page3Week = () => {
             const response = await https.get("api/v1/report/ban-tin-tuan-2");
             setData(response.data.data);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
     const getImgFromInput = (src) => {

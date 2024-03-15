@@ -9,9 +9,9 @@ const { TextArea } = Input;
 const saveText = async (textForm) => {
     try {
         const res = await https.post('api/v1/report/luu-dien-bien-thi-truong', textForm)
-        console.log(res)
+        // console.log(res)
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 }
 

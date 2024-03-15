@@ -16,7 +16,7 @@ const saveText = async (data) => {
     try {
         const response = await https.post('/api/v1/report/luu-nhan-dinh-thi-truong', data)
     } catch (err) {
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -47,7 +47,7 @@ export default function DialogIdentify({ catchText }) {
                 setWordCount2(countWords(response.data.data?.text[1]) - 1)
                 catchText(response.data.data)
             } catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
 

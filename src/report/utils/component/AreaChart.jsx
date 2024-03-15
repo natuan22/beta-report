@@ -15,7 +15,7 @@ const AreaChart = () => {
                 const response = await https.get('api/v1/report/thanh-khoan-thi-truong')
                 setData(response.data.data)
             } catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
         getData()

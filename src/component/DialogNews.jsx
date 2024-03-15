@@ -35,9 +35,9 @@ export default function DialogNews({
     const saveNews = async (data) => {
         try {
             const response = await https.post('/api/v1/report/luu-tin', data)
-            console.log(response)
+            // console.log(response)
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const getNews = async (id) => {
@@ -53,7 +53,7 @@ export default function DialogNews({
                 value: response.data.data
             })
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
     const handleToggleEdit = (index) => {
@@ -168,7 +168,7 @@ export default function DialogNews({
                 // Xác nhận xóa tin và cập nhật state
                 const updatedformData = { ...formData };
                 updatedformData.value.splice(index, 1);
-                console.log(updatedformData)
+                // console.log(updatedformData)
                 setFormData(updatedformData);
                 success("Đã xóa tin thành công!");
             }

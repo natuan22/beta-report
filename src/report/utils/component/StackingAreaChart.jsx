@@ -16,7 +16,7 @@ const StackingAreaChart = () => {
                 const response = await https.get('api/v1/report/ty-trong-dong-tien')
                 setData(response.data.data)
             } catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
 

@@ -24,7 +24,7 @@ const Page2Week = () => {
             setData(res.data.data);
             setText(res.data.data.text)
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
     useEffect(() => {
