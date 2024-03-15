@@ -10,6 +10,7 @@ import TableSR from "./utils/TableSR";
 // import img from "../../../app/asset/img/testBanner.png";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
+import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AnalysisPage1 = ({ stock }) => {
@@ -86,19 +87,6 @@ const AnalysisPage1 = ({ stock }) => {
 
   useEffect(() => {
     if (data && data.img) {
-      const convertUrlToDataURL = (url) => {
-        return fetch(url)
-          .then((response) => response.blob())
-          .then(
-            (blob) =>
-              new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-              })
-          );
-      };
       convertUrlToDataURL(`${resourceURL}${data.img}`).then((dataUrl) => {
         setImgSrc(dataUrl);
       });
@@ -106,7 +94,6 @@ const AnalysisPage1 = ({ stock }) => {
       setImgSrc("");
     }
   }, [data]);
-
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[900px] z-30 w-full">
