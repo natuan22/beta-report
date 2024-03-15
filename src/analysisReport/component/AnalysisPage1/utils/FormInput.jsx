@@ -27,6 +27,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       formData.append("code", code.toUpperCase());
       formData.append("is_sell", data.is_sell);
       formData.append("gia_muc_tieu", data.gia_muc_tieu);
+      formData.append("thoi_gian_nam_giu", data.thoi_gian_nam_giu);
       formData.append("gia_thi_truong", data.gia_thi_truong);
       formData.append("loi_nhuan_ky_vong", data.loi_nhuan_ky_vong);
       formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
@@ -54,6 +55,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
     initialValues: {
       code: "",
       is_sell: "",
+      thoi_gian_nam_giu: "",
       gia_muc_tieu: 0,
       gia_thi_truong: 0,
       loi_nhuan_ky_vong: 0,
@@ -113,6 +115,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       //     width: 1000,
       //   }}
       onSubmitCapture={handleSubmit}
+      autoComplete="off"
     >
       <div className="flex justify-evenly mt-10">
         <div className="w-[40%]">
@@ -126,7 +129,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               }}
             />
           </Form.Item>
-          <Form.Item label="Giá mục tiêu 04 tháng">
+          <Form.Item label="Giá mục tiêu">
             <InputNumber
               name="gia_muc_tieu"
               formatter={(value) =>
@@ -141,11 +144,33 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   },
                 });
               }}
+              onKeyDown={(e) => {
+                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Delete"
+                  )
+                ) {
+                  e.preventDefault();
+                }
+              }}
               style={{
                 width: 300,
               }}
             />
             {" đồng/CP"}
+          </Form.Item>
+          <Form.Item label="Thời gian">
+            <Input
+              name="thoi_gian_nam_giu"
+              onChange={handleChange}
+              placeholder="01 tháng"
+              style={{
+                width: 300,
+              }}
+            />
           </Form.Item>
           <Form.Item label="Giá thị trường">
             <InputNumber
@@ -161,6 +186,18 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                     value: value,
                   },
                 });
+              }}
+              onKeyDown={(e) => {
+                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Delete"
+                  )
+                ) {
+                  e.preventDefault();
+                }
               }}
               style={{
                 width: 300,
@@ -180,6 +217,24 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                     value: value,
                   },
                 });
+              }}
+              onKeyDown={(e) => {
+                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "." ||
+                    e.key === "Backspace" ||
+                    e.key === "Delete"
+                  )
+                ) {
+                  e.preventDefault();
+                }
+
+                // Ngăn chặn việc nhập nhiều hơn một dấu chấm thập phân
+                if (e.key === "." && e.target.value.includes(".")) {
+                  e.preventDefault();
+                }
               }}
               step="0.1"
               stringMode
@@ -203,6 +258,18 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                     value: value,
                   },
                 });
+              }}
+              onKeyDown={(e) => {
+                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Delete"
+                  )
+                ) {
+                  e.preventDefault();
+                }
               }}
               style={{
                 width: 300,

@@ -1,6 +1,7 @@
 import React from 'react'
 import formatNumber from '../../../../helper/formatNumber'
 import { getColorBaseOnValue } from '../../../../helper/getColorBaseOnValue'
+import formatNumberMorning from '../../../../helper/formatNumberMorning'
 
 const InterestRateTable = ({ data }) => {
     return (
@@ -19,10 +20,10 @@ const InterestRateTable = ({ data }) => {
                     {data?.map(item => (
                         <tr>
                             <td className='text-center px-1 py-3 font-semibold text-[11px]'>{item.code}</td>
-                            <td className='text-center px-2 py-3 text-[11px]'>{formatNumber(item.price)}</td>
-                            <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-3 text-[11px]`}>{formatNumber(item.day)}</td>
-                            <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-3 text-[11px]`}>{formatNumber(item.month)}</td>
-                            <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-3 text-[11px]`}>{formatNumber(item.year)}</td>
+                            <td className='text-center px-2 py-3 text-[11px]'>{formatNumberMorning(item.price)}</td>
+                            <td className={`${getColorBaseOnValue(item.week)} text-center px-1 py-3 text-[11px]`}>{formatNumberMorning(item.week)}</td>
+                            <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-3 text-[11px]`}>{formatNumberMorning(item.month)}</td>
+                            <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-3 text-[11px]`}>{formatNumberMorning(item.year)}</td>
                         </tr>
                     ))}
                 </tbody>

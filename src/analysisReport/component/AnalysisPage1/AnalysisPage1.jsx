@@ -11,6 +11,7 @@ import TableSR from "./utils/TableSR";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
+import formatNumberMorning from "../../../helper/formatNumberMorning";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AnalysisPage1 = ({ stock }) => {
@@ -262,7 +263,7 @@ const AnalysisPage1 = ({ stock }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end">
-                      {data.nha_nuoc !== 0 ? formatNumber(data.nha_nuoc) : "0"}%
+                      {formatNumberMorning(data.nha_nuoc)}%
                     </p>
                   </div>
                 </div>
@@ -314,7 +315,7 @@ const AnalysisPage1 = ({ stock }) => {
               <div className="bg-[#AECFF6] w-[300px] h-[120px] flex flex-col items-center justify-center ">
                 <div className="flex items-center justify-between mt-1">
                   <p className="m-0 w-[155px] text-[14px] font-semibold">
-                    Giá mục tiêu 04 tháng{" "}
+                    Giá mục tiêu {data && data.thoi_gian_nam_giu}{" "}
                   </p>
                   <p className="w-[5px] m-0">:</p>
                   <p className="m-0 w-[110px] text-[13px] font-bold">
@@ -338,7 +339,9 @@ const AnalysisPage1 = ({ stock }) => {
                   </p>
                   <p className="w-[5px] m-0">:</p>
                   <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
-                    {data && formatNumber(Number(data.loi_nhuan_ky_vong))} %
+                    {data &&
+                      formatNumberMorning(Number(data.loi_nhuan_ky_vong))}{" "}
+                    %
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-1">
