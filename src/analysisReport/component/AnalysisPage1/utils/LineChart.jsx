@@ -100,7 +100,7 @@ const LineChart = ({ data }) => {
   };
 
   return (
-    <div className="h-[200px] translate-y-[-15px]">
+    <div className="h-[205px] translate-y-[-15px]">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

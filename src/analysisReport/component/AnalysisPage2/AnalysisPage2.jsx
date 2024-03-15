@@ -155,19 +155,17 @@ const AnalysisPage2 = ({ stock }) => {
                   </h2>
                   <p className="m-0 mb-1 mr-1">
                     Giá trị:{" "}
-                    <span className="text-xs">
-                      <span className="text-[#023E8A] font-semibold">
-                        {formatNumber(data.adx.value.adx)}
-                      </span>
-                      <div className="ml-[49px]">
-                        <span className="text-[#00BF63] font-semibold">
-                          {formatNumber(data.adx.value.pdi)}
-                        </span>
-                        <span className="text-[#FF0000] px-1 font-semibold">
-                          {formatNumber(data.adx.value.mdi)}
-                        </span>
-                      </div>
+                    <span className="text-[#023E8A] font-semibold">
+                      {formatNumber(data.adx.value.adx)}
                     </span>
+                    <div className="ml-[49px]">
+                      <span className="text-[#00BF63] font-semibold">
+                        {formatNumber(data.adx.value.pdi)}
+                      </span>
+                      <span className="text-[#FF0000] px-1 font-semibold">
+                        {formatNumber(data.adx.value.mdi)}
+                      </span>
+                    </div>
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
