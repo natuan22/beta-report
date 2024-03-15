@@ -10,7 +10,7 @@ import TableSR from "./utils/TableSR";
 // import img from "../../../app/asset/img/testBanner.png";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
-const resourceURL = process.env.REACT_APP_RESOURCE_URL;
+const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AnalysisPage1 = ({ stock }) => {
   // console.log(stock);
