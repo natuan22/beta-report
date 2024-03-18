@@ -31,6 +31,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       formData.append("gia_thi_truong", data.gia_thi_truong);
       formData.append("loi_nhuan_ky_vong", data.loi_nhuan_ky_vong);
       formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
+      formData.append("analyst_name", data.analyst_name);
       formData.append("img", data.img);
 
       // Gửi yêu cầu POST
@@ -69,6 +70,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       r1: 0,
       r2: 0,
       r3: 0,
+      analyst_name: "",
     },
     onSubmit: async (values) => {
       try {
@@ -119,6 +121,16 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
     >
       <div className="flex justify-evenly mt-10">
         <div className="w-[40%]">
+          <Form.Item label="Chuyên viên phân tích">
+            <Input
+              name="analyst_name"
+              onChange={handleChange}
+              placeholder="Họ và tên"
+              style={{
+                width: 300,
+              }}
+            />
+          </Form.Item>
           <Form.Item label="Khuyến nghị">
             <Input
               name="is_sell"
@@ -147,7 +159,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Tab"
+                  )
                 ) {
                   e.preventDefault();
                 }
@@ -186,7 +202,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Tab"
+                  )
                 ) {
                   e.preventDefault();
                 }
@@ -216,7 +236,8 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   !(
                     (e.key >= "0" && e.key <= "9") ||
                     e.key === "." ||
-                    e.key === "Backspace"
+                    e.key === "Backspace" ||
+                    e.key === "Tab"
                   )
                 ) {
                   e.preventDefault();
@@ -253,7 +274,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Tab"
+                  )
                 ) {
                   e.preventDefault();
                 }
@@ -335,7 +360,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
@@ -364,7 +393,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
@@ -393,7 +426,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
@@ -426,7 +463,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
@@ -455,7 +496,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
@@ -484,7 +529,11 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   onKeyDown={(e) => {
                     // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                     if (
-                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                      !(
+                        (e.key >= "0" && e.key <= "9") ||
+                        e.key === "Backspace" ||
+                        e.key === "Tab"
+                      )
                     ) {
                       e.preventDefault();
                     }
