@@ -8,7 +8,7 @@ const getColorBaseOnName = (value) => {
 const Table = ({ data }) => {
   return (
     <div className="relative">
-      <div className="absolute w-[780px] h-[3px] bg-[#F89637] bottom-[55px] left-0 z-10"></div>
+      <div className="absolute w-[780px] h-[2px] bg-[#143A65] bottom-[56px] left-0 z-10"></div>
       <table className="w-[780px] h-[260px] border border-1 border-solid border-[#143A65] translate-y-[-25px] border-collapse">
         <thead className="bg-gradient-to-b from-[#143A65] to-[#0054B4]">
           <tr className="text-white font-semibold text-center ">
