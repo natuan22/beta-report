@@ -104,7 +104,7 @@ export default function DialogNews({
                 });
                 setDataNews(response.data.data);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         };
         fetchDataNews();
