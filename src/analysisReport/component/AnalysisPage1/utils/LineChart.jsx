@@ -21,34 +21,13 @@ const LineChart = ({ data }) => {
   const series = Object.keys(seriesData).map((code, index) => ({
     name: code,
     data: seriesData[code],
-    color: index === 0 ? "#FF8700" : index === 1 ? "#00BF63" : "#147DF5", // Lấy màu cho từng loại mã code
-    yAxis: code === "VNINDEX" ? 0 : 1,
+    color: code === "VNINDEX" ? "#FF8700" : "#00BF63", // Lấy màu cho từng loại mã code
+    // color: code === 0 ? "#FF8700" : index === 1 ? "#00BF63" : "#147DF5", // Lấy màu cho từng loại mã code
   }));
 
-  // Tạo một đối tượng để lưu trữ giá trị lớn nhất và nhỏ nhất của từng loại mã code
-  const codeMinMax = {};
+  const max = Math?.ceil(Math?.max(...data?.map((item) => item.value)) ?? 0);
+  const min = Math?.floor(Math?.min(...data?.map((item) => item.value)) ?? 0);
 
-  // Duyệt qua mảng dữ liệu và cập nhật giá trị lớn nhất và nhỏ nhất cho mỗi loại mã code
-  data.forEach((item) => {
-    if (!codeMinMax[item.code]) {
-      codeMinMax[item.code] = [];
-    }
-
-    codeMinMax[item.code].push(item.value);
-  });
-
-  // Tạo một đối tượng để lưu trữ giá trị lớn nhất và nhỏ nhất của từng loại mã code
-  const codeMaxMin = {};
-  Object.keys(codeMinMax).forEach((code, index) => {
-    const values = codeMinMax[code];
-    const max = Math.ceil(Math.max(...values));
-    const min = Math.floor(Math.min(...values));
-    codeMaxMin[index] = { max, min };
-  });
-
-  // In ra giá trị lớn nhất và nhỏ nhất của từng loại mã code
-  // console.log("Max and min values for each code:");
-  // console.log(codeMaxMin);
   const options = {
     accessibility: {
       enabled: false,
@@ -112,47 +91,23 @@ const LineChart = ({ data }) => {
         },
       },
     ],
-    yAxis: [
-      {
-        title: {
-          text: "",
-          style: {
-            color: localStorage.getItem("color"),
-          },
+    yAxis: {
+      title: {
+        text: "",
+        style: {
+          color: localStorage.getItem("color"),
         },
-        labels: {
-          style: {
-            color: "#FF8700", // màu cho các nhãn trục y
-            fontSize: "11px",
-            fontWeight: 600,
-          },
-        },
-        gridLineWidth: 0.5,
-        opposite: false,
-        max: codeMaxMin[0].max,
-        min: codeMaxMin[0].min,
       },
-      {
-        title: {
-          text: "", // Tiêu đề của trục Y thứ hai
-          style: {
-            color: localStorage.getItem("color"),
-          },
+      labels: {
+        style: {
+          fontSize: "11px",
         },
-        labels: {
-          style: {
-            color: "#00BF63", // màu cho các nhãn trục y
-            fontSize: "11px",
-            fontWeight: 600,
-          },
-          // enabled: false,
-        },
-        opposite: true,
-        gridLineWidth: 0.5,
-        max: codeMaxMin[1].max,
-        min: codeMaxMin[1].min,
       },
-    ],
+      gridLineWidth: 0.5,
+      max: max,
+      min: min,
+      tickInterval: Math.ceil(max / 11),
+    },
     plotOptions: {
       series: {
         marker: {
@@ -166,7 +121,7 @@ const LineChart = ({ data }) => {
     series: series,
   };
   return (
-    <div className="h-[205px] translate-y-[-15px]">
+    <div className="h-[200px] translate-y-[-15px]">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

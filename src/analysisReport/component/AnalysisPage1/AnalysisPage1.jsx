@@ -290,6 +290,9 @@ const AnalysisPage1 = ({ stock }) => {
             <div className="table-2 translate-y-[-60px] ">
               <TableSR data={data} />
             </div>
+            <div className="translate-y-[-60px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
+              Chuyên Viên Phân Tích: {data && data.analyst_name}
+            </div>
           </div>
 
           <div className="cont-right w-[450px] mr-1 ">
