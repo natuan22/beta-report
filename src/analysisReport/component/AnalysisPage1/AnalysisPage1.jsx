@@ -296,7 +296,7 @@ const AnalysisPage1 = ({ stock }) => {
             <div className="h-[150px]  w-[450px] flex items-center justify-between ">
               <div className="w-[150px] text-center h-[120px]">
                 <p className="m-0 font-bold text-[16px]">Khuyến nghị</p>
-                {data && data.is_sell === "mua" ? (
+                {data && data.is_sell.toUpperCase() === "MUA" ? (
                   <p
                     style={{ textShadow: "-2px 3px 3px #95e4bf " }}
                     className="text-green-500 uppercase font-bold text-[60px] m-0"

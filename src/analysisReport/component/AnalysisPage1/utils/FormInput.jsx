@@ -147,11 +147,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !(
-                    (e.key >= "0" && e.key <= "9") ||
-                    e.key === "Backspace" ||
-                    e.key === "Delete"
-                  )
+                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
                 ) {
                   e.preventDefault();
                 }
@@ -190,11 +186,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !(
-                    (e.key >= "0" && e.key <= "9") ||
-                    e.key === "Backspace" ||
-                    e.key === "Delete"
-                  )
+                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
                 ) {
                   e.preventDefault();
                 }
@@ -224,8 +216,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                   !(
                     (e.key >= "0" && e.key <= "9") ||
                     e.key === "." ||
-                    e.key === "Backspace" ||
-                    e.key === "Delete"
+                    e.key === "Backspace"
                   )
                 ) {
                   e.preventDefault();
@@ -262,11 +253,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               onKeyDown={(e) => {
                 // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
                 if (
-                  !(
-                    (e.key >= "0" && e.key <= "9") ||
-                    e.key === "Backspace" ||
-                    e.key === "Delete"
-                  )
+                  !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
                 ) {
                   e.preventDefault();
                 }
@@ -345,6 +332,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                       },
                     });
                   }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   style={{
                     width: 150,
                   }}
@@ -366,6 +361,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                       },
                     });
                   }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   style={{
                     width: 150,
                   }}
@@ -386,6 +389,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                         value: value,
                       },
                     });
+                  }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
                   }}
                   style={{
                     width: 150,
@@ -412,6 +423,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                       },
                     });
                   }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   style={{
                     width: 150,
                   }}
@@ -433,6 +452,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                       },
                     });
                   }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
+                  }}
                   style={{
                     width: 150,
                   }}
@@ -453,6 +480,14 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                         value: value,
                       },
                     });
+                  }}
+                  onKeyDown={(e) => {
+                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      !((e.key >= "0" && e.key <= "9") || e.key === "Backspace")
+                    ) {
+                      e.preventDefault();
+                    }
                   }}
                   style={{
                     width: 150,

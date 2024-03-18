@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
@@ -17,14 +17,16 @@ const LineChart = ({ data }) => {
     }
     seriesData[item.code].push([moment(item.date).format("DD/MM"), item.value]);
   });
-
   // Chuyển đổi dữ liệu thành dạng series cho biểu đồ
   const series = Object.keys(seriesData).map((code, index) => ({
     name: code,
     data: seriesData[code],
     color: index === 0 ? "#FF8700" : index === 1 ? "#00BF63" : "#147DF5", // Lấy màu cho từng loại mã code
   }));
-  // console.log(series);
+
+  const max = Math?.ceil(Math?.max(...data?.map((item) => item.value)));
+  const min = Math?.floor(Math?.min(...data?.map((item) => item.value)));
+
   const options = {
     accessibility: {
       enabled: false,
@@ -89,6 +91,8 @@ const LineChart = ({ data }) => {
       },
     ],
     yAxis: {
+      max,
+      min,
       title: {
         text: null,
       },
