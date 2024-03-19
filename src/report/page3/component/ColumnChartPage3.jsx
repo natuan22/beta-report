@@ -10,6 +10,8 @@ const ColumnChartPage3 = ({ data, title, unit }) => {
   const min = Math?.floor(
     Math?.min(...data?.map((item) => item.value / 1000000000))
   );
+  const categories = data.map((item) => moment(item.date).format("DD/MM"));
+
   const options = {
     accessibility: {
       enabled: false,
@@ -27,8 +29,28 @@ const ColumnChartPage3 = ({ data, title, unit }) => {
             </div>`,
     },
     xAxis: {
-      visible: false,
-      categories: data.map((item) => moment(item.date).format("DD/MM")),
+      visible: true,
+      categories,
+      crosshair: true,
+      tickInterval: Math.ceil(categories?.length / 6),
+      tickPositioner: function () {
+        const tickPositions = [];
+        const interval = Math.ceil(categories?.length / 5);
+
+        for (let i = 0; i < categories.length; i += interval) {
+          tickPositions.push(i);
+        }
+        if (categories.length - 1 !== tickPositions[tickPositions.length - 1]) {
+          tickPositions.push(categories.length - 1);
+        }
+        return tickPositions;
+      },
+      labels: {
+        style: {
+          fontSize: "10px",
+          fontWeight: "bold",
+        },
+      },
     },
     yAxis: {
       visible: true,
