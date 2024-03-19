@@ -99,7 +99,11 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
-                    <span className={`${getColorBaseOnName(data.rsi.rate)}`}>
+                    <span
+                      className={`${getColorBaseOnName(
+                        data.rsi.rate
+                      )} font-semibold`}
+                    >
                       {data.rsi.rate}
                     </span>
                   </p>
@@ -119,7 +123,11 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
-                    <span className={`${getColorBaseOnName(data.cci.rate)}`}>
+                    <span
+                      className={`${getColorBaseOnName(
+                        data.cci.rate
+                      )} font-semibold`}
+                    >
                       {data.cci.rate}
                     </span>
                   </p>
@@ -141,7 +149,9 @@ const AnalysisPage2 = ({ stock }) => {
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
                     <span
-                      className={`${getColorBaseOnName(data.williams.rate)}`}
+                      className={`${getColorBaseOnName(
+                        data.williams.rate
+                      )} font-semibold`}
                     >
                       {data.williams.rate}
                     </span>
@@ -170,7 +180,11 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
-                    <span className={`${getColorBaseOnName(data.adx.rate)}`}>
+                    <span
+                      className={`${getColorBaseOnName(
+                        data.adx.rate
+                      )} font-semibold`}
+                    >
                       {data.adx.rate}
                     </span>
                   </p>
@@ -216,7 +230,9 @@ const AnalysisPage2 = ({ stock }) => {
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
                     <span
-                      className={`${getColorBaseOnName(data.stochastic.rate)}`}
+                      className={`${getColorBaseOnName(
+                        data.stochastic.rate
+                      )} font-semibold`}
                     >
                       {data.stochastic.rate}
                     </span>
@@ -258,7 +274,7 @@ const AnalysisPage2 = ({ stock }) => {
                     <span
                       className={`${getColorBaseOnName(
                         data.stochasticRsi.rate
-                      )}`}
+                      )} font-semibold`}
                     >
                       {data.stochasticRsi.rate}
                     </span>
@@ -296,7 +312,11 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
-                    <span className={`${getColorBaseOnName(data.macd.rate)}`}>
+                    <span
+                      className={`${getColorBaseOnName(
+                        data.macd.rate
+                      )} font-semibold`}
+                    >
                       {data.macd.rate}
                     </span>
                   </p>
@@ -336,7 +356,7 @@ const AnalysisPage2 = ({ stock }) => {
                     <span
                       className={`${getColorBaseOnName(
                         data.macdHistogram.rate
-                      )}`}
+                      )} font-semibold`}
                     >
                       {data.macdHistogram.rate}
                     </span>

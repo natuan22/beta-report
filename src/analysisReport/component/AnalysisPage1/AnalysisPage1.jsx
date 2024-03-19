@@ -160,7 +160,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Vốn hóa thị trường (tỷ đồng)
                     </p>
                     <p className="text-[#0249A4] m-1 ">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.marketCap / 1000000000)}
                     </p>
                   </div>
@@ -170,7 +170,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Số CP đang lưu hành (triệu CP)
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1  w-[25%] text-end">
+                    <p className="m-1  w-[25%] text-end font-semibold">
                       {formatNumber(data.shareout / 1000000)}
                     </p>
                   </div>
@@ -180,7 +180,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Giá cao nhất 52 tuần (đồng)
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumberPage3(data.high)}
                     </p>
                   </div>
@@ -190,7 +190,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Giá thấp nhất 52 tuần (đồng)
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumberPage3(data.low)}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ const AnalysisPage1 = ({ stock }) => {
                       KLCP trung bình 20 phiên (CP)
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumberPage3(data.kl)}
                     </p>
                   </div>
@@ -211,7 +211,7 @@ const AnalysisPage1 = ({ stock }) => {
                       <span className="text-[13px]">(tỷ đồng)</span>
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.gia_tri / 1000000000)}
                     </p>
                   </div>
@@ -219,7 +219,7 @@ const AnalysisPage1 = ({ stock }) => {
                   <div className="flex justify-between items-center text-sm">
                     <p className="text-[#0249A4] m-1 w-[75%]">EPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.EPS)}
                     </p>
                   </div>
@@ -227,7 +227,7 @@ const AnalysisPage1 = ({ stock }) => {
                   <div className="flex justify-between items-center text-sm">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/E (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.PE)}
                     </p>
                   </div>
@@ -235,7 +235,7 @@ const AnalysisPage1 = ({ stock }) => {
                   <div className="flex justify-between items-center text-sm">
                     <p className="text-[#0249A4] m-1 w-[75%]">BVPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.BVPS)}
                     </p>
                   </div>
@@ -243,7 +243,7 @@ const AnalysisPage1 = ({ stock }) => {
                   <div className="flex justify-between items-center text-sm">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/B (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.PB)}
                     </p>
                   </div>
@@ -253,7 +253,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Tỷ lệ sở hữu nước ngoài
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.nuoc_ngoai)}%
                     </p>
                   </div>
@@ -262,7 +262,7 @@ const AnalysisPage1 = ({ stock }) => {
                       Tỷ lệ sở hữu nhà nước
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
-                    <p className="m-1 w-[25%] text-end">
+                    <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumberMorning(data.nha_nuoc)}%
                     </p>
                   </div>
