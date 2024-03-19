@@ -160,7 +160,7 @@ const AfternoonPage3 = () => {
                         <td className="text-left  py-1 font-bold  text-[11px] text-[#00429B] w-[135px] px-1 ">
                           {item.industry}
                         </td>
-                        <td className="text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px]  flex flex-col items-center">
+                        <td className="text-center pr-2 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px]  flex flex-col items-center">
                           <div className="flex items-center justify-between w-[40px]">
                             {getArrow(item.day_change_percent)}
                             <p className="m-0">
@@ -169,7 +169,7 @@ const AfternoonPage3 = () => {
                           </div>
                         </td>
                         <td
-                          className={`text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px] x   `}
+                          className={`text-center pr-2 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px] x   `}
                         >
                           <div className="flex items-center justify-between w-[40px]">
                             {getArrow(item.week_change_percent)}
@@ -180,7 +180,7 @@ const AfternoonPage3 = () => {
                           </div>
                         </td>
                         <td
-                          className={`text-center px-1 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px]  flex flex-col items-center `}
+                          className={`text-center pr-2 py-1 border-[#0155B7] border-y-0 border-r-0 border-collapse border-1 bor border-solid text-[11px]  flex flex-col items-center `}
                         >
                           <div className="flex items-center justify-between w-[40px] ">
                             {getArrow(item.month_change_percent)}

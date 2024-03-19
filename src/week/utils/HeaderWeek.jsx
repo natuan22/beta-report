@@ -21,10 +21,10 @@ const HeaderWeek = () => {
                         <p className='m-0 text-[40px] text-[#0155B7] font-bold'>NHỊP ĐẬP THỊ TRƯỜNG </p>
                     </div>
 
-                    <div className='absolute bg-[#FFB800] bottom-[-10px] left-0 w-[75%] h-[3px]'>
+                    <div className='absolute bg-[#FFB800] bottom-[-10px] left-0 w-[73%] h-[3px]'>
 
                     </div>
-                    <div className='absolute bg-[#0055B6] bottom-[-15px] left-0 w-[75%] h-[3px]'>
+                    <div className='absolute bg-[#0055B6] bottom-[-15px] left-0 w-[73%] h-[3px]'>
 
                     </div>
                 </div>
