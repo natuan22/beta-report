@@ -190,7 +190,7 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                 </div>
                 <div className="relative">
-                  <div className="absolute -top-[13px] left-[55px] z-10">
+                  <div className="absolute -top-[13px] left-[40px] z-10">
                     <div className="grid grid-cols-3">
                       <div className="flex items-center justify-end w-[50px] pr-2">
                         <div className="w-[15px] h-[3px] bg-[#00BF63] mr-1"></div>
@@ -239,7 +239,7 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                 </div>
                 <div className="relative">
-                  <div className="absolute -top-[13px] left-[30px] z-10">
+                  <div className="absolute -top-[13px] left-[20px] z-10">
                     <div className="grid grid-cols-2">
                       <div className="flex items-center justify-end w-[100px] pr-2">
                         <div className="w-[15px] h-[3px] bg-[#F89637] mr-1"></div>
@@ -281,7 +281,7 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                 </div>
                 <div className="relative">
-                  <div className="absolute -top-[13px] left-[30px] z-10">
+                  <div className="absolute -top-[13px] left-[20px] z-10">
                     <div className="grid grid-cols-2">
                       <div className="flex items-center justify-end w-[100px] pr-2">
                         <div className="w-[15px] h-[3px] bg-[#F89637] mr-1"></div>
@@ -322,16 +322,18 @@ const AnalysisPage2 = ({ stock }) => {
                   </p>
                 </div>
                 <div className="relative">
-                  <div className="absolute -top-[13px] left-[13px] z-10">
+                  <div className="absolute -top-[13px] -left-[35px] z-10">
                     <div className="grid grid-cols-2">
-                      <div className="flex items-center justify-end w-[100px] pr-2">
+                      <div className="flex items-center justify-end w-[130px] pr-2">
                         <div className="w-[15px] h-[3px] bg-[#F89637] mr-1"></div>
-                        <p className="m-0 text-[12px] font-semibold">MACD</p>
+                        <p className="m-0 text-[11px] font-semibold">
+                          MACD (12,26)
+                        </p>
                       </div>
-                      <div className="flex items-center w-[100px]">
+                      <div className="flex items-center w-[130px]">
                         <div className="w-[15px] h-[3px] bg-[#023E8A] mr-1"></div>
-                        <p className="m-0 text-[12px] font-semibold">
-                          MACD Signal
+                        <p className="m-0 text-[11px] font-semibold">
+                          MACD Signal (12,26,9)
                         </p>
                       </div>
                     </div>
