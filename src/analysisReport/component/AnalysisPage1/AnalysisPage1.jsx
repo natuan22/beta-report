@@ -290,7 +290,7 @@ const AnalysisPage1 = ({ stock }) => {
             <div className="table-2 translate-y-[-60px] ">
               <TableSR data={data} />
             </div>
-            <div className="translate-y-[-60px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
+            <div className="translate-y-[-50px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
               Chuyên Viên Phân Tích: {data && data.analyst_name}
             </div>
           </div>
@@ -387,27 +387,27 @@ const AnalysisPage1 = ({ stock }) => {
                   )}
                 </div>
 
-                <div className="text  w-[450px]">
-                  <h2 className="m-0 text-[15px] text-[#023E8A]">
-                    Khả năng xu hướng tăng mới đang hình thành
-                  </h2>
-                  <p className="m-0 text-[14px] text-justify ">
-                    {data ? (
+                {data ? (
+                  <div className="text w-[450px]">
+                    <h2 className="m-0 text-[15px] text-[#023E8A]">
+                      {data.text[0]}
+                    </h2>
+                    <p className="m-0 text-[14px] text-justify">
                       <div
-                        dangerouslySetInnerHTML={{ __html: data.text[0] }}
+                        dangerouslySetInnerHTML={{ __html: data.text[1] }}
                       ></div>
-                    ) : (
-                      <p>Loading...</p>
-                    )}
-                  </p>
+                    </p>
 
-                  <h2 className="m-0 text-[15px] text-[#023E8A]">
-                    Rủi ro xu hướng
-                  </h2>
-                  <p className="m-0 text-[14px] text-justify">
-                    {data ? <p>{data.text[1]}</p> : <p>Loading...</p>}
-                  </p>
-                </div>
+                    <h2 className="m-0 text-[15px] text-[#023E8A]">
+                      Rủi ro xu hướng
+                    </h2>
+                    <p className="m-0 text-[14px] text-justify">
+                      {data.text[2]}
+                    </p>
+                  </div>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
             </div>
           </div>

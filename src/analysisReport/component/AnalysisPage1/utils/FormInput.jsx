@@ -12,7 +12,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       const formData = new FormData();
 
       // Thêm dữ liệu văn bản
-      const arrText = [data.text1, data.text2];
+      const arrText = [data.title, data.text1, data.text2];
       arrText.forEach((text, index) => {
         formData.append(`text[${index}]`, text);
       });
@@ -64,6 +64,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       img: {},
       text1: "",
       text2: "",
+      title: "",
       s1: 0,
       s2: 0,
       s3: 0,
@@ -308,7 +309,16 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
           </Form.Item>
         </div>
         <div className="w-[50%]">
-          <Form.Item label="Khả năng xu hướng">
+          <Form.Item label="Title">
+            <Input
+              name="title"
+              onChange={handleChange}
+              style={{
+                width: 580,
+              }}
+            />
+          </Form.Item>
+          <Form.Item label="Content">
             <CKEditor
               editor={ClassicEditor}
               onReady={(editor) => {
@@ -335,7 +345,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
               placeholder="Rủi ro xu hướng"
               rows={4}
               style={{
-                height: 200,
+                height: 180,
               }}
             />
           </Form.Item>

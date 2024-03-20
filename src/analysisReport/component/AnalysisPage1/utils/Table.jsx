@@ -5,7 +5,7 @@ import { getColorBaseOnValue } from '../../../../helper/getColorBaseOnValue'
 const Table = ({ data }) => {
     return (
         <div >
-            <table className='w-[330px] h-[120px]'>
+            <table className='w-[330px] h-[100px]'>
                 <thead>
                     <tr className='text-[13px] font-bold text-center '>
                         <td className='bg-gradient-to-b from-[#024A9B] to-[#0570EB] text-white px-1 py-2'>Biến động giá (%)</td>
