@@ -214,29 +214,31 @@ const LineChart = ({ data, type }) => {
     title: {
       text: "",
     },
-    xAxis: {
-      type: "",
-      categories: date,
-      tickInterval: Math.ceil(date?.length / 6),
-      tickPositioner: function () {
-        const tickPositions = [];
-        const interval = Math.ceil(date?.length / 5);
+    xAxis: [
+      {
+        type: "",
+        categories: date,
+        tickInterval: Math.ceil(date?.length / 6),
+        tickPositioner: function () {
+          const tickPositions = [];
+          const interval = Math.ceil(date?.length / 5);
 
-        for (let i = 0; i < date.length; i += interval) {
-          tickPositions.push(i);
-        }
-        if (date.length - 1 !== tickPositions[tickPositions.length - 1]) {
-          tickPositions.push(date.length - 1);
-        }
-        return tickPositions;
-      },
-      labels: {
-        style: {
-          fontSize: "10px", // Thiết lập kích thước font cho nhãn của trục x
-          fontWeight: 600,
+          for (let i = 0; i < date.length; i += interval) {
+            tickPositions.push(i);
+          }
+          if (date.length - 1 !== tickPositions[tickPositions.length - 1]) {
+            tickPositions.push(date.length - 1);
+          }
+          return tickPositions;
+        },
+        labels: {
+          style: {
+            fontSize: "10px", // Thiết lập kích thước font cho nhãn của trục x
+            fontWeight: 600,
+          },
         },
       },
-    },
+    ],
     yAxis: {
       title: {
         text: "",

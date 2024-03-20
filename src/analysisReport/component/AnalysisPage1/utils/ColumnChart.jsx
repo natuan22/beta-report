@@ -38,6 +38,11 @@ const StackColumnChart = ({ data }) => {
         }
         return tickPositions;
       },
+      labels: {
+        style: {
+          fontSize: "10px",
+        },
+      },
     },
     yAxis: {
       min: 0,

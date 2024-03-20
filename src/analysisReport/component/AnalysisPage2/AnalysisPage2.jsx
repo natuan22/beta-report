@@ -364,7 +364,9 @@ const AnalysisPage2 = ({ stock }) => {
                     </span>
                   </p>
                 </div>
-                <ColumnChart data={data.macdHistogram.chart} />
+                <div className="-translate-y-[10px]">
+                  <ColumnChart data={data.macdHistogram.chart} />
+                </div>
               </div>
             </div>
           </div>
