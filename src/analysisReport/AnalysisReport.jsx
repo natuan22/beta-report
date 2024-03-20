@@ -32,17 +32,17 @@ const AnalysisReport = () => {
 
     const link1 = document.createElement("a");
     link1.href = img1;
-    link1.download = "BetaAnalysisReport-Trang1.png";
+    link1.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang1.png`;
     link1.click();
 
     const link2 = document.createElement("a");
     link2.href = img2;
-    link2.download = "BetaAnalysisReport-Trang2.png";
+    link2.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang2.png`;
     link2.click();
 
     const link3 = document.createElement("a");
     link3.href = img3;
-    link3.download = "BetaAnalysisReport-Trang3.png";
+    link3.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang3.png`;
     link3.click();
   };
   const generatePDF = async () => {
@@ -57,7 +57,7 @@ const AnalysisReport = () => {
     pdf.addPage();
     pdf.addImage(img3, "PNG", 0, 0, 210, 391);
 
-    pdf.save(`Phan-tich-ky-thuat.pdf`);
+    pdf.save(`Phan-tich-ky-thuat-${debouncedValue.toUpperCase()}.pdf`);
   };
 
   const [, cancel] = useDebounce(
