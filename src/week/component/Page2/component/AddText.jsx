@@ -66,6 +66,7 @@ const AddText = ({ handleGetTextInpur }) => {
         onOk={handleOk}
         onCancel={handleCancel}
         cancelText="Đóng"
+        footer={null}
       >
         <div className="h-[400px] grid place-items-center">
           <Form
