@@ -5,9 +5,9 @@ import moment from "moment";
 
 const LineChart = ({ data }) => {
   // Tạo mảng các ngày duy nhất
-  const uniqueDates = Array.from(
-    new Set(data.map((item) => moment(item.date).format("DD/MM")))
-  );
+  const uniqueDates = [
+    ...new Set(data?.map((item) => moment(item.date).format("DD/MM"))),
+  ];
 
   // Tạo mảng dữ liệu cho từng loại mã code
   const seriesData = {};
@@ -60,19 +60,6 @@ const LineChart = ({ data }) => {
     xAxis: [
       {
         categories: uniqueDates,
-        title: {
-          text: null,
-          style: {
-            color: localStorage.getItem("color"),
-          },
-        },
-        labels: {
-          style: {
-            color: localStorage.getItem("color"),
-            fontSize: "9px",
-          },
-        },
-        crosshair: false,
         tickInterval: Math.ceil(uniqueDates?.length / 6),
         tickPositioner: function () {
           const tickPositions = [];
@@ -88,6 +75,11 @@ const LineChart = ({ data }) => {
             tickPositions.push(uniqueDates.length - 1);
           }
           return tickPositions;
+        },
+        labels: {
+          style: {
+            fontSize: "9px",
+          },
         },
       },
     ],
