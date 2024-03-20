@@ -8,7 +8,7 @@ import ColumnChartPage3 from "./component/ColumnChartPage3";
 import { FaDownLong, FaUpLong } from "react-icons/fa6";
 import ColumnChartAfternoon from "./component/ColumnChartAfternoon";
 import MultipleColumnChart from "./component/MultipleColumnChart";
-import formatNumberMorning from "../../helper/formatNumberMorning";
+import formatNumber from "../../helper/formatNumber";
 
 const getArrow = (value) => {
   if (value < 0)
@@ -164,7 +164,7 @@ const AfternoonPage3 = () => {
                           <div className="flex items-center justify-between w-[40px]">
                             {getArrow(item.day_change_percent)}
                             <p className="m-0">
-                              {formatNumberMorning(item.day_change_percent)}%
+                              {formatNumber(item.day_change_percent)}%
                             </p>
                           </div>
                         </td>
@@ -175,7 +175,7 @@ const AfternoonPage3 = () => {
                             {getArrow(item.week_change_percent)}
                             <p className="m-0">
                               {" "}
-                              {formatNumberMorning(item.week_change_percent)}%
+                              {formatNumber(item.week_change_percent)}%
                             </p>
                           </div>
                         </td>
@@ -185,7 +185,7 @@ const AfternoonPage3 = () => {
                           <div className="flex items-center justify-between w-[40px] ">
                             {getArrow(item.month_change_percent)}
                             <p className="m-0">
-                              {formatNumberMorning(item.month_change_percent)}%
+                              {formatNumber(item.month_change_percent)}%
                             </p>
                           </div>
                         </td>

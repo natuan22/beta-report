@@ -11,7 +11,6 @@ import TableSR from "./utils/TableSR";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
-import formatNumberMorning from "../../../helper/formatNumberMorning";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AnalysisPage1 = ({ stock }) => {
@@ -263,7 +262,7 @@ const AnalysisPage1 = ({ stock }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberMorning(data.nha_nuoc)}%
+                      {formatNumber(data.nha_nuoc)}%
                     </p>
                   </div>
                 </div>
@@ -343,7 +342,7 @@ const AnalysisPage1 = ({ stock }) => {
                   <p className="w-[5px] m-0">:</p>
                   <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
                     {data &&
-                      formatNumberMorning(Number(data.loi_nhuan_ky_vong))}{" "}
+                      formatNumber(Number(data.loi_nhuan_ky_vong))}{" "}
                     %
                   </p>
                 </div>

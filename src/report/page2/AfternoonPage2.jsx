@@ -4,7 +4,7 @@ import FooterAfternoon from "../utils/component/FooterAfternoon";
 import { https } from "../../services/configService";
 import DialogAddImgAndText from "../utils/component/DialogAddImgAndText";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
-import formatNumberMorning from "../../helper/formatNumberMorning";
+import formatNumber from "../../helper/formatNumber";
 import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const AfternoonPage2 = () => {
@@ -84,7 +84,7 @@ const AfternoonPage2 = () => {
                       </td>
                       <td className="text-right px-2 py-1">
                         <p className="m-0 translate-x-[-15px]">
-                          {formatNumberMorning(item.price)}
+                          {formatNumber(item.price)}
                         </p>
                       </td>
                       <td
@@ -92,39 +92,39 @@ const AfternoonPage2 = () => {
                           item.day
                         )} text-center px-1 py-1`}
                       >
-                        {formatNumberMorning(item.day)}
+                        {formatNumber(item.day)}
                       </td>
                       <td
                         className={` ${getColorBaseOnValue(
                           item.week
                         )} text-center px-1 py-1`}
                       >
-                        {formatNumberMorning(item.week)}
+                        {formatNumber(item.week)}
                       </td>
                       <td
                         className={` ${getColorBaseOnValue(
                           item.month
                         )} text-center px-1 py-1`}
                       >
-                        {formatNumberMorning(item.month)}
+                        {formatNumber(item.month)}
                       </td>
                       <td
                         className={` ${getColorBaseOnValue(
                           item.ytd
                         )} text-center px-1 py-1`}
                       >
-                        {formatNumberMorning(item.ytd)}
+                        {formatNumber(item.ytd)}
                       </td>
                       <td
                         className={` ${getColorBaseOnValue(
                           item.year
                         )} text-center px-1 py-1`}
                       >
-                        {formatNumberMorning(item.year)}
+                        {formatNumber(item.year)}
                       </td>
                       <td className={`  text-right px-1 py-1`}>
                         <p className="m-0 translate-x-[-18px]">
-                          {formatNumberMorning(item.totalVal / 1000000000)}
+                          {formatNumber(item.totalVal / 1000000000)}
                         </p>
                       </td>
                     </tr>
