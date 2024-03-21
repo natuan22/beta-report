@@ -11,6 +11,8 @@ import TableSR from "./utils/TableSR";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
+import "./styles/analysisPage1.css";
+
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AnalysisPage1 = ({ stock }) => {
@@ -341,9 +343,7 @@ const AnalysisPage1 = ({ stock }) => {
                   </p>
                   <p className="w-[5px] m-0">:</p>
                   <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
-                    {data &&
-                      formatNumber(Number(data.loi_nhuan_ky_vong))}{" "}
-                    %
+                    {data && formatNumber(Number(data.loi_nhuan_ky_vong))} %
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-1">
@@ -387,7 +387,7 @@ const AnalysisPage1 = ({ stock }) => {
                 </div>
 
                 {data ? (
-                  <div className="text w-[450px]">
+                  <div className="text w-[450px]" id="content_analysis">
                     <h2 className="m-0 text-[15px] text-[#023E8A]">
                       {data.text[0]}
                     </h2>
