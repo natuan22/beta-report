@@ -6,7 +6,7 @@ const Page4 = () => {
   return (
     <div className="h-[1480px] w-[800px]  ">
       <div className="header">
-        <HeaderAnalysis type={3} />
+        <HeaderAnalysis />
       </div>
       <div className="banner flex flex-col items-center mt-[10px]">
         <img src={banner} alt="banner" width={760} height={350} />

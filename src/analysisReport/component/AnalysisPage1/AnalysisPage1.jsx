@@ -106,7 +106,7 @@ const AnalysisPage1 = ({ stock }) => {
         />
       </div>
       <div className="header">
-        <HeaderAnalysis type={1} />
+        <HeaderAnalysis />
       </div>
 
       <div className="content w-[800px] flex flex-col items-center  h-[990px]">

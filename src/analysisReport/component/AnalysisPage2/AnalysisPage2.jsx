@@ -40,7 +40,7 @@ const AnalysisPage2 = ({ stock }) => {
   return (
     <div className="h-[1480px] w-[800px] relative">
       <div className="header">
-        <HeaderAnalysis type={2} />
+        <HeaderAnalysis />
       </div>
 
       <div className="content w-[800px] flex flex-col items-center  h-[990px]">
@@ -255,7 +255,7 @@ const AnalysisPage2 = ({ stock }) => {
                 </div>
               </div>
               <div className="flex justify-between ">
-                <div className="h-[130px]">
+                <div className="h-[130px] mr-1">
                   <h2 className="m-0 mb-1 text-[17px]">
                     STOCHASTIC RSI{" "}
                     <span className="font-normal text-[15px] ">(14)</span>
@@ -298,9 +298,7 @@ const AnalysisPage2 = ({ stock }) => {
               </div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
-                  <h2 className="m-0 mb-1 text-[17px]">
-                    MACD <span className="font-normal text-[15px] ">(14)</span>
-                  </h2>
+                  <h2 className="m-0 mb-1 text-[17px]">MACD</h2>
                   <p className="m-0 mb-1">
                     Giá trị:{" "}
                     <span className="text-[#F89637] font-semibold">
@@ -343,10 +341,7 @@ const AnalysisPage2 = ({ stock }) => {
               </div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
-                  <h2 className="m-0 mb-1 text-[17px]">
-                    MACD Histogram{" "}
-                    <span className="font-normal text-[15px] ">(14)</span>
-                  </h2>
+                  <h2 className="m-0 mb-1 text-[17px]">MACD Histogram</h2>
                   <p className="m-0 mb-1">
                     Giá trị:{" "}
                     <span className="font-semibold text-[#023E8A]">
