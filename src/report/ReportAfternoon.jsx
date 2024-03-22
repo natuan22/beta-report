@@ -92,7 +92,7 @@ const ReportAfternoon = () => {
 
   return (
     <div className=" relative">
-      <div className="absolute right-[20%] top-[35px]">
+      <div className="absolute right-[10%] top-[35px]">
         <NavBar />
       </div>
       <div>

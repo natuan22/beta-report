@@ -1,14 +1,14 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import React, { useRef, useState } from "react";
-import NavBar from "../app/component/NavBar";
 import AnalysisPage1 from "./component/AnalysisPage1/AnalysisPage1";
 import AnalysisPage2 from "./component/AnalysisPage2/AnalysisPage2";
 import AnalysisPage3 from "./component/AnalysisPage3/AnalysisPage3";
 import { Button, TextField } from "@mui/material";
 import { useDebounce } from "react-use";
+import NavBar from "../app/component/NavBar";
 
-const AnalysisReport = () => {
+const AnalysisReportAutomation = () => {
   const [val, setVal] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
   const pageRefs = {
@@ -32,17 +32,17 @@ const AnalysisReport = () => {
 
     const link1 = document.createElement("a");
     link1.href = img1;
-    link1.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang1.png`;
+    link1.download = `BetaAnalysisReportAutomation${debouncedValue.toUpperCase()}-Trang1.png`;
     link1.click();
 
     const link2 = document.createElement("a");
     link2.href = img2;
-    link2.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang2.png`;
+    link2.download = `BetaAnalysisReportAutomation${debouncedValue.toUpperCase()}-Trang2.png`;
     link2.click();
 
     const link3 = document.createElement("a");
     link3.href = img3;
-    link3.download = `BetaAnalysisReport${debouncedValue.toUpperCase()}-Trang3.png`;
+    link3.download = `BetaAnalysisReportAutomation${debouncedValue.toUpperCase()}-Trang3.png`;
     link3.click();
   };
   const generatePDF = async () => {
@@ -87,7 +87,7 @@ const AnalysisReport = () => {
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <AnalysisPage1 stock={debouncedValue} type={1}/>
+          <AnalysisPage1 stock={debouncedValue} type={0} />
         </div>
         <div ref={pageRefs.page2}>
           <AnalysisPage2 stock={debouncedValue} />
@@ -110,4 +110,4 @@ const AnalysisReport = () => {
   );
 };
 
-export default AnalysisReport;
+export default AnalysisReportAutomation;

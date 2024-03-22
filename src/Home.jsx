@@ -90,7 +90,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      <div className="absolute right-[20%] top-[1%]">
+      <div className="absolute right-[10%] top-[1%]">
         <NavBar />
       </div>
       <div>

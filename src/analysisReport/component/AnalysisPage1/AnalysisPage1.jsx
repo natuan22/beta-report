@@ -12,17 +12,34 @@ import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import "./styles/analysisPage1.css";
+import GauChartGen from "../AnalysisPage2/utils/GauChartGen";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
-
-const AnalysisPage1 = ({ stock }) => {
+const getColorBaseOnName = (value) => {
+  if (value === "Tích cực") return "text-green-500";
+  if (value === "Tiêu cực") return "text-red-500";
+  if (value === "Trung lập") return "text-yellow-500";
+};
+const AnalysisPage1 = ({ stock, type }) => {
   // console.log(stock);
   const [data, setData] = useState();
+  const [dataAnalysis, setDataAnalysis] = useState();
   const [dataChart, setDataChart] = useState();
   const [dataTable, setDataTable] = useState();
   const [dataColumn, setDataColumn] = useState();
   const [imgSrc, setImgSrc] = useState();
-
+  const getDataAnalysis = async () => {
+    try {
+      const res = await https.get("api/v1/report/chi-so-ky-thuat", {
+        params: {
+          stock,
+        },
+      });
+      setDataAnalysis(res.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const getStockPage1 = async () => {
     try {
       const res = await https.get("api/v1/report/thong-tin-co-phieu", {
@@ -77,6 +94,7 @@ const AnalysisPage1 = ({ stock }) => {
     getDataChart();
     getDataTable();
     getDataColumnChart();
+    getDataAnalysis();
   }, [stock]);
   // console.log(stock, data);
 
@@ -99,11 +117,15 @@ const AnalysisPage1 = ({ stock }) => {
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[900px] z-30 w-full">
-        <DialogAddTechnicalReportInfor
-          stock={stock}
-          getImgFromInput={getImgFromInput}
-          onSubmitSuccess={onSubmitSuccess}
-        />
+        {type === 1 ? (
+          <DialogAddTechnicalReportInfor
+            stock={stock}
+            getImgFromInput={getImgFromInput}
+            onSubmitSuccess={onSubmitSuccess}
+          />
+        ) : (
+          <div></div>
+        )}
       </div>
       <div className="header">
         <HeaderAnalysis />
@@ -280,94 +302,121 @@ const AnalysisPage1 = ({ stock }) => {
                 </h2>
               </div>
               {dataChart ? (
-                <LineChart data={dataChart} />
+                <LineChart data={dataChart} type={type} />
               ) : (
                 <div>Loading...</div>
               )}
             </div>
             <div className="table translate-y-[-60px] ">
-              <Table data={dataTable} />
+              <Table data={dataTable} type={type} />
             </div>
-            <div className="table-2 translate-y-[-60px] ">
-              <TableSR data={data} />
-            </div>
-            <div className="translate-y-[-50px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
-              Chuyên Viên Phân Tích: {data && data.analyst_name}
-            </div>
+            {type === 1 ? (
+              <div className="table-2 translate-y-[-60px] ">
+                <TableSR data={data} />
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {type === 1 ? (
+              <div className="translate-y-[-50px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
+                Chuyên Viên Phân Tích: {data && data.analyst_name}
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
 
           <div className="cont-right w-[450px] mr-1 ">
-            <div className="h-[150px]  w-[450px] flex items-center justify-between ">
-              <div className="w-[150px] text-center h-[120px]">
-                <p className="m-0 font-bold text-[16px]">Khuyến nghị</p>
-                {data && data.is_sell.toUpperCase() === "MUA" ? (
+            {type === 1 ? (
+              <div className="h-[150px] w-[450px] flex items-center justify-between">
+                <div className="w-[150px] text-center h-[120px]">
+                  <p className="m-0 font-bold text-[16px]">Khuyến nghị</p>
+                  {data && data.is_sell.toUpperCase() === "MUA" ? (
+                    <p
+                      style={{ textShadow: "-2px 3px 3px #95e4bf " }}
+                      className="text-green-500 uppercase font-bold text-[60px] m-0"
+                    >
+                      {data && data.is_sell}
+                    </p>
+                  ) : (
+                    <p
+                      style={{ textShadow: "-2px 3px 3px #e4a095 " }}
+                      className="text-red-500 uppercase font-bold text-[60px] m-0"
+                    >
+                      {data && data.is_sell}
+                    </p>
+                  )}
+                </div>
+                <div className="bg-[#AECFF6] w-[300px] h-[120px] flex flex-col items-center justify-center ">
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="m-0 w-[155px] text-[14px] font-semibold">
+                      Giá mục tiêu {data && data.thoi_gian_nam_giu}{" "}
+                    </p>
+                    <p className="w-[5px] m-0">:</p>
+                    <p className="m-0 w-[110px] text-[13px] font-bold">
+                      {data && formatNumberPage3(Number(data.gia_muc_tieu))}{" "}
+                      đồng/CP
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="m-0 w-[155px] text-[14px] font-semibold">
+                      Giá thị trường
+                    </p>
+                    <p className="w-[5px] m-0">:</p>
+                    <p className="m-0 w-[110px] text-[13px] font-bold">
+                      {data &&
+                        formatNumberPage3(
+                          Number(data.gia_thi_truong) * 1000
+                        )}{" "}
+                      đồng/CP
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="m-0 w-[155px] text-[14px] font-semibold">
+                      Lợi nhuận kỳ vọng
+                    </p>
+                    <p className="w-[5px] m-0">:</p>
+                    <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
+                      {data &&
+                        formatNumber(
+                          ((Number(data.gia_muc_tieu) -
+                            Number(data.gia_thi_truong * 1000)) /
+                            Number(data.gia_thi_truong * 1000)) *
+                            100
+                        )}{" "}
+                      %
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="m-0 w-[155px] text-[14px] font-semibold">
+                      Giá bán dừng lỗ
+                    </p>
+                    <p className="w-[5px] m-0">:</p>
+                    <p className="m-0 w-[110px] text-[13px] font-bold">
+                      {data && formatNumberPage3(Number(data.gia_ban_dung_lo))}{" "}
+                      đồng/CP
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="h-[150px] w-[450px] flex items-center justify-between">
+                <div className="w-[202px] text-center h-[120px]">
+                  <p className="m-0 font-bold text-[16px] pt-2">
+                    Tín hiệu kỹ thuật tổng hợp
+                  </p>
                   <p
                     style={{ textShadow: "-2px 3px 3px #95e4bf " }}
-                    className="text-green-500 uppercase font-bold text-[60px] m-0"
+                    className="text-green-500 uppercase font-bold text-[36px] m-0 pt-5"
                   >
-                    {data && data.is_sell}
-                  </p>
-                ) : (
-                  <p
-                    style={{ textShadow: "-2px 3px 3px #e4a095 " }}
-                    className="text-red-500 uppercase font-bold text-[60px] m-0"
-                  >
-                    {data && data.is_sell}
-                  </p>
-                )}
-              </div>
-              <div className="bg-[#AECFF6] w-[300px] h-[120px] flex flex-col items-center justify-center ">
-                <div className="flex items-center justify-between mt-1">
-                  <p className="m-0 w-[155px] text-[14px] font-semibold">
-                    Giá mục tiêu {data && data.thoi_gian_nam_giu}{" "}
-                  </p>
-                  <p className="w-[5px] m-0">:</p>
-                  <p className="m-0 w-[110px] text-[13px] font-bold">
-                    {data && formatNumberPage3(Number(data.gia_muc_tieu))}{" "}
-                    đồng/CP
+                    Tích cực
                   </p>
                 </div>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="m-0 w-[155px] text-[14px] font-semibold">
-                    Giá thị trường
-                  </p>
-                  <p className="w-[5px] m-0">:</p>
-                  <p className="m-0 w-[110px] text-[13px] font-bold">
-                    {data &&
-                      formatNumberPage3(
-                        Number(data.gia_thi_truong) * 1000
-                      )}{" "}
-                    đồng/CP
-                  </p>
-                </div>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="m-0 w-[155px] text-[14px] font-semibold">
-                    Lợi nhuận kỳ vọng
-                  </p>
-                  <p className="w-[5px] m-0">:</p>
-                  <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
-                    {data &&
-                      formatNumber(
-                        ((Number(data.gia_muc_tieu) -
-                          Number(data.gia_thi_truong * 1000)) /
-                          Number(data.gia_thi_truong * 1000)) *
-                          100
-                      )}{" "}
-                    %
-                  </p>
-                </div>
-                <div className="flex items-center justify-between mt-1">
-                  <p className="m-0 w-[155px] text-[14px] font-semibold">
-                    Giá bán dừng lỗ
-                  </p>
-                  <p className="w-[5px] m-0">:</p>
-                  <p className="m-0 w-[110px] text-[13px] font-bold">
-                    {data && formatNumberPage3(Number(data.gia_ban_dung_lo))}{" "}
-                    đồng/CP
-                  </p>
+                <div className="w-[248px]">
+                  
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="imgPrice w-[450px] pt-1">
               <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px]  text-center p-1 ">
@@ -375,13 +424,18 @@ const AnalysisPage1 = ({ stock }) => {
                   Biểu đồ giá
                 </h2>
               </div>
-              <img
-                // src={data ? `${resourceURL}${data.img}` : ""}
-                src={imgSrc}
-                alt="img"
-                width={450}
-                height={200}
-              />
+              {type === 1 ? (
+                <img
+                  // src={data ? `${resourceURL}${data.img}` : ""}
+                  src={imgSrc}
+                  alt="img"
+                  width={450}
+                  height={200}
+                />
+              ) : (
+                <div className="h-[365px]"></div>
+              )}
+
               <div className="columnChart ">
                 <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30  text-center p-1  tran ">
                   <h2 className="text-white font-semibold text-[15px] m-0 leading-[19px] ">
@@ -395,27 +449,158 @@ const AnalysisPage1 = ({ stock }) => {
                     <div>Loading...</div>
                   )}
                 </div>
+                {type === 1 ? (
+                  <div>
+                    {data ? (
+                      <div className="text w-[450px]" id="content_analysis">
+                        <h2 className="m-0 text-[15px] text-[#023E8A]">
+                          {data.text[0]}
+                        </h2>
+                        <p className="m-0 text-[14px] text-justify">
+                          <div
+                            dangerouslySetInnerHTML={{ __html: data.text[1] }}
+                          ></div>
+                        </p>
 
-                {data ? (
-                  <div className="text w-[450px]" id="content_analysis">
-                    <h2 className="m-0 text-[15px] text-[#023E8A]">
-                      {data.text[0]}
-                    </h2>
-                    <p className="m-0 text-[14px] text-justify">
-                      <div
-                        dangerouslySetInnerHTML={{ __html: data.text[1] }}
-                      ></div>
-                    </p>
-
-                    <h2 className="m-0 text-[15px] text-[#023E8A]">
-                      Rủi ro xu hướng
-                    </h2>
-                    <p className="m-0 text-[14px] text-justify">
-                      {data.text[2]}
-                    </p>
+                        <h2 className="m-0 text-[15px] text-[#023E8A]">
+                          Rủi ro xu hướng
+                        </h2>
+                        <p className="m-0 text-[14px] text-justify">
+                          {data.text[2]}
+                        </p>
+                      </div>
+                    ) : (
+                      <p>Loading...</p>
+                    )}
                   </div>
                 ) : (
-                  <p>Loading...</p>
+                  <div>
+                    {dataAnalysis ? (
+                      <div className="flex">
+                        <table className="w-full h-[250px] border border-1 border-solid border-[#143A65] border-collapse">
+                          <thead className="bg-gradient-to-b from-[#024A9B] to-[#0568D8]">
+                            <tr className="text-white font-semibold text-center text-[14px]">
+                              <td className="p-1">Chỉ báo</td>
+                              <td className="p-1">Tín hiệu</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="font-semibold">
+                              <td className="text-left">RSI</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.rsi.rate
+                                )}`}
+                              >
+                                {dataAnalysis.rsi.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">CCI</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.cci.rate
+                                )}`}
+                              >
+                                {dataAnalysis.cci.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">Williams %R</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.williams.rate
+                                )}`}
+                              >
+                                {dataAnalysis.williams.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">DI+ DI-</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.rsi.rate
+                                )}`}
+                              >
+                                {dataAnalysis.rsi.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">STOCHASTIC</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.stochastic.rate
+                                )}`}
+                              >
+                                {dataAnalysis.stochastic.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">STOCHASTIC RSI</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.stochasticRsi.rate
+                                )}`}
+                              >
+                                {dataAnalysis.stochasticRsi.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">MACD</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.macd.rate
+                                )}`}
+                              >
+                                {dataAnalysis.macd.rate}
+                              </td>
+                            </tr>
+                            <tr className="font-semibold">
+                              <td className="text-left">MACD Histogram</td>
+                              <td
+                                className={`${getColorBaseOnName(
+                                  dataAnalysis.macdHistogram.rate
+                                )}`}
+                              >
+                                {dataAnalysis.macdHistogram.rate}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table className="w-full h-[250px] border border-1 border-solid border-[#143A65] border-collapse">
+                          <thead className="bg-gradient-to-b from-[#024A9B] to-[#0568D8]">
+                            <tr className="text-white font-semibold text-center text-[14px]">
+                              <td className="p-1">Đường trung bình động</td>
+                              <td className="p-1">Tín hiệu</td>
+                            </tr>
+                          </thead>
+
+                          <tbody className="">
+                            {dataAnalysis.table?.map((item, index) => {
+                              return (
+                                <tr
+                                  className="text-center font-semibold"
+                                  key={index}
+                                >
+                                  <td className="">{item.name}</td>
+                                  <td
+                                    className={`${getColorBaseOnName(
+                                      item.single
+                                    )}`}
+                                  >
+                                    {item.single}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div>Loading...</div>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

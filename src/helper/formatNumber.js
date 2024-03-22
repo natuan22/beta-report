@@ -1,4 +1,5 @@
 const formatNumber = (number) => {
+    if(!number) return null
     const strNumber = number.toFixed(2);
 
     // Tách phần âm, phần nguyên và phần thập phân

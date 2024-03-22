@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
-const LineChart = ({ data }) => {
+const LineChart = ({ data, type }) => {
   // Tạo mảng các ngày duy nhất
   const uniqueDates = [
     ...new Set(data?.map((item) => moment(item.date).format("DD/MM"))),
@@ -113,7 +113,11 @@ const LineChart = ({ data }) => {
     series: series,
   };
   return (
-    <div className="h-[210px] translate-y-[-15px]">
+    <div
+      className={`${
+        type === 1 ? "h-[210px]" : "h-[330px]"
+      } translate-y-[-15px]`}
+    >
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
