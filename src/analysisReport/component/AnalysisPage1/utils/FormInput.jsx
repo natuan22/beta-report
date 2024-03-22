@@ -28,8 +28,6 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       formData.append("is_sell", data.is_sell);
       formData.append("gia_muc_tieu", data.gia_muc_tieu);
       formData.append("thoi_gian_nam_giu", data.thoi_gian_nam_giu);
-      formData.append("gia_thi_truong", data.gia_thi_truong);
-      formData.append("loi_nhuan_ky_vong", data.loi_nhuan_ky_vong);
       formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
       formData.append("analyst_name", data.analyst_name);
       formData.append("img", data.img);
@@ -58,8 +56,6 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       is_sell: "",
       thoi_gian_nam_giu: "",
       gia_muc_tieu: 0,
-      gia_thi_truong: 0,
-      loi_nhuan_ky_vong: 0,
       gia_ban_dung_lo: 0,
       img: {},
       text1: "",
@@ -184,78 +180,6 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                 width: 300,
               }}
             />
-          </Form.Item>
-          <Form.Item label="Giá thị trường">
-            <InputNumber
-              name="gia_thi_truong"
-              formatter={(value) =>
-                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              }
-              parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-              onChange={(value) => {
-                handleChange({
-                  target: {
-                    name: "gia_thi_truong",
-                    value: value,
-                  },
-                });
-              }}
-              onKeyDown={(e) => {
-                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
-                if (
-                  !(
-                    (e.key >= "0" && e.key <= "9") ||
-                    e.key === "Backspace" ||
-                    e.key === "Tab"
-                  )
-                ) {
-                  e.preventDefault();
-                }
-              }}
-              style={{
-                width: 300,
-              }}
-            />
-            {" đồng/CP"}
-          </Form.Item>
-          <Form.Item label="Lợi nhuận kỳ vọng">
-            <InputNumber
-              name="loi_nhuan_ky_vong"
-              min={0}
-              max={100}
-              onChange={(value) => {
-                handleChange({
-                  target: {
-                    name: "loi_nhuan_ky_vong",
-                    value: value,
-                  },
-                });
-              }}
-              onKeyDown={(e) => {
-                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
-                if (
-                  !(
-                    (e.key >= "0" && e.key <= "9") ||
-                    e.key === "." ||
-                    e.key === "Backspace" ||
-                    e.key === "Tab"
-                  )
-                ) {
-                  e.preventDefault();
-                }
-
-                // Ngăn chặn việc nhập nhiều hơn một dấu chấm thập phân
-                if (e.key === "." && e.target.value.includes(".")) {
-                  e.preventDefault();
-                }
-              }}
-              step="0.1"
-              stringMode
-              style={{
-                width: 300,
-              }}
-            />
-            {" %"}
           </Form.Item>
           <Form.Item label="Giá bán dừng lỗ">
             <InputNumber
