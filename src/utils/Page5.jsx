@@ -55,16 +55,16 @@ const Page5 = () => {
             {data?.length > 0 ? (
               <div className="card-body grid grid-cols-2 gap-5 ">
                 <div className="card-content h-[260px] border-1 border-solid border-collapse border-[#064BAD] rounded-xl">
-                  <SplineChart data={data[0]} />
+                  {data[0] && <SplineChart data={data[0]} />}
                 </div>
                 <div className="card-content h-[260px] border-1 border-solid border-collapse border-[#064BAD] rounded-xl">
-                  <SplineChart data={data[1]} />
+                  {data[1] && <SplineChart data={data[1]} />}
                 </div>
                 <div className="card-content h-[260px] border-1 border-solid border-collapse border-[#064BAD] rounded-xl">
-                  <SplineChart data={data[3]} />
+                  {data[3] && <SplineChart data={data[3]} />}
                 </div>
                 <div className="card-content h-[260px] border-1 border-solid border-collapse border-[#064BAD] rounded-xl">
-                  <SplineChart data={data[2]} />
+                  {data[2] && <SplineChart data={data[2]} />}
                 </div>
               </div>
             ) : (

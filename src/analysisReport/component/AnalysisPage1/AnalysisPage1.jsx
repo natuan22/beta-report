@@ -12,7 +12,8 @@ import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import "./styles/analysisPage1.css";
-import GauChartGen from "../AnalysisPage2/utils/GauChartGen";
+import formatNumberMorning from "../../../helper/formatNumberMorning";
+import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -28,6 +29,7 @@ const AnalysisPage1 = ({ stock, type }) => {
   const [dataTable, setDataTable] = useState();
   const [dataColumn, setDataColumn] = useState();
   const [imgSrc, setImgSrc] = useState();
+  const [maxType, setMaxType] = useState("");
   const getDataAnalysis = async () => {
     try {
       const res = await https.get("api/v1/report/chi-so-ky-thuat", {
@@ -114,6 +116,22 @@ const AnalysisPage1 = ({ stock, type }) => {
       setImgSrc("");
     }
   }, [data]);
+  useEffect(() => {
+    if (dataAnalysis) {
+      const { positive, negative, neutral } = dataAnalysis.generalSignal;
+
+      // Xác định loại phản hồi lớn nhất
+      let maxCount = Math.max(positive, negative, neutral);
+      if (maxCount === positive) {
+        setMaxType("Tích cực");
+      } else if (maxCount === negative) {
+        setMaxType("Tiêu cực");
+      } else {
+        setMaxType("Trung lập");
+      }
+    }
+  }, [dataAnalysis]);
+
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[900px] z-30 w-full">
@@ -286,7 +304,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.nha_nuoc)}%
+                      {formatNumberMorning(data.nha_nuoc)}%
                     </p>
                   </div>
                 </div>
@@ -406,14 +424,33 @@ const AnalysisPage1 = ({ stock, type }) => {
                     Tín hiệu kỹ thuật tổng hợp
                   </p>
                   <p
-                    style={{ textShadow: "-2px 3px 3px #95e4bf " }}
-                    className="text-green-500 uppercase font-bold text-[36px] m-0 pt-5"
+                    style={{
+                      textShadow:
+                        maxType === "Tích cực"
+                          ? "-2px 3px 3px #95e4bf"
+                          : maxType === "Tiêu cực"
+                          ? "-2px 3px 3px #e4a095"
+                          : "-2px 3px 3px #FACC15",
+                    }}
+                    className={`${
+                      maxType === "Tích cực"
+                        ? "text-green-500"
+                        : maxType === "Tiêu cực"
+                        ? "text-red-500"
+                        : "text-yellow-500"
+                    } uppercase font-bold text-[36px] m-0 pt-5`}
                   >
-                    Tích cực
+                    {maxType}
                   </p>
                 </div>
                 <div className="w-[248px]">
-                  
+                  {dataAnalysis ? (
+                    <GauChartGenAnalReportAuto
+                      data={dataAnalysis.generalSignal}
+                    />
+                  ) : (
+                    <div>Loading...</div>
+                  )}
                 </div>
               </div>
             )}
