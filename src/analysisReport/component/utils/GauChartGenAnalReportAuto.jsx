@@ -5,7 +5,7 @@ import HighchartsMore from "highcharts/highcharts-more";
 
 HighchartsMore(Highcharts);
 
-const GauChartTech = ({ data }) => {
+const GauChartGenAnalReportAuto = ({ data }) => {
   // Tính toán các giá trị cho biểu đồ
   const calculateChartValues = (data) => {
     const positive = data.positive;
@@ -49,9 +49,9 @@ const GauChartTech = ({ data }) => {
         text: "Rất tiêu cực",
         align: "center",
         verticalAlign: "top",
-        x: 27,
+        x: 33,
         y: 14,
-        rotation: -71,
+        rotation: -70,
         style: { fontSize: "7px", fontWeight: 600 },
       },
     }, // Rất tiêu cực
@@ -64,9 +64,9 @@ const GauChartTech = ({ data }) => {
         text: "Tiêu cực",
         align: "center",
         verticalAlign: "top",
-        x: 40,
+        x: 44,
         y: 21,
-        rotation: -36,
+        rotation: -37,
         style: {
           fontSize: "9px",
           fontWeight: 600,
@@ -99,8 +99,8 @@ const GauChartTech = ({ data }) => {
         text: "Tích cực",
         align: "center",
         verticalAlign: "top",
-        x: -31,
-        y: 21,
+        x: -35,
+        y: 22,
         rotation: 37,
         style: {
           fontSize: "9px",
@@ -117,9 +117,9 @@ const GauChartTech = ({ data }) => {
         text: "Rất tích cực",
         align: "center",
         verticalAlign: "top",
-        x: -18,
-        y: 14,
-        rotation: 70,
+        x: -25,
+        y: 15,
+        rotation: 68,
         style: {
           fontSize: "7px",
           fontWeight: 600,
@@ -139,12 +139,6 @@ const GauChartTech = ({ data }) => {
     },
     title: {
       text: "",
-      align: "low", // Đặt tiêu đề ở dưới
-      style: {
-        fontSize: "16px", // Kích thước tiêu đề
-        color: "#333", // Màu của tiêu đề
-      },
-      y: 30, // Đặt vị trí y để tiêu đề nằm bên dưới
     },
     pane: {
       startAngle: -90,
@@ -199,18 +193,18 @@ const GauChartTech = ({ data }) => {
 
   return (
     <div className="relative">
-      <div className="h-[200px] w-[250px]">
+      <div className="h-[180px]">
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
           containerProps={{ style: { height: "100%", width: "100%" } }}
         />
       </div>
-      <div className="absolute bottom-[65px] left-[43px]">
-        <p className="m-0 text-[13px] font-bold">Tín Hiệu Chỉ Báo Kỹ Thuật</p>
+      <div className="absolute bottom-[65px] left-[70px]">
+        <p className="m-0 text-[13px] font-bold">Tín Hiệu Tổng Hợp</p>
       </div>
 
-      <div className="flex justify-between translate-y-[-30px]">
+      <div className="flex justify-between translate-y-[-30px] z-40">
         <div className="flex flex-col items-center text-red-400 font-semibold">
           <p className="m-0 text-[13px]">Tiêu cực</p>
           <p className="m-0 text-[13px]">{data.negative}</p>
@@ -228,4 +222,4 @@ const GauChartTech = ({ data }) => {
   );
 };
 
-export default GauChartTech;
+export default GauChartGenAnalReportAuto;

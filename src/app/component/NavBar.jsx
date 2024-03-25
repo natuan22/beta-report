@@ -45,7 +45,7 @@ const NavBar = () => {
               : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
           }
         >
-          Phân tích
+          Phân tích kỹ thuật
         </NavLink>
         <NavLink
           to="/phan-tich-ky-thuat-tu-dong"
@@ -55,7 +55,7 @@ const NavBar = () => {
               : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
           }
         >
-          Phân tích tự động
+          Phân tích kỹ thuật tự động
         </NavLink>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { getColorBaseOnValue } from '../../../../helper/getColorBaseOnValue'
 import formatNumber from '../../../../helper/formatNumber'
+import formatNumberMorning from '../../../../helper/formatNumberMorning'
 
 const GoodsPrice = ({ data }) => {
     return (
@@ -21,7 +22,7 @@ const GoodsPrice = ({ data }) => {
                         <tr>
                             <td className='text-left pl-2 py-1 font-semibold text-[11px] '>{item.name}</td>
                             <td className='text-center px-2 py-1 text-[11px]'>{formatNumber(item.price)}</td>
-                            <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1 text-[11px]`}>{formatNumber(item.day)}</td>
+                            <td className={`${getColorBaseOnValue(item.day)} text-center px-1 py-1 text-[11px]`}>{formatNumberMorning(item.day)}</td>
                             <td className={`${getColorBaseOnValue(item.month)} text-center px-1 py-1 text-[11px]`}>{formatNumber(item.month)}</td>
                             <td className={`${getColorBaseOnValue(item.ytd)} text-center px-1 py-1 text-[11px]`}>{formatNumber(item.ytd)}</td>
                             <td className={`${getColorBaseOnValue(item.year)} text-center px-1 py-1 text-[11px]`}>{formatNumber(item.year)}</td>

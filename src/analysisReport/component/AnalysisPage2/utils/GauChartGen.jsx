@@ -40,11 +40,92 @@ const GauChartGen = ({ data }) => {
   const resultMaxMin = findMaxMin(chartValues);
 
   const colorBands = [
-    { from: chartValues[0], to: chartValues[1], color: "#FF0000", thickness: 30 }, // Rất tiêu cực
-    { from: chartValues[1], to: chartValues[2], color: "#FFA500", thickness: 30 }, // Tiêu cực
-    { from: chartValues[2], to: chartValues[3], color: "#FFFF00", thickness: 30 }, // Trung lập
-    { from: chartValues[3], to: chartValues[4], color: "#00FF00", thickness: 30 }, // Tích cực
-    { from: chartValues[4], to: chartValues[5], color: "#008000", thickness: 30 }, // Rất tích cực
+    {
+      from: chartValues[0],
+      to: chartValues[1],
+      color: "#FF0000",
+      thickness: 20,
+      label: {
+        text: "Rất tiêu cực",
+        align: "center",
+        verticalAlign: "top",
+        x: 27,
+        y: 14,
+        rotation: -71,
+        style: { fontSize: "7px", fontWeight: 600 },
+      },
+    }, // Rất tiêu cực
+    {
+      from: chartValues[1],
+      to: chartValues[2],
+      color: "#FFA500",
+      thickness: 20,
+      label: {
+        text: "Tiêu cực",
+        align: "center",
+        verticalAlign: "top",
+        x: 40,
+        y: 21,
+        rotation: -36,
+        style: {
+          fontSize: "9px",
+          fontWeight: 600,
+        },
+      },
+    }, // Tiêu cực
+    {
+      from: chartValues[2],
+      to: chartValues[3],
+      color: "#FFFF00",
+      thickness: 20,
+      label: {
+        text: "Trung lập",
+        align: "center",
+        verticalAlign: "top",
+        x: 61,
+        y: 25,
+        style: {
+          fontSize: "9px",
+          fontWeight: 600,
+        },
+      },
+    }, // Trung lập
+    {
+      from: chartValues[3],
+      to: chartValues[4],
+      color: "#00FF00",
+      thickness: 20,
+      label: {
+        text: "Tích cực",
+        align: "center",
+        verticalAlign: "top",
+        x: -31,
+        y: 21,
+        rotation: 37,
+        style: {
+          fontSize: "9px",
+          fontWeight: 600,
+        },
+      },
+    }, // Tích cực
+    {
+      from: chartValues[4],
+      to: chartValues[5],
+      color: "#008000",
+      thickness: 20,
+      label: {
+        text: "Rất tích cực",
+        align: "center",
+        verticalAlign: "top",
+        x: -18,
+        y: 14,
+        rotation: 70,
+        style: {
+          fontSize: "7px",
+          fontWeight: 600,
+        },
+      },
+    }, // Rất tích cực
   ];
 
   const options = {

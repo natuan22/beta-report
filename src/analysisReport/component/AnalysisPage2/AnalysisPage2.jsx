@@ -45,37 +45,15 @@ const AnalysisPage2 = ({ stock }) => {
 
       <div className="content w-[800px] flex flex-col items-center  h-[990px]">
         <div className="cont-top flex justify-around w-[780px] translate-y-[-30px] relative">
-          <div className="absolute flex top-[50px]">
-            <div className="flex items-center  w-[130px]">
-              <div className="w-[13px] h-[13px] bg-[#FF0000] mr-1"></div>
-              <p className="m-0 text-[15px] font-semibold">: Rất tiêu cực</p>
-            </div>
-            <div className="flex items-center  w-[130px]">
-              <div className="w-[13px] h-[13px] bg-[#FFA500] mr-1"></div>
-              <p className="m-0 text-[15px] font-semibold">: Tiêu cực</p>
-            </div>
-            <div className="flex items-center  w-[130px]">
-              <div className="w-[13px] h-[13px] bg-[#FFFF00] mr-1"></div>
-              <p className="m-0 text-[15px] font-semibold">: Trung lập</p>
-            </div>
-            <div className="flex items-center  w-[130px]">
-              <div className="w-[13px] h-[13px] bg-[#00FF00] mr-1"></div>
-              <p className="m-0 text-[15px] font-semibold">: Tích cực</p>
-            </div>
-            <div className="flex items-center  w-[130px]">
-              <div className="w-[13px] h-[13px] bg-[#008000] mr-1"></div>
-              <p className="m-0 text-[15px] font-semibold">: Rất tích cực</p>
-            </div>
-          </div>
           {data ? (
             <>
-              <div className=" w-[250px] translate-y-[30px]">
+              <div className=" w-[250px] translate-y-[10px]">
                 <GauChartTech data={data.technicalSignal} />
               </div>
-              <div className=" w-[250px] translate-y-[30px]">
+              <div className=" w-[250px] translate-y-[10px]">
                 <GauChartGen data={data.generalSignal} />
               </div>
-              <div className=" w-[250px] translate-y-[30px]">
+              <div className=" w-[250px] translate-y-[10px]">
                 <GauChartTrend data={data.trendSignal} />
               </div>
             </>
@@ -84,7 +62,7 @@ const AnalysisPage2 = ({ stock }) => {
           )}
         </div>
         {data ? (
-          <div className="cont-mid flex justify-between w-[780px] translate-y-[-30px] pt-3">
+          <div className="cont-mid flex justify-between w-[780px] translate-y-[-40px] pt-3">
             <div>
               <div className="flex justify-between ">
                 <div className="h-[130px]">
