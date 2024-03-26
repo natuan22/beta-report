@@ -3,7 +3,7 @@ import Footer from "../component/Footer";
 import Header from "../component/Header";
 import { https } from "../services/configService";
 import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
-import formatNumberMorning from "../helper/formatNumberMorning";
+import formatNumber from "../helper/formatNumber";
 
 const Page2 = () => {
   const [rate, setRate] = useState();
@@ -108,28 +108,28 @@ const Page2 = () => {
                       {item.code}
                     </td>
                     <td className="text-center px-2 py-1">
-                      {formatNumberMorning(item.price)}
+                      {formatNumber(item.price)}
                     </td>
                     <td
                       className={`${getColorBaseOnValue(
                         item.day
                       )} text-center px-1 py-1`}
                     >
-                      {formatNumberMorning(item.day)}
+                      {formatNumber(item.day)}
                     </td>
                     <td
                       className={`${getColorBaseOnValue(
                         item.month
                       )} text-center px-1 py-1`}
                     >
-                      {formatNumberMorning(item.month)}
+                      {formatNumber(item.month)}
                     </td>
                     <td
                       className={`${getColorBaseOnValue(
                         item.year
                       )} text-center px-1 py-1`}
                     >
-                      {formatNumberMorning(item.year)}
+                      {formatNumber(item.year)}
                     </td>
                   </tr>
                 );
@@ -159,28 +159,28 @@ const Page2 = () => {
                     {item.code}
                   </td>
                   <td className="text-center px-2 py-3">
-                    {formatNumberMorning(item.price)}
+                    {formatNumber(item.price)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.day
                     )} text-center px-1 py-3`}
                   >
-                    {formatNumberMorning(item.day)}
+                    {formatNumber(item.day)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.month
                     )} text-center px-1 py-3`}
                   >
-                    {formatNumberMorning(item.month)}
+                    {formatNumber(item.month)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.year
                     )} text-center px-1 py-3`}
                   >
-                    {formatNumberMorning(item.year)}
+                    {formatNumber(item.year)}
                   </td>
                 </tr>
               ))}
@@ -214,35 +214,35 @@ const Page2 = () => {
                     {item.name}
                   </td>
                   <td className="text-center px-2 py-1">
-                    {formatNumberMorning(item.price)}
+                    {formatNumber(item.price)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.day
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.day)}
+                    {formatNumber(item.day)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.month
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.month)}
+                    {formatNumber(item.month)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.ytd
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.ytd)}
+                    {formatNumber(item.ytd)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.year
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.year)}
+                    {formatNumber(item.year)}
                   </td>
                 </tr>
               ))}
@@ -274,35 +274,35 @@ const Page2 = () => {
                 <tr>
                   <td className="text-left pl-2 py-1 font-bold">{item.name}</td>
                   <td className="text-center px-2 py-1">
-                    {formatNumberMorning(item.price)}
+                    {formatNumber(item.price)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.day
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.day)}
+                    {formatNumber(item.day)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.month
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.month)}
+                    {formatNumber(item.month)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.ytd
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.ytd)}
+                    {formatNumber(item.ytd)}
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
                       item.year
                     )} text-center px-1 py-1`}
                   >
-                    {formatNumberMorning(item.year)}
+                    {formatNumber(item.year)}
                   </td>
                 </tr>
               ))}

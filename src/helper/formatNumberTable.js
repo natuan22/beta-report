@@ -1,4 +1,5 @@
-const formatNumberMorning = (number) => {
+const formatNumberTable = (number) => {
+    if(!number) return null
     const strNumber = number.toFixed(2);
 
     // Tách phần âm, phần nguyên và phần thập phân
@@ -18,4 +19,4 @@ const formatNumberMorning = (number) => {
 }
 
 
-export default formatNumberMorning
+export default formatNumberTable
