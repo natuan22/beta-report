@@ -5,7 +5,6 @@ import { https } from "../../services/configService";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import DialogNews from "../../component/DialogNews";
-import formatNumberMorning from "../../helper/formatNumberMorning";
 
 const AfternoonPage4 = () => {
   const [rate, setRate] = useState();
@@ -285,7 +284,7 @@ const AfternoonPage4 = () => {
                               item.day
                             )} text-[12px] text-center px-1 py-1`}
                           >
-                            {formatNumberMorning(item.day)}
+                            {formatNumber(item.day)}
                           </td>
                           <td
                             className={`${getColorBaseOnValue(

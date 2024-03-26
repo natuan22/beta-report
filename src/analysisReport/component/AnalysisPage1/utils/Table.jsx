@@ -1,7 +1,6 @@
 import React from "react";
 import { getColorBaseOnValue } from "../../../../helper/getColorBaseOnValue";
 import formatNumber from "../../../../helper/formatNumber";
-import formatNumberMorning from "../../../../helper/formatNumberMorning";
 
 const Table = ({ data, type }) => {
   return (
@@ -36,7 +35,7 @@ const Table = ({ data, type }) => {
                     {formatNumber(item.month)}%
                   </td>
                   <td className={`${getColorBaseOnValue(item.month_3)} `}>
-                    {formatNumberMorning(item.month_3)}%
+                    {formatNumber(item.month_3)}%
                   </td>
                   <td className={`${getColorBaseOnValue(item.ytd)} `}>
                     {formatNumber(item.ytd)}%

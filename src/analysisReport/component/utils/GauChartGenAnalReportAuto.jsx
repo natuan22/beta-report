@@ -2,16 +2,18 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
+import "../styles/triangle.css";
 
 HighchartsMore(Highcharts);
 
 const GauChartGenAnalReportAuto = ({ data }) => {
   // Tính toán các giá trị cho biểu đồ
   const calculateChartValues = (data) => {
+    const neutral = data.neutral;
     const positive = data.positive;
     const negative = data.negative;
 
-    const max = positive + negative;
+    const max = positive + negative + neutral;
     const min = -max;
     const step = max / 5;
     const resultArray = [];
@@ -51,7 +53,7 @@ const GauChartGenAnalReportAuto = ({ data }) => {
         verticalAlign: "top",
         x: 33,
         y: 14,
-        rotation: -70,
+        rotation: -71,
         style: { fontSize: "7px", fontWeight: 600 },
       },
     }, // Rất tiêu cực
@@ -117,9 +119,9 @@ const GauChartGenAnalReportAuto = ({ data }) => {
         text: "Rất tích cực",
         align: "center",
         verticalAlign: "top",
-        x: -25,
-        y: 15,
-        rotation: 68,
+        x: -23,
+        y: 14,
+        rotation: 69,
         style: {
           fontSize: "7px",
           fontWeight: 600,
@@ -200,11 +202,7 @@ const GauChartGenAnalReportAuto = ({ data }) => {
           containerProps={{ style: { height: "100%", width: "100%" } }}
         />
       </div>
-      <div className="absolute bottom-[65px] left-[70px]">
-        <p className="m-0 text-[13px] font-bold">Tín Hiệu Tổng Hợp</p>
-      </div>
-
-      <div className="flex justify-between translate-y-[-30px] z-40">
+      <div className="flex justify-between translate-y-[-35px] z-40">
         <div className="flex flex-col items-center text-red-400 font-semibold">
           <p className="m-0 text-[13px]">Tiêu cực</p>
           <p className="m-0 text-[13px]">{data.negative}</p>

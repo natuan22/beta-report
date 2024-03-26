@@ -12,8 +12,8 @@ import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import "./styles/analysisPage1.css";
-import formatNumberMorning from "../../../helper/formatNumberMorning";
 import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
+import Candlestick from "../utils/Candlestick";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -304,7 +304,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberMorning(data.nha_nuoc)}%
+                      {formatNumber(data.nha_nuoc)}%
                     </p>
                   </div>
                 </div>
@@ -449,7 +449,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                       data={dataAnalysis.generalSignal}
                     />
                   ) : (
-                    <div>Loading...</div>
+                    <div className="text-center">Loading...</div>
                   )}
                 </div>
               </div>
@@ -470,7 +470,13 @@ const AnalysisPage1 = ({ stock, type }) => {
                   height={200}
                 />
               ) : (
-                <div className="h-[365px]"></div>
+                <div className="h-[365px]">
+                  {/* {dataAnalysis ? (
+                    <Candlestick data={dataAnalysis.chart} />
+                  ) : (
+                    <div>Loading...</div>
+                  )} */}
+                </div>
               )}
 
               <div className="columnChart ">
@@ -514,7 +520,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                   <div>
                     {dataAnalysis ? (
                       <div className="flex">
-                        <table className="w-full h-[250px] border border-1 border-solid border-[#143A65] border-collapse">
+                        <table className="w-full h-[250px] border-y-[1px] border-l-[1px] border-r-[0.5px] border-solid border-[#143A65] border-collapse">
                           <thead className="bg-gradient-to-b from-[#024A9B] to-[#0568D8]">
                             <tr className="text-white font-semibold text-center text-[14px]">
                               <td className="p-1">Chỉ báo</td>
@@ -605,7 +611,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                           </tbody>
                         </table>
 
-                        <table className="w-full h-[250px] border border-1 border-solid border-[#143A65] border-collapse">
+                        <table className="w-full h-[250px] border-y-[1px] border-r-[1px] border-l-0 border-solid border-[#143A65] border-collapse">
                           <thead className="bg-gradient-to-b from-[#024A9B] to-[#0568D8]">
                             <tr className="text-white font-semibold text-center text-[14px]">
                               <td className="p-1">Đường trung bình động</td>

@@ -5,6 +5,7 @@ import { https } from "../../../services/configService";
 import formatNumber from "../../../helper/formatNumber";
 import formatNumberWeek from "../../../helper/formatNumberWeek";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
+import formatNumberTable from "../../../helper/formatNumberTable";
 
 const Page9Week = () => {
   const [data, setData] = useState();
@@ -118,7 +119,7 @@ const Page9Week = () => {
                           item.ty_suat_sinh_loi_ky_vong
                         )} py-1 px-1`}
                       >
-                        {formatNumber(item.ty_suat_sinh_loi_ky_vong * 100)}
+                        {formatNumberTable(item.ty_suat_sinh_loi_ky_vong * 100)}
                         {percentIcon(item.ty_suat_sinh_loi_ky_vong)}
                       </td>
                       <td className=" py-1 px-1 ">
@@ -133,7 +134,7 @@ const Page9Week = () => {
                           item.ty_suat_loi_nhuan
                         )} py-1 px-1`}
                       >
-                        {formatNumber(item.ty_suat_loi_nhuan * 100)}
+                        {formatNumberTable(item.ty_suat_loi_nhuan * 100)}
                         {percentIcon(item.ty_suat_loi_nhuan)}
                       </td>
                       <td className=" py-1 px-1 ">
@@ -144,7 +145,7 @@ const Page9Week = () => {
                           item.ty_suat_sinh_loi_lo
                         )} py-1 px-1`}
                       >
-                        {formatNumber(item.ty_suat_sinh_loi_lo * 100)}
+                        {formatNumberTable(item.ty_suat_sinh_loi_lo * 100)}
                         {percentIcon(item.ty_suat_sinh_loi_lo)}{" "}
                       </td>
                       <td className=" py-1 px-1 ">{item.thoi_gian_nam_giu}</td>

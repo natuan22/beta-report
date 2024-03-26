@@ -8,10 +8,11 @@ HighchartsMore(Highcharts);
 const GauChartTrend = ({ data }) => {
   // Tính toán các giá trị cho biểu đồ
   const calculateChartValues = (data) => {
+    const neutral = data.neutral;
     const positive = data.positive;
     const negative = data.negative;
 
-    const max = positive + negative;
+    const max = positive + negative + neutral;
     const min = -max;
     const step = max / 5;
     const resultArray = [];
@@ -49,9 +50,9 @@ const GauChartTrend = ({ data }) => {
         text: "Rất tiêu cực",
         align: "center",
         verticalAlign: "top",
-        x: 27,
+        x: 26,
         y: 14,
-        rotation: -71,
+        rotation: -73,
         style: { fontSize: "7px", fontWeight: 600 },
       },
     }, // Rất tiêu cực
@@ -65,8 +66,8 @@ const GauChartTrend = ({ data }) => {
         align: "center",
         verticalAlign: "top",
         x: 40,
-        y: 21,
-        rotation: -36,
+        y: 20,
+        rotation: -39,
         style: {
           fontSize: "9px",
           fontWeight: 600,
@@ -83,7 +84,7 @@ const GauChartTrend = ({ data }) => {
         align: "center",
         verticalAlign: "top",
         x: 61,
-        y: 25,
+        y: 23,
         style: {
           fontSize: "9px",
           fontWeight: 600,
@@ -119,7 +120,7 @@ const GauChartTrend = ({ data }) => {
         verticalAlign: "top",
         x: -18,
         y: 14,
-        rotation: 70,
+        rotation: 71,
         style: {
           fontSize: "7px",
           fontWeight: 600,
