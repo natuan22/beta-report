@@ -115,7 +115,7 @@ const LineChart = ({ data, type }) => {
   return (
     <div
       className={`${
-        type === 1 ? "h-[210px]" : "h-[330px]"
+        type === 1 ? "h-[210px]" : "h-[300px]"
       } translate-y-[-15px]`}
     >
       <HighchartsReact
