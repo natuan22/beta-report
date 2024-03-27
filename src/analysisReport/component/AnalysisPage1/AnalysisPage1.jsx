@@ -470,12 +470,12 @@ const AnalysisPage1 = ({ stock, type }) => {
                   height={200}
                 />
               ) : (
-                <div className="h-[365px]">
-                  {/* {dataAnalysis ? (
+                <div>
+                  {dataAnalysis ? (
                     <Candlestick data={dataAnalysis.chart} />
                   ) : (
                     <div>Loading...</div>
-                  )} */}
+                  )}
                 </div>
               )}
 
@@ -531,7 +531,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">RSI</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.rsi.rate
                                 )}`}
                               >
@@ -541,7 +541,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">CCI</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.cci.rate
                                 )}`}
                               >
@@ -551,7 +551,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">Williams %R</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.williams.rate
                                 )}`}
                               >
@@ -561,7 +561,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">DI+ DI-</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.rsi.rate
                                 )}`}
                               >
@@ -571,7 +571,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">STOCHASTIC</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.stochastic.rate
                                 )}`}
                               >
@@ -581,7 +581,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">STOCHASTIC RSI</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.stochasticRsi.rate
                                 )}`}
                               >
@@ -591,7 +591,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">MACD</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.macd.rate
                                 )}`}
                               >
@@ -601,7 +601,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                             <tr className="font-semibold">
                               <td className="text-left">MACD Histogram</td>
                               <td
-                                className={`${getColorBaseOnName(
+                                className={`text-center ${getColorBaseOnName(
                                   dataAnalysis.macdHistogram.rate
                                 )}`}
                               >
@@ -628,7 +628,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                                 >
                                   <td className="">{item.name}</td>
                                   <td
-                                    className={`${getColorBaseOnName(
+                                    className={`text-center ${getColorBaseOnName(
                                       item.single
                                     )}`}
                                   >

@@ -159,7 +159,7 @@ const Page4Week = () => {
                   })}
                 </tbody>
               </table>
-              <div className="absolute bottom-[55px] left-0 w-full h-[5px] bg-[#1B68BB] opacity-60"></div>
+              <div className="absolute bottom-[56px] left-0 w-full h-[4px] bg-[#1B68BB] opacity-60"></div>
             </div>
             <div className=" chartMetric content-top_right chart  w-[340px] h-[374px]">
               <ColumnChart
