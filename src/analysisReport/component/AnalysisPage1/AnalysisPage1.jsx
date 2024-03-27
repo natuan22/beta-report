@@ -131,7 +131,7 @@ const AnalysisPage1 = ({ stock, type }) => {
       }
     }
   }, [dataAnalysis]);
-
+  console.log(data);
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[900px] z-30 w-full">
@@ -196,6 +196,19 @@ const AnalysisPage1 = ({ stock, type }) => {
                       Thông tin cổ phiếu
                     </h2>
                   </div>
+                  {type === 1 ? (
+                    <div></div>
+                  ) : (
+                    <div className="flex justify-between items-center text-sm">
+                      <p className="text-[#0249A4] m-1 w-[75%]">
+                        Thị giá (đồng/CP)
+                      </p>
+                      <p className="text-[#0249A4] m-1 ">:</p>
+                      <p className="m-1 w-[25%] text-end font-semibold">
+                        {formatNumberPage3(data.gia_thi_truong * 1000)}
+                      </p>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center text-sm">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Vốn hóa thị trường (tỷ đồng)
@@ -312,7 +325,11 @@ const AnalysisPage1 = ({ stock, type }) => {
             ) : (
               <div>Loading....</div>
             )}
-            <div className="lineChart translate-y-[-35px]">
+            <div
+              className={`lineChart ${
+                type === 1 ? "translate-y-[-35px]" : "translate-y-[-6.5px]"
+              }`}
+            >
               <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30  text-center p-1  tran ">
                 <h2 className="text-white font-semibold text-[12px] m-0 leading-[19px] ">
                   Tương quan biến động giá cổ phiếu{" "}
@@ -325,7 +342,11 @@ const AnalysisPage1 = ({ stock, type }) => {
                 <div>Loading...</div>
               )}
             </div>
-            <div className="table translate-y-[-60px] ">
+            <div
+              className={`table ${
+                type === 1 ? "translate-y-[-60px]" : "translate-y-[-20px]"
+              } `}
+            >
               <Table data={dataTable} type={type} />
             </div>
             {type === 1 ? (
