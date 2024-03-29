@@ -211,7 +211,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                   {type === 1 ? (
                     <div></div>
                   ) : (
-                    <div className="flex justify-between items-center text-sm">
+                    <div className="flex justify-between items-center text-[15px]">
                       <p className="text-[#0249A4] m-1 w-[75%]">
                         Thị giá (đồng/CP)
                       </p>
@@ -221,7 +221,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                       </p>
                     </div>
                   )}
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Vốn hóa thị trường (tỷ đồng)
                     </p>
@@ -231,7 +231,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Số CP đang lưu hành (triệu CP)
                     </p>
@@ -241,7 +241,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Giá cao nhất 52 tuần (đồng)
                     </p>
@@ -251,7 +251,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Giá thấp nhất 52 tuần (đồng)
                     </p>
@@ -261,7 +261,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       KLCP trung bình 20 phiên (CP)
                     </p>
@@ -271,7 +271,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       GTGD trung bình 20 phiên{" "}
                       <span className="text-[13px]">(tỷ đồng)</span>
@@ -282,7 +282,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">EPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
@@ -290,7 +290,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/E (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
@@ -298,7 +298,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">BVPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
@@ -306,7 +306,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/B (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
@@ -314,7 +314,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     </p>
                   </div>
 
-                  <div className="flex justify-between items-center text-sm">
+                  <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Tỷ lệ sở hữu nước ngoài
                     </p>
@@ -323,7 +323,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.nuoc_ngoai)}%
                     </p>
                   </div>
-                  <div className="flex justify-between items-center text-sm">
+                  {/* <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Tỷ lệ sở hữu nhà nước
                     </p>
@@ -331,7 +331,7 @@ const AnalysisPage1 = ({ stock, type }) => {
                     <p className="m-1 w-[25%] text-end font-semibold">
                       {formatNumber(data.nha_nuoc)}%
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ) : (

@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AiOutlineCaretLeft, AiOutlineCaretRight } from "react-icons/ai";
+import { BsCalendar2Day } from "react-icons/bs";
+import {
+  FiSunrise,
+  FiSunset,
+  FiChevronsRight,
+  FiChevronsLeft,
+} from "react-icons/fi";
+import { MdOutlineAutoGraph } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
+import DialogLogin from "./DialogLogin";
 
 const NavBar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -34,14 +43,14 @@ const NavBar = () => {
             onClick={toggleSidebar}
             className={`fixed top-1 -right-4 bg-slate-100 text-black z-40 font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
             ${
-              showSidebar ? "translate-x-[-460%] ease-in-out duration-500" : ""
+              showSidebar ? "translate-x-[-520%] ease-in-out duration-500" : ""
             } `}
             type="button"
             data-drawer-target="drawer-navigation"
             data-drawer-show="drawer-navigation"
             aria-controls="drawer-navigation"
           >
-            {showSidebar ? <AiOutlineCaretRight /> : <AiOutlineCaretLeft />}
+            {showSidebar ? <FiChevronsRight /> : <FiChevronsLeft />}
           </button>
         </div>
         <div
@@ -58,9 +67,12 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
                 }
               >
+                <span className="px-2">
+                  <FiSunrise />
+                </span>
                 Bản tin sáng
               </NavLink>
               <NavLink
@@ -68,9 +80,12 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
                 }
               >
+                <span className="px-2">
+                  <FiSunset />
+                </span>
                 Bản tin chiều
               </NavLink>
               <NavLink
@@ -78,9 +93,12 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
                 }
               >
+                <span className="px-2">
+                  <BsCalendar2Day />
+                </span>
                 Bản tin tuần
               </NavLink>
             </div>
@@ -91,9 +109,12 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
                 }
               >
+                <span className="px-2">
+                  <SlGraph />
+                </span>
                 Phân tích kỹ thuật
               </NavLink>
               <NavLink
@@ -101,13 +122,20 @@ const NavBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block dark:text-gray-300 text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
                 }
               >
+                <span className="px-2">
+                  <MdOutlineAutoGraph />
+                </span>
                 Phân tích kỹ thuật tự động
               </NavLink>
             </div>
           </div>
+          {/* <div className="fixed bottom-0 m-2 px-3 py-3">
+            <div className="h-[1px] bg-slate-400 mb-2"></div>
+            <DialogLogin />
+          </div> */}
         </div>
       </div>
     </div>
