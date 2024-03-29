@@ -70,10 +70,10 @@ const AnalysisReportAutomation = () => {
 
   return (
     <div className="relative">
-      <div className="absolute right-[250px] top-[50px]">
+      <div className="absolute right-[10%] top-[1%]">
         <NavBar />
       </div>
-      <div className="absolute  left-0 top-[50px] translate-x-[900px] z-10 ">
+      <div className="absolute left-0 top-[50px] translate-x-[850px] z-10 ">
         <TextField
           onChange={({ currentTarget }) => {
             setVal(currentTarget.value);

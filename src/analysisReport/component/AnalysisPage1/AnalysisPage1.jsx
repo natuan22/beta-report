@@ -14,6 +14,7 @@ import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import "./styles/analysisPage1.css";
 import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
 import Candlestick from "../utils/Candlestick";
+import calculateChartValues from "../../../helper/calculateChartValues";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -118,23 +119,34 @@ const AnalysisPage1 = ({ stock, type }) => {
   }, [data]);
   useEffect(() => {
     if (dataAnalysis) {
-      const { positive, negative, neutral } = dataAnalysis.generalSignal;
+      const arrValues = calculateChartValues(dataAnalysis.generalSignal);
+      const { positive, negative } = dataAnalysis.generalSignal;
+      const value = positive + -negative;
 
-      // Xác định loại phản hồi lớn nhất
-      let maxCount = Math.max(positive, negative, neutral);
-      if (maxCount === positive) {
-        setMaxType("Tích cực");
-      } else if (maxCount === negative) {
-        setMaxType("Tiêu cực");
-      } else {
-        setMaxType("Trung lập");
+      switch (true) {
+        case value >= arrValues[0] && value <= arrValues[1]:
+          setMaxType("Rất tiêu cực");
+          break;
+        case value >= arrValues[1] && value <= arrValues[2]:
+          setMaxType("Tiêu cực");
+          break;
+        case value >= arrValues[2] && value <= arrValues[3]:
+          setMaxType("Trung lập");
+          break;
+        case value >= arrValues[3] && value <= arrValues[4]:
+          setMaxType("Tích cực");
+          break;
+        case value >= arrValues[4] && value <= arrValues[5]:
+          setMaxType("Rất tích cực");
+          break;
+        default:
+          setMaxType("Không xác định");
       }
     }
   }, [dataAnalysis]);
-  console.log(data);
   return (
     <div className="h-[1480px] w-[900px] relative">
-      <div className="absolute top-[300px] left-[900px] z-30 w-full">
+      <div className="absolute top-[300px] left-[860px] z-30 w-[223px]">
         {type === 1 ? (
           <DialogAddTechnicalReportInfor
             stock={stock}
@@ -447,19 +459,27 @@ const AnalysisPage1 = ({ stock, type }) => {
                   <p
                     style={{
                       textShadow:
-                        maxType === "Tích cực"
+                        maxType === "Rất tích cực"
+                          ? "-2px 3px 3px #95e4bf"
+                          : maxType === "Tích cực"
                           ? "-2px 3px 3px #95e4bf"
                           : maxType === "Tiêu cực"
+                          ? "-2px 3px 3px #e4a095"
+                          : maxType === "Rất tiêu cực"
                           ? "-2px 3px 3px #e4a095"
                           : "-2px 3px 3px #FACC15",
                     }}
                     className={`${
-                      maxType === "Tích cực"
+                      maxType === "Rất tích cực"
+                        ? "text-green-500"
+                        : maxType === "Tích cực"
                         ? "text-green-500"
                         : maxType === "Tiêu cực"
                         ? "text-red-500"
+                        : maxType === "Rất tiêu cực"
+                        ? "text-red-500"
                         : "text-yellow-500"
-                    } uppercase font-bold text-[36px] m-0 pt-5`}
+                    } uppercase font-bold text-[30px] text-center m-0 pt-5 overflow-visible whitespace-nowrap`}
                   >
                     {maxType}
                   </p>

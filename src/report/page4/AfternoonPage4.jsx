@@ -309,7 +309,7 @@ const AfternoonPage4 = () => {
             </div>
 
             <div className="content-mid relative">
-              <div className="absolute top-0 right-0 translate-x-[400px] flex flex-col justify-around h-[150px]">
+              <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
                 <DialogNews
                   handleCatchDataNews={handleCatchDataNews}
                   type={"quốc tế"}
