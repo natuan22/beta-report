@@ -3,29 +3,11 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
 import "../styles/triangle.css";
+import calculateChartValues from "../../../helper/calculateChartValues";
 
 HighchartsMore(Highcharts);
 
 const GauChartGenAnalReportAuto = ({ data }) => {
-  // Tính toán các giá trị cho biểu đồ
-  const calculateChartValues = (data) => {
-    const neutral = data.neutral;
-    const positive = data.positive;
-    const negative = data.negative;
-
-    const max = positive + negative + neutral;
-    const min = -max;
-    const step = max / 5;
-    const resultArray = [];
-
-    for (let i = 0; i <= 5; i++) {
-      const currentValue = parseFloat((min + step * 2 * i).toFixed(2));
-      resultArray.push(currentValue);
-    }
-
-    return resultArray;
-  };
-
   // Tìm giá trị max và min trong mảng
   const findMaxMin = (arr) => {
     if (arr.length === 0) {
