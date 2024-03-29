@@ -149,6 +149,10 @@ const DialogAddStock = ({ catchStock }) => {
   const removeAll = () => {
     catchStock([]);
     setComponents([]);
+    setArrStock({
+      stock_buy: [],
+      stock_sell: [],
+    });
     saveStock({
       stock_buy: [],
       stock_sell: [],
