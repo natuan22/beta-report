@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import jsPDF from "jspdf";
 import { Button } from "@mui/material";
 import AfternoonPage1 from "./page1/AfternoonPage1";
@@ -10,8 +10,29 @@ import AfternoonPage5 from "./page5/AfternoonPage5";
 import { formattedDate } from "../helper/getDateAfternoon";
 import NavBar from "../app/component/NavBar";
 import AfternoonPage6 from "./page6/AfternoonPage6";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
 
 const ReportAfternoon = () => {
+  const dispatch = useDispatch();
+  const [isLogin, setIsLogin] = useState(
+    JSON.parse(localStorage.getItem("_il"))
+  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const handleUserLogout = () => {
+    if (isLogin) {
+      setIsLogin(null);
+      dispatch(userLogoutAction());
+      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.removeItem("user");
+    }
+  };
+
+  const onSubmitSuccess = () => {
+    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setUser(JSON.parse(localStorage.getItem("user")));
+  };
   const pageRefs = {
     page1: useRef(null),
     page2: useRef(null),
@@ -93,20 +114,25 @@ const ReportAfternoon = () => {
   return (
     <div className=" relative">
       <div className="absolute right-[10%] top-[35px]">
-        <NavBar />
+        <NavBar
+          isLogin={isLogin}
+          user={user}
+          handleUserLogout={handleUserLogout}
+          onSubmitSuccess={onSubmitSuccess}
+        />
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <AfternoonPage1 />
+          <AfternoonPage1 isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page2}>
-          <AfternoonPage2 />
+          <AfternoonPage2 isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page3}>
           <AfternoonPage3 />
         </div>
         <div ref={pageRefs.page4}>
-          <AfternoonPage4 />
+          <AfternoonPage4 isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page6}>
           <AfternoonPage6 />

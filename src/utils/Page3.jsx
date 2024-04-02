@@ -1,15 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
 import iconDeco from "../app/asset/img/iconDeco.png";
 import DialogIdentify from "../component/DialogIdentify";
 import DialogAddStock from "../component/DialogAddStock";
 import formatNumberPage3 from "../helper/formatNumberPage3";
+import { https } from "../services/configService";
 
-const Page3 = () => {
+const Page3 = ({ isLogin }) => {
   const [data, setData] = useState();
   const [dataStock, setDataStock] = useState([]);
   // console.log(dataStock)
+
+  useEffect(() => {
+    const getTextAndStock = async () => {
+      try {
+        const response = await https.get(
+          "/api/v1/report/nhan-dinh-thi-truong-redis"
+        );
+        setData(response.data.data);
+        setDataStock(response.data.data.stock_buy);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getTextAndStock();
+  }, []);
 
   const catchText = (arrText) => {
     setData(arrText);
@@ -20,14 +37,19 @@ const Page3 = () => {
 
   return (
     <div className="h-[1480px] w-[800px] relative ">
-      <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
-        <div>
-          <DialogIdentify catchText={catchText} />
+      {isLogin ? (
+        <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
+          <div>
+            <DialogIdentify catchText={catchText} />
+          </div>
+          <div>
+            <DialogAddStock catchStock={catchStock} />
+          </div>
         </div>
-        <div>
-          <DialogAddStock catchStock={catchStock} />
-        </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
+
       <div className="header">
         <Header date={"21/11/2023"} type={2} />
       </div>

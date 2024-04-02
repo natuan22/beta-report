@@ -22,7 +22,7 @@ const getColorBaseOnName = (value) => {
   if (value === "Tiêu cực") return "text-red-500";
   if (value === "Trung lập") return "text-yellow-500";
 };
-const AnalysisPage1 = ({ stock, type }) => {
+const AnalysisPage1 = ({ stock, type, isLogin }) => {
   // console.log(stock);
   const [data, setData] = useState();
   const [dataAnalysis, setDataAnalysis] = useState();
@@ -147,7 +147,7 @@ const AnalysisPage1 = ({ stock, type }) => {
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[860px] z-30 w-[223px]">
-        {type === 1 ? (
+        {type === 1 && isLogin ? (
           <DialogAddTechnicalReportInfor
             stock={stock}
             getImgFromInput={getImgFromInput}
@@ -208,19 +208,15 @@ const AnalysisPage1 = ({ stock, type }) => {
                       Thông tin cổ phiếu
                     </h2>
                   </div>
-                  {type === 1 ? (
-                    <div></div>
-                  ) : (
-                    <div className="flex justify-between items-center text-[15px]">
-                      <p className="text-[#0249A4] m-1 w-[75%]">
-                        Thị giá (đồng/CP)
-                      </p>
-                      <p className="text-[#0249A4] m-1 ">:</p>
-                      <p className="m-1 w-[25%] text-end font-semibold">
-                        {formatNumberPage3(data.gia_thi_truong * 1000)}
-                      </p>
-                    </div>
-                  )}
+                  <div className="flex justify-between items-center text-[15px]">
+                    <p className="text-[#0249A4] m-1 w-[75%]">
+                      Thị giá (đồng/CP)
+                    </p>
+                    <p className="text-[#0249A4] m-1 ">:</p>
+                    <p className="m-1 w-[25%] text-end font-semibold">
+                      {formatNumberPage3(data.closePrice * 1000)}
+                    </p>
+                  </div>
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Vốn hóa thị trường (tỷ đồng)
@@ -230,7 +226,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.marketCap / 1000000000)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Số CP đang lưu hành (triệu CP)
@@ -240,7 +235,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.shareout / 1000000)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Giá cao nhất 52 tuần (đồng)
@@ -250,7 +244,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumberPage3(data.high)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Giá thấp nhất 52 tuần (đồng)
@@ -260,7 +253,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumberPage3(data.low)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       KLCP trung bình 20 phiên (CP)
@@ -270,7 +262,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumberPage3(data.kl)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       GTGD trung bình 20 phiên{" "}
@@ -281,7 +272,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.gia_tri / 1000000000)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">EPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
@@ -289,7 +279,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.EPS)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/E (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
@@ -297,7 +286,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.PE)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">BVPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
@@ -305,7 +293,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.BVPS)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/B (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
@@ -313,7 +300,6 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {formatNumber(data.PB)}
                     </p>
                   </div>
-
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">
                       Tỷ lệ sở hữu nước ngoài
@@ -339,7 +325,7 @@ const AnalysisPage1 = ({ stock, type }) => {
             )}
             <div
               className={`lineChart ${
-                type === 1 ? "translate-y-[-35px]" : "translate-y-[-6.5px]"
+                type === 1 ? "translate-y-[-15px]" : "translate-y-[-6.5px]"
               }`}
             >
               <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30  text-center p-1  tran ">
@@ -356,20 +342,20 @@ const AnalysisPage1 = ({ stock, type }) => {
             </div>
             <div
               className={`table ${
-                type === 1 ? "translate-y-[-60px]" : "translate-y-[-20px]"
+                type === 1 ? "translate-y-[-40px]" : "translate-y-[-20px]"
               } `}
             >
               <Table data={dataTable} type={type} />
             </div>
             {type === 1 ? (
-              <div className="table-2 translate-y-[-60px] ">
+              <div className="table-2 translate-y-[-35px] ">
                 <TableSR data={data} />
               </div>
             ) : (
               <div></div>
             )}
             {type === 1 ? (
-              <div className="translate-y-[-50px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
+              <div className="translate-y-[-30px] font-bold text-[#023E8A] uppercase pl-1 text-[13px] overflow-visible whitespace-nowrap">
                 Chuyên Viên Phân Tích: {data && data.analyst_name}
               </div>
             ) : (
@@ -411,14 +397,11 @@ const AnalysisPage1 = ({ stock, type }) => {
                   </div>
                   <div className="flex items-center justify-between mt-1">
                     <p className="m-0 w-[155px] text-[14px] font-semibold">
-                      Giá thị trường
+                      Giá khuyến nghị
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data &&
-                        formatNumberPage3(
-                          Number(data.gia_thi_truong) * 1000
-                        )}{" "}
+                      {data && formatNumberPage3(Number(data.gia_khuyen_nghi))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -431,8 +414,8 @@ const AnalysisPage1 = ({ stock, type }) => {
                       {data &&
                         formatNumber(
                           ((Number(data.gia_muc_tieu) -
-                            Number(data.gia_thi_truong * 1000)) /
-                            Number(data.gia_thi_truong * 1000)) *
+                            Number(data.gia_khuyen_nghi)) /
+                            Number(data.gia_khuyen_nghi)) *
                             100
                         )}{" "}
                       %

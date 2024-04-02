@@ -4,7 +4,7 @@ import formatNumberPage3 from "../../../../helper/formatNumberPage3";
 const TableSR = ({ data }) => {
   return (
     <div>
-      <table className="translate-x-[-1px] w-[330px]  h-[120px]">
+      <table className="translate-x-[-1px] w-[330px]  h-[110px]">
         <thead>
           <tr className="text-[12px] font-bold text-center">
             <td className="bg-gradient-to-b from-[#024A9B] to-[#0570EB] text-white px-1 py-2">

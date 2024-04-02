@@ -23,7 +23,7 @@ const getText = (value) => {
   }
 };
 
-const AfternoonPage1 = () => {
+const AfternoonPage1 = ({ isLogin }) => {
   const [dataColumnChart1, setDataColumnChart1] = useState([]);
   const [dataColumnChart2, setDataColumnChart2] = useState([]);
   const [dataColumnChart3, setDataColumnChart3] = useState([]);
@@ -53,9 +53,14 @@ const AfternoonPage1 = () => {
       </div>
       {data ? (
         <div className="content  w-full flex flex-col justify-center items-center  mt-[20px] relative">
-          <div className="absolute right-0 top-0 translate-x-[300px]">
-            <DialogAddText getData={getData} />
-          </div>
+          {isLogin ? (
+            <div className="absolute right-0 top-0 translate-x-[300px]">
+              <DialogAddText getData={getData} />
+            </div>
+          ) : (
+            <div></div>
+          )}
+
           <div className="flex w-[760px]">
             <div className="content-left w-[55%] ">
               {text.length > 0 ? (

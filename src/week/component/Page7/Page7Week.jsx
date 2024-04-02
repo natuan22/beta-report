@@ -5,12 +5,12 @@ import { https } from "../../../services/configService";
 import ListNew from "./component/ListNew";
 import DialogAddNews from "./component/DialogAddNews";
 
-const Page7Week = () => {
+const Page7Week = ({ isLogin }) => {
   const [dataDomestic, setDataDomestic] = useState([]);
   const [dataForeign, setDataForeign] = useState([]);
   const getDataDomestic = async () => {
     try {
-      const res = await https.get("api/v1/report/tin-trong-nuoc?quantity=7");
+      const res = await https.get("api/v1/report/tin-tuc-redis?id=4");
       setDataDomestic(res.data.data);
     } catch (err) {
       console.error(err);
@@ -19,11 +19,7 @@ const Page7Week = () => {
 
   const getDataForeign = async () => {
     try {
-      const res = await https.get("api/v1/report/tin-quoc-te", {
-        params: {
-          quantity: 7,
-        },
-      });
+      const res = await https.get("api/v1/report/tin-tuc-redis?id=3");
       setDataForeign(res.data.data);
     } catch (err) {
       console.error(err);
@@ -31,8 +27,8 @@ const Page7Week = () => {
   };
 
   useEffect(() => {
-    // getDataDomestic();
-    // getDataForeign();
+    getDataDomestic();
+    getDataForeign();
   }, []);
 
   const handleCatchDataNews = (arrNews, type) => {
@@ -48,24 +44,30 @@ const Page7Week = () => {
       <div className="header h-[135px]">
         <HeaderWeek />
       </div>
-      <div className="absolute top-0 right-0 translate-x-[300px] translate-y-[200px] h-[100px] flex flex-col items-center justify-between">
-        <div>
-          <DialogAddNews
-            type={"trong nước"}
-            query={"trong-nuoc"}
-            idQuery={4}
-            handleCatchDataNews={handleCatchDataNews}
-          />
+
+      {isLogin ? (
+        <div className="absolute top-0 right-0 translate-x-[300px] translate-y-[200px] h-[100px] flex flex-col items-center justify-between">
+          <div>
+            <DialogAddNews
+              type={"trong nước"}
+              query={"trong-nuoc"}
+              idQuery={4}
+              handleCatchDataNews={handleCatchDataNews}
+            />
+          </div>
+          <div>
+            <DialogAddNews
+              type={"quốc tế"}
+              query={"quoc-te"}
+              idQuery={3}
+              handleCatchDataNews={handleCatchDataNews}
+            />
+          </div>
         </div>
-        <div>
-          <DialogAddNews
-            type={"quốc tế"}
-            query={"quoc-te"}
-            idQuery={3}
-            handleCatchDataNews={handleCatchDataNews}
-          />
-        </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
+
       <div className="content h-[945px] w-full flex flex-col items-center mt-2">
         <div className="relative">
           <div className="flex">

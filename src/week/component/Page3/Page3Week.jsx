@@ -9,7 +9,7 @@ import DialogAddImgAndTextWeek from "./component/DialogAddImgAndTextWeek";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
-const Page3Week = () => {
+const Page3Week = ({ isLogin }) => {
   const [data, setData] = useState();
   const [imgSrc, setImgSrc] = useState();
 
@@ -44,12 +44,18 @@ const Page3Week = () => {
       <div className="header">
         <HeaderWeek />
       </div>
-      <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
-        <DialogAddImgAndTextWeek
-          onSubmitSuccess={onSubmitSuccess}
-          getImgFromInput={getImgFromInput}
-        />
-      </div>
+
+      {isLogin ? (
+        <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
+          <DialogAddImgAndTextWeek
+            onSubmitSuccess={onSubmitSuccess}
+            getImgFromInput={getImgFromInput}
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
+
       <div className="content h-[950px] w-full flex flex-col items-center mt-[20px]">
         {data ? (
           <div className="w-[95%]">

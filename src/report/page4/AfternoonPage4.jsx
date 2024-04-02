@@ -6,7 +6,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import DialogNews from "../../component/DialogNews";
 
-const AfternoonPage4 = () => {
+const AfternoonPage4 = ({ isLogin }) => {
   const [rate, setRate] = useState();
   const [interestRate, setInterestRate] = useState();
   const [goodsPrice, setGoodsPrice] = useState();
@@ -52,6 +52,28 @@ const AfternoonPage4 = () => {
       }
     };
 
+    const getNews = async (id) => {
+      try {
+        const response = await https.get("/api/v1/report/tin-tuc-redis?", {
+          params: {
+            id,
+          },
+        });
+        return response.data.data.map((item) => item.title);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const fetchData = async () => {
+      const [newsForeignData, newsDomesticData, newsEnterpriseData] =
+        await Promise.all([getNews(0), getNews(1), getNews(2)]);
+      setNewsForeign(newsForeignData);
+      setNewsDomestic(newsDomesticData);
+      setNewsEnterprise(newsEnterpriseData);
+    };
+
+    fetchData();
     fetchDataRate();
     fetchDataInterestRate();
     fetchDataGoodsPrice();
@@ -309,26 +331,31 @@ const AfternoonPage4 = () => {
             </div>
 
             <div className="content-mid relative">
-              <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
-                <DialogNews
-                  handleCatchDataNews={handleCatchDataNews}
-                  type={"quốc tế"}
-                  query={"quoc-te"}
-                  idQuery={0}
-                />
-                <DialogNews
-                  handleCatchDataNews={handleCatchDataNews}
-                  type={"trong nước"}
-                  query={"trong-nuoc"}
-                  idQuery={1}
-                />
-                <DialogNews
-                  handleCatchDataNews={handleCatchDataNews}
-                  type={"doanh nghiệp"}
-                  query={"doanh-nghiep"}
-                  idQuery={2}
-                />
-              </div>
+              {isLogin ? (
+                <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
+                  <DialogNews
+                    handleCatchDataNews={handleCatchDataNews}
+                    type={"quốc tế"}
+                    query={"quoc-te"}
+                    idQuery={0}
+                  />
+                  <DialogNews
+                    handleCatchDataNews={handleCatchDataNews}
+                    type={"trong nước"}
+                    query={"trong-nuoc"}
+                    idQuery={1}
+                  />
+                  <DialogNews
+                    handleCatchDataNews={handleCatchDataNews}
+                    type={"doanh nghiệp"}
+                    query={"doanh-nghiep"}
+                    idQuery={2}
+                  />
+                </div>
+              ) : (
+                <div></div>
+              )}
+
               <div className="content-top w-[790px] h-[250px] z-10 relative mt-5  ">
                 <div className={` flex justify-around w-full h-[80%]  `}>
                   <div className="content-top_left w-[45%]  ">

@@ -1,10 +1,22 @@
 import './App.css';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { routes } from './app/route';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { generateMAC } from './helper/generateMAC';
 
 function App() {
+  useEffect(() => {
+    const deviceId = JSON.parse(localStorage.getItem('deviceId'))
+    if (!deviceId) {
+      localStorage.setItem('deviceId', JSON.stringify(generateMAC()))
+    }
 
+    const _il = JSON.parse(localStorage.getItem('_il'));
+    if (!_il) {
+      localStorage.setItem('_il', JSON.stringify(false));
+    }
+  }, [])
+  
   const mappedRoute = routes.map(({ path, component: Component }) => {
     return <Route key={path} path={path} element={<Component />} ></Route>
   })
