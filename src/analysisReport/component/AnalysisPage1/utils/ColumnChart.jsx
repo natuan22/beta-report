@@ -8,7 +8,7 @@ const StackColumnChart = ({ data }) => {
 
   const buys = data.map((item) => item.buy);
   const sells = data.map((item) => item.sell);
-  const buy_sell = data.map((item) => +item.buy_sell.toFixed(2));
+  const buy_sell = data.map((item) => item.buy_sell);
 
   const maxValues = data.map((item) => item.buy + item.sell);
   const maxTotal = Math.max(...maxValues);
