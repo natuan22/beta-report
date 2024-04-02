@@ -130,10 +130,10 @@ const StackColumnChart = ({ data }) => {
         zones: [
           {
             value: 1, // Giá trị tách màu (nếu giá trị dưới 1 thì màu đỏ, còn trên 1 thì màu xanh)
-            color: "red",
+            color: "#d92323",
           },
           {
-            color: "green",
+            color: "#24bf0f",
           },
         ],
       },
