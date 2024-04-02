@@ -5,7 +5,7 @@ import formatNumber from "../../../../helper/formatNumber";
 const Table = ({ data, type }) => {
   return (
     <div>
-      <table className={`w-[330px] ${type === 1 ? "h-[100px]" : "h-[120px]"}`}>
+      <table className={`w-[330px] ${type === 1 ? "h-[90px]" : "h-[120px]"}`}>
         <thead>
           <tr className="text-[13px] font-bold text-center ">
             <td className="bg-gradient-to-b from-[#024A9B] to-[#0570EB] text-white px-1 py-2">

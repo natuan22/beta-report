@@ -7,7 +7,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
-const AfternoonPage2 = () => {
+const AfternoonPage2 = ({ isLogin }) => {
   const [data, setData] = useState();
   const [imgSrc, setImgSrc] = useState();
 
@@ -44,12 +44,17 @@ const AfternoonPage2 = () => {
 
   return (
     <div className="h-[1480px] w-[800px] relative">
-      <div className="absolute top-0 right-0 z-10 translate-x-[300px] translate-y-[200px]">
-        <DialogAddImgAndText
-          getImgFromInput={getImgFromInput}
-          onSubmitSuccess={onSubmitSuccess}
-        />
-      </div>
+      {isLogin ? (
+        <div className="absolute top-0 right-0 z-10 translate-x-[300px] translate-y-[200px]">
+          <DialogAddImgAndText
+            getImgFromInput={getImgFromInput}
+            onSubmitSuccess={onSubmitSuccess}
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
+
       <div className="header">
         <HeaderAfternoon />
       </div>

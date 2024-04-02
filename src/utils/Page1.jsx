@@ -5,24 +5,44 @@ import { https } from "../services/configService";
 import { homNay } from "../helper/getDate";
 import DialogNews from "../component/DialogNews";
 
-const Page1 = () => {
-  const [newsForeign, setNewsForeign] = useState(
-    JSON.parse(localStorage.getItem(`selectedNews-quoc-te`)) || []
-  );
-  const [newsDomestic, setNewsDomestic] = useState(
-    JSON.parse(localStorage.getItem(`selectedNews-trong-nuoc`)) || []
-  );
-  const [newsEnterprise, setNewsEnterprise] = useState(
-    JSON.parse(localStorage.getItem(`selectedNews-doanh-nghiep`)) || []
-  );
+const Page1 = ({ isLogin }) => {
+  const [newsForeign, setNewsForeign] = useState([]);
+  const [newsDomestic, setNewsDomestic] = useState([]);
+  const [newsEnterprise, setNewsEnterprise] = useState([]);
   const [events, setEvents] = useState();
+
   useEffect(() => {
     const fetchDataEvent = async () => {
       try {
         const response = await https.get("api/v1/report/lich-su-kien");
         setEvents(response.data.data);
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
     };
+
+    const getNews = async (id) => {
+      try {
+        const response = await https.get("/api/v1/report/tin-tuc-redis?", {
+          params: {
+            id,
+          },
+        });
+        return response.data.data.map((item) => item.title);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const fetchData = async () => {
+      const [newsForeignData, newsDomesticData, newsEnterpriseData] =
+        await Promise.all([getNews(0), getNews(1), getNews(2)]);
+      setNewsForeign(newsForeignData);
+      setNewsDomestic(newsDomesticData);
+      setNewsEnterprise(newsEnterpriseData);
+    };
+
+    fetchData();
     fetchDataEvent();
   }, []);
 
@@ -39,26 +59,30 @@ const Page1 = () => {
   return (
     <div className="h-[1480px] w-[800px] relative  ">
       <div className="absolute top-[30%] right-0 translate-x-[300px] ">
-        <div className="flex flex-col justify-between h-[200px]">
-          <DialogNews
-            handleCatchDataNews={handleCatchDataNews}
-            type={"quốc tế"}
-            query={"quoc-te"}
-            idQuery={0}
-          />
-          <DialogNews
-            handleCatchDataNews={handleCatchDataNews}
-            type={"trong nước"}
-            query={"trong-nuoc"}
-            idQuery={1}
-          />
-          <DialogNews
-            handleCatchDataNews={handleCatchDataNews}
-            type={"doanh nghiệp"}
-            query={"doanh-nghiep"}
-            idQuery={2}
-          />
-        </div>
+        {isLogin ? (
+          <div className="flex flex-col justify-between h-[200px]">
+            <DialogNews
+              handleCatchDataNews={handleCatchDataNews}
+              type={"quốc tế"}
+              query={"quoc-te"}
+              idQuery={0}
+            />
+            <DialogNews
+              handleCatchDataNews={handleCatchDataNews}
+              type={"trong nước"}
+              query={"trong-nuoc"}
+              idQuery={1}
+            />
+            <DialogNews
+              handleCatchDataNews={handleCatchDataNews}
+              type={"doanh nghiệp"}
+              query={"doanh-nghiep"}
+              idQuery={2}
+            />
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
       <div className="header">
         <Header date={homNay} type={1} />

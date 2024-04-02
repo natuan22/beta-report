@@ -29,6 +29,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       formData.append("gia_muc_tieu", data.gia_muc_tieu);
       formData.append("thoi_gian_nam_giu", data.thoi_gian_nam_giu);
       formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
+      formData.append("gia_khuyen_nghi", data.gia_khuyen_nghi);
       formData.append("analyst_name", data.analyst_name);
       formData.append("img", data.img);
 
@@ -56,6 +57,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       is_sell: "",
       thoi_gian_nam_giu: "",
       gia_muc_tieu: 0,
+      gia_khuyen_nghi: 0,
       gia_ban_dung_lo: 0,
       img: {},
       text1: "",
@@ -106,15 +108,8 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       labelCol={{
         span: 6,
       }}
-      //   wrapperCol={{
-      //     span: 14,
-      //   }}
       layout="horizontal"
-      //   style={{
-      //     width: 1000,
-      //   }}
       onSubmitCapture={handleSubmit}
-      autoComplete="off"
     >
       <div className="flex justify-evenly mt-10">
         <div className="w-[40%]">
@@ -180,6 +175,39 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
                 width: 300,
               }}
             />
+          </Form.Item>
+          <Form.Item label="Giá khuyến nghị">
+            <InputNumber
+              name="gia_khuyen_nghi"
+              formatter={(value) =>
+                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+              onChange={(value) => {
+                handleChange({
+                  target: {
+                    name: "gia_khuyen_nghi",
+                    value: value,
+                  },
+                });
+              }}
+              onKeyDown={(e) => {
+                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  !(
+                    (e.key >= "0" && e.key <= "9") ||
+                    e.key === "Backspace" ||
+                    e.key === "Tab"
+                  )
+                ) {
+                  e.preventDefault();
+                }
+              }}
+              style={{
+                width: 300,
+              }}
+            />
+            {" đồng/CP"}
           </Form.Item>
           <Form.Item label="Giá bán dừng lỗ">
             <InputNumber

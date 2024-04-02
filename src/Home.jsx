@@ -9,8 +9,30 @@ import { homNay } from "./helper/getDate";
 import { Button } from "@mui/material";
 import Page5 from "./utils/Page5";
 import NavBar from "./app/component/NavBar";
+import { userLogoutAction } from "./Auth/thunk";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const [isLogin, setIsLogin] = useState(
+    JSON.parse(localStorage.getItem("_il"))
+  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const handleUserLogout = () => {
+    if (isLogin) {
+      setIsLogin(null);
+      dispatch(userLogoutAction());
+      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.removeItem("user");
+    }
+  };
+
+  const onSubmitSuccess = () => {
+    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setUser(JSON.parse(localStorage.getItem("user")));
+  };
+
   const pageRefs = {
     page1: useRef(null),
     page2: useRef(null),
@@ -91,17 +113,22 @@ const Home = () => {
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">
-        <NavBar />
+        <NavBar
+          isLogin={isLogin}
+          user={user}
+          handleUserLogout={handleUserLogout}
+          onSubmitSuccess={onSubmitSuccess}
+        />
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <Page1 />
+          <Page1 isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page2}>
           <Page2 />
         </div>
         <div ref={pageRefs.page3}>
-          <Page3 />
+          <Page3 isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page4}>
           <Page4 />

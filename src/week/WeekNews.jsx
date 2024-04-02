@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Page1Week from "./component/Page1/Page1Week";
 import Page2Week from "./component/Page2/Page2Week";
 import Page3Week from "./component/Page3/Page3Week";
@@ -16,8 +16,31 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import NavBar from "../app/component/NavBar";
 import getTimeWeek from "../helper/getTimeWeek";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
+
 const weekDate = getTimeWeek();
+
 const WeekNews = () => {
+  const dispatch = useDispatch();
+  const [isLogin, setIsLogin] = useState(
+    JSON.parse(localStorage.getItem("_il"))
+  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const handleUserLogout = () => {
+    if (isLogin) {
+      setIsLogin(null);
+      dispatch(userLogoutAction());
+      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.removeItem("user");
+    }
+  };
+
+  const onSubmitSuccess = () => {
+    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setUser(JSON.parse(localStorage.getItem("user")));
+  };
   const pageRefs = {
     page1: useRef(null),
     page2: useRef(null),
@@ -144,17 +167,22 @@ const WeekNews = () => {
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[35px]">
-        <NavBar />
+        <NavBar
+          isLogin={isLogin}
+          user={user}
+          handleUserLogout={handleUserLogout}
+          onSubmitSuccess={onSubmitSuccess}
+        />
       </div>
       <div>
         <div ref={pageRefs.page1}>
           <Page1Week />
         </div>
         <div ref={pageRefs.page2}>
-          <Page2Week />
+          <Page2Week isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page3}>
-          <Page3Week />
+          <Page3Week isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page4}>
           <Page4Week />
@@ -166,7 +194,7 @@ const WeekNews = () => {
           <Page6Week />
         </div>
         <div ref={pageRefs.page7}>
-          <Page7Week />
+          <Page7Week isLogin={isLogin} />
         </div>
         <div ref={pageRefs.page8}>
           <Page8Week />
