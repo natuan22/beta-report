@@ -34,7 +34,7 @@ function AnalysisReportBasic() {
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
-      Phân tích kỹ thuật cơ bản
+      Phân tích cơ bản
     </div>
   );
 }

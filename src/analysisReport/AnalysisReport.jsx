@@ -11,8 +11,8 @@ import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 
 const AnalysisReport = () => {
-  const [val, setVal] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
+  const [val, setVal] = useState("FPT");
+  const [debouncedValue, setDebouncedValue] = useState("FPT");
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(
     JSON.parse(localStorage.getItem("_il"))

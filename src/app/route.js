@@ -17,8 +17,8 @@ export const routes = [
     //Phân tích
     { path: "/phan-tich-ky-thuat", component: AnalysisReport },
     { path: "/phan-tich-ky-thuat-tu-dong", component: AnalysisReportAutomation },
-    { path: "/phan-tich-ky-thuat-co-ban", component: AnalysisReportBasic },
-    //Name
+    { path: "/phan-tich-co-ban", component: AnalysisReportBasic },
+    //Công cụ đầu tư
     { path: "/bo-loc", component: NavBar1 },
     { path: "/canh-bao-tin-hieu", component: NavBar2 },
     { path: "/danh-muc-theo-doi", component: NavBar3 },

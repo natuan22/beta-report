@@ -9,8 +9,8 @@ import { useDebounce } from "react-use";
 import NavBar from "../app/component/NavBar";
 
 const AnalysisReportAutomation = () => {
-  const [val, setVal] = useState("");
-  const [debouncedValue, setDebouncedValue] = useState("");
+  const [val, setVal] = useState("FPT");
+  const [debouncedValue, setDebouncedValue] = useState("FPT");
   const pageRefs = {
     page1: useRef(null),
     page2: useRef(null),
