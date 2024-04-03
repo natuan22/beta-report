@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import HeaderLandscape from "../../utils/HeaderLandscape";
 import FooterLandscape from "../../utils/FooterLandscape";
 import { https } from "../../../services/configService";
-import formatNumber from "../../../helper/formatNumber";
 import formatNumberWeek from "../../../helper/formatNumberWeek";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import formatNumberTable from "../../../helper/formatNumberTable";

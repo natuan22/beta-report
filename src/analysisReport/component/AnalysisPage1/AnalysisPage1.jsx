@@ -7,7 +7,6 @@ import formatNumberPage3 from "../../../helper/formatNumberPage3";
 import LineChart from "./utils/LineChart";
 import Table from "./utils/Table";
 import TableSR from "./utils/TableSR";
-// import img from "../../../app/asset/img/testBanner.png";
 import ColumnChart from "./utils/ColumnChart";
 import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
@@ -23,7 +22,6 @@ const getColorBaseOnName = (value) => {
   if (value === "Trung lập") return "text-yellow-500";
 };
 const AnalysisPage1 = ({ stock, type, isLogin }) => {
-  // console.log(stock);
   const [data, setData] = useState();
   const [dataAnalysis, setDataAnalysis] = useState();
   const [dataChart, setDataChart] = useState();
@@ -214,7 +212,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1 ">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberPage3(data.closePrice * 1000)}
+                      {formatNumberPage3(parseInt(data.closePrice * 1000))}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">

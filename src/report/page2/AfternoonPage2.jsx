@@ -7,6 +7,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
+
 const AfternoonPage2 = ({ isLogin }) => {
   const [data, setData] = useState();
   const [imgSrc, setImgSrc] = useState();

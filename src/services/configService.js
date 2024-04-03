@@ -8,6 +8,6 @@ export const https = axios.create({
     baseURL: apiUrl,
     headers: {
         mac: localStorage.getItem('deviceId'),
-        Authorization: `Bearer ${accessToken}`
+        Authorization: "Bearer " + Cookies.get('at')
       }
 });

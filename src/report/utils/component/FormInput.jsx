@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
-import { https } from "../../../services/configService";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
 const FormInput = ({
@@ -10,6 +13,7 @@ const FormInput = ({
   getImgFromInput,
   query,
   queryImg,
+  warning,
 }) => {
   const saveDataAndFile = async (data) => {
     try {
@@ -24,15 +28,16 @@ const FormInput = ({
       formData.append("img", data.img);
 
       // Gửi yêu cầu POST
-      const response = await https.post(
-        `/api/v1/report/luu-nhan-dinh-thi-truong-${query}`,
-        formData,
-        {
+      const response = await axios
+        .create({
+          baseURL: apiUrl,
           headers: {
+            mac: localStorage.getItem("deviceId"),
+            Authorization: "Bearer " + Cookies.get("at"),
             "Content-Type": "multipart/form-data",
           },
-        }
-      );
+        })
+        .post(`/api/v1/report/luu-nhan-dinh-thi-truong-${query}`, formData);
 
       // console.log("Response:", response.data);
     } catch (error) {
@@ -56,6 +61,7 @@ const FormInput = ({
       }
 
       handleOk();
+      warning("success", "Thêm hình và nhận định thành công");
     },
   });
   const handleChangeFile = (e) => {

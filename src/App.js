@@ -10,7 +10,7 @@ function App() {
     if (!deviceId) {
       localStorage.setItem('deviceId', JSON.stringify(generateMAC()))
     }
-
+    
     const _il = JSON.parse(localStorage.getItem('_il'));
     if (!_il) {
       localStorage.setItem('_il', JSON.stringify(false));

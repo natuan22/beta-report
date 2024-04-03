@@ -3,7 +3,7 @@ import NavBar from "../app/component/NavBar";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 
-function AnalysisReportBasic() {
+const AnalysisReportBasic = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(
     JSON.parse(localStorage.getItem("_il"))
@@ -37,6 +37,6 @@ function AnalysisReportBasic() {
       Phân tích cơ bản
     </div>
   );
-}
+};
 
 export default AnalysisReportBasic;

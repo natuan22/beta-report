@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal } from "antd";
 import { message } from "antd";
 import Button from "@mui/material/Button";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
-import { https } from "../../../services/configService";
+import axios from "axios";
+import Cookies from "js-cookie";
+const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
+
 const saveText = async (textForm) => {
   try {
-    const res = await https.post(
-      "api/v1/report/luu-dien-bien-thi-truong",
-      textForm
-    );
+    const res = await axios
+      .create({
+        baseURL: apiUrl,
+        headers: {
+          mac: localStorage.getItem("deviceId"),
+          Authorization: "Bearer " + Cookies.get("at"),
+        },
+      })
+      .post("api/v1/report/luu-dien-bien-thi-truong", textForm);
     // console.log(res)
   } catch (err) {
     console.error(err);
@@ -34,12 +42,13 @@ const DialogAddText = ({ getData }) => {
       await saveText({ text: [values.title, values.subTitle, values.content] });
       await getData();
       handleOk();
+      warning("success", "Thêm diễn biến thị trường thành công");
     },
   });
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };

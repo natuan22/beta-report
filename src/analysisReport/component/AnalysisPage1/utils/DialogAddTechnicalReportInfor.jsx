@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Form, Modal } from "antd";
-import { FaPlus } from "react-icons/fa6";
+import React, { useState } from "react";
+import { Modal } from "antd";
 import { message } from "antd";
 import Button from "@mui/material/Button";
 import FormInput from "./FormInput";
@@ -13,9 +12,9 @@ const DialogAddTechnicalReportInfor = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };
@@ -50,6 +49,7 @@ const DialogAddTechnicalReportInfor = ({
             code={stock}
             getImgFromInput={getImgFromInput}
             handleOk={handleOk}
+            warning={warning}
             onSubmitSuccess={onSubmitSuccess}
           />
         </div>

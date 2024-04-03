@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Form, Modal } from "antd";
-import { FaPlus } from "react-icons/fa6";
+import React, { useState } from "react";
+import { Modal } from "antd";
 import { message } from "antd";
 import Button from "@mui/material/Button";
 import FormInput from "./FormInput";
@@ -9,9 +8,9 @@ const DialogAddImgAndText = ({ onSubmitSuccess, getImgFromInput }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };
@@ -47,6 +46,7 @@ const DialogAddImgAndText = ({ onSubmitSuccess, getImgFromInput }) => {
             getImgFromInput={getImgFromInput}
             handleOk={handleOk}
             onSubmitSuccess={onSubmitSuccess}
+            warning={warning}
             query={"chieu"}
           />
         </div>

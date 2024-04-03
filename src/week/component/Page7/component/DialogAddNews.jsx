@@ -8,9 +8,11 @@ import FormGroup from "@mui/material/FormGroup";
 import { FaFileCirclePlus, FaCheck, FaX } from "react-icons/fa6";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import "../../../../component/styles/btnStyle.css";
-import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 import { https } from "../../../../services/configService";
+import axios from "axios";
+import Cookies from "js-cookie";
+const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -82,7 +84,15 @@ export default function DialogAddNews({
   };
   const saveNews = async (data) => {
     try {
-      const response = await https.post("/api/v1/report/luu-tin", data);
+      const response = await axios
+        .create({
+          baseURL: apiUrl,
+          headers: {
+            mac: localStorage.getItem("deviceId"),
+            Authorization: "Bearer " + Cookies.get("at"),
+          },
+        })
+        .post("/api/v1/report/luu-tin", data);
       // console.log(response)
     } catch (err) {
       console.error(err);

@@ -1,18 +1,26 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Form, Modal } from "antd";
+import { Modal } from "antd";
 import InputFormBuy from "./utils/InputFormBuy";
 import { FaPlus } from "react-icons/fa6";
 import InputFormSell from "./utils/InputFormSell";
 import { message } from "antd";
 import Button from "@mui/material/Button";
 import { https } from "../services/configService";
+import axios from "axios";
+import Cookies from "js-cookie";
+const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const saveStock = async (arrStock) => {
   try {
-    const response = await https.post(
-      "/api/v1/report/luu-co-phieu-khuyen-nghi",
-      arrStock
-    );
+    const response = await axios
+      .create({
+        baseURL: apiUrl,
+        headers: {
+          mac: localStorage.getItem("deviceId"),
+          Authorization: "Bearer " + Cookies.get("at"),
+        },
+      })
+      .post("/api/v1/report/luu-co-phieu-khuyen-nghi", arrStock);
   } catch (err) {
     console.error(err);
   }
@@ -68,9 +76,9 @@ const DialogAddStock = ({ catchStock }) => {
     });
   };
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };
@@ -102,7 +110,7 @@ const DialogAddStock = ({ catchStock }) => {
         );
       setComponents((prevComponents) => [...prevComponents, newComponent]);
     } else {
-      warning("Tối đa 4 mã");
+      warning("warning", "Tối đa 4 mã");
     }
   };
 
@@ -163,6 +171,7 @@ const DialogAddStock = ({ catchStock }) => {
     setIsModalOpen(false);
     await saveStock(arrStock);
     getStock();
+    warning("success", "Thêm cổ phiếu khuyến nghị thành công");
   };
 
   const handleCancel = () => {
