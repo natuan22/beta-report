@@ -5,12 +5,6 @@ import formatNumber from "../../../../helper/formatNumber";
 import moment from "moment/moment";
 import formatNumberChart from "../../../../helper/formatNumberChart";
 const ChartTopForeignTotal = ({ data, title }) => {
-  const max = Math.ceil(
-    Math.max(...data.map((item) => item.netVal / 1000000000))
-  );
-  const min = Math.floor(
-    Math.min(...data.map((item) => item.value / 1000000000))
-  );
   const options = {
     accessibility: {
       enabled: false,

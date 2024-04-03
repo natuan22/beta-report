@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { Form, Input, InputNumber } from "antd";
 import { useFormik } from "formik";
-import { https } from "../../../../services/configService";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
-const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
+const FormInput = ({
+  code,
+  onSubmitSuccess,
+  handleOk,
+  getImgFromInput,
+  warning,
+}) => {
   const saveDataAndFile = async (data) => {
     try {
       const formData = new FormData();
@@ -34,15 +43,16 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       formData.append("img", data.img);
 
       // Gửi yêu cầu POST
-      const response = await https.post(
-        `/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`,
-        formData,
-        {
+      const response = await axios
+        .create({
+          baseURL: apiUrl,
           headers: {
+            mac: localStorage.getItem("deviceId"),
+            Authorization: "Bearer " + Cookies.get("at"),
             "Content-Type": "multipart/form-data",
           },
-        }
-      );
+        })
+        .post(`/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`, formData);
 
       // console.log("Response:", response.data);
     } catch (error) {
@@ -80,6 +90,7 @@ const FormInput = ({ code, onSubmitSuccess, handleOk, getImgFromInput }) => {
       }
 
       handleOk();
+      warning("success", "Thêm hình và nhận định thành công");
     },
   });
   const handleChangeFile = (e) => {

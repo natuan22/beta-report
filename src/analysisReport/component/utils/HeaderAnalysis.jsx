@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../../app/asset/img/logoAfternoon.png";
 import { homNay } from "../../../helper/getDate";
+
 const HeaderAnalysis = () => {
   return (
     <div className="h-[100px] w-[800px] bg-gradient-to-b from-[#143A65] to-[#0054B4] relative">

@@ -8,9 +8,9 @@ const DialogAddImgAndTextWeek = ({ onSubmitSuccess, getImgFromInput }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };
@@ -46,6 +46,7 @@ const DialogAddImgAndTextWeek = ({ onSubmitSuccess, getImgFromInput }) => {
             query={"tuan-trang-2"}
             getImgFromInput={getImgFromInput}
             handleOk={handleOk}
+            warning={warning}
             onSubmitSuccess={onSubmitSuccess}
           />
         </div>

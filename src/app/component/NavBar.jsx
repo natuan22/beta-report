@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BsCalendar2Day } from "react-icons/bs";
-import {
-  FiSunrise,
-  FiSunset,
-  FiChevronsRight,
-  FiChevronsLeft,
-} from "react-icons/fi";
+import { FiSunset, FiChevronsRight, FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineAutoGraph } from "react-icons/md";
 import { SlGraph } from "react-icons/sl";
 import DialogLogin from "../../Auth/components/DialogLogin";
@@ -15,7 +10,7 @@ import Button from "@mui/material/Button";
 import { UserOutlined } from "@ant-design/icons";
 import { VscCoffee } from "react-icons/vsc";
 import { BsGraphUp } from "react-icons/bs";
-import { CiFilter,   } from "react-icons/ci";
+import { CiFilter } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdQueryStats } from "react-icons/md";
@@ -58,7 +53,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       </NavLink>
     );
   };
-  
+
   return (
     <div className="flex flex-col relative w-screen">
       <div>
@@ -91,16 +86,40 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           </div>
           <div>
             <h3 className="uppercase text-slate-500">Phân tích</h3>
-            {buttonNavLink("/phan-tich-ky-thuat", <SlGraph />, "Phân tích kỹ thuật")}
-            {buttonNavLink("/phan-tich-ky-thuat-tu-dong", <MdOutlineAutoGraph />, "Phân tích kỹ thuật tự động")}
-            {buttonNavLink("/phan-tich-co-ban", <BsGraphUp />, "Phân tích cơ bản")}
+            {buttonNavLink(
+              "/phan-tich-ky-thuat",
+              <SlGraph />,
+              "Phân tích kỹ thuật"
+            )}
+            {buttonNavLink(
+              "/phan-tich-ky-thuat-tu-dong",
+              <MdOutlineAutoGraph />,
+              "Phân tích kỹ thuật tự động"
+            )}
+            {buttonNavLink(
+              "/phan-tich-co-ban",
+              <BsGraphUp />,
+              "Phân tích cơ bản"
+            )}
           </div>
           <div>
             <h3 className="uppercase text-slate-500">Công cụ đầu tư</h3>
             {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
-            {buttonNavLink("/canh-bao-tin-hieu", <IoMdNotificationsOutline />, "Cảnh báo tín hiệu")}
-            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
-            {buttonNavLink("/chien-luoc-giao-dich", <MdQueryStats />, "Chiến lược giao dịch")}
+            {buttonNavLink(
+              "/canh-bao-tin-hieu",
+              <IoMdNotificationsOutline />,
+              "Cảnh báo tín hiệu"
+            )}
+            {buttonNavLink(
+              "/danh-muc-theo-doi",
+              <BiCategoryAlt />,
+              "Danh mục theo dõi"
+            )}
+            {buttonNavLink(
+              "/chien-luoc-giao-dich",
+              <MdQueryStats />,
+              "Chiến lược giao dịch"
+            )}
           </div>
         </div>
         <div className="fixed bottom-0 m-2 px-3 py-3">

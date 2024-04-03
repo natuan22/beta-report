@@ -33,6 +33,7 @@ const Page2Week = ({ isLogin }) => {
 
   const handleGetTextInpur = (text) => {
     setText(text);
+    getData();
   };
   return (
     <div className="h-[1480px] w-[800px] relative">

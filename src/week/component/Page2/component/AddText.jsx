@@ -4,15 +4,22 @@ import { message } from "antd";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { Form, Input } from "antd";
-import { https } from "../../../../services/configService";
+import axios from "axios";
+import Cookies from "js-cookie";
+const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
 const saveText = async (text) => {
   try {
-    const res = await https.post(
-      "api/v1/report/luu-dien-bien-thi-truong-tuan",
-      text
-    );
+    const res = await axios
+      .create({
+        baseURL: apiUrl,
+        headers: {
+          mac: localStorage.getItem("deviceId"),
+          Authorization: "Bearer " + Cookies.get("at"),
+        },
+      })
+      .post("api/v1/report/luu-dien-bien-thi-truong-tuan", text);
     // console.log(res)
   } catch (err) {
     console.error(err);
@@ -33,12 +40,14 @@ const AddText = ({ handleGetTextInpur }) => {
       // console.log({ text: [values.title, values.subTitle, values.content] })
       saveText({ text: [values.title, values.subTitle, values.content] });
       handleGetTextInpur(values.text);
+      setIsModalOpen(false);
+      warning("success", "Thêm nhận định thành công");
     },
   });
 
-  const warning = (text) => {
+  const warning = (type, text) => {
     messageApi.open({
-      type: "warning",
+      type,
       content: text,
     });
   };
@@ -46,7 +55,7 @@ const AddText = ({ handleGetTextInpur }) => {
     setIsModalOpen(true);
   };
 
-  const handleOk = async () => {
+  const handleOk = () => {
     setIsModalOpen(false);
   };
 

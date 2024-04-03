@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
 
-function NavBar4() {
+const NavBar4 = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(
     JSON.parse(localStorage.getItem("_il"))
@@ -36,6 +36,6 @@ function NavBar4() {
       Chiến lược giao dịch
     </div>
   );
-}
+};
 
 export default NavBar4;

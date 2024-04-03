@@ -27,7 +27,6 @@ const Home = () => {
       localStorage.removeItem("user");
     }
   };
-
   const onSubmitSuccess = () => {
     setIsLogin(JSON.parse(localStorage.getItem("_il")));
     setUser(JSON.parse(localStorage.getItem("user")));

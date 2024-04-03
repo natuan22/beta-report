@@ -22,8 +22,8 @@ export const userLoginAction = (data) => async (dispatch) => {
       
       localStorage.setItem('user', JSON.stringify(userDataWithoutTokens));
       localStorage.setItem('_il', JSON.stringify(true));
-      Cookies.set('at', res.data.data.access_token, {});
-      Cookies.set('rt', res.data.data.refresh_token, {});
+      Cookies.set('at', res.data.data.access_token);
+      Cookies.set('rt', res.data.data.refresh_token);
     }
   } catch (err) {
     dispatch({

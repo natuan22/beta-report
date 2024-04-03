@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
 
-function NavBar3() {
+const NavBar3 = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(
     JSON.parse(localStorage.getItem("_il"))
@@ -36,6 +36,6 @@ function NavBar3() {
       Danh mục theo dõi
     </div>
   );
-}
+};
 
 export default NavBar3;

@@ -15,7 +15,7 @@ const getArrow = (value) => {
 };
 const SplineChart = ({ data }) => {
   const dataRender = data.chart.map((item) => item.value);
-  console.log(dataRender);
+
   const chartOptions = {
     accessibility: {
       enabled: false,

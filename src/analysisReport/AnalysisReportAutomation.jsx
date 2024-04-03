@@ -7,10 +7,31 @@ import AnalysisPage3 from "./component/AnalysisPage3/AnalysisPage3";
 import { Button, TextField } from "@mui/material";
 import { useDebounce } from "react-use";
 import NavBar from "../app/component/NavBar";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
 
 const AnalysisReportAutomation = () => {
   const [val, setVal] = useState("FPT");
   const [debouncedValue, setDebouncedValue] = useState("FPT");
+  const dispatch = useDispatch();
+  const [isLogin, setIsLogin] = useState(
+    JSON.parse(localStorage.getItem("_il"))
+  );
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  const handleUserLogout = () => {
+    if (isLogin) {
+      setIsLogin(null);
+      dispatch(userLogoutAction());
+      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.removeItem("user");
+    }
+  };
+
+  const onSubmitSuccess = () => {
+    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setUser(JSON.parse(localStorage.getItem("user")));
+  };
   const pageRefs = {
     page1: useRef(null),
     page2: useRef(null),
@@ -71,7 +92,12 @@ const AnalysisReportAutomation = () => {
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">
-        <NavBar />
+        <NavBar
+          isLogin={isLogin}
+          user={user}
+          handleUserLogout={handleUserLogout}
+          onSubmitSuccess={onSubmitSuccess}
+        />
       </div>
       <div className="absolute left-0 top-[50px] translate-x-[850px] z-10 ">
         <TextField
