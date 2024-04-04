@@ -109,6 +109,7 @@ const AnalysisReportAutomation = () => {
           id="outlined-basic"
           label="Mã CP"
           variant="outlined"
+          autoFocus
         />
       </div>
       <div>

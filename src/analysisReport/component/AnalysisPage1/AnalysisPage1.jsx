@@ -202,7 +202,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                   </div>
                 </div>
                 <div className="w-full pt-1">
-                  <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px]">
+                  <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] p-1">
                     <h2 className="text-white text-[15px] leading-[25px] font-semibold text-center m-0">
                       Thông tin cổ phiếu
                     </h2>
@@ -400,7 +400,8 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data && formatNumberCurrency(Number(data.gia_khuyen_nghi))}{" "}
+                      {data &&
+                        formatNumberCurrency(Number(data.gia_khuyen_nghi))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -426,7 +427,8 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data && formatNumberCurrency(Number(data.gia_ban_dung_lo))}{" "}
+                      {data &&
+                        formatNumberCurrency(Number(data.gia_ban_dung_lo))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -502,8 +504,8 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                 </div>
               )}
 
-              <div className="columnChart ">
-                <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30  text-center p-1  tran ">
+              <div className="columnChart">
+                <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30 text-center p-1">
                   <h2 className="text-white font-semibold text-[15px] m-0 leading-[19px] ">
                     Thống kê lệnh Mua- Bán chủ động (nghìn CP)
                   </h2>
