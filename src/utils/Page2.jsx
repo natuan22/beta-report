@@ -95,9 +95,9 @@ const Page2 = () => {
               </tr>
             </thead>
             <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-              {rate?.map((item) => {
+              {rate?.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td className="text-center px-2 py-1 font-bold flex items-center">
                       <img
                         src={`/${item.code}.png`}
@@ -153,8 +153,8 @@ const Page2 = () => {
               </tr>
             </thead>
             <tbody className="border-1 border-[#0155B7] border-solid border-collapse  ">
-              {interestRate?.map((item) => (
-                <tr>
+              {interestRate?.map((item, index) => (
+                <tr key={index}>
                   <td className="text-center px-1 py-3 font-semibold">
                     {item.code}
                   </td>
@@ -208,8 +208,8 @@ const Page2 = () => {
               </tr>
             </thead>
             <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-              {goodsPrice?.slice(0, 8)?.map((item) => (
-                <tr>
+              {goodsPrice?.slice(0, 8)?.map((item, index) => (
+                <tr key={index}>
                   <td className="text-left pl-2 py-1 font-semibold ">
                     {item.name}
                   </td>
@@ -270,8 +270,8 @@ const Page2 = () => {
               </tr>
             </thead>
             <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-              {stockMarket?.map((item) => (
-                <tr>
+              {stockMarket?.map((item, index) => (
+                <tr key={index}>
                   <td className="text-left pl-2 py-1 font-bold">{item.name}</td>
                   <td className="text-center px-2 py-1">
                     {formatNumber(item.price)}

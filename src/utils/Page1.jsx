@@ -98,8 +98,8 @@ const Page1 = ({ isLogin }) => {
             {newsForeign.length > 0 ? (
               <div className="newsForeign ">
                 <ul>
-                  {newsForeign?.map((item) => (
-                    <li className="text-[14px] font-semibold mt-3 ">
+                  {newsForeign?.map((item, index) => (
+                    <li className="text-[14px] font-semibold mt-3 " key={index}>
                       <span className="line-clamp-2">{item}</span>
                     </li>
                   ))}
@@ -118,8 +118,8 @@ const Page1 = ({ isLogin }) => {
             {newsDomestic.length > 0 ? (
               <div className="newsDomestic ">
                 <ul>
-                  {newsDomestic?.map((item) => (
-                    <li className="text-[14px] font-semibold mt-3">
+                  {newsDomestic?.map((item, index) => (
+                    <li className="text-[14px] font-semibold mt-3" key={index}>
                       <span className="line-clamp-2">{item}</span>
                     </li>
                   ))}
@@ -142,7 +142,7 @@ const Page1 = ({ isLogin }) => {
           {newsEnterprise.length > 0 ? (
             <div className="newsEnterpise">
               <ul>
-                {newsEnterprise?.map((item) => {
+                {newsEnterprise?.map((item, index) => {
                   const parts = item.split(":");
                   let beforeColon = "";
                   let afterColon = "";
@@ -157,7 +157,7 @@ const Page1 = ({ isLogin }) => {
                     console.log("Không tìm thấy dấu : trong chuỗi.");
                   }
                   return (
-                    <li className="mb-1 ">
+                    <li className="mb-1 " key={index}>
                       <span className="text-[12px] text-[#064BAD] font-bold">
                         {beforeColon}:{" "}
                       </span>
@@ -192,8 +192,8 @@ const Page1 = ({ isLogin }) => {
                 </tr>
               </thead>
               <tbody className="border-1 border-[#0155B7] border-solid border-collapse ">
-                {events?.slice(0, 13).map((item) => (
-                  <tr>
+                {events?.slice(0, 13).map((item, index) => (
+                  <tr key={index}>
                     <td className="text-[12px] font-bold text-center py-1  px-2">
                       {item.ticker}
                     </td>

@@ -236,7 +236,10 @@ export default function DialogNews({
             <FormGroup>
               {dataNews?.map((item, index) => {
                 return (
-                  <div className="mb-2 flex items-center hover:bg-slate-300 duration-500 p-1 rounded-lg ">
+                  <div
+                    className="mb-2 flex items-center hover:bg-slate-300 duration-500 p-1 rounded-lg "
+                    key={index}
+                  >
                     <div className="w-[80%]">
                       <span className="font-semibold"> {index + 1}</span>.{" "}
                       {item.title}

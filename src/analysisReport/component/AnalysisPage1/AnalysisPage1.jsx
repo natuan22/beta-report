@@ -14,6 +14,7 @@ import "./styles/analysisPage1.css";
 import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
 import Candlestick from "../utils/Candlestick";
 import calculateChartValues from "../../../helper/calculateChartValues";
+import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -212,7 +213,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1 ">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberPage3(parseInt(data.closePrice * 1000))}
+                      {formatNumberCurrency(data.closePrice * 1000)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -221,7 +222,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1 ">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.marketCap / 1000000000)}
+                      {formatNumberCurrency(data.marketCap / 1000000000)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -230,7 +231,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1  w-[25%] text-end font-semibold">
-                      {formatNumber(data.shareout / 1000000)}
+                      {formatNumberCurrency(data.shareout / 1000000)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -239,7 +240,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberPage3(data.high)}
+                      {formatNumberCurrency(data.high)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -248,7 +249,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberPage3(data.low)}
+                      {formatNumberCurrency(data.low)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -257,7 +258,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumberPage3(data.kl)}
+                      {formatNumberCurrency(data.kl)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -267,35 +268,35 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.gia_tri / 1000000000)}
+                      {formatNumberCurrency(data.gia_tri / 1000000000)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">EPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.EPS)}
+                      {formatNumberCurrency(data.EPS)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/E (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.PE)}
+                      {formatNumberCurrency(data.PE)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">BVPS (đồng/CP)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.BVPS)}
+                      {formatNumberCurrency(data.BVPS)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
                     <p className="text-[#0249A4] m-1 w-[75%]">P/B (lần)</p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.PB)}
+                      {formatNumberCurrency(data.PB)}
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-[15px]">
@@ -304,7 +305,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.nuoc_ngoai)}%
+                      {formatNumberCurrency(data.nuoc_ngoai)}%
                     </p>
                   </div>
                   {/* <div className="flex justify-between items-center text-[15px]">
@@ -313,7 +314,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="text-[#0249A4] m-1">:</p>
                     <p className="m-1 w-[25%] text-end font-semibold">
-                      {formatNumber(data.nha_nuoc)}%
+                      {formatNumberCurrency(data.nha_nuoc)}%
                     </p>
                   </div> */}
                 </div>
@@ -389,7 +390,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data && formatNumberPage3(Number(data.gia_muc_tieu))}{" "}
+                      {data && formatNumberCurrency(Number(data.gia_muc_tieu))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -399,7 +400,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data && formatNumberPage3(Number(data.gia_khuyen_nghi))}{" "}
+                      {data && formatNumberCurrency(Number(data.gia_khuyen_nghi))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -410,7 +411,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold text-start text-[#00BF63]">
                       {data &&
-                        formatNumber(
+                        formatNumberCurrency(
                           ((Number(data.gia_muc_tieu) -
                             Number(data.gia_khuyen_nghi)) /
                             Number(data.gia_khuyen_nghi)) *
@@ -425,7 +426,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                     </p>
                     <p className="w-[5px] m-0">:</p>
                     <p className="m-0 w-[110px] text-[13px] font-bold">
-                      {data && formatNumberPage3(Number(data.gia_ban_dung_lo))}{" "}
+                      {data && formatNumberCurrency(Number(data.gia_ban_dung_lo))}{" "}
                       đồng/CP
                     </p>
                   </div>
@@ -521,11 +522,11 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
                         <h2 className="m-0 text-[15px] text-[#023E8A]">
                           {data.text[0]}
                         </h2>
-                        <p className="m-0 text-[14px] text-justify">
+                        <div className="m-0 text-[14px] text-justify">
                           <div
                             dangerouslySetInnerHTML={{ __html: data.text[1] }}
                           ></div>
-                        </p>
+                        </div>
 
                         <h2 className="m-0 text-[15px] text-[#023E8A]">
                           Rủi ro xu hướng

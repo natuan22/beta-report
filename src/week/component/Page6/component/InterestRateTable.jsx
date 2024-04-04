@@ -16,8 +16,8 @@ const InterestRateTable = ({ data }) => {
           </tr>
         </thead>
         <tbody className="border border-[#0155B7] border-solid border-collapse  ">
-          {data?.map((item) => (
-            <tr>
+          {data?.map((item, index) => (
+            <tr key={index}>
               <td className="text-center px-1 py-3 font-semibold text-[11px]">
                 {item.code}
               </td>

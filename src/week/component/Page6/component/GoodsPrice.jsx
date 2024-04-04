@@ -19,8 +19,8 @@ const GoodsPrice = ({ data }) => {
           </tr>
         </thead>
         <tbody className="border border-[#0155B7] border-solid border-collapse ">
-          {data?.slice(0, 8)?.map((item) => (
-            <tr>
+          {data?.slice(0, 8)?.map((item, index) => (
+            <tr key={index}>
               <td className="text-left pl-2 py-1 font-semibold text-[11px] ">
                 {item.name}
               </td>

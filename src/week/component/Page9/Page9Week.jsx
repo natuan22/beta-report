@@ -99,9 +99,12 @@ const Page9Week = () => {
             </thead>
             <tbody className="border border-[#0155B7] border-solid border-collapse ">
               {data?.length > 0 ? (
-                data.map((item) => {
+                data.map((item, index) => {
                   return (
-                    <tr className="text-center text-[14px] border border-y border-[#0155B7] border-solid  border-collapse ">
+                    <tr
+                      className="text-center text-[14px] border border-y border-[#0155B7] border-solid  border-collapse "
+                      key={index}
+                    >
                       <td className=" py-1 px-1 font-bold ">{item.code}</td>
                       <td className=" py-1 px-1 ">{item.date}</td>
                       <td className=" py-1 px-1 ">
@@ -153,7 +156,9 @@ const Page9Week = () => {
                   );
                 })
               ) : (
-                <div>Loading....</div>
+                <tr>
+                  <td>Loading....</td>
+                </tr>
               )}
             </tbody>
           </table>

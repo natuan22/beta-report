@@ -28,8 +28,8 @@ const TableEvent = ({ data }) => {
           </tr>
         </thead>
         <tbody className="border border-t-0 border-[#0155B7] border-solid border-collapse ">
-          {data?.map((item) => (
-            <tr>
+          {data?.map((item, index) => (
+            <tr key={index}>
               <td className="text-[11px] font-bold text-center p-1   border border-solid border-collapse border-[#0155B7] border-y-0 border-l-0  ">
                 {item.ticker}
               </td>

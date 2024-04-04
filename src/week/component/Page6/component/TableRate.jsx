@@ -17,9 +17,9 @@ const TableRate = ({ data }) => {
           </tr>
         </thead>
         <tbody className="border border-[#0155B7] border-solid border-collapse ">
-          {data?.map((item) => {
+          {data?.map((item, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <td className="text-center px-2 py-1 font-bold flex items-center text-[11px]">
                   <img
                     src={`/${item.code}.png`}

@@ -111,9 +111,9 @@ const Page4Week = () => {
                   </tr>
                 </thead>
                 <tbody className="border border-[#0155B7] border-solid border-collapse  ">
-                  {rate?.map((item) => {
+                  {rate?.map((item, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td
                           className={` ${
                             item.name === "Dollar Index" ? "pb-1 pt-2" : "py-1"

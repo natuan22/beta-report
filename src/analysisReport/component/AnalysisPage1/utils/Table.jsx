@@ -44,7 +44,9 @@ const Table = ({ data, type }) => {
               );
             })
           ) : (
-            <div>Loading...</div>
+            <tr>
+              <td>Loading...</td>
+            </tr>
           )}
         </tbody>
       </table>

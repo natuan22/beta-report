@@ -142,7 +142,7 @@ const AnalysisPage2 = ({ stock }) => {
                   <h2 className="m-0 mb-1 text-[17px]">
                     ADX <span className="font-normal text-[15px] ">(14)</span>
                   </h2>
-                  <p className="m-0 mb-1 mr-1">
+                  <div className="m-0 mb-1 mr-1">
                     Giá trị:{" "}
                     <span className="text-[#023E8A] font-semibold">
                       {formatNumber(data.adx.value.adx)}
@@ -155,7 +155,7 @@ const AnalysisPage2 = ({ stock }) => {
                         {formatNumber(data.adx.value.mdi)}
                       </span>
                     </div>
-                  </p>
+                  </div>
                   <p className="m-0 mb-1">
                     Đánh giá:{" "}
                     <span
