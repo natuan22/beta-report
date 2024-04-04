@@ -77,7 +77,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           showSidebar ? "" : "translate-x-[100%] ease-in-out duration-500"
         }`}
       >
-        <div id="nav" className="w-full px-3">
+        <div id="nav" className="w-full px-3 overflow-y-auto h-[830px]">
           <div>
             <h3 className="uppercase text-slate-500">Bản tin</h3>
             {buttonNavLink("/", <VscCoffee />, "Bản tin sáng")}
@@ -86,43 +86,19 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           </div>
           <div>
             <h3 className="uppercase text-slate-500">Phân tích</h3>
-            {buttonNavLink(
-              "/phan-tich-ky-thuat",
-              <SlGraph />,
-              "Phân tích kỹ thuật"
-            )}
-            {buttonNavLink(
-              "/phan-tich-ky-thuat-tu-dong",
-              <MdOutlineAutoGraph />,
-              "Phân tích kỹ thuật tự động"
-            )}
-            {buttonNavLink(
-              "/phan-tich-co-ban",
-              <BsGraphUp />,
-              "Phân tích cơ bản"
-            )}
+            {buttonNavLink("/phan-tich-ky-thuat", <SlGraph />, "Phân tích kỹ thuật")}
+            {buttonNavLink("/phan-tich-ky-thuat-tu-dong", <MdOutlineAutoGraph />, "Phân tích kỹ thuật tự động")}
+            {buttonNavLink("/phan-tich-co-ban", <BsGraphUp />, "Phân tích cơ bản")}
           </div>
           <div>
             <h3 className="uppercase text-slate-500">Công cụ đầu tư</h3>
             {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
-            {buttonNavLink(
-              "/canh-bao-tin-hieu",
-              <IoMdNotificationsOutline />,
-              "Cảnh báo tín hiệu"
-            )}
-            {buttonNavLink(
-              "/danh-muc-theo-doi",
-              <BiCategoryAlt />,
-              "Danh mục theo dõi"
-            )}
-            {buttonNavLink(
-              "/chien-luoc-giao-dich",
-              <MdQueryStats />,
-              "Chiến lược giao dịch"
-            )}
+            {buttonNavLink("/canh-bao-tin-hieu", <IoMdNotificationsOutline />, "Cảnh báo tín hiệu")}
+            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
+            {buttonNavLink("/chien-luoc-giao-dich", <MdQueryStats />, "Chiến lược giao dịch")}
           </div>
         </div>
-        <div className="fixed bottom-0 m-2 px-3 py-3">
+        <div className="fixed bottom-0 px-3 py-3">
           <div className="h-[1px] bg-slate-400 mb-2"></div>
           {isLogin ? (
             <div>
