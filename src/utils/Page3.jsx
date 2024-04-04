@@ -105,12 +105,13 @@ const Page3 = ({ isLogin }) => {
                 : "flex flex-col justify-center items-center"
             }`}
           >
-            {dataStock?.map((item) => {
+            {dataStock?.map((item, index) => {
               return (
                 <div
                   className={`${
                     item.isBuy ? "border-[#116DDF]" : "border-red-500"
                   } stock-card flex  items-center   w-[47%] my-[5px] border-1 border-collapse border-solid  mr-2 rounded-lg `}
+                  key={index}
                 >
                   <div className="flex flex-col items-center w-[130px] h-auto ">
                     <img

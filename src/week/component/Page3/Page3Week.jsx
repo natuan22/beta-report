@@ -79,8 +79,11 @@ const Page3Week = ({ isLogin }) => {
                   </tr>
                 </thead>
                 <tbody className="border-1 ">
-                  {data.table?.map((item) => (
-                    <tr className="border-[#0155B7] border-solid border-[0.5px] border-l-0 border-r-0 border-collapse font-semibold ">
+                  {data.table?.map((item, index) => (
+                    <tr
+                      className="border-[#0155B7] border-solid border-[0.5px] border-l-0 border-r-0 border-collapse font-semibold "
+                      key={index}
+                    >
                       <td className="text-left pl-2 py-1 font-bold">
                         {item.name}
                       </td>

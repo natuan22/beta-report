@@ -10,9 +10,9 @@ const ListNew = ({ data, type }) => {
         </div>
       </div>
       <div className="listNews min-h-[910px] flex flex-col justify-start items-center">
-        {data?.map((item) => {
+        {data?.map((item, index) => {
           return (
-            <div className=" min-h-[105px] ">
+            <div className=" min-h-[105px] " key={index}>
               <p className="my-1 text-justify font-bold text-[13px] min-h-[25px] ">
                 {item.title}
               </p>

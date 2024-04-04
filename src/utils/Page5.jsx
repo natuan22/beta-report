@@ -117,9 +117,12 @@ const Page5 = () => {
                       <span className="ml-2">ròng mạnh (tỷ đồng)</span>
                     </div>
                     <div className="flex flex-wrap p-2  ">
-                      {dataHose.buy.map((item) => {
+                      {dataHose.buy.map((item, index) => {
                         return (
-                          <div className=" w-[100%] flex justify-evenly">
+                          <div
+                            className=" w-[100%] flex justify-evenly"
+                            key={index}
+                          >
                             <span className=" w-[40%] font-semibold m-0 text-center">
                               {item.code}
                             </span>
@@ -138,9 +141,12 @@ const Page5 = () => {
                     </div>
 
                     <div className="flex  flex-wrap p-2 ">
-                      {dataHose.sell.map((item) => {
+                      {dataHose.sell.map((item, index) => {
                         return (
-                          <div className=" w-[100%] flex justify-evenly  ">
+                          <div
+                            className=" w-[100%] flex justify-evenly  "
+                            key={index}
+                          >
                             <p className="w-[40%] font-semibold m-0 text-center">
                               {item.code}
                             </p>
@@ -176,7 +182,10 @@ const Page5 = () => {
                     const isLastItem =
                       index === dataContribute.stock_advance.length - 1;
                     return (
-                      <span className="text-green-500 ml-1 font-semibold">
+                      <span
+                        className="text-green-500 ml-1 font-semibold"
+                        key={index}
+                      >
                         {item.code} (+{formatNumber(item.point)} điểm)
                         {isLastItem ? "." : ","}
                       </span>
@@ -190,7 +199,10 @@ const Page5 = () => {
                     const isLastItem =
                       index === dataContribute.stock_decline.length - 1;
                     return (
-                      <span className="text-red-500 ml-1 font-semibold">
+                      <span
+                        className="text-red-500 ml-1 font-semibold"
+                        key={index}
+                      >
                         {item.code} ({formatNumber(item.point)} điểm)
                         {isLastItem ? "." : ","}
                       </span>
@@ -210,7 +222,10 @@ const Page5 = () => {
                       index === dataContribute.stock_decline.length - 1;
 
                     return (
-                      <span className="text-red-500 ml-1 font-semibold">
+                      <span
+                        className="text-red-500 ml-1 font-semibold"
+                        key={index}
+                      >
                         {item.code} {""}({formatNumber(item.point)} điểm)
                         {isLastItem ? "." : ","}
                       </span>
@@ -224,7 +239,10 @@ const Page5 = () => {
                       index === dataContribute.stock_advance.length - 1;
 
                     return (
-                      <span className="text-green-500 ml-1 font-semibold">
+                      <span
+                        className="text-green-500 ml-1 font-semibold"
+                        key={index}
+                      >
                         {item.code} {""}
                         (+{item.point.toFixed(2)} điểm)
                         {isLastItem ? "." : ","}

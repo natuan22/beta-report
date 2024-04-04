@@ -134,9 +134,9 @@ const AfternoonPage4 = ({ isLogin }) => {
                     </tr>
                   </thead>
                   <tbody className="border border-[#0155B7] border-solid border-collapse ">
-                    {rate?.slice(0, 7)?.map((item) => {
+                    {rate?.slice(0, 7)?.map((item, index) => {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td className="text-center  font-bold flex items-center text-[12px] h-full">
                             <div className="flex items-center justify-evenly">
                               <img
@@ -218,9 +218,9 @@ const AfternoonPage4 = ({ isLogin }) => {
                     </tr>
                   </thead>
                   <tbody className="border border-[#0155B7] border-solid border-collapse ">
-                    {interestRate?.map((item) => {
+                    {interestRate?.map((item, index) => {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td className="text-center font-bold  items-center text-[12px] w-[60px] ">
                             {item.code}
                           </td>
@@ -292,9 +292,9 @@ const AfternoonPage4 = ({ isLogin }) => {
                     </tr>
                   </thead>
                   <tbody className="border border-[#0155B7] border-solid border-collapse ">
-                    {goodsPrice?.slice(0, 7).map((item) => {
+                    {goodsPrice?.slice(0, 7).map((item, index) => {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td className="text-center px-2 py-1 font-bold  items-center text-[12px]">
                             {item.name}
                           </td>
@@ -379,8 +379,11 @@ const AfternoonPage4 = ({ isLogin }) => {
                     {newsForeign.length > 0 ? (
                       <div className="newsForeign ">
                         <ul className="my-0">
-                          {newsForeign?.map((item) => (
-                            <li className="text-[14px] font-semibold mt-2 ">
+                          {newsForeign?.map((item, index) => (
+                            <li
+                              className="text-[14px] font-semibold mt-2 "
+                              key={index}
+                            >
                               <span className="line-clamp-2">{item}</span>
                             </li>
                           ))}
@@ -411,8 +414,11 @@ const AfternoonPage4 = ({ isLogin }) => {
                     {newsDomestic.length > 0 ? (
                       <div className="newsDomestic ">
                         <ul className="my-0">
-                          {newsDomestic?.map((item) => (
-                            <li className="text-[14px] font-semibold mt-2">
+                          {newsDomestic?.map((item, index) => (
+                            <li
+                              className="text-[14px] font-semibold mt-2"
+                              key={index}
+                            >
                               <span className="line-clamp-2">{item}</span>
                             </li>
                           ))}
@@ -462,8 +468,8 @@ const AfternoonPage4 = ({ isLogin }) => {
                       </tr>
                     </thead>
                     <tbody className=" ">
-                      {events?.slice(0, 8)?.map((item) => (
-                        <tr className="">
+                      {events?.slice(0, 8)?.map((item, index) => (
+                        <tr className="" key={index}>
                           <td className="text-[12px] font-bold text-center py-1  px-2 border border-[#0155B7] border-y-0  border-solid border-collapse ">
                             {item.ticker}
                           </td>
@@ -498,7 +504,7 @@ const AfternoonPage4 = ({ isLogin }) => {
                 {newsEnterprise.length > 0 ? (
                   <div className="newsEnterpise">
                     <ul>
-                      {newsEnterprise?.map((item) => {
+                      {newsEnterprise?.map((item, index) => {
                         const parts = item.split(":");
                         let beforeColon = "";
                         let afterColon = "";
@@ -513,7 +519,7 @@ const AfternoonPage4 = ({ isLogin }) => {
                           console.log("Không tìm thấy dấu : trong chuỗi.");
                         }
                         return (
-                          <li className="mb-1 ">
+                          <li className="mb-1 " key={index}>
                             <span className="text-[12px] text-[#064BAD] font-bold">
                               {beforeColon}:{" "}
                             </span>

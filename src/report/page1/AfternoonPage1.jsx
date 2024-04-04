@@ -71,14 +71,14 @@ const AfternoonPage1 = ({ isLogin }) => {
                   <p className="text-[#00429B] font-bold text-[15px] my-2 text-justify">
                     {text[1]}
                   </p>
-                  <p className="my-2 text-justify">
+                  <div className="my-2 text-justify">
                     <p className="text-[#00429B] font-bold m-0">
                       Diễn biến thị trường:{" "}
                     </p>
                     <p className="leading-[20px] m-0 text-[14px] indent-[15px]  ">
                       {text[2]}
                     </p>
-                  </p>
+                  </div>
                 </div>
               ) : (
                 <div className="max-h-[354px]">Loading...</div>
