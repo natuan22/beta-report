@@ -203,9 +203,11 @@ export default function DialogNews({
         const updatedformData = { ...formData };
         updatedformData.value = [];
         setFormData(updatedformData);
+        setNewsSelected([]);
         success("Đã xóa tất cả tin thành công!");
         // Gọi API saveNews với formData mới (rỗng)
         saveNews(updatedformData);
+        setOpen(false);
       }
     });
   };
