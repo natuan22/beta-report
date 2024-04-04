@@ -12,6 +12,7 @@ import "sweetalert2/dist/sweetalert2.css";
 import { https } from "../../../../services/configService";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Swal from "sweetalert2";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -193,17 +194,26 @@ export default function DialogAddNews({
   }, [formData]);
 
   const handleDeleteNews = (index) => {
-    const confirmDelete = window.confirm(
-      "Bạn có chắc muốn xóa tin tức này không?"
-    );
-
-    if (confirmDelete) {
-      setArrSelectedNews((prevArr) => {
-        const newArr = [...prevArr];
-        newArr.splice(index, 1);
-        return newArr;
-      });
-    }
+    // Sử dụng SweetAlert để xác nhận việc xóa
+    Swal.fire({
+      title: "Bạn chắc chắn muốn xóa tin này?",
+      text: "Thao tác này không thể hoàn tác!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Xác nhận xóa tin và cập nhật state
+        const updatedformData = { ...formData };
+        updatedformData.value.splice(index, 1);
+        // console.log(updatedformData)
+        setFormData(updatedformData);
+        success("Đã xóa tin thành công!");
+      }
+    });
   };
 
   const handleAddNewsBtn = async () => {
@@ -222,6 +232,31 @@ export default function DialogAddNews({
       setOpen(false);
       success(`Thêm bản tin ${type} thành công`);
     }
+  };
+  const handleDeleteAllNews = () => {
+    // Sử dụng SweetAlert để xác nhận việc xóa tất cả
+    Swal.fire({
+      title: "Bạn chắc chắn muốn xóa tất cả tin này?",
+      text: "Thao tác này không thể hoàn tác!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Xác nhận xóa tất cả tin và cập nhật state
+        const updatedformData = { ...formData };
+        updatedformData.value = [];
+        setFormData(updatedformData);
+        setArrSelectedNews([]);
+        success("Đã xóa tất cả tin thành công!");
+        // Gọi API saveNews với formData mới (rỗng)
+        saveNews(updatedformData);
+        setOpen(false);
+      }
+    });
   };
   return (
     <Fragment>
@@ -382,7 +417,11 @@ export default function DialogAddNews({
             </button>
           </div>
           <div className="absolute right-[11%] bottom-[30px] z-10">
-            <Button variant="contained" color="warning">
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={handleDeleteAllNews}
+            >
               Xóa tất cả
             </Button>
           </div>
