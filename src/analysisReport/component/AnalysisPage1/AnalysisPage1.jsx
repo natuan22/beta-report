@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import HeaderAnalysis from "../utils/HeaderAnalysis";
 import FooterAnalysis from "../utils/FooterAnalysis";
 import { https } from "../../../services/configService";
-import formatNumber from "../../../helper/formatNumber";
-import formatNumberPage3 from "../../../helper/formatNumberPage3";
 import LineChart from "./utils/LineChart";
 import Table from "./utils/Table";
 import TableSR from "./utils/TableSR";
