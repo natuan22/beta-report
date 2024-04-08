@@ -95,7 +95,7 @@ const Page1 = ({ isLogin }) => {
             <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1 ">
               QUỐC TẾ
             </h2>
-            {newsForeign.length > 0 ? (
+            {newsForeign?.length > 0 ? (
               <div className="newsForeign ">
                 <ul>
                   {newsForeign?.map((item, index) => (
@@ -115,7 +115,7 @@ const Page1 = ({ isLogin }) => {
             <h2 className="titile font-[800] text-[20px] text-[#0155B7]  text-center border-1 border-x-0 border-solid border-collapse border-[#116DDF] py-1">
               TRONG NƯỚC
             </h2>
-            {newsDomestic.length > 0 ? (
+            {newsDomestic?.length > 0 ? (
               <div className="newsDomestic ">
                 <ul>
                   {newsDomestic?.map((item, index) => (
@@ -139,7 +139,7 @@ const Page1 = ({ isLogin }) => {
           <h2 className="titile font-[800] text-[20px] text-[#0155B7] text-center border-1 border-x-0  border-solid border-collapse border-[#116DDF] py-1">
             DOANH NGHIỆP
           </h2>
-          {newsEnterprise.length > 0 ? (
+          {newsEnterprise?.length > 0 ? (
             <div className="newsEnterpise">
               <ul>
                 {newsEnterprise?.map((item, index) => {

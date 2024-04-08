@@ -376,7 +376,7 @@ const AfternoonPage4 = ({ isLogin }) => {
                       </h2>
                     </div>
 
-                    {newsForeign.length > 0 ? (
+                    {newsForeign?.length > 0 ? (
                       <div className="newsForeign ">
                         <ul className="my-0">
                           {newsForeign?.map((item, index) => (
@@ -411,7 +411,7 @@ const AfternoonPage4 = ({ isLogin }) => {
                         TIN TRONG NƯỚC
                       </h2>
                     </div>
-                    {newsDomestic.length > 0 ? (
+                    {newsDomestic?.length > 0 ? (
                       <div className="newsDomestic ">
                         <ul className="my-0">
                           {newsDomestic?.map((item, index) => (
@@ -501,7 +501,7 @@ const AfternoonPage4 = ({ isLogin }) => {
                     TIN DOANH NGHIỆP
                   </h2>
                 </div>
-                {newsEnterprise.length > 0 ? (
+                {newsEnterprise?.length > 0 ? (
                   <div className="newsEnterpise">
                     <ul>
                       {newsEnterprise?.map((item, index) => {
