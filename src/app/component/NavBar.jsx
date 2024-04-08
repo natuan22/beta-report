@@ -92,9 +92,9 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           </div>
           <div>
             <h3 className="uppercase text-slate-500">Công cụ đầu tư</h3>
+            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
             {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
             {buttonNavLink("/canh-bao-tin-hieu", <IoMdNotificationsOutline />, "Cảnh báo tín hiệu")}
-            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
             {buttonNavLink("/chien-luoc-giao-dich", <MdQueryStats />, "Chiến lược giao dịch")}
           </div>
         </div>
