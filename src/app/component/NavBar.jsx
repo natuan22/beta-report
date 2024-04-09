@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { BsCalendar2Day } from "react-icons/bs";
 import { FiSunset, FiChevronsRight, FiChevronsLeft } from "react-icons/fi";
 import { MdOutlineAutoGraph } from "react-icons/md";
@@ -14,18 +14,24 @@ import { CiFilter } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdQueryStats } from "react-icons/md";
+import DialogSignUp from "../../Auth/components/DialogSignUp";
+import { FloatButton } from "antd";
 
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
+    if (showSidebar) setPositionBackToTopBtn(20);
+    else setPositionBackToTopBtn(300);
   };
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1440) {
         setShowSidebar(true);
+        setPositionBackToTopBtn(300);
       }
     };
 
@@ -38,10 +44,24 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
     };
   }, []);
 
+  const [activeNav, setActiveNav] = useState(""); // State để lưu nav đang active
+  const location = useLocation(); // Hook để lấy thông tin về địa chỉ hiện tại của trang
+
+  useEffect(() => {
+    // Khi location thay đổi, cập nhật activeNav tương ứng
+    setActiveNav(location.pathname);
+  }, [location]);
+
+  // Hàm để kiểm tra nav có active hay không
+  const isNavActive = (navPath) => {
+    return navPath === activeNav;
+  };
+
   const buttonNavLink = (path, icon, name) => {
     return (
       <NavLink
         to={path}
+        isActive={(location) => isNavActive(location.pathname)}
         className={({ isActive }) =>
           isActive
             ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
@@ -56,6 +76,12 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
 
   return (
     <div className="flex flex-col relative w-screen">
+      <FloatButton.BackTop
+        tooltip={<div>Back to top</div>}
+        style={{
+          right: positionBackToTopBtn,
+        }}
+      />
       <div>
         <button
           onClick={toggleSidebar}
@@ -79,26 +105,81 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       >
         <div id="nav" className="w-full px-3 overflow-y-auto h-[830px]">
           <div>
-            <h3 className="uppercase text-slate-500">Bản tin</h3>
+            <h3
+              className={`uppercase ${
+                activeNav === "/" ||
+                activeNav === "/ban-tin-chieu" ||
+                activeNav === "/ban-tin-tuan"
+                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                  : "text-slate-500"
+              }`}
+            >
+              Bản tin
+            </h3>
             {buttonNavLink("/", <VscCoffee />, "Bản tin sáng")}
             {buttonNavLink("/ban-tin-chieu", <FiSunset />, "Bản tin chiều")}
             {buttonNavLink("/ban-tin-tuan", <BsCalendar2Day />, "Bản tin tuần")}
           </div>
           <div>
-            <h3 className="uppercase text-slate-500">Phân tích</h3>
-            {buttonNavLink("/phan-tich-ky-thuat", <SlGraph />, "Phân tích kỹ thuật")}
-            {buttonNavLink("/phan-tich-ky-thuat-tu-dong", <MdOutlineAutoGraph />, "Phân tích kỹ thuật tự động")}
-            {buttonNavLink("/phan-tich-co-ban", <BsGraphUp />, "Phân tích cơ bản")}
+            <h3
+              className={`uppercase ${
+                activeNav === "/phan-tich-ky-thuat" ||
+                activeNav === "/phan-tich-ky-thuat-tu-dong" ||
+                activeNav === "/phan-tich-co-ban"
+                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                  : "text-slate-500"
+              }`}
+            >
+              Phân tích
+            </h3>
+            {buttonNavLink(
+              "/phan-tich-ky-thuat",
+              <SlGraph />,
+              "Phân tích kỹ thuật"
+            )}
+            {buttonNavLink(
+              "/phan-tich-ky-thuat-tu-dong",
+              <MdOutlineAutoGraph />,
+              "Phân tích kỹ thuật tự động"
+            )}
+            {buttonNavLink(
+              "/phan-tich-co-ban",
+              <BsGraphUp />,
+              "Phân tích cơ bản"
+            )}
           </div>
           <div>
-            <h3 className="uppercase text-slate-500">Công cụ đầu tư</h3>
-            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
+            <h3
+              className={`uppercase ${
+                activeNav === "/danh-muc-theo-doi" ||
+                activeNav === "/bo-loc" ||
+                activeNav === "/canh-bao-tin-hieu" ||
+                activeNav === "/chien-luoc-giao-dich"
+                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                  : "text-slate-500"
+              }`}
+            >
+              Công cụ đầu tư
+            </h3>
+            {buttonNavLink(
+              "/danh-muc-theo-doi",
+              <BiCategoryAlt />,
+              "Danh mục theo dõi"
+            )}
             {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
-            {buttonNavLink("/canh-bao-tin-hieu", <IoMdNotificationsOutline />, "Cảnh báo tín hiệu")}
-            {buttonNavLink("/chien-luoc-giao-dich", <MdQueryStats />, "Chiến lược giao dịch")}
+            {buttonNavLink(
+              "/canh-bao-tin-hieu",
+              <IoMdNotificationsOutline />,
+              "Cảnh báo tín hiệu"
+            )}
+            {buttonNavLink(
+              "/chien-luoc-giao-dich",
+              <MdQueryStats />,
+              "Chiến lược giao dịch"
+            )}
           </div>
         </div>
-        <div className="fixed bottom-0 px-3 py-3">
+        <div className="fixed bottom-0 px-3 py-3 bg-slate-100">
           <div className="h-[1px] bg-slate-400 mb-2"></div>
           {isLogin ? (
             <div>
@@ -121,7 +202,10 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
               </Button>
             </div>
           ) : (
-            <DialogLogin onSubmitSuccess={onSubmitSuccess} />
+            <div className="flex">
+              <DialogLogin onSubmitSuccess={onSubmitSuccess} />
+              <DialogSignUp onSubmitSuccess={onSubmitSuccess} />
+            </div>
           )}
         </div>
       </div>

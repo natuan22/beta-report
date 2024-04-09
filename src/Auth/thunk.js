@@ -50,6 +50,19 @@ export const autoLoginWithToken = (token) => async (dispatch) => {
   }
 }
 
+export const userRegisterAction = (formData) => async (dispatch) => {
+  try {
+    const res = await authenServices.userRegister(formData);
+    dispatch({
+      type: authenTypes.USER_REGISTER,
+      payload: formData,
+    });
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const userLogoutAction = () => async dispatch => {
   try {
     const res = await authenServices.userLogout()

@@ -123,7 +123,6 @@ const AnalysisReport = () => {
           <AnalysisPage3 />
         </div>
       </div>
-
       <div className="flex justify-evenly w-[50%] mb-5">
         <Button variant="contained" color="success" onClick={generatePDF}>
           Tạo PDF

@@ -67,7 +67,7 @@ const AfternoonPage4 = ({ isLogin }) => {
 
     const fetchData = async () => {
       const [newsForeignData, newsDomesticData, newsEnterpriseData] =
-        await Promise.all([getNews(0), getNews(1), getNews(2)]);
+        await Promise.all([getNews(5), getNews(6), getNews(7)]);
       setNewsForeign(newsForeignData);
       setNewsDomestic(newsDomesticData);
       setNewsEnterprise(newsEnterpriseData);
@@ -337,19 +337,19 @@ const AfternoonPage4 = ({ isLogin }) => {
                     handleCatchDataNews={handleCatchDataNews}
                     type={"quốc tế"}
                     query={"quoc-te"}
-                    idQuery={0}
+                    idQuery={5}
                   />
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
                     type={"trong nước"}
                     query={"trong-nuoc"}
-                    idQuery={1}
+                    idQuery={6}
                   />
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
                     type={"doanh nghiệp"}
                     query={"doanh-nghiep"}
-                    idQuery={2}
+                    idQuery={7}
                   />
                 </div>
               ) : (

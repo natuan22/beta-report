@@ -58,7 +58,7 @@ const DialogLogin = ({ onSubmitSuccess }) => {
         sx={{
           p: "0.5rem",
           borderRadius: "0.375rem",
-          width: "244px",
+          width: "122px",
           fontWeight: 600,
         }}
       >
