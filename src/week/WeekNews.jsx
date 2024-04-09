@@ -23,22 +23,24 @@ const weekDate = getTimeWeek();
 
 const WeekNews = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(
-    JSON.parse(localStorage.getItem("_il"))
-  );
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
+      setRole(null);
       dispatch(userLogoutAction());
-      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.setItem("_il", "4E8WL");
+      localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setIsLogin(localStorage.getItem("_il"));
+    setRole(localStorage.getItem("2ZW79"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
   const pageRefs = {
@@ -179,10 +181,10 @@ const WeekNews = () => {
           <Page1Week />
         </div>
         <div ref={pageRefs.page2}>
-          <Page2Week isLogin={isLogin} />
+          <Page2Week role={role} />
         </div>
         <div ref={pageRefs.page3}>
-          <Page3Week isLogin={isLogin} />
+          <Page3Week role={role} />
         </div>
         <div ref={pageRefs.page4}>
           <Page4Week />
@@ -194,7 +196,7 @@ const WeekNews = () => {
           <Page6Week />
         </div>
         <div ref={pageRefs.page7}>
-          <Page7Week isLogin={isLogin} />
+          <Page7Week role={role} />
         </div>
         <div ref={pageRefs.page8}>
           <Page8Week />

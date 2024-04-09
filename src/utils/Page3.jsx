@@ -7,7 +7,7 @@ import DialogAddStock from "../component/DialogAddStock";
 import formatNumberPage3 from "../helper/formatNumberPage3";
 import { https } from "../services/configService";
 
-const Page3 = ({ isLogin }) => {
+const Page3 = ({ role }) => {
   const [data, setData] = useState();
   const [dataStock, setDataStock] = useState([]);
   // console.log(dataStock)
@@ -37,7 +37,7 @@ const Page3 = ({ isLogin }) => {
 
   return (
     <div className="h-[1480px] w-[800px] relative ">
-      {isLogin ? (
+      {role === "V0U1S" ? (
         <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
           <div>
             <DialogIdentify catchText={catchText} />

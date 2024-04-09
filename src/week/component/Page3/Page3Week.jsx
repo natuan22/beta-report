@@ -9,7 +9,7 @@ import DialogAddImgAndTextWeek from "./component/DialogAddImgAndTextWeek";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
-const Page3Week = ({ isLogin }) => {
+const Page3Week = ({ role }) => {
   const [data, setData] = useState();
   const [imgSrc, setImgSrc] = useState();
 
@@ -45,7 +45,7 @@ const Page3Week = ({ isLogin }) => {
         <HeaderWeek />
       </div>
 
-      {isLogin ? (
+      {role === "V0U1S" ? (
         <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
           <DialogAddImgAndTextWeek
             onSubmitSuccess={onSubmitSuccess}

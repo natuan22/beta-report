@@ -181,7 +181,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
         </div>
         <div className="fixed bottom-0 px-3 py-3 bg-slate-100">
           <div className="h-[1px] bg-slate-400 mb-2"></div>
-          {isLogin ? (
+          {isLogin === "7MEvU" ? (
             <div>
               <div className="flex my-1 justify-center items-center">
                 <UserOutlined className="mx-2" />

@@ -14,21 +14,23 @@ import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(
-    JSON.parse(localStorage.getItem("_il"))
-  );
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
+      setRole(null);
       dispatch(userLogoutAction());
-      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.setItem("_il", "4E8WL");
+      localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
     }
   };
   const onSubmitSuccess = () => {
-    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setIsLogin(localStorage.getItem("_il"));
+    setRole(localStorage.getItem("2ZW79"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -121,13 +123,13 @@ const Home = () => {
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <Page1 isLogin={isLogin} />
+          <Page1 role={role} />
         </div>
         <div ref={pageRefs.page2}>
           <Page2 />
         </div>
         <div ref={pageRefs.page3}>
-          <Page3 isLogin={isLogin} />
+          <Page3 role={role} />
         </div>
         <div ref={pageRefs.page4}>
           <Page4 />

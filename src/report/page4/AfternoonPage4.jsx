@@ -6,7 +6,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import DialogNews from "../../component/DialogNews";
 
-const AfternoonPage4 = ({ isLogin }) => {
+const AfternoonPage4 = ({ role }) => {
   const [rate, setRate] = useState();
   const [interestRate, setInterestRate] = useState();
   const [goodsPrice, setGoodsPrice] = useState();
@@ -331,7 +331,7 @@ const AfternoonPage4 = ({ isLogin }) => {
             </div>
 
             <div className="content-mid relative">
-              {isLogin ? (
+              {role === "V0U1S" ? (
                 <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
