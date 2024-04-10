@@ -1,4 +1,5 @@
 import Home from "../Home";
+import NavBar1 from "../NavBarTest/NavBar1";
 import NavBar2 from "../NavBarTest/NavBar2";
 import NavBar3 from "../NavBarTest/NavBar3";
 import NavBar4 from "../NavBarTest/NavBar4";
@@ -19,7 +20,7 @@ export const routes = [
   { path: "/phan-tich-ky-thuat-tu-dong", component: AnalysisReportAutomation },
   { path: "/phan-tich-co-ban", component: AnalysisReportBasic },
   //Công cụ đầu tư
-  { path: "/danh-muc-theo-doi", component: WatchList },
+  { path: "/danh-muc-theo-doi", component: NavBar1 },
   { path: "/bo-loc", component: NavBar2 },
   { path: "/canh-bao-tin-hieu", component: NavBar3 },
   { path: "/chien-luoc-giao-dich", component: NavBar4 },

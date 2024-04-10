@@ -44,7 +44,7 @@ const DialogAddTechnicalReportInfor = ({
         cancelText="Đóng"
         footer={null}
       >
-        <div className="h-[650px] ">
+        <div className="h-full w-full">
           <FormInput
             code={stock}
             getImgFromInput={getImgFromInput}

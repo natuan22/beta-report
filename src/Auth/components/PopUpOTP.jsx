@@ -15,7 +15,7 @@ const PopUpOTP = ({ open, userID }) => {
   const [isOpen, setIsOpen] = useState(open);
   const [countdown, setCountdown] = useState(300);
   const [verifyOTP, setVerifyOTP] = useState("");
-  
+
   const warning = (value) => {
     messageApi.open({
       type: "warning",
@@ -82,40 +82,46 @@ const PopUpOTP = ({ open, userID }) => {
     <>
       {contextHolder}
       <Modal open={isOpen} footer={[]} maskClosable={false} closable={false}>
-        <form className="otp-Form">
-          <span className="mainHeading">Nhập vào OTP</span>
-          <p className="otpSubheading ">
-            Chúng tôi đã gửi mã xác minh tới số điện thoại di động của bạn
-          </p>
-          <OtpInput
-            value={verifyOTP}
-            onChange={setVerifyOTP}
-            numInputs={6}
-            renderInput={(props) => <input type="number" {...props} />}
-            containerStyle={"flex w-[300px] justify-between"}
-            inputStyle={{ width: "30px", height: "30px" }}
-            inputType={"tel"}
-          />
-          <button onClick={handleSubmit} className="verifyButton" type="submit">
-            Xác nhận
-          </button>
-          <p className="resendNote">
-            Bạn không nhận được OTP?
+        <div className="grid place-content-center">
+          <form className="otp-Form">
+            <span className="mainHeading">Nhập vào OTP</span>
+            <p className="otpSubheading ">
+              Chúng tôi đã gửi mã xác minh tới số điện thoại di động của bạn
+            </p>
+            <OtpInput
+              value={verifyOTP}
+              onChange={setVerifyOTP}
+              numInputs={6}
+              renderInput={(props) => <input type="number" {...props} />}
+              containerStyle={"flex w-[300px] justify-between"}
+              inputStyle={{ width: "30px", height: "30px" }}
+              inputType={"tel"}
+            />
             <button
-              onClick={handleResendOTP}
-              className={`${
-                isResendDisabled
-                  ? "cursor-not-allowed resendBtn bg-[#7f81ff] p-[10px] text-white font-bold text-sm border-0"
-                  : "cursor-pointer resendBtn bg-[#7f81ff] p-[10px] text-white font-bold text-sm border-0  "
-              }  `}
-              disabled={isResendDisabled}
+              onClick={handleSubmit}
+              className="verifyButton"
+              type="submit"
             >
-              {isResendDisabled
-                ? `Gửi lại OTP sau:  ${countdown}s`
-                : "Gửi lại OTP"}
+              Xác nhận
             </button>
-          </p>
-        </form>
+            <p className="resendNote">
+              Bạn không nhận được OTP?
+              <button
+                onClick={handleResendOTP}
+                className={`${
+                  isResendDisabled
+                    ? "cursor-not-allowed resendBtn bg-[#7f81ff] p-[10px] text-white font-bold text-sm border-0"
+                    : "cursor-pointer resendBtn bg-[#7f81ff] p-[10px] text-white font-bold text-sm border-0  "
+                }  `}
+                disabled={isResendDisabled}
+              >
+                {isResendDisabled
+                  ? `Gửi lại OTP sau:  ${countdown}s`
+                  : "Gửi lại OTP"}
+              </button>
+            </p>
+          </form>
+        </div>
       </Modal>
     </>
   );
