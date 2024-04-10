@@ -5,7 +5,7 @@ import { https } from "../services/configService";
 import { homNay } from "../helper/getDate";
 import DialogNews from "../component/DialogNews";
 
-const Page1 = ({ isLogin }) => {
+const Page1 = ({ role }) => {
   const [newsForeign, setNewsForeign] = useState([]);
   const [newsDomestic, setNewsDomestic] = useState([]);
   const [newsEnterprise, setNewsEnterprise] = useState([]);
@@ -59,7 +59,7 @@ const Page1 = ({ isLogin }) => {
   return (
     <div className="h-[1480px] w-[800px] relative  ">
       <div className="absolute top-[30%] right-0 translate-x-[300px] ">
-        {isLogin ? (
+        {role === "V0U1S" ? (
           <div className="flex flex-col justify-between h-[200px]">
             <DialogNews
               handleCatchDataNews={handleCatchDataNews}

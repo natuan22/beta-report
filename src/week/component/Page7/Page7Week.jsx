@@ -5,7 +5,7 @@ import { https } from "../../../services/configService";
 import ListNew from "./component/ListNew";
 import DialogAddNews from "./component/DialogAddNews";
 
-const Page7Week = ({ isLogin }) => {
+const Page7Week = ({ role }) => {
   const [dataDomestic, setDataDomestic] = useState([]);
   const [dataForeign, setDataForeign] = useState([]);
   const getDataDomestic = async () => {
@@ -45,7 +45,7 @@ const Page7Week = ({ isLogin }) => {
         <HeaderWeek />
       </div>
 
-      {isLogin ? (
+      {role === "V0U1S" ? (
         <div className="absolute top-0 right-0 translate-x-[300px] translate-y-[200px] h-[100px] flex flex-col items-center justify-between">
           <div>
             <DialogAddNews

@@ -6,7 +6,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import formatNumber from "../../helper/formatNumber";
 import DialogNews from "../../component/DialogNews";
 
-const AfternoonPage4 = ({ isLogin }) => {
+const AfternoonPage4 = ({ role }) => {
   const [rate, setRate] = useState();
   const [interestRate, setInterestRate] = useState();
   const [goodsPrice, setGoodsPrice] = useState();
@@ -67,7 +67,7 @@ const AfternoonPage4 = ({ isLogin }) => {
 
     const fetchData = async () => {
       const [newsForeignData, newsDomesticData, newsEnterpriseData] =
-        await Promise.all([getNews(0), getNews(1), getNews(2)]);
+        await Promise.all([getNews(5), getNews(6), getNews(7)]);
       setNewsForeign(newsForeignData);
       setNewsDomestic(newsDomesticData);
       setNewsEnterprise(newsEnterpriseData);
@@ -331,25 +331,25 @@ const AfternoonPage4 = ({ isLogin }) => {
             </div>
 
             <div className="content-mid relative">
-              {isLogin ? (
+              {role === "V0U1S" ? (
                 <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
                     type={"quốc tế"}
                     query={"quoc-te"}
-                    idQuery={0}
+                    idQuery={5}
                   />
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
                     type={"trong nước"}
                     query={"trong-nuoc"}
-                    idQuery={1}
+                    idQuery={6}
                   />
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}
                     type={"doanh nghiệp"}
                     query={"doanh-nghiep"}
-                    idQuery={2}
+                    idQuery={7}
                   />
                 </div>
               ) : (

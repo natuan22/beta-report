@@ -8,7 +8,7 @@ import formatNumber from "../../helper/formatNumber";
 import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
-const AfternoonPage2 = ({ isLogin }) => {
+const AfternoonPage2 = ({ role }) => {
   const [data, setData] = useState();
   const [imgSrc, setImgSrc] = useState();
 
@@ -45,7 +45,7 @@ const AfternoonPage2 = ({ isLogin }) => {
 
   return (
     <div className="h-[1480px] w-[800px] relative">
-      {isLogin ? (
+      {role === "V0U1S" ? (
         <div className="absolute top-0 right-0 z-10 translate-x-[300px] translate-y-[200px]">
           <DialogAddImgAndText
             getImgFromInput={getImgFromInput}

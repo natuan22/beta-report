@@ -20,7 +20,7 @@ const getColorBaseOnName = (value) => {
   if (value === "Tiêu cực") return "text-red-500";
   if (value === "Trung lập") return "text-yellow-500";
 };
-const AnalysisPage1 = ({ stock, type, isLogin }) => {
+const AnalysisPage1 = ({ stock, type, role }) => {
   const [data, setData] = useState();
   const [dataAnalysis, setDataAnalysis] = useState();
   const [dataChart, setDataChart] = useState();
@@ -144,7 +144,7 @@ const AnalysisPage1 = ({ stock, type, isLogin }) => {
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[300px] left-[860px] z-30 w-[223px]">
-        {type === 1 && isLogin ? (
+        {type === 1 && role === "V0U1S" ? (
           <DialogAddTechnicalReportInfor
             stock={stock}
             getImgFromInput={getImgFromInput}

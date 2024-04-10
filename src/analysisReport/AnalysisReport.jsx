@@ -14,22 +14,24 @@ const AnalysisReport = () => {
   const [val, setVal] = useState("FPT");
   const [debouncedValue, setDebouncedValue] = useState("FPT");
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(
-    JSON.parse(localStorage.getItem("_il"))
-  );
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
+      setRole(null);
       dispatch(userLogoutAction());
-      localStorage.setItem("_il", JSON.stringify(false));
+      localStorage.setItem("_il", "4E8WL");
+      localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(JSON.parse(localStorage.getItem("_il")));
+    setIsLogin(localStorage.getItem("_il"));
+    setRole(localStorage.getItem("2ZW79"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
   const pageRefs = {
@@ -114,7 +116,7 @@ const AnalysisReport = () => {
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <AnalysisPage1 stock={debouncedValue} type={1} isLogin={isLogin} />
+          <AnalysisPage1 stock={debouncedValue} type={1} role={role} />
         </div>
         <div ref={pageRefs.page2}>
           <AnalysisPage2 stock={debouncedValue} />
@@ -123,7 +125,6 @@ const AnalysisReport = () => {
           <AnalysisPage3 />
         </div>
       </div>
-
       <div className="flex justify-evenly w-[50%] mb-5">
         <Button variant="contained" color="success" onClick={generatePDF}>
           Tạo PDF

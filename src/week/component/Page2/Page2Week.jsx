@@ -15,7 +15,7 @@ const getText = (value) => {
   if (value < 0) return <span>giảm</span>;
 };
 
-const Page2Week = ({ isLogin }) => {
+const Page2Week = ({ role }) => {
   const [data, setData] = useState();
   const [text, setText] = useState();
   const getData = async () => {
@@ -41,7 +41,7 @@ const Page2Week = ({ isLogin }) => {
         <HeaderWeek />
       </div>
 
-      {isLogin ? (
+      {role === "V0U1S" ? (
         <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
           <AddText handleGetTextInpur={handleGetTextInpur} />
         </div>
