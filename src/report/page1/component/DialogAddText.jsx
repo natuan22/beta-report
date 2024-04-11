@@ -4,27 +4,9 @@ import { message } from "antd";
 import Button from "@mui/material/Button";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../../../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
-
-const saveText = async (textForm) => {
-  try {
-    const res = await axios
-      .create({
-        baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
-      })
-      .post("api/v1/report/luu-dien-bien-thi-truong", textForm);
-    // console.log(res)
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const DialogAddText = ({ getData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +21,9 @@ const DialogAddText = ({ getData }) => {
       content: "",
     },
     onSubmit: async (values) => {
-      await saveText({ text: [values.title, values.subTitle, values.content] });
+      await postApi(apiUrl, "api/v1/report/luu-dien-bien-thi-truong", {
+        text: [values.title, values.subTitle, values.content],
+      });
       await getData();
       handleOk();
       warning("success", "Thêm diễn biến thị trường thành công");

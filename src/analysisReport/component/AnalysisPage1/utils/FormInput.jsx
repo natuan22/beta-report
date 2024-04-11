@@ -3,8 +3,7 @@ import { Form, Input, InputNumber } from "antd";
 import { useFormik } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../../../../helper/postApi";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
@@ -16,48 +15,37 @@ const FormInput = ({
   getImgFromInput,
   warning,
 }) => {
-  const saveDataAndFile = async (data) => {
-    try {
-      const formData = new FormData();
+  const saveDataAndFile = async (data, img) => {
+    const formData = new FormData();
 
-      // Thêm dữ liệu văn bản
-      const arrText = [data.title, data.text1, data.text2];
-      arrText.forEach((text, index) => {
-        formData.append(`text[${index}]`, text);
-      });
+    // Thêm dữ liệu văn bản
+    const arrText = [data.title, data.text1, data.text2];
+    arrText.forEach((text, index) => {
+      formData.append(`text[${index}]`, text);
+    });
 
-      // Thêm dữ liệu bảng
-      const arrTable = [data.s1, data.s2, data.s3, data.r1, data.r2, data.r3];
-      arrTable.forEach((text, index) => {
-        formData.append(`table[${index}]`, text);
-      });
+    // Thêm dữ liệu bảng
+    const arrTable = [data.s1, data.s2, data.s3, data.r1, data.r2, data.r3];
+    arrTable.forEach((text, index) => {
+      formData.append(`table[${index}]`, text);
+    });
 
-      // Thêm các trường khác
-      formData.append("code", code.toUpperCase());
-      formData.append("is_sell", data.is_sell);
-      formData.append("gia_muc_tieu", data.gia_muc_tieu);
-      formData.append("thoi_gian_nam_giu", data.thoi_gian_nam_giu);
-      formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
-      formData.append("gia_khuyen_nghi", data.gia_khuyen_nghi);
-      formData.append("analyst_name", data.analyst_name);
-      formData.append("img", data.img);
+    // Thêm các trường khác
+    formData.append("code", code.toUpperCase());
+    formData.append("is_sell", data.is_sell);
+    formData.append("gia_muc_tieu", data.gia_muc_tieu);
+    formData.append("thoi_gian_nam_giu", data.thoi_gian_nam_giu);
+    formData.append("gia_ban_dung_lo", data.gia_ban_dung_lo);
+    formData.append("gia_khuyen_nghi", data.gia_khuyen_nghi);
+    formData.append("analyst_name", data.analyst_name);
+    formData.append("img", img);
 
-      // Gửi yêu cầu POST
-      const response = await axios
-        .create({
-          baseURL: apiUrl,
-          headers: {
-            mac: localStorage.getItem("deviceId"),
-            Authorization: "Bearer " + Cookies.get("at"),
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .post(`/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`, formData);
-
-      // console.log("Response:", response.data);
-    } catch (error) {
-      console.error("Error:", error.response.data);
-    }
+    // Gửi yêu cầu POST
+    await postApi(
+      apiUrl,
+      `/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`,
+      formData
+    );
   };
 
   const [imgSrc, setImgSrc] = useState(null);

@@ -203,7 +203,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
             </div>
           ) : (
             <div className="flex">
-              <DialogLogin onSubmitSuccess={onSubmitSuccess} />
+              <DialogLogin onSubmitSuccess={onSubmitSuccess} type={0} />
               <DialogSignUp onSubmitSuccess={onSubmitSuccess} />
             </div>
           )}

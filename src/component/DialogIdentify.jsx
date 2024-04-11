@@ -6,8 +6,7 @@ import Slide from "@mui/material/Slide";
 import { message } from "antd";
 import Textarea from "./utils/Textarea";
 import { https } from "../services/configService";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -15,21 +14,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 });
 
 const MAX_WORDS = 170; // Số từ tối đa cho mỗi TextArea
-const saveText = async (data) => {
-  try {
-    const response = await axios
-      .create({
-        baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
-      })
-      .post("/api/v1/report/luu-nhan-dinh-thi-truong", data);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 export default function DialogIdentify({ catchText }) {
   const [messageApi, contextHolder] = message.useMessage();
@@ -98,7 +82,9 @@ export default function DialogIdentify({ catchText }) {
   const handleAddText = async () => {
     if (text1.trim() !== "" && text2.trim() !== "") {
       const newTextArr = [text1, text2];
-      await saveText({ text: newTextArr });
+      await postApi(apiUrl, "/api/v1/report/luu-nhan-dinh-thi-truong", {
+        text: newTextArr,
+      });
       // Cập nhật textArr sau khi gọi API thành công
       setTextArr((prev) => ({
         text: newTextArr,
