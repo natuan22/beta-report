@@ -7,13 +7,34 @@ import logo from "../../app/asset/img/logoWeek.png";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginAction } from "../thunk";
 
-const DialogLogin = ({ onSubmitSuccess }) => {
+const DialogLogin = ({ onSubmitSuccess, type }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const loginMessage = useSelector(
     (state) => state.authen.loginMessage || "Sai tài khoản hoặc mật khẩu"
   );
+
+  const styleBtn = (type) => {
+    if (type === 1) {
+      return {
+        borderRadius: "15px",
+        width: "335px",
+        height: "52px",
+        fontWeight: 600,
+        backgroundImage: "linear-gradient(90deg, #0669fcff 0%, #011e49ff 100%)",
+        color: "white",
+        fontSize: "18px",
+      };
+    } else {
+      return {
+        p: "0.5rem",
+        borderRadius: "0.375rem",
+        width: "122px",
+        fontWeight: 600,
+      };
+    }
+  };
 
   const warning = (text) => {
     messageApi.open({
@@ -55,12 +76,7 @@ const DialogLogin = ({ onSubmitSuccess }) => {
         variant="text"
         color="primary"
         onClick={showModal}
-        sx={{
-          p: "0.5rem",
-          borderRadius: "0.375rem",
-          width: "122px",
-          fontWeight: 600,
-        }}
+        sx={styleBtn(type)}
       >
         Đăng nhập
       </Button>

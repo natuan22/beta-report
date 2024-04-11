@@ -6,25 +6,8 @@ import InputFormSell from "./utils/InputFormSell";
 import { message } from "antd";
 import Button from "@mui/material/Button";
 import { https } from "../services/configService";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
-
-const saveStock = async (arrStock) => {
-  try {
-    const response = await axios
-      .create({
-        baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
-      })
-      .post("/api/v1/report/luu-co-phieu-khuyen-nghi", arrStock);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const DialogAddStock = ({ catchStock }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -161,7 +144,7 @@ const DialogAddStock = ({ catchStock }) => {
       stock_buy: [],
       stock_sell: [],
     });
-    saveStock({
+    postApi(apiUrl, "/api/v1/report/luu-co-phieu-khuyen-nghi", {
       stock_buy: [],
       stock_sell: [],
     });
@@ -169,7 +152,7 @@ const DialogAddStock = ({ catchStock }) => {
 
   const handleOk = async () => {
     setIsModalOpen(false);
-    await saveStock(arrStock);
+    await postApi(apiUrl, "/api/v1/report/luu-co-phieu-khuyen-nghi", arrStock);
     getStock();
     warning("success", "Thêm cổ phiếu khuyến nghị thành công");
   };

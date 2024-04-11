@@ -4,27 +4,9 @@ import { message } from "antd";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { Form, Input } from "antd";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../../../../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
-
-const saveText = async (text) => {
-  try {
-    const res = await axios
-      .create({
-        baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
-      })
-      .post("api/v1/report/luu-dien-bien-thi-truong-tuan", text);
-    // console.log(res)
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const AddText = ({ handleGetTextInpur }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +20,9 @@ const AddText = ({ handleGetTextInpur }) => {
     },
     onSubmit: (values) => {
       // console.log({ text: [values.title, values.subTitle, values.content] })
-      saveText({ text: [values.title, values.subTitle, values.content] });
+      postApi(apiUrl, "api/v1/report/luu-dien-bien-thi-truong-tuan", {
+        text: [values.title, values.subTitle, values.content],
+      });
       handleGetTextInpur(values.text);
       setIsModalOpen(false);
       warning("success", "Thêm nhận định thành công");

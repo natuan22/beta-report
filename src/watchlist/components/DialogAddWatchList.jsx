@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, message } from "antd";
 import Button from "@mui/material/Button";
 import { Modal } from "antd";
+import "./styles/modalStyle.css";
 
 const DialogAddWatchList = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -42,10 +43,14 @@ const DialogAddWatchList = () => {
         color="primary"
         onClick={showModal}
         sx={{
-          p: "0.5rem",
-          borderRadius: "0.375rem",
-          width: "200px",
+          borderRadius: "15px",
+          width: "335px",
+          height: "52px",
           fontWeight: 600,
+          backgroundImage:
+            "linear-gradient(90deg, #0669fcff 0%, #011e49ff 100%)",
+          color: "white",
+          fontSize: "18px",
         }}
       >
         Tạo watchlist
@@ -57,6 +62,7 @@ const DialogAddWatchList = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
+        className="modalStyle"
       >
         <Form
           initialValues={{
@@ -67,15 +73,28 @@ const DialogAddWatchList = () => {
           size="large"
         >
           <div className="mt-6">
-            <div>Nhập tên watchlist</div>
-            <Form.Item name="name">
-              <Input placeholder="Tên watchlist" />
-            </Form.Item>
-            <Form.Item>
-              <Button type="submit" variant="text" sx={{ fontWeight: 600 }}>
-                Tạo watchlist
-              </Button>
-            </Form.Item>
+            <p className="text-[20px] font-semibold text-white mb-2 mt-0">
+              Nhập tên watchlist
+            </p>
+            <div className="flex flex-col items-end">
+              <Form.Item name="name" className="inputStyle">
+                <Input placeholder="Tên watchlist" />
+              </Form.Item>
+              <Form.Item className="btnStyle">
+                <Button
+                  type="submit"
+                  variant="text"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#ffba07",
+                    fontSize: "18px",
+                    textTransform: "none",
+                  }}
+                >
+                  Tạo watchlist
+                </Button>
+              </Form.Item>
+            </div>
           </div>
         </Form>
       </Modal>

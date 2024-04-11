@@ -11,8 +11,7 @@ import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import "./styles/btnStyle.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { postApi } from "../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -35,22 +34,7 @@ export default function DialogNews({
     id: idQuery,
     value: [],
   });
-  const saveNews = async (data) => {
-    try {
-      const response = await axios
-        .create({
-          baseURL: apiUrl,
-          headers: {
-            mac: localStorage.getItem("deviceId"),
-            Authorization: "Bearer " + Cookies.get("at"),
-          },
-        })
-        .post("/api/v1/report/luu-tin", data);
-      // console.log(response)
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
   const getNews = async (id) => {
     try {
       const response = await https.get("/api/v1/report/tin-tuc-redis?", {
@@ -152,7 +136,7 @@ export default function DialogNews({
     if (editingIndex !== -1) {
       return warning("Vui lòng hoàn tất chỉnh sửa");
     } else {
-      await saveNews(formData);
+      await postApi(apiUrl, "/api/v1/report/luu-tin", formData);
       await getNews(idQuery);
 
       handleCatchDataNews(
@@ -206,7 +190,7 @@ export default function DialogNews({
         setNewsSelected([]);
         success("Đã xóa tất cả tin thành công!");
         // Gọi API saveNews với formData mới (rỗng)
-        saveNews(updatedformData);
+        postApi(apiUrl, "/api/v1/report/luu-tin", updatedformData);
         setOpen(false);
       }
     });
