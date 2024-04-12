@@ -93,8 +93,8 @@ const WeekNews = () => {
     pdf.addImage(img7, "JPEG", 0, 0, 210, 391);
     pdf.addPage(null, "p");
     pdf.addImage(img8, "JPEG", 0, 0, 210, 391);
-    pdf.addPage(null, "l");
-    pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
+    // pdf.addPage(null, "l");
+    // pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
     // pdf.addPage(null, 'p')
     // pdf.addImage(img10, 'JPEG', 0, 0);
     // pdf.addPage(null, 'p')
@@ -157,10 +157,10 @@ const WeekNews = () => {
     link8.download = "Baocaotuan-Trang7.png";
     link8.click();
 
-    const link9 = document.createElement("a");
-    link9.href = img9;
-    link9.download = "Baocaotuan-Trang7.png";
-    link9.click();
+    // const link9 = document.createElement("a");
+    // link9.href = img9;
+    // link9.download = "Baocaotuan-Trang7.png";
+    // link9.click();
     const link10 = document.createElement("a");
     link10.href = img10;
     link10.download = "Baocaotuan-Trang7.png";
