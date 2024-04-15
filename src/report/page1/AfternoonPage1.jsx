@@ -117,14 +117,18 @@ const AfternoonPage1 = ({ role }) => {
                     {formatNumber(data.lowPrice)}).
                   </li>
 
-                  <li className="mt-2">
-                    Ngành đóng góp tăng nổi bật cho VN-Index:{" "}
-                    {data.industryAdvance?.code} (
-                    <span className="text-green-500">
-                      {formatNumber(data.industryAdvance?.value)} điểm
-                    </span>
-                    ).
-                  </li>
+                  {data.industryAdvance?.value > 0 ? (
+                    <li className="mt-2">
+                      Ngành đóng góp tăng nổi bật cho VN-Index:{" "}
+                      {data.industryAdvance?.code} (
+                      <span className="text-green-500">
+                        {formatNumber(data.industryAdvance?.value)} điểm
+                      </span>
+                      ).
+                    </li>
+                  ) : (
+                    <div></div>
+                  )}
 
                   <li className="mt-2">
                     Ngành đóng góp giảm nổi bật cho VN-Index:{" "}
