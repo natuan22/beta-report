@@ -119,20 +119,24 @@ const AfternoonPage1 = ({ role }) => {
 
                   {data.industryAdvance?.value > 0 ? (
                     <li className="mt-2">
-                      Ngành đóng góp tăng nổi bật cho VN-Index:{" "}
-                      {data.industryAdvance?.code} (
+                      Ngành đóng góp{" "}
+                      <span className="text-green-600">tăng</span> nổi bật cho
+                      VN-Index: {data.industryAdvance?.code} (
                       <span className="text-green-500">
                         {formatNumber(data.industryAdvance?.value)} điểm
                       </span>
                       ).
                     </li>
                   ) : (
-                    <div></div>
+                    <li className="mt-2">
+                      Không có ngành đóng góp{" "}
+                      <span className="text-green-600">tăng</span>
+                    </li>
                   )}
 
                   <li className="mt-2">
-                    Ngành đóng góp giảm nổi bật cho VN-Index:{" "}
-                    {data.industryDecline?.code} (
+                    Ngành đóng góp <span className="text-red-600">giảm</span>{" "}
+                    nổi bật cho VN-Index: {data.industryDecline?.code} (
                     <span className="text-red-500">
                       {formatNumber(+data.industryDecline?.value)} điểm
                     </span>

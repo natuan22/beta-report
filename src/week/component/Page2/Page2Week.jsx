@@ -119,18 +119,23 @@ const Page2Week = ({ role }) => {
                     điểm.
                   </p>
                   <p className="my-1 text-[11px] font-semibold ">
-                    • Ngành đóng góp{" "}
-                    <span className="text-green-600 text-[12px]">tăng</span> nổi
-                    bật cho VN-Index:{" "}
-                    {data.industryAdvance ? (
+                    {data.industryAdvance.value > 0 ? (
                       <span>
-                        {data.industryAdvance.code}{" "}
-                        <span className="text-green-600 text-[13px]">
-                          ({formatNumber(data.industryAdvance.value)})
+                        • Ngành đóng góp{" "}
+                        <span className="text-green-600 text-[12px]">tăng</span>{" "}
+                        nổi bật cho VN-Index:{" "}
+                        <span>
+                          {data.industryAdvance.code}{" "}
+                          <span className="text-green-600 text-[13px]">
+                            ({formatNumber(data.industryAdvance.value)})
+                          </span>
                         </span>
                       </span>
                     ) : (
-                      <span>không có cổ phiếu đóng góp nổi bật</span>
+                      <span>
+                        • Không có ngành đóng góp{" "}
+                        <span className="text-green-600 text-[12px]">tăng</span>
+                      </span>
                     )}
                     . Ngành đóng góp{" "}
                     <span className="text-red-600 text-[12px]">giảm</span> nổi
