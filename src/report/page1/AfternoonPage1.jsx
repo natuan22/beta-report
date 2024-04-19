@@ -52,7 +52,7 @@ const AfternoonPage1 = ({ role }) => {
         <HeaderAfternoon />
       </div>
       {data ? (
-        <div className="content  w-full flex flex-col justify-center items-center  mt-[20px] relative">
+        <div className="content w-full flex flex-col justify-center items-center mt-[20px] relative">
           {role === "V0U1S" ? (
             <div className="absolute right-0 top-0 translate-x-[300px]">
               <DialogAddText getData={getData} />
@@ -62,7 +62,7 @@ const AfternoonPage1 = ({ role }) => {
           )}
 
           <div className="flex w-[760px]">
-            <div className="content-left w-[55%] ">
+            <div className="content-left w-[55%]">
               {text.length > 0 ? (
                 <div className="content-left_top max-h-[354px]">
                   <h2 className="text-[#0D4381] text-[35px] font-bold m-0">
@@ -75,7 +75,7 @@ const AfternoonPage1 = ({ role }) => {
                     <p className="text-[#00429B] font-bold m-0">
                       Diễn biến thị trường:{" "}
                     </p>
-                    <p className="leading-[20px] m-0 text-[14px] indent-[15px]  ">
+                    <p className="leading-[20px] m-0 text-[14px] indent-[15px]">
                       {text[2]}
                     </p>
                   </div>
@@ -88,7 +88,7 @@ const AfternoonPage1 = ({ role }) => {
                 <p className="text-[#00429B] font-bold underline underline-offset-1">
                   Điểm nhấn chính:
                 </p>
-                <ul className="leading-[23px] translate-x-[-15px] text-sm text-justify font-[500] ">
+                <ul className="leading-[23px] translate-x-[-15px] text-sm text-justify font-[500]">
                   <li className="mt-2">
                     VN-Index {getText(data.perChange)}{" "}
                     <span className={`${getColorBaseOnValue(data.change)}`}>
@@ -110,7 +110,7 @@ const AfternoonPage1 = ({ role }) => {
                     , đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.
                   </li>
 
-                  <li>
+                  <li className="mt-2">
                     Biên độ dao động ngày:{" "}
                     {formatNumber(data.highPrice - data.lowPrice)} điểm (
                     {formatNumber(data.highPrice)} -{" "}
@@ -246,11 +246,11 @@ const AfternoonPage1 = ({ role }) => {
                 </ul>
               </div>
             </div>
-            <div className="content-right w-[45%] h-[960px] flex flex-col items-center justify-evenly ">
-              <div className="content-right_lineChart h-[250px]   w-full">
+            <div className="content-right w-[45%] h-[960px] flex flex-col items-center justify-evenly">
+              <div className="content-right_lineChart h-[250px] w-full">
                 <LineChart dataLineChart={data} />
               </div>
-              <div className="content-right_columnChart1 w-full ">
+              <div className="content-right_columnChart1 w-full">
                 <ColumnChart
                   isChart3={false}
                   tickInterval={0.5}
@@ -261,7 +261,7 @@ const AfternoonPage1 = ({ role }) => {
                   title={"Nhóm dẫn dắt thị trường sàn HOSE"}
                 />
               </div>
-              <div className="content-right_columnChart2 w-full ">
+              <div className="content-right_columnChart2 w-full">
                 <ColumnChart
                   isChart3={false}
                   tickInterval={50}
@@ -272,7 +272,7 @@ const AfternoonPage1 = ({ role }) => {
                   title={"Top Khối ngoại giao dịch ròng sàn HOSE"}
                 />
               </div>
-              <div className="content-right_columnChart3  w-full">
+              <div className="content-right_columnChart3 w-full">
                 <ColumnChart
                   isChart3={true}
                   tickInterval={100}
