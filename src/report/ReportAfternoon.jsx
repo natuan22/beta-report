@@ -98,7 +98,7 @@ const ReportAfternoon = () => {
     const img6 = await generateImage(pageRefs.page6, 1480);
     const img5 = await generateImage(pageRefs.page5, 1480);
 
-    pdf.addImage(img1, "PNG", 0, 0, 210, 385);
+    pdf.addImage(img1, "PNG", 0, 0, 210, 390); //385
     pdf.addPage();
     pdf.addImage(img2, "PNG", 0, 0, 210, 392);
     pdf.addPage();
