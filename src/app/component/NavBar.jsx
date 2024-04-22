@@ -52,16 +52,14 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
     setActiveNav(location.pathname);
   }, [location]);
 
-  // Hàm để kiểm tra nav có active hay không
-  const isNavActive = (navPath) => {
-    return navPath === activeNav;
-  };
-
   const buttonNavLink = (path, icon, name) => {
     return (
       <NavLink
         to={path}
-        isActive={(location) => isNavActive(location.pathname)}
+        isActive={(location) => {
+          // Check if the current location starts with the path
+          return location.pathname.includes(path);
+        }}
         className={({ isActive }) =>
           isActive
             ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
@@ -123,9 +121,12 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           <div>
             <h3
               className={`uppercase ${
-                activeNav === "/phan-tich-ky-thuat" ||
-                activeNav === "/phan-tich-ky-thuat-tu-dong" ||
-                activeNav === "/phan-tich-co-ban"
+                activeNav.split("/").slice(0, -1).join("/") ===
+                  "/phan-tich-ky-thuat" ||
+                activeNav.split("/").slice(0, -1).join("/") ===
+                  "/phan-tich-ky-thuat-tu-dong" ||
+                activeNav.split("/").slice(0, -1).join("/") ===
+                  "/phan-tich-co-ban"
                   ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
                   : "text-slate-500"
               }`}
@@ -133,12 +134,12 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
               Phân tích
             </h3>
             {buttonNavLink(
-              "/phan-tich-ky-thuat",
+              "/phan-tich-ky-thuat/FPT",
               <SlGraph />,
               "Phân tích kỹ thuật"
             )}
             {buttonNavLink(
-              "/phan-tich-ky-thuat-tu-dong",
+              "/phan-tich-ky-thuat-tu-dong/FPT",
               <MdOutlineAutoGraph />,
               "Phân tích kỹ thuật tự động"
             )}

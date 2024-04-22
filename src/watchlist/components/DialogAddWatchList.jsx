@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Form, Input, message } from "antd";
 import Button from "@mui/material/Button";
 import { Modal } from "antd";
-import "./styles/modalStyle.css";
+import { postApi } from "../../helper/postApi";
+import { getApi } from "../../helper/getApi";
+const apiUrl = process.env.REACT_APP_BASE_URL;
 
-const DialogAddWatchList = () => {
+const DialogAddWatchList = ({ catchWatchlists }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,7 +30,27 @@ const DialogAddWatchList = () => {
   };
 
   const onFinish = async (values) => {
-    console.log("Finish:", values);
+    await postApi(apiUrl, "/api/v1/watchlist/create", values);
+    setIsModalOpen(false);
+
+    const fetchDataWatchList = async () => {
+      try {
+        const data = await getApi(apiUrl, "/api/v1/watchlist");
+        catchWatchlists(data);
+
+        // Lấy tên của watchlist mới được thêm vào
+        const newWatchlist = data.find(
+          (watchlist) => watchlist.name === values.name
+        );
+        if (newWatchlist) {
+          localStorage.setItem("watchlistActive", JSON.stringify(newWatchlist));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchDataWatchList();
   };
 
   function onFinishFailed(errorInfo) {
@@ -66,7 +88,7 @@ const DialogAddWatchList = () => {
       >
         <Form
           initialValues={{
-            remember: true,
+            remember: false,
           }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}

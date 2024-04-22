@@ -1,0 +1,12 @@
+.add-conditions .ant-modal-content {
+    background: linear-gradient(180deg, #5088C9 0%, #1B63AE 45%, #063C6D 100%);
+    padding: 20px 19px 20px 24px;
+}
+
+.add-conditions .ant-modal-close{
+    color: #013F87;
+}
+
+.shadowInner {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
