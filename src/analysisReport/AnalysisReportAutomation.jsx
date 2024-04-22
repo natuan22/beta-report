@@ -132,6 +132,12 @@ const AnalysisReportAutomation = () => {
     searchData(debouncedValue);
   }, [debouncedValue]);
 
+  const handleEnterPress = () => {
+    if (dataSearch.length > 0) {
+      window.location.href = `/phan-tich-ky-thuat-tu-dong/${dataSearch[0].code}`;
+    }
+  };
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">
@@ -150,6 +156,11 @@ const AnalysisReportAutomation = () => {
           onFocus={() => {
             setIsFocus(true);
           }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleEnterPress();
+            }
+          }}
           value={valStock}
           inputProps={{ maxLength: 3 }}
           id="outlined-basic"
@@ -163,10 +174,14 @@ const AnalysisReportAutomation = () => {
             className="absolute w-[400px] h-[300px] top-[56px] bg-white shadow-lg z-[30] p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
           >
             {dataSearch?.map((item, index) => {
+              const isFirstItem = index === 0;
+
               return (
                 <a
                   key={index}
-                  className="text-black flex justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-black/50 p-2 hover:bg-[#0000000a] duration-500 cursor-pointer no-underline"
+                  className={`${
+                    isFirstItem ? "bg-[#0000000a]" : "bg-transparent"
+                  } text-black flex justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-black/50 p-2 hover:bg-[#0000000a] duration-500 cursor-pointer no-underline`}
                   href={`/phan-tich-ky-thuat-tu-dong/${item.code}`}
                 >
                   <div className="font-semibold">
