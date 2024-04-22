@@ -143,7 +143,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
   }, [dataAnalysis]);
   return (
     <div className="h-[1480px] w-[900px] relative">
-      <div className="absolute top-[300px] left-[860px] z-30 w-[223px]">
+      <div className="absolute top-[450px] left-[860px] z-30 w-[223px]">
         {type === 1 && role === "V0U1S" ? (
           <DialogAddTechnicalReportInfor
             stock={stock}

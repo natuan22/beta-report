@@ -71,6 +71,8 @@ export const userLogoutAction = () => async (dispatch) => {
     const res = await authenServices.userLogout();
     Cookies.remove("at");
     Cookies.remove("rt");
+    localStorage.removeItem("watchlistActive");
+    localStorage.removeItem("2ZW79");
     dispatch({
       type: authenTypes.USER_LOGOUT_ACTION,
     });

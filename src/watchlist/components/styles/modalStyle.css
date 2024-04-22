@@ -1,6 +1,16 @@
 /* ============================== */
 /* DIALOG ADD WATCHLIST */
 
+/* modalEditStyle */
+.modalEditStyle .ant-modal-content {
+    padding: 20px 19px 20px 24px;
+    background-image: linear-gradient(90deg, #0b70cdff 0%, #073662ff 100%);
+}
+
+.modalEditStyle .ant-modal-close{
+    color: #77B3F8;
+}
+
 /* modalStyle */
 .modalStyle .ant-modal-content {
     background-image: linear-gradient(90deg, #0b70cdff 0%, #073662ff 100%);
@@ -9,7 +19,7 @@
 }
 
 .modalStyle .ant-modal-close{
-    color: white;
+    color: #77B3F8;
 }
 
 /* inputStyle */
@@ -42,34 +52,118 @@
 
 .inputSearch .ant-input-group-addon {
     background-color:#94c7f6;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 0px;
 }
 
 .inputSearch .ant-input-outlined {
     background-color:#94c7f6;
     border-style: none;
-    border-radius: 10px;
+    border-radius: 0px 10px 0px 0px;
 }
 
 .inputSearch .anticon-search {
     color: #3C3C43;
 }
 
-/* bgImage */
-.bgImage {
-    background-image: linear-gradient(90deg, #0669fcff 0%, #011e48ff 100%);
-}
-
 /* dropdown */
-.dropdown .ant-dropdown-menu-light {
-    background-color:#96C6FF;
+.ant-dropdown-menu-light {
+    background-color:#96C6FF !important;
+    border-radius: 0px !important;
 }
 
-.dropdown .ant-dropdown-menu-item-group-title {
+.ant-dropdown-menu-item-group-title {
     color: #000 !important;
     font-weight: 600;
+    font-size: 15px;
 }
 
 .ant-dropdown {
     inset: 203px auto auto 40px !important;
+    z-index: 900;
 }
+
+/* tooltip */
+.ant-tooltip {
+    max-width: fit-content;
+}
+
+.ant-tooltip .ant-tooltip-inner {
+    color: black
+}
+
+/* ant-tabs */
+.tab-watchlist .ant-tabs .ant-tabs-tab+.ant-tabs-tab {
+    margin: 0;
+}
+
+.tab-watchlist .ant-tabs .ant-tabs-tab {
+    font-size: 15px;
+    background-color: #96C6FF;
+    font-weight: 700;
+}
+
+.tab-watchlist .ant-tabs-tab-active {
+    background-color: #073882 !important;
+}
+
+.tab-watchlist .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: white;
+}
+
+.tab-watchlist .ant-tabs-tab {
+    width: 296px;
+    justify-content: center;
+}
+
+.tab-watchlist .ant-tabs-top >.ant-tabs-nav{
+    margin: 0;
+}
+
+.tab-watchlist .ant-tabs .ant-tabs-ink-bar {
+    background: none;
+}
+
+/* table antd watchlist*/
+.table-data-watchlist .ant-table-thead .ant-table-cell {
+    background-color: #278AFF !important;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.table-data-watchlist .ant-table-column-sorters .ant-table-column-title {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
+    background: white;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-cell-fix-left {
+    background: none;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-row:nth-child(odd) .ant-table-cell {
+    background-color: #d9e9fd;
+} 
+
+.table-data-watchlist .ant-table-wrapper .ant-table-row:nth-child(even) .ant-table-cell {
+    background-color: white;
+} 
+
+.table-data-watchlist .ant-table-wrapper td.ant-table-column-sort {
+    background: none;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+    border-radius: 0;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
+    border-radius: 0;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table-tbody>tr>td {
+    padding: 5px 16px;
+}
+

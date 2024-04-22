@@ -1,6 +1,6 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../app/component/NavBar";
 import AnalysisPage1 from "./component/AnalysisPage1/AnalysisPage1";
 import AnalysisPage2 from "./component/AnalysisPage2/AnalysisPage2";
@@ -9,14 +9,22 @@ import { Button, TextField } from "@mui/material";
 import { useDebounce } from "react-use";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
+import { https } from "../services/configService";
+import { useParams } from "react-router-dom";
 
 const AnalysisReport = () => {
-  const [val, setVal] = useState("FPT");
-  const [debouncedValue, setDebouncedValue] = useState("FPT");
   const dispatch = useDispatch();
+  const { code } = useParams();
+
+  const [valStock, setValStock] = useState(code);
+  const [debouncedValue, setDebouncedValue] = useState(code);
+  const [dataSearch, setDataSearch] = useState([]);
+  const [isFocus, setIsFocus] = useState(false);
+  const wrapperRef = useRef(null); // Ref cho phần div chứa dữ liệu
+
   const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
 
   const handleUserLogout = () => {
     if (isLogin) {
@@ -28,7 +36,6 @@ const AnalysisReport = () => {
       localStorage.removeItem("user");
     }
   };
-
   const onSubmitSuccess = () => {
     setIsLogin(localStorage.getItem("_il"));
     setRole(localStorage.getItem("2ZW79"));
@@ -82,14 +89,52 @@ const AnalysisReport = () => {
 
     pdf.save(`Phan-tich-ky-thuat-${debouncedValue.toUpperCase()}.pdf`);
   };
-
   const [, cancel] = useDebounce(
     () => {
-      setDebouncedValue(val);
+      setDebouncedValue(valStock);
     },
     500,
-    [val]
+    [valStock]
   );
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      // Kiểm tra xem người dùng có click ra ngoài giao diện không
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsFocus(false); // Nếu click ra ngoài, ẩn div chứa dữ liệu
+      }
+    }
+
+    // Thêm sự kiện click vào document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Xóa sự kiện khi component unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (debouncedValue === "") {
+      setDataSearch([]);
+      return;
+    }
+
+    const searchData = async (stock) => {
+      try {
+        const res = await https.get("/api/v1/investment/search", {
+          params: {
+            stock,
+          },
+        });
+        setDataSearch(res.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    searchData(debouncedValue);
+  }, [debouncedValue]);
 
   return (
     <div className="relative">
@@ -104,22 +149,48 @@ const AnalysisReport = () => {
       <div className="absolute  left-0 top-[50px] translate-x-[850px] z-10 ">
         <TextField
           onChange={({ currentTarget }) => {
-            setVal(currentTarget.value);
+            setValStock(currentTarget.value);
           }}
-          value={val}
+          onFocus={() => {
+            setIsFocus(true);
+          }}
+          value={valStock}
           inputProps={{ maxLength: 3 }}
           id="outlined-basic"
           label="Mã CP"
           variant="outlined"
-          autoFocus
+          autoComplete="off"
         />
+        {dataSearch?.length > 0 && isFocus && (
+          <div
+            ref={wrapperRef}
+            className="absolute w-[400px] h-[300px] top-[56px] bg-white shadow-lg z-[30] p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
+          >
+            {dataSearch?.map((item, index) => {
+              return (
+                <a
+                  key={index}
+                  className="text-black flex justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-black/50 p-2 hover:bg-[#0000000a] duration-500 cursor-pointer no-underline"
+                  href={`/phan-tich-ky-thuat/${item.code}`}
+                >
+                  <div className="font-semibold">
+                    <div className="w-[50px]">{item.code}</div>
+                  </div>
+                  <div className="text-sm whitespace-nowrap overflow-hidden text-ellipsis">
+                    {item.company_name}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div>
         <div ref={pageRefs.page1}>
-          <AnalysisPage1 stock={debouncedValue} type={1} role={role} />
+          <AnalysisPage1 stock={code} type={1} role={role} />
         </div>
         <div ref={pageRefs.page2}>
-          <AnalysisPage2 stock={debouncedValue} />
+          <AnalysisPage2 stock={code} />
         </div>
         <div ref={pageRefs.page3}>
           <AnalysisPage3 />
