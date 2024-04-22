@@ -526,6 +526,56 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     }
   };
 
+  const handleEnterPress = async () => {
+    if (dataSearch.length > 0) {
+      if (watchlistActive) {
+        let updatedCodes;
+        let newData;
+
+        if (watchlistActive.code.includes(dataSearch[0].code)) {
+          // If the code already exists, remove it
+          updatedCodes = watchlistActive.code.filter(
+            (c) => c !== dataSearch[0].code
+          );
+
+          // Remove the code from data
+          setData(data.filter((record) => record.code !== dataSearch[0].code));
+        } else {
+          // If the code doesn't exist, add it
+          updatedCodes = [...watchlistActive.code, dataSearch[0].code];
+
+          // Fetch new data for the added code
+          newData = await getApi(
+            apiUrl,
+            `/api/v1/watchlist/data?stock=${dataSearch[0].code}`
+          );
+          const newKey = data.length + 1;
+          newData = { ...newData, key: newKey };
+        }
+
+        const updatedWatchlist = {
+          ...watchlistActive,
+          code: updatedCodes,
+        };
+
+        // Update state and localStorage
+        setWatchlistActive(updatedWatchlist);
+        localStorage.setItem(
+          "watchlistActive",
+          JSON.stringify(updatedWatchlist)
+        );
+
+        // Update data state
+        if (newData) {
+          // If new data is fetched, merge it with current data
+          setData((prevData) => [...prevData, newData]);
+        }
+
+        await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+      }
+    }
+  };
+
   //del code
   const handleDelCodeInWatchlist = async (item) => {
     if (watchlistActive) {
@@ -722,6 +772,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               onChange={({ currentTarget }) => {
                 setValStock(currentTarget.value);
               }}
+              onPressEnter={handleEnterPress}
               onFocus={() => {
                 setIsFocus(true);
               }}
@@ -732,13 +783,17 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                 className="absolute w-[400px] h-[300px] top-[141px] right-[40px] bg-[#94c7f6] shadow-lg z-[30] p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
               >
                 {dataSearch?.map((item, index) => {
+                  const isFirstItem = index === 0;
+
                   return (
                     <div
                       onClick={() => {
                         handleAddCode(item.code);
                       }}
                       key={index}
-                      className="text-black justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-white/50  p-2 hover:bg-[#0000000a] duration-500 cursor-pointer"
+                      className={`${
+                        isFirstItem ? "bg-[#65a8e7]" : "bg-transparent"
+                      } text-black justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-white/50  p-2 hover:bg-[#0000000a] duration-500 cursor-pointer`}
                     >
                       <div className="font-semibold flex">
                         <div className="w-[50px]">{item.code}</div>
