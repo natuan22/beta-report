@@ -56,10 +56,6 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
     return (
       <NavLink
         to={path}
-        isActive={(location) => {
-          // Check if the current location starts with the path
-          return location.pathname.includes(path);
-        }}
         className={({ isActive }) =>
           isActive
             ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
@@ -71,7 +67,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       </NavLink>
     );
   };
-
+  console.log(activeNav.split("/").slice(0, -1).join("/"));
   return (
     <div className="flex flex-col relative w-screen">
       <FloatButton.BackTop
@@ -121,33 +117,40 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           <div>
             <h3
               className={`uppercase ${
-                activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-ky-thuat" ||
-                activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-ky-thuat-tu-dong" ||
-                activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-co-ban"
+                activeNav.split("/").slice(0, -1).join("/") === "/phan-tich-ky-thuat" ||
+                activeNav.split("/").slice(0, -1).join("/") === "/phan-tich-ky-thuat-tu-dong" ||
+                activeNav === "/phan-tich-co-ban"
                   ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
                   : "text-slate-500"
               }`}
             >
               Phân tích
             </h3>
-            {buttonNavLink(
-              "/phan-tich-ky-thuat/FPT",
-              <SlGraph />,
-              "Phân tích kỹ thuật"
-            )}
-            {buttonNavLink(
-              "/phan-tich-ky-thuat-tu-dong/FPT",
-              <MdOutlineAutoGraph />,
-              "Phân tích kỹ thuật tự động"
-            )}
-            {buttonNavLink(
-              "/phan-tich-co-ban",
-              <BsGraphUp />,
-              "Phân tích cơ bản"
-            )}
+            <NavLink
+              to={"/phan-tich-ky-thuat/FPT"}
+              className={activeNav.split("/").slice(0, -1).join("/") === "/phan-tich-ky-thuat"
+                  ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                  : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+              }
+            >
+              <span className="px-2">
+                <SlGraph />
+              </span>
+              Phân tích kỹ thuật
+            </NavLink>
+            <NavLink
+              to={"/phan-tich-ky-thuat-tu-dong/FPT"}
+              className={activeNav.split("/").slice(0, -1).join("/") === "/phan-tich-ky-thuat-tu-dong"
+                  ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                  : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+              }
+            >
+              <span className="px-2">
+                <MdOutlineAutoGraph />
+              </span>
+              Phân tích kỹ thuật tự động
+            </NavLink>
+            {buttonNavLink("/phan-tich-co-ban", <BsGraphUp />, "Phân tích cơ bản")}
           </div>
           <div>
             <h3
@@ -162,22 +165,10 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
             >
               Công cụ đầu tư
             </h3>
-            {buttonNavLink(
-              "/danh-muc-theo-doi",
-              <BiCategoryAlt />,
-              "Danh mục theo dõi"
-            )}
+            {buttonNavLink("/danh-muc-theo-doi", <BiCategoryAlt />, "Danh mục theo dõi")}
             {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
-            {buttonNavLink(
-              "/canh-bao-tin-hieu",
-              <IoMdNotificationsOutline />,
-              "Cảnh báo tín hiệu"
-            )}
-            {buttonNavLink(
-              "/chien-luoc-giao-dich",
-              <MdQueryStats />,
-              "Chiến lược giao dịch"
-            )}
+            {buttonNavLink("/canh-bao-tin-hieu", <IoMdNotificationsOutline />, "Cảnh báo tín hiệu")}
+            {buttonNavLink("/chien-luoc-giao-dich", <MdQueryStats />, "Chiến lược giao dịch")}
           </div>
         </div>
         <div className="fixed bottom-0 px-3 py-3 bg-slate-100">

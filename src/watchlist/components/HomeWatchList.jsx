@@ -792,7 +792,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                       }}
                       key={index}
                       className={`${
-                        isFirstItem ? "bg-[#65a8e7]" : "bg-transparent"
+                        isFirstItem ? "bg-[#0000000a]" : "bg-transparent"
                       } text-black justify-between items-center border-solid border border-b-2 border-t-0 border-x-0 border-white/50  p-2 hover:bg-[#0000000a] duration-500 cursor-pointer`}
                     >
                       <div className="font-semibold flex">
