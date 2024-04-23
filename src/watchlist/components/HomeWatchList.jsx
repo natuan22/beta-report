@@ -47,6 +47,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       watchlists[watchlists.length - 1]
   );
   const [loading, setLoading] = useState(true);
+  const [loadingTb, setLoadingTb] = useState(true);
 
   //data table
   const [data, setData] = useState();
@@ -61,6 +62,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       }));
     setData(dataWithKey);
     setLoading(false);
+    setLoadingTb(false);
   };
 
   useEffect(() => {
@@ -470,6 +472,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
   //selected watchlist
   const handleWatchlistClick = async (id) => {
+    setLoadingTb(true);
     const clickedWatchlist = watchlists.find(
       (watchlist) => watchlist.id === id
     );
@@ -482,12 +485,14 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       setActiveKey("0");
 
       await getDataTable(clickedWatchlist.id);
+      setLoadingTb(false);
     }
   };
 
   //search add code
   const handleAddCode = async (code) => {
     if (watchlistActive) {
+      setLoadingTb(true);
       let updatedCodes;
       let newData;
 
@@ -522,6 +527,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         setData((prevData) => [...prevData, newData]);
       }
 
+      setLoadingTb(false);
       await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
     }
   };
@@ -529,6 +535,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   const handleEnterPress = async () => {
     if (dataSearch.length > 0) {
       if (watchlistActive) {
+        setLoadingTb(true);
         let updatedCodes;
         let newData;
 
@@ -571,6 +578,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           setData((prevData) => [...prevData, newData]);
         }
 
+        setLoadingTb(false);
         await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
       }
     }
@@ -605,6 +613,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       children: (
         <TableBase
           loading={loading}
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />
@@ -615,6 +624,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Thống kê",
       children: (
         <TableStatistical
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />
@@ -625,6 +635,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Cơ bản",
       children: (
         <TableBasic
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />
@@ -635,6 +646,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Kỹ thuật",
       children: (
         <TableTechnique
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />
@@ -645,6 +657,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Tín hiệu cảnh báo",
       children: (
         <TableSignalWarning
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />
@@ -655,6 +668,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Tin tức",
       children: (
         <TableNews
+          loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />

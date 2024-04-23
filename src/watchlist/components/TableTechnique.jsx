@@ -1,11 +1,10 @@
-import { Table } from "antd";
+import { Table, Tooltip } from "antd";
 import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
-import { Tooltip } from "antd";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 
-const TableTechnique = ({ data, handleDelCodeInWatchlist }) => {
+const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -131,6 +130,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist }) => {
       {Array.isArray(data) && data?.length > 0 ? (
         <div className="table-data-watchlist w-[1840px]">
           <Table
+            loading={loadingTb}
             showSorterTooltip={false}
             scroll={{ x: 1000 }}
             columns={columns}
