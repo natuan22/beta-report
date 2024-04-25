@@ -73,6 +73,8 @@ export const userLogoutAction = () => async (dispatch) => {
     Cookies.remove("rt");
     localStorage.removeItem("watchlistActive");
     localStorage.removeItem("2ZW79");
+    localStorage.setItem("_il", "4E8WL");
+
     dispatch({
       type: authenTypes.USER_LOGOUT_ACTION,
     });

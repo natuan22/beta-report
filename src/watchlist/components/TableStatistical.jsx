@@ -240,23 +240,24 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       width: 165,
       align: "center",
       render: (_, record) => {
+        const lowestPrice = +record.PRICE_LOWEST_CR_52W.toFixed(2);
+        const highestPrice = +record.PRICE_HIGHEST_CR_52W.toFixed(2);
+        const isHighestPrice = record.closePrice === highestPrice;
+
+        const thumbColor = isHighestPrice ? "#3dcc91" : "#137ab9";
+        const borderTopColor = isHighestPrice ? "#3dcc91" : "#137ab9";
+
         return (
           <div className="w-[120px] h-[28px] -translate-y-[5px] translate-x-[7px]">
             <Slider
-              value={record.closePrice}
-              min={+record.PRICE_LOWEST_CR_52W.toFixed(2)}
-              max={+record.PRICE_HIGHEST_CR_52W.toFixed(2)}
               disabled
+              value={record.closePrice}
+              min={lowestPrice}
+              max={highestPrice}
               track={false}
               marks={[
-                {
-                  value: +record.PRICE_LOWEST_CR_52W.toFixed(2),
-                  label: +record.PRICE_LOWEST_CR_52W.toFixed(2),
-                },
-                {
-                  value: +record.PRICE_HIGHEST_CR_52W.toFixed(2),
-                  label: +record.PRICE_HIGHEST_CR_52W.toFixed(2),
-                },
+                { value: lowestPrice, label: lowestPrice },
+                { value: highestPrice, label: highestPrice },
               ]}
               sx={{
                 "& .MuiSlider-markLabel": {
@@ -266,7 +267,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
                 "& .MuiSlider-thumb": {
                   width: "2px",
                   height: "4px",
-                  backgroundColor: "#137bba",
+                  backgroundColor: thumbColor,
                   borderRadius: 0,
                 },
                 "& .MuiSlider-thumb::after": {
@@ -274,7 +275,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
                   height: "0px",
                   borderLeft: "4px solid transparent",
                   borderRight: "4px solid transparent",
-                  borderTop: "4px solid rgb(19, 122, 185)",
+                  borderTop: `4px solid ${borderTopColor}`,
                   borderRadius: 0,
                   top: "-2.5px",
                   left: "1px",
