@@ -771,14 +771,16 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
           <div class="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
         `; // Set the innerHTML of the div
-        divElement.querySelector("div").addEventListener("click", fetchDataAndDownloadCSV); // Add event listener to the created div
+        divElement
+          .querySelector("div")
+          .addEventListener("click", fetchDataAndDownloadCSV); // Add event listener to the created div
 
         tabsNavList.appendChild(divElement); // Append the div to the tabsNavList
       } else {
         console.error("ant-tabs-nav-list not found");
       }
     };
-    
+
     addDivToTabsNavList(); // Call the function to add the div
   }, []);
 
@@ -882,21 +884,6 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               onChange={onChange}
             />
           </div>
-          {/* <div className="absolute top-[161px] 2xl:right-[520px] xl:right-[40px] lg:-right-[375px] md:-right-[631px] sm:-right-[974px] xs:-right-[1024px] xxs:-right-[1079px]">
-            <div
-              className="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit"
-              onClick={fetchDataAndDownloadCSV}
-            >
-              <Tooltip
-                placement="top"
-                title={<span className="">Xuất dữ liệu ra Excel</span>}
-                color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
-              >
-                <img src={icon_excel} alt="icon_excel" />
-              </Tooltip>
-            </div>
-            <div className="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
-          </div> */}
         </div>
       </div>
     </div>
