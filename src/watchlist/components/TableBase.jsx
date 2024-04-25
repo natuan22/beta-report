@@ -22,6 +22,7 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       dataindex: "code",
       fixed: true,
       width: 200,
+      align: "center",
       render: (_, record) => {
         return (
           <div className={`font-bold text-lg flex flex-row items-center`}>
@@ -53,22 +54,27 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "Sàn",
       dataindex: "floor",
+      align: "center",
+      width: 200,
       render: (_, record) => {
-        return <div className="text-black">{record.floor}</div>;
+        return <div className="text-black text-left">{record.floor}</div>;
       },
       sorter: (a, b) => a.floor.localeCompare(b.floor),
     },
     {
       title: "Ngành",
       dataindex: "LV2",
+      align: "center",
       render: (_, record) => {
-        return <div className="text-black">{record.LV2}</div>;
+        return <div className="text-black text-left">{record.LV2}</div>;
       },
       sorter: (a, b) => a.LV2.localeCompare(b.LV2),
     },
     {
       title: "Thị giá (đồng)",
       dataindex: "closePrice",
+      width: 150,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -83,6 +89,8 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
+      width: 70,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -97,6 +105,8 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "KLGD (CP)",
       dataindex: "totalVol",
+      width: 130,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -109,6 +119,8 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "GTGD (tỷ đồng)",
       dataindex: "totalVal",
+      width: 160,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -125,11 +137,10 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1840px]">
+            <div className="table-data-watchlist w-[1360px]">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1000 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Page1Week from "./component/Page1/Page1Week";
 import Page2Week from "./component/Page2/Page2Week";
 import Page3Week from "./component/Page3/Page3Week";
@@ -166,6 +166,11 @@ const WeekNews = () => {
     link10.download = "Baocaotuan-Trang7.png";
     link10.click();
   };
+
+  useEffect(() => {
+    document.title = "Bản tin tuần";
+  }, []);
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[35px]">

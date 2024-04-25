@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import jsPDF from "jspdf";
 import { Button } from "@mui/material";
 import AfternoonPage1 from "./page1/AfternoonPage1";
@@ -112,6 +112,10 @@ const ReportAfternoon = () => {
 
     pdf.save(`${formattedDate}.dailyreport.pdf`);
   };
+
+  useEffect(() => {
+    document.title = "Bản tin chiều";
+  }, []);
 
   return (
     <div className=" relative">

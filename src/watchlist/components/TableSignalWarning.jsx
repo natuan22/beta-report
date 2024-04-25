@@ -19,6 +19,7 @@ const TableSignalWarning = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       dataindex: "code",
       fixed: true,
       width: 200,
+      align: "center",
       render: (_, record) => {
         return (
           <div className={`font-bold text-lg flex flex-row items-center`}>
@@ -49,6 +50,7 @@ const TableSignalWarning = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     },
     {
       title: "Tín hiệu",
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },

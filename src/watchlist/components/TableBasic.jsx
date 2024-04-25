@@ -21,6 +21,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       dataindex: "code",
       fixed: true,
       width: 200,
+      align: "center",
       render: (_, record) => {
         return (
           <div className={`font-bold text-lg flex flex-row items-center`}>
@@ -52,7 +53,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Thị giá (đồng)",
       dataindex: "closePrice",
-      width: 200,
+      width: 150,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -67,7 +69,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
-      width: 120,
+      width: 70,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -82,7 +85,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KLGD (CP)",
       dataindex: "totalVol",
-      width: 150,
+      width: 130,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -95,7 +99,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "GTGD (tỷ đồng)",
       dataindex: "totalVal",
-      width: 200,
+      width: 160,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -108,7 +113,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "EPS (đồng/cp)",
       dataindex: "EPS",
-      width: 170,
+      width: 150,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -121,7 +127,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "PE (lần)",
       dataindex: "PE",
-      width: 120,
+      width: 110,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -134,7 +141,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "BVPS (đồng/cp)",
       dataindex: "BVPS",
-      width: 180,
+      width: 170,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -147,7 +155,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "PB (lần)",
       dataindex: "PB",
-      width: 120,
+      width: 110,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -160,7 +169,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "ROA (%)",
       dataindex: "ROA",
-      width: 120,
+      width: 110,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -173,7 +183,8 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "ROE (%)",
       dataindex: "ROE",
-      width: 120,
+      width: 110,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -184,9 +195,10 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.ROE - b.ROE,
     },
     {
-      title: "Biên lợi nhuận gộp năm gần nhất (%)",
+      title: "Biên LNG năm gần nhất (%)",
       dataindex: "grossProfitMarginYear",
-      width: 320,
+      width: 250,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -197,9 +209,10 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.grossProfitMarginYear - b.grossProfitMarginYear,
     },
     {
-      title: "Biên lợi nhuận gộp quý gần nhất (%)",
+      title: "Biên LNG quý gần nhất (%)",
       dataindex: "grossProfitMarginQuarter",
-      width: 320,
+      width: 240,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -210,9 +223,10 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.grossProfitMarginQuarter - b.grossProfitMarginQuarter,
     },
     {
-      title: "Biên lợi nhuận ròng năm gần nhất (%)",
+      title: "Biên LNR năm gần nhất (%)",
       dataindex: "netProfitMarginYear",
-      width: 320,
+      width: 250,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -223,9 +237,9 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.netProfitMarginYear - b.netProfitMarginYear,
     },
     {
-      title: "Biên lợi nhuận ròng quý gần nhất (%)",
+      title: "Biên LNR quý gần nhất (%)",
       dataindex: "netProfitMarginQuarter",
-      width: 320,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -244,7 +258,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 3000 }}
+            scroll={{ x: 2450 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}

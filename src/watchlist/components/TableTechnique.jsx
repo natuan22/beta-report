@@ -21,6 +21,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       dataindex: "code",
       fixed: true,
       width: 200,
+      align: "center",
       render: (_, record) => {
         return (
           <div className={`font-bold text-lg flex flex-row items-center`}>
@@ -52,7 +53,8 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Thị giá (đồng)",
       dataindex: "closePrice",
-      width: 200,
+      width: 150,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -67,7 +69,8 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
-      width: 120,
+      width: 70,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -82,7 +85,8 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KLGD (CP)",
       dataindex: "totalVol",
-      width: 150,
+      width: 130,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -95,7 +99,8 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "GTGD (tỷ đồng)",
       dataindex: "totalVal",
-      width: 200,
+      width: 160,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -107,18 +112,21 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     },
     {
       title: "Tín hiệu đường xu hướng",
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
     },
     {
       title: "Tín hiệu chỉ báo kỹ thuật",
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
     },
     {
       title: "Tín hiệu kỹ thuật tổng hợp",
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },

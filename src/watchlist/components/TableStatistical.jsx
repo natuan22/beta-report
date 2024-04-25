@@ -22,6 +22,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       dataindex: "code",
       fixed: true,
       width: 200,
+      align: "center",
       render: (_, record) => {
         return (
           <div className={`font-bold text-lg flex flex-row items-center`}>
@@ -53,7 +54,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Thị giá (đồng)",
       dataindex: "closePrice",
-      width: 200,
+      width: 150,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -68,7 +70,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
-      width: 120,
+      width: 70,
+      align: "center",
       render: (_, record) => {
         return (
           <div
@@ -83,7 +86,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KLGD (CP)",
       dataindex: "totalVol",
-      width: 150,
+      width: 130,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -96,7 +100,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "GTGD (tỷ đồng)",
       dataindex: "totalVal",
-      width: 200,
+      width: 160,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -110,6 +115,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       title: "%W",
       dataindex: "",
       width: 150,
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
@@ -119,6 +125,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       title: "%M",
       dataindex: "",
       width: 150,
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
@@ -128,6 +135,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       title: "%YtD",
       dataindex: "",
       width: 150,
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
@@ -137,18 +145,20 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       title: "%YoY",
       dataindex: "",
       width: 150,
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },
       // sorter: (a, b) => a.totalVal - b.totalVal,
     },
     {
-      title: "KLNN mua ròng (CP)",
+      title: "KL NN mua ròng (CP)",
       dataindex: "buyVol",
-      width: 220,
+      width: 200,
+      align: "center",
       render: (_, record) => {
         return (
-          <div className="text-black text-right">
+          <div className={`text-right ${getColorBaseOnValue(record.buyVol)}`}>
             {formatNumberCurrency(record.buyVol)}
           </div>
         );
@@ -156,12 +166,13 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.buyVol - b.buyVol,
     },
     {
-      title: "Giá trị NN mua ròng (tỷ đồng)",
+      title: "Giá trị NN mua/bán ròng (tỷ đồng)",
       dataindex: "buyVal",
-      width: 280,
+      width: 300,
+      align: "center",
       render: (_, record) => {
         return (
-          <div className="text-black text-right">
+          <div className={`text-right ${getColorBaseOnValue(record.buyVal)}`}>
             {formatNumberCurrency(record.buyVal / 1000000000)}
           </div>
         );
@@ -171,7 +182,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Vốn hóa (tỷ đồng)",
       dataindex: "marketCap",
-      width: 200,
+      width: 180,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -184,7 +196,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KL Mua chủ động (CP) (M)",
       dataindex: "Mua",
-      width: 250,
+      width: 240,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -197,7 +210,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KL Bán chủ động (CP) (B)",
       dataindex: "Ban",
-      width: 250,
+      width: 230,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -210,7 +224,8 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "M/B",
       dataindex: "MB",
-      width: 100,
+      width: 70,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="text-black text-right">
@@ -223,6 +238,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Biến động 52 tuần",
       width: 165,
+      align: "center",
       render: (_, record) => {
         return (
           <div className="w-[120px] h-[28px] -translate-y-[5px] translate-x-[7px]">
@@ -276,6 +292,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       title: "beta",
       dataindex: "",
       width: 150,
+      align: "center",
       render: (_, record) => {
         return <div className="text-black text-right"></div>;
       },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
@@ -21,6 +21,11 @@ const NavBar3 = () => {
     setIsLogin(localStorage.getItem("_il"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
+
+  useEffect(() => {
+    document.title = "Cảnh báo tín hiệu";
+  }, []);
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">
