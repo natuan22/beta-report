@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Form, Input, Tooltip, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { IoCaretDownSharp } from "react-icons/io5";
@@ -130,11 +130,17 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     warning("success", `Chỉnh sửa thành công watchlist`);
 
     const newData = await fetchDataWatchList();
-    setWatchlistActive(newData[newData.length - 1]);
-    localStorage.setItem(
-      "watchlistActive",
-      JSON.stringify(newData[newData.length - 1])
-    );
+    if (editedItem.id === watchlistActive.id) {
+      const foundItem = newData.find((item) => item.id === editedItem.id);
+
+      setWatchlistActive(foundItem);
+      localStorage.setItem("watchlistActive", JSON.stringify(foundItem));
+    } else {
+      const foundItem = newData.find((item) => item.id === watchlistActive.id);
+
+      setWatchlistActive(foundItem);
+      localStorage.setItem("watchlistActive", JSON.stringify(foundItem));
+    }
 
     setEditingIndex(-1);
     setEditValue("");
@@ -216,10 +222,14 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   };
 
   const handleEditCancel = () => {
-    setIsModalEditOpen(false);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 200);
+    if (editingIndex !== -1) {
+      return warning("warning", "Vui lòng hoàn tất chỉnh sửa");
+    } else {
+      setIsModalEditOpen(false);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 200);
+    }
   };
 
   // ModalAdd
@@ -291,7 +301,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
             onClick={() => handleWatchlistClick(watchlist.id)}
             className="flex"
           >
-            <div className="w-[186px] whitespace-nowrap overflow-hidden text-ellipsis mr-3">
+            <div className="w-[142px] whitespace-nowrap overflow-hidden text-ellipsis mr-3">
               {watchlist.name}
             </div>
             {watchlistActive && watchlist.id === watchlistActive.id && (
@@ -313,7 +323,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           label: (
             <div>
               <div
-                className="flex items-center justify-center rounded-md px-[12px] py-[5px]"
+                className="flex items-center justify-center rounded-md"
                 onClick={showModalAdd}
               >
                 <FiPlusCircle className="w-[30px]" />
@@ -380,7 +390,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           label: (
             <div>
               <div
-                className="flex items-center justify-center rounded-md px-[12px] py-[5px]"
+                className="flex items-center justify-center rounded-md"
                 onClick={showModalEdit}
               >
                 <HiOutlineViewList className="w-[30px] ml-[9px]" />
@@ -408,7 +418,13 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                               <input
                                 type="text"
                                 value={editValue}
+                                autoFocus
                                 onChange={(e) => setEditValue(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") {
+                                    handleEditConfirm(item);
+                                  }
+                                }}
                                 className="w-full h-[25px] focus:outline-0"
                               />
                             </div>
@@ -434,7 +450,10 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                           </div>
                         ) : (
                           <div className="flex items-center justify-between w-full">
-                            <p className="w-[70%] py-[5px] px-[10px] m-2 bg-[#9DC4FF] text-[15px]">
+                            <p
+                              className="w-[70%] py-[5px] px-[10px] m-2 bg-[#9DC4FF] text-[15px] cursor-pointer"
+                              onDoubleClick={() => handleToggleEdit(index)}
+                            >
                               {item.name}
                             </p>
                             <div className="flex items-center w-[30%]">
@@ -736,35 +755,32 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     }
   };
 
-  const OperationsSlot = {
-    right: (
-      <div
-        className="bg-[#94C7F6] py-[11px] px-[18.5px] self-center cursor-pointer flex"
-        onClick={fetchDataAndDownloadCSV}
-      >
-        <Tooltip
-          placement="top"
-          title={<span className="">Xuất dữ liệu ra Excel</span>}
-          color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
-        >
-          <img src={icon_excel} alt="icon_excel" />
-        </Tooltip>
-      </div>
-    ),
-  };
+  useEffect(() => {
+    const addDivToTabsNavList = () => {
+      const tabsNavList =
+        document.getElementsByClassName("ant-tabs-nav-list")[0]; // Get the first element with class "ant-tabs-nav-list"
 
-  const [position] = useState(["right"]);
+      if (tabsNavList) {
+        // Check if tabsNavList exists
+        const divElement = document.createElement("div"); // Create a new div element
+        divElement.innerHTML = `
+          <div class="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit">
+            <Tooltip placement="top" title="<span class=''>Xuất dữ liệu ra Excel</span>" color="linear-gradient(to bottom, #E6EFF9, #61A6F6)">
+              <img src="${icon_excel}" alt="icon_excel" />
+            </Tooltip>
+          </div>
+          <div class="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
+        `; // Set the innerHTML of the div
+        divElement.querySelector("div").addEventListener("click", fetchDataAndDownloadCSV); // Add event listener to the created div
 
-  const slot = useMemo(() => {
-    if (position.length === 0) return null;
-    return position.reduce(
-      (acc, direction) => ({
-        ...acc,
-        [direction]: OperationsSlot[direction],
-      }),
-      {}
-    );
-  }, [position]);
+        tabsNavList.appendChild(divElement); // Append the div to the tabsNavList
+      } else {
+        console.error("ant-tabs-nav-list not found");
+      }
+    };
+    
+    addDivToTabsNavList(); // Call the function to add the div
+  }, []);
 
   return (
     <div>
@@ -773,11 +789,11 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] w-[410px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
           Danh mục theo dõi
         </div>
-        <div className="grid place-content-end">
+        <div className="pt-1">
           <div className="text-[#073882] text-[15px] font-bold w-fit pb-1">
             Thêm mã CP vào watchlist
           </div>
-          <div className="inputSearch w-[400px]">
+          <div className="inputSearch w-[410px]">
             <Input
               maxLength={5}
               placeholder="Search"
@@ -794,7 +810,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
             {dataSearch?.length > 0 && isFocus && (
               <div
                 ref={wrapperRef}
-                className="absolute w-[400px] h-[300px] top-[141px] right-[40px] bg-[#94c7f6] shadow-lg z-[30] p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
+                className="z-40 absolute w-[410px] h-[300px] top-[145px] left-[40px] bg-[#94c7f6] shadow-lg p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
               >
                 {dataSearch?.map((item, index) => {
                   const isFirstItem = index === 0;
@@ -827,7 +843,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[296px] h-[48px] mt-[15px] z-50 absolute">
+          <div className="w-[216px] h-[48px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
@@ -838,11 +854,11 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                 className={`${
                   activeKey === "0"
                     ? "bg-[#073882] text-[#ffba07]"
-                    : "bg-[#94C7F6] text-[#073882]"
+                    : "bg-[#96C6FF] text-[#073882]"
                 } h-full flex text-center items-center justify-center cursor-pointer`}
               >
                 <span
-                  className="font-semibold text-lg w-[178px] whitespace-nowrap overflow-hidden text-ellipsis mr-3 hover:text-[#4096ff]"
+                  className="font-semibold text-lg w-[140px] whitespace-nowrap overflow-hidden text-ellipsis mr-3 hover:text-[#4096ff]"
                   onClick={() => setActiveTab("0")}
                 >
                   {watchlistActive?.name}
@@ -858,16 +874,29 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               </div>
             </Dropdown>
           </div>
-          <div className="absolute top-[157px] tab-watchlist">
+          <div className="absolute top-[161px] tab-watchlist">
             <Tabs
               defaultActiveKey="0"
               items={itemsTab}
               activeKey={activeKey}
               onChange={onChange}
-              tabBarExtraContent={slot}
             />
           </div>
-          <div className="absolute w-[64px] h-[1px] top-[204px] right-[40px] bg-[#94C7F6]"></div>
+          {/* <div className="absolute top-[161px] 2xl:right-[520px] xl:right-[40px] lg:-right-[375px] md:-right-[631px] sm:-right-[974px] xs:-right-[1024px] xxs:-right-[1079px]">
+            <div
+              className="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit"
+              onClick={fetchDataAndDownloadCSV}
+            >
+              <Tooltip
+                placement="top"
+                title={<span className="">Xuất dữ liệu ra Excel</span>}
+                color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+              >
+                <img src={icon_excel} alt="icon_excel" />
+              </Tooltip>
+            </div>
+            <div className="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
+          </div> */}
         </div>
       </div>
     </div>

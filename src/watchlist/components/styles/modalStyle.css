@@ -78,7 +78,7 @@
 }
 
 .ant-dropdown {
-    inset: 203px auto auto 40px !important;
+    inset: 207px auto auto 40px !important;
     z-index: 900;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .tab-watchlist .ant-tabs-tab {
-    width: 296px;
+    width: 216px;
     justify-content: center;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../app/component/NavBar";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
@@ -21,6 +21,10 @@ const AnalysisReportBasic = () => {
     setIsLogin(localStorage.getItem("_il"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
+
+  useEffect(() => {
+    document.title = "Phân tích cơ bản";
+  }, []);
 
   return (
     <div className="relative">

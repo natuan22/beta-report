@@ -142,6 +142,10 @@ const AnalysisReport = () => {
     }
   };
 
+  useEffect(() => {
+    document.title = `${code} - Phân tích kỹ thuật`;
+  }, []);
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

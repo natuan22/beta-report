@@ -1,7 +1,7 @@
 export const sheet1Title = ["Mã CP", "Sàn", "Ngành", "Thị giá (đồng)", "%D", "KLGD (CP)", "GTGD (tỷ đồng)"];
 
 export const sheet2Title = ["Mã CP", "Thị giá (đồng)", "%D", "KLGD (CP)", "GTGD (tỷ đồng)", "%W", "%M", "%YtD", 
-                    "%YoY", "KLNN mua ròng (CP)", "Giá trị NN mua ròng (tỷ đồng)", "Vốn hóa (tỷ đồng)", 
+                    "%YoY", "KL NN mua ròng (CP)", "Giá trị NN mua ròng (tỷ đồng)", "Vốn hóa (tỷ đồng)", 
                     "KL Mua chủ động (CP) (M)", "KL Bán chủ động (CP) (B)", "M/B", "Biến động 52 tuần", "beta"];
 
 export const sheet3Title = ["Mã CP", "Thị giá (đồng)", "%D", "KLGD (CP)", "GTGD (tỷ đồng)", "EPS (đồng/cp)", 

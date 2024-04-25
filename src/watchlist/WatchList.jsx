@@ -54,7 +54,9 @@ const WatchList = () => {
   const catchWatchlists = (arrText) => {
     setWatchlists(arrText);
   };
-
+  useEffect(() => {
+    document.title = "Danh mục theo dõi";
+  }, []);
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

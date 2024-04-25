@@ -111,6 +111,10 @@ const Home = () => {
     pdf.save(`BetaMorningNews-${homNay}.pdf`);
   };
 
+  useEffect(() => {
+    document.title = "Bản tin sáng";
+  }, []);
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">
