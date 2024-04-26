@@ -3,6 +3,8 @@ import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
+import GauChart from "./GauChart";
+import calSignalText from "../../helper/calSignalText";
 
 const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
   const rowClassName = (record, index) => {
@@ -113,22 +115,24 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Tín hiệu đường xu hướng",
       align: "center",
+      width: 220,
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return <GauChart data={record.trendSignal} />;
       },
     },
     {
       title: "Tín hiệu chỉ báo kỹ thuật",
       align: "center",
+      width: 220,
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return <GauChart data={record.technicalSignal} />;
       },
     },
     {
       title: "Tín hiệu kỹ thuật tổng hợp",
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return <GauChart data={record.generalSignal} />;
       },
     },
   ];
@@ -136,11 +140,11 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
   return (
     <div>
       {Array.isArray(data) && data?.length > 0 ? (
-        <div className="table-data-watchlist w-[1840px]">
+        <div className="table-data-watchlist">
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 1000 }}
+            scroll={{ x: 1380 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}

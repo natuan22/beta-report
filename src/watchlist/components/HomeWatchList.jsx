@@ -718,32 +718,16 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       const workbook = XLSX.utils.book_new();
 
       // Tạo sheet 1
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]),
-        watchlistActive.name
-      );
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]), watchlistActive.name);
 
       // Tạo sheet 2
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet2Title, ...sheet2Data]),
-        "Thống kê"
-      );
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet2Title, ...sheet2Data]), "Thống kê");
 
       // Tạo sheet 3
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet3Title, ...sheet3Data]),
-        "Cơ bản"
-      );
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet3Title, ...sheet3Data]), "Cơ bản");
 
       // Tạo sheet 4
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]),
-        "Kỹ thuật"
-      );
+      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]), "Kỹ thuật");
 
       // Xuất workbook thành file Excel
       XLSX.writeFile(workbook, `dataWatchlist_${watchlistActive.name}.xlsx`);
@@ -840,7 +824,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[216px] h-[48px] mt-[15px] z-30 absolute">
+          <div className="w-[220px] h-[48px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
