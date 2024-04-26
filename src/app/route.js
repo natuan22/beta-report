@@ -1,4 +1,5 @@
 import Home from "../Home";
+import NavBar2 from "../NavBarTest/NavBar2";
 import NavBar3 from "../NavBarTest/NavBar3";
 import NavBar4 from "../NavBarTest/NavBar4";
 import AnalysisReport from "../analysisReport/AnalysisReport";
@@ -20,7 +21,7 @@ export const routes = [
   { path: "/phan-tich-co-ban", component: AnalysisReportBasic },
   //Công cụ đầu tư
   { path: "/danh-muc-theo-doi", component: WatchList },
-  { path: "/bo-loc", component: Filter },
+  { path: "/bo-loc", component: NavBar2 },
   { path: "/canh-bao-tin-hieu", component: NavBar3 },
   { path: "/chien-luoc-giao-dich", component: NavBar4 },
 ];
