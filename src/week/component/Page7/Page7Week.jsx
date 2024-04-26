@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
 import { https } from "../../../services/configService";
-import ListNew from "./component/ListNew";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
 import DialogAddNews from "./component/DialogAddNews";
+import ListNew from "./component/ListNew";
 
 const Page7Week = ({ role }) => {
   const [dataDomestic, setDataDomestic] = useState([]);

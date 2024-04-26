@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import HeaderAnalysis from "../utils/HeaderAnalysis";
-import FooterAnalysis from "../utils/FooterAnalysis";
+import calculateChartValues from "../../../helper/calculateChartValues";
+import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
+import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 import { https } from "../../../services/configService";
+import Candlestick from "../utils/Candlestick";
+import FooterAnalysis from "../utils/FooterAnalysis";
+import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
+import HeaderAnalysis from "../utils/HeaderAnalysis";
+import "./styles/analysisPage1.css";
+import ColumnChart from "./utils/ColumnChart";
+import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
 import LineChart from "./utils/LineChart";
 import Table from "./utils/Table";
 import TableSR from "./utils/TableSR";
-import ColumnChart from "./utils/ColumnChart";
-import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor";
-import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
-import "./styles/analysisPage1.css";
-import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
-import Candlestick from "../utils/Candlestick";
-import calculateChartValues from "../../../helper/calculateChartValues";
-import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -199,9 +199,9 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                     </p>
                   </div>
                 </div>
-                <div className="w-full pt-1">
-                  <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] p-1">
-                    <h2 className="text-white text-[15px] leading-[25px] font-semibold text-center m-0">
+                <div className="w-full pt-2.5">
+                  <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[25px] p-1">
+                    <h2 className="text-white text-[15px] font-semibold text-center m-0">
                       Thông tin cổ phiếu
                     </h2>
                   </div>
@@ -322,10 +322,10 @@ const AnalysisPage1 = ({ stock, type, role }) => {
             )}
             <div
               className={`lineChart ${
-                type === 1 ? "translate-y-[-15px]" : "translate-y-[-6.5px]"
+                type === 1 ? "translate-y-[-15px]" : "translate-y-[-5.5px]"
               }`}
             >
-              <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30  text-center p-1  tran ">
+              <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[25px] z-30 text-center p-1 tran">
                 <h2 className="text-white font-semibold text-[12px] m-0 leading-[19px] ">
                   Tương quan biến động giá cổ phiếu{" "}
                   <span className="uppercase">{stock}</span> trong 1 năm (%)
@@ -433,7 +433,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                 </div>
               </div>
             ) : (
-              <div className="h-[150px] w-[450px] flex items-center justify-between">
+              <div className="h-[150px] w-[450px] flex items-center justify-between translate-y-[6px]">
                 <div className="w-[202px] text-center h-[120px]">
                   <p className="m-0 font-bold text-[16px] pt-2">
                     Tín hiệu kỹ thuật tổng hợp
@@ -478,9 +478,9 @@ const AnalysisPage1 = ({ stock, type, role }) => {
               </div>
             )}
 
-            <div className="imgPrice w-[450px] pt-1">
-              <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px]  text-center p-1 ">
-                <h2 className="text-white font-semibold text-[15px] m-0 leading-[25px]">
+            <div className="imgPrice w-[450px] pt-2.5">
+              <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[25px]  text-center p-1 ">
+                <h2 className="text-white font-semibold text-[15px] m-0">
                   Biểu đồ giá
                 </h2>
               </div>
@@ -503,7 +503,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
               )}
 
               <div className="columnChart">
-                <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[30px] z-30 text-center p-1">
+                <div className="bg-gradient-to-b from-[#024A9B] to-[#0568D8] h-[25px] z-30 text-center p-1">
                   <h2 className="text-white font-semibold text-[15px] m-0 leading-[19px] ">
                     Thống kê lệnh Mua- Bán chủ động (nghìn CP)
                   </h2>

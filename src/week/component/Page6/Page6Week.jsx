@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
-import GoodsPrice from "./component/GoodsPrice";
-import TableRate from "./component/TableRate";
-import RateLineChart from "./component/RateLineChart";
-import AverageRate from "./component/AverageRate";
 import { https } from "../../../services/configService";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
+import AverageRate from "./component/AverageRate";
+import GoodsPrice from "./component/GoodsPrice";
 import InterestRateTable from "./component/InterestRateTable";
+import RateLineChart from "./component/RateLineChart";
+import TableRate from "./component/TableRate";
 
 const Page6Week = () => {
   const [dataAverageRateChart, setDataAverageRateChart] = useState();

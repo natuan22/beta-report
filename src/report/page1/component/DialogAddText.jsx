@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Modal } from "antd";
-import { message } from "antd";
 import Button from "@mui/material/Button";
-import { Form, Input } from "antd";
+import { Form, Input, Modal, message } from "antd";
 import { useFormik } from "formik";
+import React, { useState } from "react";
 import { postApi } from "../../../helper/postApi";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;

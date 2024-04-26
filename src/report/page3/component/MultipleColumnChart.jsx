@@ -1,6 +1,6 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import React from "react";
 
 const MultipleColumnChart = ({ data, legend, title, unit }) => {
   const totalVal = data?.map((item) => +(item.totalVal / 1000000000));

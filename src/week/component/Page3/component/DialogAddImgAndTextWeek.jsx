@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { Modal } from "antd";
-import { message } from "antd";
 import Button from "@mui/material/Button";
+import { Modal, message } from "antd";
+import React, { useState } from "react";
 import FormInput from "../../../../report/utils/component/FormInput";
 
 const DialogAddImgAndTextWeek = ({ onSubmitSuccess, getImgFromInput }) => {

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
 import { Form, Input } from "antd";
 import { useFormik } from "formik";
-import axios from "axios";
-import Cookies from "js-cookie";
+import React, { useState } from "react";
 import { postApi } from "../../../helper/postApi";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;

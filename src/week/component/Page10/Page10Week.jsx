@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
 import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
 
 const Page10Week = () => {
   return (

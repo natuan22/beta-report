@@ -1,5 +1,13 @@
+import { Button } from "@mui/material";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
+import NavBar from "../app/component/NavBar";
+import getTimeWeek from "../helper/getTimeWeek";
 import Page1Week from "./component/Page1/Page1Week";
+import Page12Week from "./component/Page12/Page12Week";
 import Page2Week from "./component/Page2/Page2Week";
 import Page3Week from "./component/Page3/Page3Week";
 import Page4Week from "./component/Page4/Page4Week";
@@ -7,17 +15,6 @@ import Page5Week from "./component/Page5/Page5Week";
 import Page6Week from "./component/Page6/Page6Week";
 import Page7Week from "./component/Page7/Page7Week";
 import Page8Week from "./component/Page8/Page8Week";
-import Page9Week from "./component/Page9/Page9Week";
-import Page10Week from "./component/Page10/Page10Week";
-import Page11Week from "./component/Page11/Page11Week";
-import Page12Week from "./component/Page12/Page12Week";
-import { Button } from "@mui/material";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import NavBar from "../app/component/NavBar";
-import getTimeWeek from "../helper/getTimeWeek";
-import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../Auth/thunk";
 
 const weekDate = getTimeWeek();
 

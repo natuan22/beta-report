@@ -1,9 +1,10 @@
-import React from "react";
 import Highcharts from "highcharts";
-import { TbTriangleInverted } from "react-icons/tb";
-import { FiTriangle } from "react-icons/fi";
 import HighchartsReact from "highcharts-react-official";
+import React from "react";
+import { FiTriangle } from "react-icons/fi";
+import { TbTriangleInverted } from "react-icons/tb";
 import formatNumberChart from "../../../../helper/formatNumberChart";
+
 const ChartTopTotal = ({ data, title }) => {
   const max = Math.ceil(
     Math.max(...data.map((item) => item.totalVal / 1000000000))

@@ -1,5 +1,6 @@
 import React from "react";
 import "./loading.css";
+
 const Loading = () => (
   <div className="loader relative pt-[100px]">
     <div className="square" id="sq1" />

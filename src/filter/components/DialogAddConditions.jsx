@@ -1,11 +1,10 @@
+import Button from "@mui/material/Button";
+import { Checkbox, Modal, Row, message } from "antd";
 import React, { useState } from "react";
 import { FaSearchPlus } from "react-icons/fa";
-import Button from "@mui/material/Button";
-import { Checkbox, Row, message } from "antd";
-import { Modal } from "antd";
-import "../components/styles/dialogAddStyle.css";
-import { MdFormatListNumbered } from "react-icons/md";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import { MdFormatListNumbered } from "react-icons/md";
+import "../components/styles/dialogAddStyle.css";
 import { hashTbStockFilter } from "../utils/hashTb";
 
 const DialogAddConditions = () => {
@@ -72,7 +71,7 @@ const DialogAddConditions = () => {
       }
     });
   };
-  
+
   return (
     <div>
       {contextHolder}

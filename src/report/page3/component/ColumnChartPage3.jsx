@@ -1,7 +1,7 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
+import React from "react";
 
 const ColumnChartPage3 = ({ data, title, unit }) => {
   const max = Math?.ceil(

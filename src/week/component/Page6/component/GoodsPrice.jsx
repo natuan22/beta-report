@@ -1,6 +1,6 @@
 import React from "react";
-import { getColorBaseOnValue } from "../../../../helper/getColorBaseOnValue";
 import formatNumber from "../../../../helper/formatNumber";
+import { getColorBaseOnValue } from "../../../../helper/getColorBaseOnValue";
 
 const GoodsPrice = ({ data }) => {
   return (

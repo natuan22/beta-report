@@ -1,6 +1,6 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import React from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 import formatNumber from "../../../helper/formatNumber";
 

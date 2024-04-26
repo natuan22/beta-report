@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Form, Input, message } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Button from "@mui/material/Button";
-import { Modal } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import logo from "../../app/asset/img/logoWeek.png";
-import { useDispatch, useSelector } from "react-redux";
-import { userLoginAction, userRegisterAction } from "../thunk";
-import { object, ref, string } from "yup";
+import { Form, Input, Modal, message } from "antd";
 import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { object, ref, string } from "yup";
+import logo from "../../app/asset/img/logoWeek.png";
+import { userRegisterAction } from "../thunk";
 import PopUpOTP from "./PopUpOTP";
 
 const DialogSignUp = ({ onSubmitSuccess }) => {

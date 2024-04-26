@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterAfternoon from "../../../report/utils/component/FooterAfternoon";
-import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import formatNumber from "../../../helper/formatNumber";
+import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
+import FooterAfternoon from "../../../report/utils/component/FooterAfternoon";
 import { https } from "../../../services/configService";
+import HeaderWeek from "../../utils/HeaderWeek";
 import ColumnChart from "./component/ColumnChart";
 import TableIndustry from "./component/TableIndustry";
 

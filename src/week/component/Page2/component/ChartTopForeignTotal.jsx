@@ -1,9 +1,10 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import formatNumber from "../../../../helper/formatNumber";
 import moment from "moment/moment";
+import React from "react";
+import formatNumber from "../../../../helper/formatNumber";
 import formatNumberChart from "../../../../helper/formatNumberChart";
+
 const ChartTopForeignTotal = ({ data, title }) => {
   const options = {
     accessibility: {

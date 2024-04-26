@@ -1,21 +1,18 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { BsCalendar2Day } from "react-icons/bs";
-import { FiSunset, FiChevronsRight, FiChevronsLeft } from "react-icons/fi";
-import { MdOutlineAutoGraph } from "react-icons/md";
-import { SlGraph } from "react-icons/sl";
-import DialogLogin from "../../Auth/components/DialogLogin";
-import Button from "@mui/material/Button";
 import { UserOutlined } from "@ant-design/icons";
-import { VscCoffee } from "react-icons/vsc";
-import { BsGraphUp } from "react-icons/bs";
-import { CiFilter } from "react-icons/ci";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { BiCategoryAlt } from "react-icons/bi";
-import { MdQueryStats } from "react-icons/md";
-import DialogSignUp from "../../Auth/components/DialogSignUp";
+import Button from "@mui/material/Button";
 import { FloatButton } from "antd";
+import React, { useEffect, useState } from "react";
+import { BiCategoryAlt } from "react-icons/bi";
+import { BsCalendar2Day, BsGraphUp } from "react-icons/bs";
+import { CiFilter } from "react-icons/ci";
+import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineAutoGraph, MdQueryStats } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
+import { VscCoffee } from "react-icons/vsc";
+import { NavLink, useLocation } from "react-router-dom";
+import DialogLogin from "../../Auth/components/DialogLogin";
+import DialogSignUp from "../../Auth/components/DialogSignUp";
 
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
   const [showSidebar, setShowSidebar] = useState(false);

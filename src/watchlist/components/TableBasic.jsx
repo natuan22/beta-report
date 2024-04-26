@@ -195,55 +195,79 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.ROE - b.ROE,
     },
     {
-      title: "Biên LNG năm gần nhất (%)",
+      title: (
+        <span>
+          Biên LNG <br /> năm gần nhất (%)
+        </span>
+      ),
       dataindex: "grossProfitMarginYear",
-      width: 250,
+      width: 180,
       align: "center",
       render: (_, record) => {
+        const grossProfitMarginYear = record.grossProfitMarginYear * 100;
+
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.grossProfitMarginYear * 100)}
+            {grossProfitMarginYear !== 0 ? formatNumberCurrency(grossProfitMarginYear) : ""}
           </div>
         );
       },
       sorter: (a, b) => a.grossProfitMarginYear - b.grossProfitMarginYear,
     },
     {
-      title: "Biên LNG quý gần nhất (%)",
+      title: (
+        <span>
+          Biên LNG <br /> quý gần nhất (%)
+        </span>
+      ),
       dataindex: "grossProfitMarginQuarter",
-      width: 240,
+      width: 170,
       align: "center",
       render: (_, record) => {
+        const grossProfitMarginQuarter = record.grossProfitMarginQuarter * 100;
+
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.grossProfitMarginQuarter * 100)}
+            {grossProfitMarginQuarter !== 0 ? formatNumberCurrency(grossProfitMarginQuarter) : ""}
           </div>
         );
       },
       sorter: (a, b) => a.grossProfitMarginQuarter - b.grossProfitMarginQuarter,
     },
     {
-      title: "Biên LNR năm gần nhất (%)",
+      title: (
+        <span>
+          Biên LNR <br /> năm gần nhất (%)
+        </span>
+      ),
       dataindex: "netProfitMarginYear",
-      width: 250,
+      width: 180,
       align: "center",
       render: (_, record) => {
+        const netProfitMarginYear = record.netProfitMarginYear * 100;
+
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.netProfitMarginYear * 100)}
+            {netProfitMarginYear !== 0 ? formatNumberCurrency(netProfitMarginYear) : ""}
           </div>
         );
       },
       sorter: (a, b) => a.netProfitMarginYear - b.netProfitMarginYear,
     },
     {
-      title: "Biên LNR quý gần nhất (%)",
+      title: (
+        <span>
+          Biên LNR <br /> quý gần nhất (%)
+        </span>
+      ),
       dataindex: "netProfitMarginQuarter",
       align: "center",
       render: (_, record) => {
+        const netProfitMarginQuarter = record.netProfitMarginQuarter * 100;
+
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.netProfitMarginQuarter * 100)}
+            {netProfitMarginQuarter !== 0 ? formatNumberCurrency(netProfitMarginQuarter) : ""}
           </div>
         );
       },
@@ -258,7 +282,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 2450 }}
+            scroll={{ x: 2170 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}

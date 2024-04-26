@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import DialogLogin from "../Auth/components/DialogLogin";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
-import DialogAddWatchList from "./components/DialogAddWatchList";
-import DialogLogin from "../Auth/components/DialogLogin";
 import { getApi } from "../helper/getApi";
+import DialogAddWatchList from "./components/DialogAddWatchList";
 import HomeWatchList from "./components/HomeWatchList";
-import { useNavigate } from "react-router-dom";
 import "./components/styles/modalStyle.css";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 

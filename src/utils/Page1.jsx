@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import DialogNews from "../component/DialogNews";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import { https } from "../services/configService";
 import { homNay } from "../helper/getDate";
-import DialogNews from "../component/DialogNews";
+import { https } from "../services/configService";
 
 const Page1 = ({ role }) => {
   const [newsForeign, setNewsForeign] = useState([]);

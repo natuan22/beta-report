@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import iconDeco from "../app/asset/img/iconDeco.png";
+import DialogAddStock from "../component/DialogAddStock";
+import DialogIdentify from "../component/DialogIdentify";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import iconDeco from "../app/asset/img/iconDeco.png";
-import DialogIdentify from "../component/DialogIdentify";
-import DialogAddStock from "../component/DialogAddStock";
 import formatNumberPage3 from "../helper/formatNumberPage3";
 import { https } from "../services/configService";
 

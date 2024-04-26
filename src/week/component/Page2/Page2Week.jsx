@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
-import { https } from "../../../services/configService";
-import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import formatNumber from "../../../helper/formatNumber";
-import ChartColumn from "./component/ChartColumn";
-import ChartTopTotal from "./component/ChartTopTotal";
-import ChartTopForeignTotal from "./component/ChartTopForeignTotal";
+import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
+import { https } from "../../../services/configService";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
 import AddText from "./component/AddText";
+import ChartColumn from "./component/ChartColumn";
 import ColumnChart1 from "./component/ChartColumn1";
+import ChartTopForeignTotal from "./component/ChartTopForeignTotal";
+import ChartTopTotal from "./component/ChartTopTotal";
 
 const getText = (value) => {
   if (value > 0) return <span>tăng</span>;

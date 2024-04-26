@@ -1,6 +1,6 @@
-import * as authenTypes from "./utils/constant";
-import { authenServices } from "./services/authenServices";
 import Cookies from "js-cookie";
+import { authenServices } from "./services/authenServices";
+import * as authenTypes from "./utils/constant";
 
 export const userLoginAction = (data) => async (dispatch) => {
   try {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import HeaderLandscape from "../../utils/HeaderLandscape";
-import FooterLandscape from "../../utils/FooterLandscape";
-import { https } from "../../../services/configService";
+import formatNumberTable from "../../../helper/formatNumberTable";
 import formatNumberWeek from "../../../helper/formatNumberWeek";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
-import formatNumberTable from "../../../helper/formatNumberTable";
+import { https } from "../../../services/configService";
+import FooterLandscape from "../../utils/FooterLandscape";
+import HeaderLandscape from "../../utils/HeaderLandscape";
 
 const Page9Week = () => {
   const [data, setData] = useState();

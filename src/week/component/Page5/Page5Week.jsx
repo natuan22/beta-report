@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
 import { https } from "../../../services/configService";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
 import ChartMultiColumn from "./component/ChartMultiColumn";
 import ChartNetVal from "./component/ChartNetVal";
 import TableEvent from "./component/TableEvent";

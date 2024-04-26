@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { Form, Input, message } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Button from "@mui/material/Button";
-import { Modal } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import logo from "../../app/asset/img/logoWeek.png";
+import { Form, Input, Modal, message } from "antd";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import logo from "../../app/asset/img/logoWeek.png";
 import { userLoginAction } from "../thunk";
 
 const DialogLogin = ({ onSubmitSuccess, type }) => {

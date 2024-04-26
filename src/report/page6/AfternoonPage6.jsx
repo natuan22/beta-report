@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-import FooterAfternoon from "../utils/component/FooterAfternoon";
+import { IoIosStar } from "react-icons/io";
 import { https } from "../../services/configService";
 import LineChartGoodsPrice from "../../week/component/Page8/component/LineChartGoodsPrice";
-import { IoIosStar } from "react-icons/io";
+import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 import RateLineChart from "../utils/component/RateLineChart";
 
 const AfternoonPage6 = () => {

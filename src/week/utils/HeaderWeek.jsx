@@ -1,7 +1,8 @@
 import React from "react";
-import logo from "../../app/asset/img/logoWeek.png";
 import imgHeader from "../../app/asset/img/headerWeek.png";
+import logo from "../../app/asset/img/logoWeek.png";
 import getTimeWeek from "../../helper/getTimeWeek";
+
 const HeaderWeek = () => {
   return (
     <div className="h-[120px] w-[800px]">

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-import FooterAfternoon from "../utils/component/FooterAfternoon";
+import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
+import formatNumber from "../../helper/formatNumber";
+import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import { https } from "../../services/configService";
 import DialogAddImgAndText from "../utils/component/DialogAddImgAndText";
-import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
-import formatNumber from "../../helper/formatNumber";
-import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
+import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AfternoonPage2 = ({ role }) => {

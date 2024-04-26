@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Modal } from "antd";
-import "../utils/otpForm.css";
-import { useNavigate } from "react-router-dom";
-import { message } from "antd";
-import { https } from "../../services/configService";
+import { Modal, message } from "antd";
+import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
+import { useNavigate } from "react-router-dom";
+import { https } from "../../services/configService";
+import "../utils/otpForm.css";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
