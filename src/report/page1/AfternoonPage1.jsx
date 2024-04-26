@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-import FooterAfternoon from "../utils/component/FooterAfternoon";
-import ColumnChart from "../utils/component/ColumnChart";
-import { https } from "../../services/configService";
-import LineChart from "../utils/component/LineChart";
 import formatNumber from "../../helper/formatNumber";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
+import { https } from "../../services/configService";
+import ColumnChart from "../utils/component/ColumnChart";
+import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
+import LineChart from "../utils/component/LineChart";
 import DialogAddText from "./component/DialogAddText";
 
 const getSymbol = (value) => {

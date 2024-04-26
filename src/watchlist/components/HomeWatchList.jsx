@@ -1,28 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Form, Input, Tooltip, message } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { IoCaretDownSharp } from "react-icons/io5";
-import { Dropdown } from "antd";
+import Button from "@mui/material/Button";
+import { Dropdown, Form, Input, Modal, Tabs, message } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
+import { FaCheck, FaX } from "react-icons/fa6";
 import { FiPlusCircle } from "react-icons/fi";
 import { HiOutlineViewList } from "react-icons/hi";
-import Button from "@mui/material/Button";
-import { Modal } from "antd";
-import { postApi } from "../../helper/postApi";
-import { getApi } from "../../helper/getApi";
-import { FaCheck, FaX } from "react-icons/fa6";
-import { https } from "../../services/configService";
+import { IoCaretDownSharp } from "react-icons/io5";
 import { useDebounce } from "react-use";
-import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
-import { Tabs } from "antd";
-import TableBase from "./TableBase";
-import TableStatistical from "./TableStatistical";
-import TableBasic from "./TableBasic";
-import TableTechnique from "./TableTechnique";
-import TableSignalWarning from "./TableSignalWarning";
-import TableNews from "./TableNews";
 import icon_excel from "../../app/asset/img/icon_excel.png";
+import { getApi } from "../../helper/getApi";
+import { postApi } from "../../helper/postApi";
+import { https } from "../../services/configService";
 import {
   prepareData,
   prepareData2,
@@ -33,6 +24,12 @@ import {
   sheet3Title,
   sheet4Title,
 } from "../utils/hashTb";
+import TableBase from "./TableBase";
+import TableBasic from "./TableBasic";
+import TableNews from "./TableNews";
+import TableSignalWarning from "./TableSignalWarning";
+import TableStatistical from "./TableStatistical";
+import TableTechnique from "./TableTechnique";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -93,7 +90,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         const newData = await fetchDataWatchList();
         setWatchlistActive(newData[newData.length - 1]);
         if (newData.length > 0) {
-          if (id == watchlistActive.id) {
+          if (id === watchlistActive.id) {
             await getDataTable(newData[newData.length - 1].id);
           }
         } else {
@@ -765,9 +762,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         const divElement = document.createElement("div"); // Create a new div element
         divElement.innerHTML = `
           <div class="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit">
-            <Tooltip placement="top" title="<span class=''>Xuất dữ liệu ra Excel</span>" color="linear-gradient(to bottom, #E6EFF9, #61A6F6)">
-              <img src="${icon_excel}" alt="icon_excel" />
-            </Tooltip>
+              <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
           </div>
           <div class="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
         `; // Set the innerHTML of the div

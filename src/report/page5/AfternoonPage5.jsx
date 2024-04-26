@@ -1,7 +1,7 @@
 import React from "react";
 import banner from "../../app/asset/img/banner.png";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 
 const AfternoonPage5 = () => {
   return (

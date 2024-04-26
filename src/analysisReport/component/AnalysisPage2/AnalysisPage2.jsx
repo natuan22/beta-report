@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import HeaderAnalysis from "../utils/HeaderAnalysis";
-import FooterAnalysis from "../utils/FooterAnalysis";
+import formatNumber from "../../../helper/formatNumber";
 import { https } from "../../../services/configService";
-import GauChartTech from "./utils/GauChartTech";
+import FooterAnalysis from "../utils/FooterAnalysis";
+import HeaderAnalysis from "../utils/HeaderAnalysis";
+import ColumnChart from "./utils/ColumnChart";
 import GauChartGen from "./utils/GauChartGen";
+import GauChartTech from "./utils/GauChartTech";
 import GauChartTrend from "./utils/GauChartTrend";
 import LineChart from "./utils/LineChart";
-import formatNumber from "../../../helper/formatNumber";
 import LineChart2 from "./utils/LineChart2";
 import LineChartADX from "./utils/LineChartADX";
 import Table from "./utils/Table";
-import ColumnChart from "./utils/ColumnChart";
 
 const getColorBaseOnName = (value) => {
   if (value === "Tích cực") return "text-green-500";

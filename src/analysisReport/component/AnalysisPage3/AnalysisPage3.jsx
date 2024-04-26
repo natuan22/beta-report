@@ -1,7 +1,8 @@
 import React from "react";
+import banner from "../../../app/asset/img/bannerPTKT.png";
 import FooterAnalysis from "../utils/FooterAnalysis";
 import HeaderAnalysis from "../utils/HeaderAnalysis";
-import banner from "../../../app/asset/img/bannerPTKT.png";
+
 const Page4 = () => {
   return (
     <div className="h-[1480px] w-[800px]  ">

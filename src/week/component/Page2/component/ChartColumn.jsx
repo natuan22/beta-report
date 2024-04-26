@@ -1,10 +1,10 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import formatNumber from "../../../../helper/formatNumber";
-import formatNumberChart from "../../../../helper/formatNumberChart";
+import React from "react";
 import { FiTriangle } from "react-icons/fi";
 import { TbTriangleInverted } from "react-icons/tb";
+import formatNumber from "../../../../helper/formatNumber";
+import formatNumberChart from "../../../../helper/formatNumberChart";
 
 const ColumnChart = ({ data, title, unit, currency, translateX }) => {
   const max = Math.ceil(Math.max(...data.map((item) => item.point / currency)));

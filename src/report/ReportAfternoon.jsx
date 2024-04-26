@@ -1,17 +1,17 @@
-import html2canvas from "html2canvas";
-import React, { useEffect, useRef, useState } from "react";
-import jsPDF from "jspdf";
 import { Button } from "@mui/material";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
+import NavBar from "../app/component/NavBar";
+import { formattedDate } from "../helper/getDateAfternoon";
 import AfternoonPage1 from "./page1/AfternoonPage1";
 import AfternoonPage2 from "./page2/AfternoonPage2";
 import AfternoonPage3 from "./page3/AfternoonPage3";
 import AfternoonPage4 from "./page4/AfternoonPage4";
 import AfternoonPage5 from "./page5/AfternoonPage5";
-import { formattedDate } from "../helper/getDateAfternoon";
-import NavBar from "../app/component/NavBar";
 import AfternoonPage6 from "./page6/AfternoonPage6";
-import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../Auth/thunk";
 
 const ReportAfternoon = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,8 @@
 import React from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
 import banner from "../../../app/asset/img/banner.png";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
+
 const Page12Week = () => {
   return (
     <div className="h-[1480px] w-[800px]  ">

@@ -1,12 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Modal } from "antd";
-import InputFormBuy from "./utils/InputFormBuy";
-import { FaPlus } from "react-icons/fa6";
-import InputFormSell from "./utils/InputFormSell";
-import { message } from "antd";
 import Button from "@mui/material/Button";
-import { https } from "../services/configService";
+import { Modal, message } from "antd";
+import React, { Fragment, useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa6";
 import { postApi } from "../helper/postApi";
+import { https } from "../services/configService";
+import InputFormBuy from "./utils/InputFormBuy";
+import InputFormSell from "./utils/InputFormSell";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const DialogAddStock = ({ catchStock }) => {

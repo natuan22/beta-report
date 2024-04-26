@@ -1,6 +1,6 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import React from "react";
 
 const ColumnChartAfternoon = ({ data, title, unit }) => {
   const max = Math?.ceil(

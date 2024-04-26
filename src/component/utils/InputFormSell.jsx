@@ -1,7 +1,6 @@
-import React from "react";
-import { Form, Input, Select } from "antd";
-import { message } from "antd";
+import { Form, Input, Select, message } from "antd";
 import { useFormik } from "formik";
+import React from "react";
 
 const InputFormSell = ({ catchStockInput, isBuy, data, index }) => {
   const [messageApi, contextHolder] = message.useMessage();

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-import FooterAfternoon from "../utils/component/FooterAfternoon";
-import { https } from "../../services/configService";
-import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
-import formatNumber from "../../helper/formatNumber";
 import DialogNews from "../../component/DialogNews";
+import formatNumber from "../../helper/formatNumber";
+import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
+import { https } from "../../services/configService";
+import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 
 const AfternoonPage4 = ({ role }) => {
   const [rate, setRate] = useState();

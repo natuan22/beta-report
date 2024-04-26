@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import HeaderMarket from "../component/HeaderMarket";
-import { homNay } from "../helper/getDate";
 import Footer from "../component/Footer";
-import { https } from "../services/configService";
+import HeaderMarket from "../component/HeaderMarket";
 import SplineChart from "../component/SplineChart";
 import formatNumber from "../helper/formatNumber";
+import { homNay } from "../helper/getDate";
+import { https } from "../services/configService";
+
 const Page5 = () => {
   const [data, setData] = useState();
   const [dataHose, setDataHose] = useState();

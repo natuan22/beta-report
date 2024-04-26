@@ -1,16 +1,16 @@
+import { Button } from "@mui/material";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "./Auth/thunk";
+import NavBar from "./app/component/NavBar";
+import { homNay } from "./helper/getDate";
 import Page1 from "./utils/Page1";
 import Page2 from "./utils/Page2";
 import Page3 from "./utils/Page3";
 import Page4 from "./utils/Page4";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { homNay } from "./helper/getDate";
-import { Button } from "@mui/material";
 import Page5 from "./utils/Page5";
-import NavBar from "./app/component/NavBar";
-import { userLogoutAction } from "./Auth/thunk";
-import { useDispatch } from "react-redux";
 
 const Home = () => {
   const dispatch = useDispatch();

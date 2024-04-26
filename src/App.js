@@ -1,7 +1,7 @@
-import "./App.css";
 import { Fragment, useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
 import { routes } from "./app/route";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { generateMAC } from "./helper/generateMAC";
 
 function App() {

@@ -1,9 +1,9 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
-import { FaArrowUpLong, FaArrowDownLong } from "react-icons/fa6";
+import React from "react";
+import { FaArrowDownLong, FaArrowUpLong } from "react-icons/fa6";
 import formatNumber from "../helper/formatNumber";
+import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
 
 const getLineCorlor = (value) => {
   if (value > 0) return "#039B3B";

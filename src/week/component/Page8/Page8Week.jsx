@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import HeaderWeek from "../../utils/HeaderWeek";
-import FooterWeek from "../../utils/FooterWeek";
 import { IoIosStar } from "react-icons/io";
-import LineChartGoodsPrice from "./component/LineChartGoodsPrice";
 import { https } from "../../../services/configService";
+import FooterWeek from "../../utils/FooterWeek";
+import HeaderWeek from "../../utils/HeaderWeek";
+import LineChartGoodsPrice from "./component/LineChartGoodsPrice";
+
 const Page8Week = () => {
   const [data, setData] = useState();
 

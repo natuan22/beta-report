@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../component/Footer";
 import Header from "../component/Header";
-import { https } from "../services/configService";
-import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
 import formatNumber from "../helper/formatNumber";
+import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
+import { https } from "../services/configService";
 
 const Page2 = () => {
   const [rate, setRate] = useState();

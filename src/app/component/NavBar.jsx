@@ -1,21 +1,18 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { BsCalendar2Day } from "react-icons/bs";
-import { FiSunset, FiChevronsRight, FiChevronsLeft } from "react-icons/fi";
-import { MdOutlineAutoGraph } from "react-icons/md";
-import { SlGraph } from "react-icons/sl";
-import DialogLogin from "../../Auth/components/DialogLogin";
-import Button from "@mui/material/Button";
 import { UserOutlined } from "@ant-design/icons";
-import { VscCoffee } from "react-icons/vsc";
-import { BsGraphUp } from "react-icons/bs";
-import { CiFilter } from "react-icons/ci";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { BiCategoryAlt } from "react-icons/bi";
-import { MdQueryStats } from "react-icons/md";
-import DialogSignUp from "../../Auth/components/DialogSignUp";
+import Button from "@mui/material/Button";
 import { FloatButton } from "antd";
+import React, { useEffect, useState } from "react";
+import { BiCategoryAlt } from "react-icons/bi";
+import { BsCalendar2Day, BsGraphUp } from "react-icons/bs";
+import { CiFilter } from "react-icons/ci";
+import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { MdOutlineAutoGraph, MdQueryStats } from "react-icons/md";
+import { SlGraph } from "react-icons/sl";
+import { VscCoffee } from "react-icons/vsc";
+import { NavLink, useLocation } from "react-router-dom";
+import DialogLogin from "../../Auth/components/DialogLogin";
+import DialogSignUp from "../../Auth/components/DialogSignUp";
 
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -79,7 +76,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       <div>
         <button
           onClick={toggleSidebar}
-          className={`fixed top-1 -right-4 bg-slate-100 text-black z-40 font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
+          className={`fixed top-1 -right-4 bg-slate-100 text-black z-[999] font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
             ${
               showSidebar ? "translate-x-[-520%] ease-in-out duration-500" : ""
             } `}
@@ -93,7 +90,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       </div>
       <div
         id="menu"
-        className={`z-50 fixed top-0 right-0 bg-slate-100 h-full transition-transform drop-shadow-xl ${
+        className={`z-[1000] fixed top-0 right-0 bg-slate-100 h-full transition-transform drop-shadow-xl ${
           showSidebar ? "" : "translate-x-[100%] ease-in-out duration-500"
         }`}
       >

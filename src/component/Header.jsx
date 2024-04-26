@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import logo from "../app/asset/img/logo.png";
 import imgHeaderRight from "../app/asset/img/imgHeader.png";
 import imgHeaderRight2 from "../app/asset/img/imgHeader2.png";
+import logo from "../app/asset/img/logo.png";
 
 const Header = ({ date, type }) => {
   return (

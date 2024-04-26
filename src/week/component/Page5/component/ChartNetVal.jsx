@@ -1,7 +1,7 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment/moment";
+import React from "react";
 
 const ChartNetVal = ({ data }) => {
   const dataForeign = data?.map((item) => +item.net_foreign.toFixed(2));

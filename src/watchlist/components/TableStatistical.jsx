@@ -152,9 +152,9 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       // sorter: (a, b) => a.totalVal - b.totalVal,
     },
     {
-      title: "KL NN mua ròng (CP)",
+      title: "Khối lượng NN mua/bán ròng (CP)",
       dataindex: "buyVol",
-      width: 200,
+      width: 190,
       align: "center",
       render: (_, record) => {
         return (
@@ -166,9 +166,13 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       sorter: (a, b) => a.buyVol - b.buyVol,
     },
     {
-      title: "Giá trị NN mua/bán ròng (tỷ đồng)",
+      title: (
+        <span>
+          Giá trị NN <br /> mua/bán ròng (tỷ đồng)
+        </span>
+      ),
       dataindex: "buyVal",
-      width: 300,
+      width: 220,
       align: "center",
       render: (_, record) => {
         return (
@@ -196,7 +200,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KL Mua chủ động (CP) (M)",
       dataindex: "Mua",
-      width: 240,
+      width: 180,
       align: "center",
       render: (_, record) => {
         return (
@@ -210,7 +214,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "KL Bán chủ động (CP) (B)",
       dataindex: "Ban",
-      width: 230,
+      width: 170,
       align: "center",
       render: (_, record) => {
         return (

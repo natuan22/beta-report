@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { https } from "../../../services/configService";
 import moment from "moment/moment";
+import React, { useEffect, useState } from "react";
+import { https } from "../../../services/configService";
 
 const AreaChart = () => {
   const [data, setData] = useState([]);

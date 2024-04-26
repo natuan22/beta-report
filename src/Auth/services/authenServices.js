@@ -1,6 +1,6 @@
+import axios from "axios";
 import Cookies from "js-cookie";
 import { https } from "../../services/configService";
-import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 

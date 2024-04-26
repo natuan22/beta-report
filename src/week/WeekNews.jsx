@@ -1,5 +1,13 @@
+import { Button } from "@mui/material";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { userLogoutAction } from "../Auth/thunk";
+import NavBar from "../app/component/NavBar";
+import getTimeWeek from "../helper/getTimeWeek";
 import Page1Week from "./component/Page1/Page1Week";
+import Page12Week from "./component/Page12/Page12Week";
 import Page2Week from "./component/Page2/Page2Week";
 import Page3Week from "./component/Page3/Page3Week";
 import Page4Week from "./component/Page4/Page4Week";
@@ -8,16 +16,6 @@ import Page6Week from "./component/Page6/Page6Week";
 import Page7Week from "./component/Page7/Page7Week";
 import Page8Week from "./component/Page8/Page8Week";
 import Page9Week from "./component/Page9/Page9Week";
-import Page10Week from "./component/Page10/Page10Week";
-import Page11Week from "./component/Page11/Page11Week";
-import Page12Week from "./component/Page12/Page12Week";
-import { Button } from "@mui/material";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import NavBar from "../app/component/NavBar";
-import getTimeWeek from "../helper/getTimeWeek";
-import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../Auth/thunk";
 
 const weekDate = getTimeWeek();
 
@@ -93,13 +91,13 @@ const WeekNews = () => {
     pdf.addImage(img7, "JPEG", 0, 0, 210, 391);
     pdf.addPage(null, "p");
     pdf.addImage(img8, "JPEG", 0, 0, 210, 391);
-    // pdf.addPage(null, "l");
-    // pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
-    // pdf.addPage(null, 'p')
-    // pdf.addImage(img10, 'JPEG', 0, 0);
-    // pdf.addPage(null, 'p')
-    // pdf.addImage(img11, 'JPEG', 0, 0);
+    pdf.addPage(null, "l");
+    pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
     pdf.addPage(null, "p");
+    // pdf.addImage(img10, "JPEG", 0, 0);
+    // pdf.addPage(null, "p");
+    // pdf.addImage(img11, "JPEG", 0, 0);
+    // pdf.addPage(null, "p");
     pdf.addImage(img12, "JPEG", 0, 0, 210, 391);
 
     pdf.save(`Baocaotuan${weekDate}.pdf`);
@@ -157,10 +155,11 @@ const WeekNews = () => {
     link8.download = "Baocaotuan-Trang7.png";
     link8.click();
 
-    // const link9 = document.createElement("a");
-    // link9.href = img9;
-    // link9.download = "Baocaotuan-Trang7.png";
-    // link9.click();
+    const link9 = document.createElement("a");
+    link9.href = img9;
+    link9.download = "Baocaotuan-Trang7.png";
+    link9.click();
+
     const link10 = document.createElement("a");
     link10.href = img10;
     link10.download = "Baocaotuan-Trang7.png";
@@ -206,15 +205,15 @@ const WeekNews = () => {
         <div ref={pageRefs.page8}>
           <Page8Week />
         </div>
-        {/* <div className="h-[1480px]" ref={pageRefs.page9}>
+        <div className="h-[1480px]" ref={pageRefs.page9}>
           <Page9Week />
-        </div> */}
+        </div>
         {/* <div ref={pageRefs.page10}>
-                    <Page10Week />
-                </div>
-                <div ref={pageRefs.page11}>
-                    <Page11Week />
-                </div> */}
+              <Page10Week />
+            </div>
+            <div ref={pageRefs.page11}>
+              <Page11Week />
+            </div> */}
         <div ref={pageRefs.page12}>
           <Page12Week />
         </div>

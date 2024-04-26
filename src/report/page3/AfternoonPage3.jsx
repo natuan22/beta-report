@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-import FooterAfternoon from "../utils/component/FooterAfternoon";
-import AreaChart from "../utils/component/AreaChart";
-import StackingAreaChart from "../utils/component/StackingAreaChart";
-import { https } from "../../services/configService";
-import ColumnChartPage3 from "./component/ColumnChartPage3";
 import { FaDownLong, FaUpLong } from "react-icons/fa6";
-import ColumnChartAfternoon from "./component/ColumnChartAfternoon";
-import MultipleColumnChart from "./component/MultipleColumnChart";
 import formatNumber from "../../helper/formatNumber";
+import { https } from "../../services/configService";
+import AreaChart from "../utils/component/AreaChart";
+import FooterAfternoon from "../utils/component/FooterAfternoon";
+import HeaderAfternoon from "../utils/component/HeaderAfternoon";
+import StackingAreaChart from "../utils/component/StackingAreaChart";
+import ColumnChartAfternoon from "./component/ColumnChartAfternoon";
+import ColumnChartPage3 from "./component/ColumnChartPage3";
+import MultipleColumnChart from "./component/MultipleColumnChart";
 
 const getArrow = (value) => {
   if (value < 0)

@@ -1,7 +1,7 @@
-import moment from "moment";
-import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 
 const AverageRate = ({ data }) => {
   const [timeLine, setTimeLine] = useState();

@@ -1,16 +1,16 @@
+import { Button, TextField } from "@mui/material";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useDebounce } from "react-use";
+import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
+import { https } from "../services/configService";
 import AnalysisPage1 from "./component/AnalysisPage1/AnalysisPage1";
 import AnalysisPage2 from "./component/AnalysisPage2/AnalysisPage2";
 import AnalysisPage3 from "./component/AnalysisPage3/AnalysisPage3";
-import { Button, TextField } from "@mui/material";
-import { useDebounce } from "react-use";
-import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../Auth/thunk";
-import { https } from "../services/configService";
-import { useParams } from "react-router-dom";
 
 const AnalysisReport = () => {
   const dispatch = useDispatch();

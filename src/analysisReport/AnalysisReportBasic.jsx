@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../app/component/NavBar";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
+import NavBar from "../app/component/NavBar";
 
 const AnalysisReportBasic = () => {
   const dispatch = useDispatch();

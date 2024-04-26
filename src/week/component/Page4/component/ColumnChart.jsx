@@ -1,6 +1,6 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import React from "react";
 
 const CustomBarChart = ({ data, title, unit, height }) => {
   const vnIndexIndex = data?.findIndex((item) => item.name === "VNINDEX");
