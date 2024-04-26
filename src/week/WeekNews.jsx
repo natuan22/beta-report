@@ -15,6 +15,7 @@ import Page5Week from "./component/Page5/Page5Week";
 import Page6Week from "./component/Page6/Page6Week";
 import Page7Week from "./component/Page7/Page7Week";
 import Page8Week from "./component/Page8/Page8Week";
+import Page9Week from "./component/Page9/Page9Week";
 
 const weekDate = getTimeWeek();
 
@@ -90,13 +91,13 @@ const WeekNews = () => {
     pdf.addImage(img7, "JPEG", 0, 0, 210, 391);
     pdf.addPage(null, "p");
     pdf.addImage(img8, "JPEG", 0, 0, 210, 391);
-    // pdf.addPage(null, "l");
-    // pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
-    // pdf.addPage(null, 'p')
-    // pdf.addImage(img10, 'JPEG', 0, 0);
-    // pdf.addPage(null, 'p')
-    // pdf.addImage(img11, 'JPEG', 0, 0);
+    pdf.addPage(null, "l");
+    pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
     pdf.addPage(null, "p");
+    // pdf.addImage(img10, "JPEG", 0, 0);
+    // pdf.addPage(null, "p");
+    // pdf.addImage(img11, "JPEG", 0, 0);
+    // pdf.addPage(null, "p");
     pdf.addImage(img12, "JPEG", 0, 0, 210, 391);
 
     pdf.save(`Baocaotuan${weekDate}.pdf`);
@@ -154,10 +155,11 @@ const WeekNews = () => {
     link8.download = "Baocaotuan-Trang7.png";
     link8.click();
 
-    // const link9 = document.createElement("a");
-    // link9.href = img9;
-    // link9.download = "Baocaotuan-Trang7.png";
-    // link9.click();
+    const link9 = document.createElement("a");
+    link9.href = img9;
+    link9.download = "Baocaotuan-Trang7.png";
+    link9.click();
+
     const link10 = document.createElement("a");
     link10.href = img10;
     link10.download = "Baocaotuan-Trang7.png";
@@ -203,15 +205,15 @@ const WeekNews = () => {
         <div ref={pageRefs.page8}>
           <Page8Week />
         </div>
-        {/* <div className="h-[1480px]" ref={pageRefs.page9}>
+        <div className="h-[1480px]" ref={pageRefs.page9}>
           <Page9Week />
-        </div> */}
+        </div>
         {/* <div ref={pageRefs.page10}>
-                    <Page10Week />
-                </div>
-                <div ref={pageRefs.page11}>
-                    <Page11Week />
-                </div> */}
+              <Page10Week />
+            </div>
+            <div ref={pageRefs.page11}>
+              <Page11Week />
+            </div> */}
         <div ref={pageRefs.page12}>
           <Page12Week />
         </div>

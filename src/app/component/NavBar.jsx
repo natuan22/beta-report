@@ -76,7 +76,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       <div>
         <button
           onClick={toggleSidebar}
-          className={`fixed top-1 -right-4 bg-slate-100 text-black z-40 font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
+          className={`fixed top-1 -right-4 bg-slate-100 text-black z-[999] font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
             ${
               showSidebar ? "translate-x-[-520%] ease-in-out duration-500" : ""
             } `}
@@ -90,7 +90,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
       </div>
       <div
         id="menu"
-        className={`z-50 fixed top-0 right-0 bg-slate-100 h-full transition-transform drop-shadow-xl ${
+        className={`z-[1000] fixed top-0 right-0 bg-slate-100 h-full transition-transform drop-shadow-xl ${
           showSidebar ? "" : "translate-x-[100%] ease-in-out duration-500"
         }`}
       >
