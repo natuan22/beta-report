@@ -13,6 +13,7 @@ import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor
 import LineChart from "./utils/LineChart";
 import Table from "./utils/Table";
 import TableSR from "./utils/TableSR";
+import calSignalText from "../../../helper/calSignalText";
 
 const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
@@ -114,33 +115,13 @@ const AnalysisPage1 = ({ stock, type, role }) => {
       setImgSrc("");
     }
   }, [data]);
+
   useEffect(() => {
     if (dataAnalysis) {
-      const arrValues = calculateChartValues(dataAnalysis.generalSignal);
-      const { positive, negative } = dataAnalysis.generalSignal;
-      const value = positive + -negative;
-
-      switch (true) {
-        case value >= arrValues[0] && value <= arrValues[1]:
-          setMaxType("Rất tiêu cực");
-          break;
-        case value >= arrValues[1] && value <= arrValues[2]:
-          setMaxType("Tiêu cực");
-          break;
-        case value >= arrValues[2] && value <= arrValues[3]:
-          setMaxType("Trung lập");
-          break;
-        case value >= arrValues[3] && value <= arrValues[4]:
-          setMaxType("Tích cực");
-          break;
-        case value >= arrValues[4] && value <= arrValues[5]:
-          setMaxType("Rất tích cực");
-          break;
-        default:
-          setMaxType("Không xác định");
-      }
+      setMaxType(calSignalText(dataAnalysis.generalSignal));
     }
   }, [dataAnalysis]);
+
   return (
     <div className="h-[1480px] w-[900px] relative">
       <div className="absolute top-[450px] left-[860px] z-30 w-[223px]">

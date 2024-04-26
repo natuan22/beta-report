@@ -113,43 +113,67 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     },
     {
       title: "%W",
-      dataindex: "",
-      width: 150,
+      dataindex: "perChangeW",
+      width: 80,
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return (
+          <div
+            className={`text-right ${getColorBaseOnValue(record.perChangeW)}`}
+          >
+            {record.perChangeW}
+          </div>
+        );
       },
-      // sorter: (a, b) => a.totalVal - b.totalVal,
+      sorter: (a, b) => a.perChangeW - b.perChangeW,
     },
     {
       title: "%M",
-      dataindex: "",
-      width: 150,
+      dataindex: "perChangeM",
+      width: 80,
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return (
+          <div
+            className={`text-right ${getColorBaseOnValue(record.perChangeM)}`}
+          >
+            {record.perChangeM}
+          </div>
+        );
       },
-      // sorter: (a, b) => a.totalVal - b.totalVal,
+      sorter: (a, b) => a.perChangeM - b.perChangeM,
     },
     {
       title: "%YtD",
-      dataindex: "",
-      width: 150,
+      dataindex: "perChangeYtD",
+      width: 80,
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return (
+          <div
+            className={`text-right ${getColorBaseOnValue(record.perChangeYtD)}`}
+          >
+            {record.perChangeYtD}
+          </div>
+        );
       },
-      // sorter: (a, b) => a.totalVal - b.totalVal,
+      sorter: (a, b) => a.perChangeYtD - b.perChangeYtD,
     },
     {
       title: "%YoY",
-      dataindex: "",
-      width: 150,
+      dataindex: "perChangeY",
+      width: 80,
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return (
+          <div
+            className={`text-right ${getColorBaseOnValue(record.perChangeY)}`}
+          >
+            {record.perChangeY}
+          </div>
+        );
       },
-      // sorter: (a, b) => a.totalVal - b.totalVal,
+      sorter: (a, b) => a.perChangeY - b.perChangeY,
     },
     {
       title: "Khối lượng NN mua/bán ròng (CP)",
@@ -186,7 +210,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Vốn hóa (tỷ đồng)",
       dataindex: "marketCap",
-      width: 180,
+      width: 120,
       align: "center",
       render: (_, record) => {
         return (
@@ -295,13 +319,12 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     },
     {
       title: "beta",
-      dataindex: "",
-      width: 150,
+      dataindex: "beta",
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right"></div>;
+        return <div className="text-black text-right">{record.beta}</div>;
       },
-      // sorter: (a, b) => a.buyVal - b.buyVal,
+      sorter: (a, b) => a.beta - b.beta,
     },
   ];
 
@@ -312,7 +335,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 2000 }}
+            scroll={{ x: 2230 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
