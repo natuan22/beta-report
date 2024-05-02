@@ -68,7 +68,7 @@ const TableSignalWarning = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
-            pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+            pagination={{ defaultPageSize: 14, showSizeChanger: false }}
           />
         </div>
       ) : (

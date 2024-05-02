@@ -140,15 +140,15 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
   return (
     <div>
       {Array.isArray(data) && data?.length > 0 ? (
-        <div className="table-data-watchlist">
+        <div className="table-data-watchlist w-[1379.4px]">
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 1360 }}
+            scroll={{ x: 1360, y: 580 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
-            pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+            pagination={{ defaultPageSize: 14, showSizeChanger: false }}
           />
         </div>
       ) : (

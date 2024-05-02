@@ -78,7 +78,7 @@
 }
 
 .ant-dropdown {
-    inset: 209px auto auto 40px !important;
+    inset: 211px auto auto 40px !important;
     z-index: 900;
 }
 
@@ -104,6 +104,7 @@
 
 .tab-watchlist .ant-tabs-tab-active {
     background-color: #073882 !important;
+    border: 1px solid white !important;
 }
 
 .tab-watchlist .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
@@ -111,8 +112,10 @@
 }
 
 .tab-watchlist .ant-tabs-tab {
-    width: 216px;
+    width: 218.8px;
     justify-content: center;
+    border: 1px solid black;
+    border-left: 0;
 }
 
 .tab-watchlist .ant-tabs-top >.ant-tabs-nav{
@@ -128,6 +131,11 @@
     background-color: #278AFF !important;
     font-size: 15px;
     font-weight: 700;
+}
+
+.table-data-watchlist .ant-table-wrapper .ant-table .ant-table-header {
+    border-radius: 0;
+
 }
 
 .table-data-watchlist .ant-table-column-sorters .ant-table-column-title {
