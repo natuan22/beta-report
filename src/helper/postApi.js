@@ -16,6 +16,7 @@ const logoutUser = async () => {
       .post("/api/v1/auth/logout");
     Cookies.remove("at");
     Cookies.remove("rt");
+    localStorage.removeItem("user");
     localStorage.removeItem("watchlistActive");
     localStorage.removeItem("2ZW79");
     localStorage.setItem("_il", "4E8WL");
@@ -23,7 +24,15 @@ const logoutUser = async () => {
     // Redirect về trang chủ
     window.location.href = "/";
   } catch (err) {
-    console.error(err); //logout
+    Cookies.remove("at");
+    Cookies.remove("rt");
+    localStorage.removeItem("user");
+    localStorage.removeItem("watchlistActive");
+    localStorage.removeItem("2ZW79");
+    localStorage.setItem("_il", "4E8WL");
+
+    // Redirect về trang chủ
+    window.location.href = "/";
   }
 };
 

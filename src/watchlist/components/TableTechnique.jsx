@@ -115,7 +115,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Tín hiệu đường xu hướng",
       align: "center",
-      width: 220,
+      width: 213,
       render: (_, record) => {
         return <GauChart data={record.trendSignal} />;
       },
@@ -123,7 +123,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
     {
       title: "Tín hiệu chỉ báo kỹ thuật",
       align: "center",
-      width: 220,
+      width: 207,
       render: (_, record) => {
         return <GauChart data={record.technicalSignal} />;
       },
@@ -144,7 +144,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
-            scroll={{ x: 1380 }}
+            scroll={{ x: 1360 }}
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
