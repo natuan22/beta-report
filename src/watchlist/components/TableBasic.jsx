@@ -208,7 +208,9 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
 
         return (
           <div className="text-black text-right">
-            {grossProfitMarginYear !== 0 ? formatNumberCurrency(grossProfitMarginYear) : ""}
+            {grossProfitMarginYear !== 0
+              ? formatNumberCurrency(grossProfitMarginYear)
+              : ""}
           </div>
         );
       },
@@ -228,7 +230,9 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
 
         return (
           <div className="text-black text-right">
-            {grossProfitMarginQuarter !== 0 ? formatNumberCurrency(grossProfitMarginQuarter) : ""}
+            {grossProfitMarginQuarter !== 0
+              ? formatNumberCurrency(grossProfitMarginQuarter)
+              : ""}
           </div>
         );
       },
@@ -248,7 +252,9 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
 
         return (
           <div className="text-black text-right">
-            {netProfitMarginYear !== 0 ? formatNumberCurrency(netProfitMarginYear) : ""}
+            {netProfitMarginYear !== 0
+              ? formatNumberCurrency(netProfitMarginYear)
+              : ""}
           </div>
         );
       },
@@ -267,7 +273,9 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
 
         return (
           <div className="text-black text-right">
-            {netProfitMarginQuarter !== 0 ? formatNumberCurrency(netProfitMarginQuarter) : ""}
+            {netProfitMarginQuarter !== 0
+              ? formatNumberCurrency(netProfitMarginQuarter)
+              : ""}
           </div>
         );
       },
@@ -286,7 +294,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
-            pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+            pagination={{ defaultPageSize: 14, showSizeChanger: false }}
           />
         </div>
       ) : (

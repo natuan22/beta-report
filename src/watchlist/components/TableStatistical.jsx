@@ -270,12 +270,20 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
       render: (_, record) => {
         const lowestPrice = +record.PRICE_LOWEST_CR_52W.toFixed(2);
         const highestPrice = +record.PRICE_HIGHEST_CR_52W.toFixed(2);
-        
+
         const isHighestPrice = record.closePrice === highestPrice;
         const isLowestPrice = record.closePrice === lowestPrice;
 
-        const thumbColor = isHighestPrice ? "#3dcc91" : (isLowestPrice ? "#d1686a" : "#137ab9");
-        const borderTopColor = isHighestPrice ? "#3dcc91" : (isLowestPrice ? "#d1686a" : "#137ab9");
+        const thumbColor = isHighestPrice
+          ? "#3dcc91"
+          : isLowestPrice
+          ? "#d1686a"
+          : "#137ab9";
+        const borderTopColor = isHighestPrice
+          ? "#3dcc91"
+          : isLowestPrice
+          ? "#d1686a"
+          : "#137ab9";
 
         return (
           <div className="w-[120px] h-[28px] -translate-y-[5px] translate-x-[7px]">
@@ -341,7 +349,7 @@ const TableStatistical = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
             columns={columns}
             dataSource={data}
             rowClassName={rowClassName}
-            pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+            pagination={{ defaultPageSize: 14, showSizeChanger: false }}
           />
         </div>
       ) : (

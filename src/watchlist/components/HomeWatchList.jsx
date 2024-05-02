@@ -298,7 +298,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
             onClick={() => handleWatchlistClick(watchlist.id)}
             className="flex"
           >
-            <div className="w-[142px] whitespace-nowrap overflow-hidden text-ellipsis mr-3">
+            <div className="w-[145px] whitespace-nowrap overflow-hidden text-ellipsis mr-3">
               {watchlist.name}
             </div>
             {watchlistActive && watchlist.id === watchlistActive.id && (
@@ -718,16 +718,32 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       const workbook = XLSX.utils.book_new();
 
       // Tạo sheet 1
-      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]), watchlistActive.name);
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]),
+        watchlistActive.name
+      );
 
       // Tạo sheet 2
-      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet2Title, ...sheet2Data]), "Thống kê");
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet2Title, ...sheet2Data]),
+        "Thống kê"
+      );
 
       // Tạo sheet 3
-      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet3Title, ...sheet3Data]), "Cơ bản");
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet3Title, ...sheet3Data]),
+        "Cơ bản"
+      );
 
       // Tạo sheet 4
-      XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]), "Kỹ thuật");
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]),
+        "Kỹ thuật"
+      );
 
       // Xuất workbook thành file Excel
       XLSX.writeFile(workbook, `dataWatchlist_${watchlistActive.name}.xlsx`);
@@ -744,11 +760,12 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       if (tabsNavList) {
         // Check if tabsNavList exists
         const divElement = document.createElement("div"); // Create a new div element
-        divElement.innerHTML = `
-          <div class="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit">
-              <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
+        divElement.innerHTML = ` 
+          <div class='border border-black border-solid border-l-0 h-[50px]'>
+            <div class="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit h-[48px]">
+                <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
+            </div>
           </div>
-          <div class="absolute w-[64px] h-[1px] bg-[#94C7F6]"></div>
         `; // Set the innerHTML of the div
         divElement
           .querySelector("div")
@@ -824,7 +841,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[216px] h-[48px] mt-[15px] z-30 absolute">
+          <div className="w-[218.8px] h-[50px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
@@ -834,8 +851,8 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               <div
                 className={`${
                   activeKey === "0"
-                    ? "bg-[#073882] text-[#ffba07]"
-                    : "bg-[#96C6FF] text-[#073882]"
+                    ? "bg-[#073882] text-[#ffba07] border border-white border-solid"
+                    : "bg-[#96C6FF] text-[#073882] border border-black border-solid"
                 } h-full flex text-center items-center justify-center cursor-pointer`}
               >
                 <span
