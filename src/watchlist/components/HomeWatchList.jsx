@@ -824,7 +824,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[220px] h-[48px] mt-[15px] z-30 absolute">
+          <div className="w-[216px] h-[48px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{

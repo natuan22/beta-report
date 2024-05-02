@@ -181,27 +181,13 @@ const GauChart = ({ data }) => {
   };
 
   return (
-    <div className="w-[200px] h-[115px] translate-y-[-40px]">
+    <div className="w-[200px] h-[77px] translate-y-[-40px]">
       <div className="h-[160px] w-[200px]">
         <HighchartsReact
           highcharts={Highcharts}
           options={options}
           containerProps={{ style: { height: "100%", width: "100%" } }}
         />
-      </div>
-      <div className="flex justify-between translate-y-[-40px]">
-        <div className="flex flex-col items-center text-red-400 font-semibold">
-          <p className="m-0 text-[13px]">Tiêu cực</p>
-          <p className="m-0 text-[13px]">{data.negative}</p>
-        </div>
-        <div className="flex flex-col items-center text-yellow-400 font-semibold">
-          <p className="m-0 text-[13px]">Trung lập</p>
-          <p className="m-0 text-[13px]">{data.neutral}</p>
-        </div>
-        <div className="flex flex-col items-center text-green-500 font-semibold">
-          <p className="m-0 text-[13px]">Tích cực</p>
-          <p className="m-0 text-[13px]">{data.positive}</p>
-        </div>
       </div>
     </div>
   );
