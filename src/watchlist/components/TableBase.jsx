@@ -55,7 +55,7 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       title: "Sàn",
       dataindex: "floor",
       align: "center",
-      width: 200,
+      width: 100,
       render: (_, record) => {
         return <div className="text-black text-left">{record.floor}</div>;
       },
@@ -137,7 +137,7 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1379px]">
+            <div className="table-data-watchlist w-[1060px]">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}

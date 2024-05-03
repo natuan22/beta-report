@@ -140,7 +140,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
   return (
     <div>
       {Array.isArray(data) && data?.length > 0 ? (
-        <div className="table-data-watchlist w-[1379.4px]">
+        <div className="table-data-watchlist w-[1377px]">
           <Table
             loading={loadingTb}
             showSorterTooltip={false}
