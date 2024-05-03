@@ -21,7 +21,7 @@ export const routes = [
   { path: "/phan-tich-co-ban", component: AnalysisReportBasic },
   //Công cụ đầu tư
   { path: "/danh-muc-theo-doi", component: WatchList },
-  { path: "/bo-loc", component: Filter },
+  { path: "/bo-loc", component: NavBar2 },
   { path: "/canh-bao-tin-hieu", component: NavBar3 },
   { path: "/chien-luoc-giao-dich", component: NavBar4 },
 ];
