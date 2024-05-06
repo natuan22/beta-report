@@ -137,7 +137,7 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1060px]">
+            <div className="table-data-watchlist w-[1113px]">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
