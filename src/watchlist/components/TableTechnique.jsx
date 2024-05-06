@@ -4,9 +4,9 @@ import { IoIosCloseCircle } from "react-icons/io";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import GauChart from "./GauChart";
-import calSignalText from "../../helper/calSignalText";
+import Loading from "../../loading/Loading";
 
-const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
+const TableTechnique = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -139,24 +139,34 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loadingTb }) => {
 
   return (
     <div>
-      {Array.isArray(data) && data?.length > 0 ? (
-        <div className="table-data-watchlist w-[1377px]">
-          <Table
-            loading={loadingTb}
-            showSorterTooltip={false}
-            scroll={{ x: 1360, y: 580 }}
-            columns={columns}
-            dataSource={data}
-            rowClassName={rowClassName}
-            pagination={{ defaultPageSize: 14, showSizeChanger: false }}
-          />
+      {!loading ? (
+        <div>
+          {Array.isArray(data) && data?.length > 0 ? (
+            <div className="table-data-watchlist w-[1377px]">
+              <Table
+                loading={loadingTb}
+                showSorterTooltip={false}
+                scroll={{ x: 1360, y: 580 }}
+                columns={columns}
+                dataSource={data}
+                rowClassName={rowClassName}
+                pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+              />
+            </div>
+          ) : (
+            <div className="grid place-content-center h-[710px] font-medium text-lg">
+              <div className="flex flex-col justify-center items-center bg-[#D6EBFF] bg-opacity-70 w-[1064px] h-[394px] border-solid border-[#0669FC] border-opacity-20 rounded-[25px]">
+                <div className="p-7">Chưa có mã chứng khoán nào</div>
+                <div>
+                  Bạn hãy thêm mã chứng khoán vào watchlist để theo dõi.
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
-        <div className="grid place-content-center h-[710px] font-medium text-lg">
-          <div className="flex flex-col justify-center items-center bg-[#D6EBFF] bg-opacity-70 w-[1064px] h-[394px] border-solid border-[#0669FC] border-opacity-20 rounded-[25px]">
-            <div className="p-7">Chưa có mã chứng khoán nào</div>
-            <div>Bạn hãy thêm mã chứng khoán vào watchlist để theo dõi.</div>
-          </div>
+        <div className="grid place-content-center h-[710px]">
+          <Loading />
         </div>
       )}
     </div>

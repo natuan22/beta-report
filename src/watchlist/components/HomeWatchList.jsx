@@ -640,6 +640,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Thống kê",
       children: (
         <TableStatistical
+          loading={loading}
           loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
@@ -651,6 +652,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Cơ bản",
       children: (
         <TableBasic
+          loading={loading}
           loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
@@ -662,6 +664,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Kỹ thuật",
       children: (
         <TableTechnique
+          loading={loading}
           loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
@@ -673,6 +676,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Tín hiệu cảnh báo",
       children: (
         <TableSignalWarning
+          loading={loading}
           loadingTb={loadingTb}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
@@ -841,7 +845,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[165.6px] h-[50px] mt-[15px] z-30 absolute">
+          <div className="w-[219px] h-[50px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
@@ -856,7 +860,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                 } h-full flex text-center items-center justify-center cursor-pointer`}
               >
                 <span
-                  className="font-semibold text-lg w-[90px] whitespace-nowrap overflow-hidden text-ellipsis mr-3 hover:text-[#4096ff]"
+                  className="font-semibold text-lg w-[150px] whitespace-nowrap overflow-hidden text-ellipsis mr-0.5 hover:text-[#4096ff]"
                   onClick={() => setActiveTab("0")}
                 >
                   {watchlistActive?.name}

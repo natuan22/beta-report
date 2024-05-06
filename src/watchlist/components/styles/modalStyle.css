@@ -110,6 +110,9 @@
 .tab-watchlist .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: white;
 }
+.tab-watchlist .ant-tabs-nav-list .ant-tabs-tab:first-child {
+    width: 219px;
+}
 
 .tab-watchlist .ant-tabs-tab {
     width: 165.6px;
