@@ -75,7 +75,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
-      width: 70,
+      width: 80,
       align: "center",
       render: (_, record) => {
         return (
@@ -318,7 +318,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1860 }}
+                scroll={{ x: 1870 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}

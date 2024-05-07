@@ -71,7 +71,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) 
     {
       title: "%D",
       dataindex: "perChange",
-      width: 70,
+      width: 80,
       align: "center",
       render: (_, record) => {
         return (
@@ -142,11 +142,11 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) 
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1377px]">
+            <div className="table-data-watchlist w-[1387px]">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1360, y: 580 }}
+                scroll={{ x: 1370, y: 580 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}
