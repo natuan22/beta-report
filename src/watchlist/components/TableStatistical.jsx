@@ -81,7 +81,7 @@ const TableStatistical = ({
     {
       title: "%D",
       dataindex: "perChange",
-      width: 70,
+      width: 80,
       align: "center",
       render: (_, record) => {
         return (
@@ -368,7 +368,7 @@ const TableStatistical = ({
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 2121 }}
+                scroll={{ x: 2131 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}

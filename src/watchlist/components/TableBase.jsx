@@ -89,7 +89,7 @@ const TableBase = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
     {
       title: "%D",
       dataindex: "perChange",
-      width: 70,
+      width: 80,
       align: "center",
       render: (_, record) => {
         return (

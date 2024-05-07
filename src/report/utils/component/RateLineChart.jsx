@@ -9,8 +9,9 @@ const RateLineChart = ({ data }) => {
   useEffect(() => {
     if (data?.length > 0) {
       const uniqueDates = [
-        ...new Set(data?.map((item) => moment(item.date).format("DD/MM"))),
-      ];
+        ...new Set(data?.map((item) => moment(item.date).format("DD/MM/YY"))),
+      ].map((date) => date.slice(0, -3)); // Cắt bỏ 3 ký tự cuối cùng (/YY)
+
       setTimeLine(uniqueDates);
       const result = [];
       data?.forEach((item) => {
