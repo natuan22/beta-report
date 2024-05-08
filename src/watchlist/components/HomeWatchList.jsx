@@ -765,10 +765,8 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         // Check if tabsNavList exists
         const divElement = document.createElement("div"); // Create a new div element
         divElement.innerHTML = ` 
-          <div class='border border-black border-solid border-l-0 h-[50px]'>
-            <div class="bg-[#96C6FF] py-[11px] px-[18.5px] self-center cursor-pointer flex w-fit h-[48px]">
-                <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
-            </div>
+          <div class="bg-[#ADE6F9] h-[51.56px] py-[11px] px-[18.5px] self-center ml-[1px] cursor-pointer flex w-fit border-[1.5px] border-[#2D4CEF] border-solid rounded-lg hover:bg-gradient-to-b from-[#FFFFFFCC] to-[#08AADD]">
+              <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
           </div>
         `; // Set the innerHTML of the div
         divElement
@@ -845,7 +843,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[219px] h-[50px] mt-[15px] z-30 absolute">
+          <div className="w-[219px] h-[51.56px] mt-[15px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
@@ -855,12 +853,12 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               <div
                 className={`${
                   activeKey === "0"
-                    ? "bg-[#073882] text-[#ffba07] border border-white border-solid"
-                    : "bg-[#96C6FF] text-[#073882] border border-black border-solid"
-                } h-full flex text-center items-center justify-center cursor-pointer`}
+                    ? "bg-[#0242BE] text-[#ffba07] border-2 border-[#FC9433] border-solid hover:text-black hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
+                    : "bg-[#ADE6F9] text-[#073882] border-2 border-[#2D4CEF] border-solid hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
+                } h-full flex text-center items-center justify-center cursor-pointer rounded-md`}
               >
                 <span
-                  className="font-semibold text-lg w-[150px] whitespace-nowrap overflow-hidden text-ellipsis mr-0.5 hover:text-[#4096ff]"
+                  className="font-semibold text-lg w-[150px] whitespace-nowrap overflow-hidden text-ellipsis mr-0.5 hover:text-black"
                   onClick={() => setActiveTab("0")}
                 >
                   {watchlistActive?.name}
@@ -868,7 +866,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
                 <IoCaretDownSharp
                   className={`${
                     activeKey === "0"
-                      ? "text-[#94C7F6] hover:text-[#4096ff]"
+                      ? "text-[#5c87af] hover:text-[#4096ff]"
                       : "text-[#073882] hover:text-[#4096ff]"
                   } text-lg`}
                   onClick={showDropdown}

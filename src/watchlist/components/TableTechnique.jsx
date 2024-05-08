@@ -6,7 +6,12 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import GauChart from "./GauChart";
 import Loading from "../../loading/Loading";
 
-const TableTechnique = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
+const TableTechnique = ({
+  data,
+  handleDelCodeInWatchlist,
+  loading,
+  loadingTb,
+}) => {
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -142,7 +147,7 @@ const TableTechnique = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) 
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1387px]">
+            <div className="table-data-watchlist w-[1387px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
