@@ -148,9 +148,11 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                   <div className="flex items-center justify-around ">
                     {stock ? (
                       <img
+                        className={` ${
+                          stock === "PDV" ? "w-[17%]" : "w-[25%]"
+                        }`}
                         src={`/logo_${stock.toUpperCase()}.png`}
                         alt="stock"
-                        width="25%"
                       />
                     ) : (
                       <>Loading...</>
@@ -165,10 +167,16 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                       </p>
                     </div>
                   </div>
-                  <div>
+                  <div
+                    className={`${
+                      data.LV2 === "Hàng hóa và dịch vụ công nghiệp"
+                        ? "text-[14px]"
+                        : "text-base"
+                    }`}
+                  >
                     <p className="text-[#023E8A] font-bold m-0">
                       Ngành cấp II:{" "}
-                      <span className="text-black font-semibold">
+                      <span className={`text-black font-semibold`}>
                         {data.LV2}
                       </span>{" "}
                     </p>
