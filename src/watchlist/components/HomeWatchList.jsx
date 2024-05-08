@@ -30,6 +30,7 @@ import TableNews from "./TableNews";
 import TableSignalWarning from "./TableSignalWarning";
 import TableStatistical from "./TableStatistical";
 import TableTechnique from "./TableTechnique";
+import socket from "../../helper/socket";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -781,6 +782,36 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
     addDivToTabsNavList(); // Call the function to add the div
   }, []);
+
+  useEffect(() => {
+    if (watchlistActive?.code.length > 0) {
+      watchlistActive.code.forEach((code) => {
+        socket.on(`listen-co-phieu-${code}`, (newData) => {
+          setData((prevData) => {
+            const updatedData = prevData.map((item) => {
+              if (item.code === code) {
+                return {
+                  ...item,
+                  closePrice: newData.closePrice,
+                  perChange: newData.perChange,
+                  totalVol: newData.totalVol,
+                  totalVal: newData.totalVal,
+                };
+              }
+              return item;
+            });
+            return updatedData;
+          });
+        });
+      });
+    }
+
+    return () => {
+      watchlistActive.code.forEach((code) => {
+        socket.off(`listen-co-phieu-${code}`);
+      });
+    };
+  }, [watchlistActive]);
 
   return (
     <div>
