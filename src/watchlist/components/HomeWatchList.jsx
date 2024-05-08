@@ -49,6 +49,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
   //data table
   const [data, setData] = useState();
+  const [socketConnected, setSocketConnected] = useState(false);
 
   const getDataTable = async (id) => {
     const data = await getApi(apiUrl, `/api/v1/watchlist/${id}`);
@@ -61,7 +62,40 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     setData(dataWithKey);
     setLoading(false);
     setLoadingTb(false);
+
+    // Khi dữ liệu đã được tải xuống, kết nối socket
+    setSocketConnected(true);
   };
+
+  useEffect(() => {
+    if (socketConnected && watchlistActive?.code.length > 0) {
+      watchlistActive.code.forEach((code) => {
+        socket.on(`listen-co-phieu-${code}`, (newData) => {
+          setData((prevData) => {
+            const updatedData = prevData.map((item) => {
+              if (item.code === code) {
+                return {
+                  ...item,
+                  closePrice: newData.closePrice,
+                  perChange: newData.perChange,
+                  totalVol: newData.totalVol,
+                  totalVal: newData.totalVal,
+                };
+              }
+              return item;
+            });
+            return updatedData;
+          });
+        });
+      });
+    }
+
+    return () => {
+      watchlistActive.code.forEach((code) => {
+        socket.off(`listen-co-phieu-${code}`);
+      });
+    };
+  }, [socketConnected, watchlistActive]);
 
   useEffect(() => {
     getDataTable(watchlistActive.id);
@@ -782,36 +816,6 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
     addDivToTabsNavList(); // Call the function to add the div
   }, []);
-
-  useEffect(() => {
-    if (watchlistActive?.code.length > 0) {
-      watchlistActive.code.forEach((code) => {
-        socket.on(`listen-co-phieu-${code}`, (newData) => {
-          setData((prevData) => {
-            const updatedData = prevData.map((item) => {
-              if (item.code === code) {
-                return {
-                  ...item,
-                  closePrice: newData.closePrice,
-                  perChange: newData.perChange,
-                  totalVol: newData.totalVol,
-                  totalVal: newData.totalVal,
-                };
-              }
-              return item;
-            });
-            return updatedData;
-          });
-        });
-      });
-    }
-
-    return () => {
-      watchlistActive.code.forEach((code) => {
-        socket.off(`listen-co-phieu-${code}`);
-      });
-    };
-  }, [watchlistActive]);
 
   return (
     <div>
