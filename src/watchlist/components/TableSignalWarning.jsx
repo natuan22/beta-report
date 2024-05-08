@@ -3,7 +3,12 @@ import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
 import Loading from "../../loading/Loading";
 
-const TableSignalWarning = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
+const TableSignalWarning = ({
+  data,
+  handleDelCodeInWatchlist,
+  loading,
+  loadingTb,
+}) => {
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -63,7 +68,7 @@ const TableSignalWarning = ({ data, handleDelCodeInWatchlist, loading, loadingTb
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1840px]">
+            <div className="table-data-watchlist w-[1840px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}

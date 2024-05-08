@@ -67,7 +67,7 @@
 
 /* dropdown */
 .ant-dropdown-menu-light {
-    background-color:#96C6FF !important;
+    background-color:#ADE6F9 !important;
     border-radius: 0px !important;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .ant-dropdown {
-    inset: 211px auto auto 40px !important;
+    inset: 212.5px auto auto 40px !important;
     z-index: 900;
 }
 
@@ -93,32 +93,42 @@
 
 /* ant-tabs */
 .tab-watchlist .ant-tabs .ant-tabs-tab+.ant-tabs-tab {
-    margin: 0;
+    margin: 0 0 0 1px;
+}
+
+.tab-watchlist .ant-tabs .ant-tabs-tab:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #08AADD 100%);
+    color: black
 }
 
 .tab-watchlist .ant-tabs .ant-tabs-tab {
     font-size: 15px;
-    background-color: #96C6FF;
+    background-color: #ADE6F9;
     font-weight: 700;
 }
 
 .tab-watchlist .ant-tabs-tab-active {
-    background-color: #073882 !important;
-    border: 1px solid white !important;
+    background-color: #0242BE !important;
+    border: 1.5px solid #FC9433 !important;
+}
+
+.tab-watchlist .ant-tabs .ant-tabs-tab-active:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #08AADD 100%);
 }
 
 .tab-watchlist .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: white;
 }
+
 .tab-watchlist .ant-tabs-nav-list .ant-tabs-tab:first-child {
     width: 219px;
 }
 
 .tab-watchlist .ant-tabs-tab {
-    width: 165.6px;
+    width: 153.2px;
     justify-content: center;
-    border: 1px solid black;
-    border-left: 0;
+    border: 1.5px solid #2D4CEF;
+    border-radius: 8px;
 }
 
 .tab-watchlist .ant-tabs-top >.ant-tabs-nav{

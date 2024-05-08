@@ -364,7 +364,7 @@ const TableStatistical = ({
       {!loading ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1840px]">
+            <div className="table-data-watchlist w-[1840px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
