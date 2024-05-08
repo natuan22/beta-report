@@ -27,7 +27,7 @@ const StackColumnChart = ({ data }) => {
       tickInterval: Math.ceil(categories?.length / 6),
       tickPositioner: function () {
         const tickPositions = [];
-        const interval = Math.ceil(categories?.length / 5);
+        const interval = Math.ceil(categories?.length / 4);
 
         for (let i = 0; i < categories.length; i += interval) {
           tickPositions.push(i);
