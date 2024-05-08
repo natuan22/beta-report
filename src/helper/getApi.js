@@ -15,16 +15,20 @@ export const getApi = async (apiUrl, url) => {
       .get(url);
     return response.data.data;
   } catch (err) {
-    await refreshTokenAction();
-    const response = await axios
-      .create({
-        baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
-      })
-      .get(url);
-    return response.data.data;
+    if (err.response.status === 401) {
+      await refreshTokenAction();
+      const response = await axios
+        .create({
+          baseURL: apiUrl,
+          headers: {
+            mac: localStorage.getItem("deviceId"),
+            Authorization: "Bearer " + Cookies.get("at"),
+          },
+        })
+        .get(url);
+      return response.data.data;
+    } else {
+      console.error(err);
+    }
   }
 };
