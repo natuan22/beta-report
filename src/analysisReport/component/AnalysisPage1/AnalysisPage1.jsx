@@ -145,7 +145,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
             {data ? (
               <div className="h-[555px]">
                 <div className="stock-info flex flex-col justify-around h-[150px] w-full ">
-                  <div className="flex items-center justify-around ">
+                  <div className="flex items-center justify-around h-full">
                     {stock ? (
                       <img
                         className={` ${
