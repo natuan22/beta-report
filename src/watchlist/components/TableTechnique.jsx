@@ -144,7 +144,7 @@ const TableTechnique = ({
 
   return (
     <div>
-      {!loading ? (
+      {!loading && data ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
             <div className="table-data-watchlist w-[1387px] mt-0.5">

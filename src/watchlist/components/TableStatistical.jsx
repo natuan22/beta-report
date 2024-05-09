@@ -361,7 +361,7 @@ const TableStatistical = ({
 
   return (
     <div>
-      {!loading ? (
+      {!loading && data ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
             <div className="table-data-watchlist w-[1840px] mt-0.5">
