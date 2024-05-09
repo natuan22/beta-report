@@ -72,18 +72,20 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       watchlistActive.code.forEach((code) => {
         socket.on(`listen-co-phieu-${code}`, (newData) => {
           setData((prevData) => {
-            const updatedData = prevData.map((item) => {
-              if (item.code === code) {
-                return {
-                  ...item,
-                  closePrice: newData.closePrice,
-                  perChange: newData.perChange,
-                  totalVol: newData.totalVol,
-                  totalVal: newData.totalVal,
-                };
-              }
-              return item;
-            });
+            const updatedData = Array.isArray(prevData)
+              ? prevData.map((item) => {
+                  if (item.code === code) {
+                    return {
+                      ...item,
+                      closePrice: newData.closePrice,
+                      perChange: newData.perChange,
+                      totalVol: newData.totalVol,
+                      totalVal: newData.totalVal,
+                    };
+                  }
+                  return item;
+                })
+              : prevData;
             return updatedData;
           });
         });
