@@ -1,0 +1,30 @@
+.example-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.custom-flash-down {
+    background-color: rgba(255, 0, 0, 0.5) !important; /* Red with opacity */
+}
+  
+.custom-flash-up {
+    background-color: rgba(0, 255, 0, 0.5) !important; /* Green with opacity */
+}
+
+.custom-flash-ref {
+    background-color: transparent !important; /* Green with opacity */
+}
+
+.ag-theme-quartz {
+    --ag-value-change-value-highlight-background-color: #dbdbdb;
+}
+
+.example-wrapper .ag-header {
+    background-color: #278AFF;
+}
+
+.example-wrapper .ag-header-cell-text {
+    font-size: 15px;
+    font-weight: 700;
+}

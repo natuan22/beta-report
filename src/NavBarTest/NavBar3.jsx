@@ -23,7 +23,7 @@ const NavBar3 = () => {
   };
 
   useEffect(() => {
-    document.title = "Cảnh báo tín hiệu";
+    document.title = "Bộ lọc";
   }, []);
 
   return (
