@@ -144,7 +144,7 @@ const TestAgGrid = () => {
 
       socket2.on("onFOSStream", (data) => {
         const rowNode = gridRef.current.api.getRowNode(
-          data.topic.replace("INTRADAY_1s|", "")
+          data?.topic.replace("INTRADAY_1s|", "")
         );
 
         const updateRowData = (field, value, flashClass) => {
