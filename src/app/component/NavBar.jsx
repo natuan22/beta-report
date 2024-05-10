@@ -17,6 +17,7 @@ import DialogSignUp from "../../Auth/components/DialogSignUp";
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
+  const [hasScrollbar, setHasScrollbar] = useState(false);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -26,6 +27,12 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
 
   useEffect(() => {
     const handleResize = () => {
+      const navElement = document.getElementById("nav");
+      if (navElement.scrollHeight > navElement.clientHeight) {
+        setHasScrollbar(true);
+      } else {
+        setHasScrollbar(false);
+      }
       if (window.innerWidth >= 1440) {
         setShowSidebar(true);
         setPositionBackToTopBtn(300);
@@ -94,103 +101,113 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
           showSidebar ? "" : "translate-x-[100%] ease-in-out duration-500"
         }`}
       >
-        <div id="nav" className="w-full px-3 overflow-y-auto h-[830px]">
-          <div>
-            <h3
-              className={`uppercase ${
-                activeNav === "/" ||
-                activeNav === "/ban-tin-chieu" ||
-                activeNav === "/ban-tin-tuan"
-                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
-                  : "text-slate-500"
-              }`}
-            >
-              Bản tin
-            </h3>
-            {buttonNavLink("/", <VscCoffee />, "Bản tin sáng")}
-            {buttonNavLink("/ban-tin-chieu", <FiSunset />, "Bản tin chiều")}
-            {buttonNavLink("/ban-tin-tuan", <BsCalendar2Day />, "Bản tin tuần")}
-          </div>
-          <div>
-            <h3
-              className={`uppercase ${
-                activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-ky-thuat" ||
-                activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-ky-thuat-tu-dong" ||
-                activeNav === "/phan-tich-co-ban"
-                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
-                  : "text-slate-500"
-              }`}
-            >
-              Phân tích
-            </h3>
-            <NavLink
-              to={"/phan-tich-ky-thuat/FPT"}
-              className={
-                activeNav.split("/").slice(0, -1).join("/") ===
-                "/phan-tich-ky-thuat"
-                  ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                  : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-              }
-            >
-              <span className="px-2">
-                <SlGraph />
-              </span>
-              Phân tích kỹ thuật
-            </NavLink>
-            <NavLink
-              to={"/phan-tich-ky-thuat-tu-dong/FPT"}
-              className={
-                activeNav.split("/").slice(0, -1).join("/") ===
-                "/phan-tich-ky-thuat-tu-dong"
-                  ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                  : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-              }
-            >
-              <span className="px-2">
-                <MdOutlineAutoGraph />
-              </span>
-              Phân tích kỹ thuật tự động
-            </NavLink>
-            {buttonNavLink(
-              "/phan-tich-co-ban",
-              <BsGraphUp />,
-              "Phân tích cơ bản"
-            )}
-          </div>
-          <div>
-            <h3
-              className={`uppercase ${
-                activeNav === "/danh-muc-theo-doi" ||
-                activeNav === "/bo-loc" ||
-                activeNav === "/canh-bao-tin-hieu" ||
-                activeNav === "/chien-luoc-giao-dich"
-                  ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
-                  : "text-slate-500"
-              }`}
-            >
-              Công cụ đầu tư
-            </h3>
-            {buttonNavLink(
-              "/danh-muc-theo-doi",
-              <BiCategoryAlt />,
-              "Danh mục theo dõi"
-            )}
-            {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
-            {buttonNavLink(
-              "/canh-bao-tin-hieu",
-              <IoMdNotificationsOutline />,
-              "Cảnh báo tín hiệu"
-            )}
-            {buttonNavLink(
-              "/chien-luoc-giao-dich",
-              <MdQueryStats />,
-              "Chiến lược giao dịch"
-            )}
+        <div id="nav" className="overflow-x-auto h-full">
+          <div className="w-full px-3 overflow-y-auto h-[830px]">
+            <div>
+              <h3
+                className={`uppercase ${
+                  activeNav === "/" ||
+                  activeNav === "/ban-tin-chieu" ||
+                  activeNav === "/ban-tin-tuan"
+                    ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                    : "text-slate-500"
+                }`}
+              >
+                Bản tin
+              </h3>
+              {buttonNavLink("/", <VscCoffee />, "Bản tin sáng")}
+              {buttonNavLink("/ban-tin-chieu", <FiSunset />, "Bản tin chiều")}
+              {buttonNavLink(
+                "/ban-tin-tuan",
+                <BsCalendar2Day />,
+                "Bản tin tuần"
+              )}
+            </div>
+            <div>
+              <h3
+                className={`uppercase ${
+                  activeNav.split("/").slice(0, -1).join("/") ===
+                    "/phan-tich-ky-thuat" ||
+                  activeNav.split("/").slice(0, -1).join("/") ===
+                    "/phan-tich-ky-thuat-tu-dong" ||
+                  activeNav === "/phan-tich-co-ban"
+                    ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                    : "text-slate-500"
+                }`}
+              >
+                Phân tích
+              </h3>
+              <NavLink
+                to={"/phan-tich-ky-thuat/FPT"}
+                className={
+                  activeNav.split("/").slice(0, -1).join("/") ===
+                  "/phan-tich-ky-thuat"
+                    ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                }
+              >
+                <span className="px-2">
+                  <SlGraph />
+                </span>
+                Phân tích kỹ thuật
+              </NavLink>
+              <NavLink
+                to={"/phan-tich-ky-thuat-tu-dong/FPT"}
+                className={
+                  activeNav.split("/").slice(0, -1).join("/") ===
+                  "/phan-tich-ky-thuat-tu-dong"
+                    ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                }
+              >
+                <span className="px-2">
+                  <MdOutlineAutoGraph />
+                </span>
+                Phân tích kỹ thuật tự động
+              </NavLink>
+              {buttonNavLink(
+                "/phan-tich-co-ban",
+                <BsGraphUp />,
+                "Phân tích cơ bản"
+              )}
+            </div>
+            <div>
+              <h3
+                className={`uppercase ${
+                  activeNav === "/danh-muc-theo-doi" ||
+                  activeNav === "/bo-loc" ||
+                  activeNav === "/canh-bao-tin-hieu" ||
+                  activeNav === "/chien-luoc-giao-dich"
+                    ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
+                    : "text-slate-500"
+                }`}
+              >
+                Công cụ đầu tư
+              </h3>
+              {buttonNavLink(
+                "/danh-muc-theo-doi",
+                <BiCategoryAlt />,
+                "Danh mục theo dõi"
+              )}
+              {buttonNavLink("/bo-loc", <CiFilter />, "Bộ lọc")}
+              {buttonNavLink(
+                "/canh-bao-tin-hieu",
+                <IoMdNotificationsOutline />,
+                "Cảnh báo tín hiệu"
+              )}
+              {buttonNavLink(
+                "/chien-luoc-giao-dich",
+                <MdQueryStats />,
+                "Chiến lược giao dịch"
+              )}
+            </div>
           </div>
         </div>
-        <div className="fixed bottom-0 px-3 py-3 bg-slate-100">
+        <div
+          className={`fixed bottom-0 right-0 px-3 py-3 bg-slate-100 z-[2000] ${
+            hasScrollbar ? "mr-[17px]" : ""
+          }`}
+        >
           <div className="h-[1px] bg-slate-400 mb-2"></div>
           {isLogin === "7MEvU" ? (
             <div>
