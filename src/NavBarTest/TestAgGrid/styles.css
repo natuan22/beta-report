@@ -28,3 +28,8 @@
     font-size: 15px;
     font-weight: 700;
 }
+
+.example-wrapper .ag-root-wrapper {
+    border: 0;
+    border-radius: 0;
+}

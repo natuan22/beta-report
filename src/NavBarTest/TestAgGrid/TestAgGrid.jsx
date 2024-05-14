@@ -18,7 +18,7 @@ import PerChangeRenderer from "./perChangeRenderer.jsx";
 import TotalVolRenderer from "./totalVolRenderer.jsx";
 import TotalValRenderer from "./totalValRenderer.jsx";
 import socket from "../../helper/socket.js";
-import { io } from "socket.io-client";
+import socket2 from "../../helper/socket2.js";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const flashClass = {
@@ -137,23 +137,23 @@ const TestAgGrid = () => {
 
   useEffect(() => {
     if (socketConnected && watchlistActive?.code.length > 0) {
-      const socket2 = io("https://fos.altisss.vn", {
-        path: "/market",
-        transports: ["websocket", "polling"],
-      });
-
       socket2.on("onFOSStream", (data) => {
-        const rowNode = gridRef.current.api.getRowNode(
+        const rowNode = gridRef?.current?.api.getRowNode(
           data?.topic.replace("INTRADAY_1s|", "")
         );
+        if (!rowNode) return;
 
         const updateRowData = (field, value, flashClass) => {
           const rowElement = document.querySelector(
             `[row-index="${rowNode.rowIndex}"]`
           );
+          if (!rowElement) return;
+
           const cellElement = rowElement.querySelector(`[col-id="${field}"]`);
           if (!cellElement) return;
+
           const spanElement = cellElement.querySelector("span");
+          if (!spanElement) return;
 
           const oldValue = rowNode.data[field];
 
@@ -193,15 +193,20 @@ const TestAgGrid = () => {
 
       watchlistActive.code.forEach((code) => {
         socket.on(`listen-co-phieu-${code}`, (newData) => {
-          const rowNode = gridRef.current.api.getRowNode(code);
+          const rowNode = gridRef?.current?.api.getRowNode(code);
+          if (!rowNode) return;
 
           const updateRowData = (field, value, flashClass) => {
             const rowElement = document.querySelector(
               `[row-index="${rowNode.rowIndex}"]`
             );
+            if (!rowElement) return;
+
             const cellElement = rowElement.querySelector(`[col-id="${field}"]`);
             if (!cellElement) return;
+
             const spanElement = cellElement.querySelector("span");
+            if (!spanElement) return;
 
             const oldValue = rowNode.data[field];
 
@@ -244,6 +249,14 @@ const TestAgGrid = () => {
       watchlistActive.code.forEach((code) => {
         socket.off(`listen-co-phieu-${code}`);
       });
+      const requestStream = {
+        ClientSeq: 1,
+        TransId: "123-abc",
+        topic: ["*"],
+        value: ["*"],
+      };
+
+      socket2.emit("UNSUB_REQ", requestStream);
     };
   }, [socketConnected, watchlistActive]);
 
@@ -257,7 +270,7 @@ const TestAgGrid = () => {
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
-      <div className="w-[1200px] h-[770px]">
+      <div className="w-[1200px] h-[919px] p-[40px]">
         <div className="w-full h-full">
           <div className="example-wrapper">
             <div className={"ag-theme-quartz w-full h-full"}>
@@ -270,7 +283,7 @@ const TestAgGrid = () => {
                 getRowClass={(params) => {
                   if (params.node.rowIndex % 2 === 0) {
                     return "bg-[#d9e9fd]";
-                  }
+                  } else return "bg-white";
                 }}
                 suppressRowHoverHighlight={true}
               />
