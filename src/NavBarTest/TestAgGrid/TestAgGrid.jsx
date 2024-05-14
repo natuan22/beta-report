@@ -1,3 +1,6 @@
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-quartz.css";
+import { AgGridReact } from "ag-grid-react";
 import React, {
   useCallback,
   useEffect,
@@ -8,17 +11,14 @@ import React, {
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../../Auth/thunk.js";
 import NavBar from "../../app/component/NavBar.jsx";
-import { AgGridReact } from "ag-grid-react";
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
-import "./styles.css";
 import { getApi } from "../../helper/getApi.js";
-import PriceRenderer from "./priceRenderer.jsx";
-import PerChangeRenderer from "./perChangeRenderer.jsx";
-import TotalVolRenderer from "./totalVolRenderer.jsx";
-import TotalValRenderer from "./totalValRenderer.jsx";
 import socket from "../../helper/socket.js";
 import socket2 from "../../helper/socket2.js";
+import PerChangeRenderer from "./perChangeRenderer.jsx";
+import PriceRenderer from "./priceRenderer.jsx";
+import "./styles.css";
+import TotalValRenderer from "./totalValRenderer.jsx";
+import TotalVolRenderer from "./totalVolRenderer.jsx";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const flashClass = {

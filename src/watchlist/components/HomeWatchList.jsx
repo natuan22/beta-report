@@ -2,6 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Button from "@mui/material/Button";
 import { Dropdown, Form, Input, Modal, Tabs, message } from "antd";
 import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { FaCheck, FaX } from "react-icons/fa6";
 import { FiPlusCircle } from "react-icons/fi";
@@ -10,29 +11,18 @@ import { IoCaretDownSharp } from "react-icons/io5";
 import { useDebounce } from "react-use";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
-import icon_excel from "../../app/asset/img/icon_excel.png";
 import { getApi } from "../../helper/getApi";
 import { postApi } from "../../helper/postApi";
+import socket from "../../helper/socket";
 import { https } from "../../services/configService";
-import {
-  prepareData,
-  prepareData2,
-  prepareData3,
-  prepareData4,
-  sheet1Title,
-  sheet2Title,
-  sheet3Title,
-  sheet4Title,
-} from "../utils/hashTb";
+import BtnToExcel from "./BtnToExcel";
 import TableBase from "./TableBase";
 import TableBasic from "./TableBasic";
 import TableNews from "./TableNews";
 import TableSignalWarning from "./TableSignalWarning";
 import TableStatistical from "./TableStatistical";
 import TableTechnique from "./TableTechnique";
-import socket from "../../helper/socket";
 
-const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const HomeWatchList = ({ watchlists, catchWatchlists }) => {
@@ -741,58 +731,6 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     setActiveKey(key);
   };
 
-  const fetchDataAndDownloadCSV = async () => {
-    try {
-      // Gọi API để lấy dữ liệu
-      const data = await getApi(
-        apiUrl,
-        `/api/v1/watchlist/${watchlistActive.id}`
-      );
-
-      //Xử lý dữ liệu đưa vào sheet
-      const sheet1Data = data.map(prepareData);
-      const sheet2Data = data.map(prepareData2);
-      const sheet3Data = data.map(prepareData3);
-      const sheet4Data = data.map(prepareData4);
-
-      // Tạo workbook và thêm các sheet
-      const workbook = XLSX.utils.book_new();
-
-      // Tạo sheet 1
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]),
-        watchlistActive.name
-      );
-
-      // Tạo sheet 2
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet2Title, ...sheet2Data]),
-        "Thống kê"
-      );
-
-      // Tạo sheet 3
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet3Title, ...sheet3Data]),
-        "Cơ bản"
-      );
-
-      // Tạo sheet 4
-      XLSX.utils.book_append_sheet(
-        workbook,
-        XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]),
-        "Kỹ thuật"
-      );
-
-      // Xuất workbook thành file Excel
-      XLSX.writeFile(workbook, `dataWatchlist_${watchlistActive.name}.xlsx`);
-    } catch (error) {
-      console.error("Có lỗi xảy ra:", error);
-    }
-  };
-
   useEffect(() => {
     const addDivToTabsNavList = () => {
       const tabsNavList =
@@ -801,14 +739,11 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       if (tabsNavList) {
         // Check if tabsNavList exists
         const divElement = document.createElement("div"); // Create a new div element
-        divElement.innerHTML = ` 
-          <div class="bg-[#ADE6F9] h-[51.56px] py-[11px] px-[18.5px] self-center ml-[1px] cursor-pointer flex w-fit border-[1.5px] border-[#2D4CEF] border-solid rounded-lg hover:bg-gradient-to-b from-[#FFFFFFCC] to-[#08AADD]">
-              <img src="${icon_excel}" alt="icon_excel" title="Xuất dữ liệu ra Excel" />
-          </div>
-        `; // Set the innerHTML of the div
-        divElement
-          .querySelector("div")
-          .addEventListener("click", fetchDataAndDownloadCSV); // Add event listener to the created div
+
+        ReactDOM.render(
+          <BtnToExcel watchlistActive={watchlistActive} />,
+          divElement
+        );
 
         tabsNavList.appendChild(divElement); // Append the div to the tabsNavList
       } else {
@@ -847,7 +782,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
             {dataSearch?.length > 0 && isFocus && (
               <div
                 ref={wrapperRef}
-                className="z-40 absolute w-[410px] h-[300px] top-[145px] left-[40px] bg-[#94c7f6] shadow-lg p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
+                className="z-[1000] absolute w-[410px] h-[300px] top-[145px] left-[40px] bg-[#94c7f6] shadow-lg p-3 rounded-bl-xl rounded-br-xl overflow-y-auto"
               >
                 {dataSearch?.map((item, index) => {
                   const isFirstItem = index === 0;
