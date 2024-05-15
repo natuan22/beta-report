@@ -815,7 +815,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[219px] h-[51.56px] mt-[15px] z-30 absolute">
+          <div className="w-[219px] h-[51.56px] mt-[11px] z-30 absolute">
             <Dropdown
               open={isOpen}
               menu={{
@@ -846,7 +846,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
               </div>
             </Dropdown>
           </div>
-          <div className="absolute top-[161px] tab-watchlist">
+          <div className="absolute top-[157px] tab-watchlist">
             <Tabs
               defaultActiveKey="0"
               items={itemsTab}
