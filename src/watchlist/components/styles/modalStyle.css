@@ -53,6 +53,7 @@
 .inputSearch .ant-input-group-addon {
     background-color:#94c7f6;
     border-radius: 10px 0px 0px 0px;
+    border: 0;
 }
 
 .inputSearch .ant-input-outlined {
@@ -78,7 +79,7 @@
 }
 
 .ant-dropdown {
-    inset: 212.5px auto auto 40px !important;
+    inset: 209px auto auto 40px !important;
     z-index: 900;
 }
 
