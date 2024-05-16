@@ -2,7 +2,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import Button from "@mui/material/Button";
 import { Dropdown, Form, Input, Modal, Tabs, message } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { AiFillEdit, AiOutlineDelete } from "react-icons/ai";
 import { FaCheck, FaX } from "react-icons/fa6";
 import { FiPlusCircle } from "react-icons/fi";
@@ -739,11 +739,9 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       if (tabsNavList) {
         // Check if tabsNavList exists
         const divElement = document.createElement("div"); // Create a new div element
+        const root = createRoot(divElement);
 
-        ReactDOM.render(
-          <BtnToExcel watchlistActive={watchlistActive} />,
-          divElement
-        );
+        root.render(<BtnToExcel watchlistActive={watchlistActive} />);
 
         tabsNavList.appendChild(divElement); // Append the div to the tabsNavList
       } else {
