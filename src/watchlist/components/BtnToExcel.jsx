@@ -7,10 +7,14 @@ import {
   prepareData2,
   prepareData3,
   prepareData4,
+  prepareData5,
+  prepareData6,
   sheet1Title,
   sheet2Title,
   sheet3Title,
   sheet4Title,
+  sheet5Title,
+  sheet6Title,
 } from "../utils/hashTb";
 import { Tooltip } from "antd";
 
@@ -34,6 +38,11 @@ const BtnToExcel = ({ watchlistActive }) => {
       const sheet2Data = data.map(prepareData2);
       const sheet3Data = data.map(prepareData3);
       const sheet4Data = data.map(prepareData4);
+      const sheet5Data = data.map(prepareData5);
+      let sheet6Data = [];
+      data.forEach((item) => {
+        sheet6Data = sheet6Data.concat(prepareData6(item));
+      });
 
       // Tạo workbook và thêm các sheet
       const workbook = XLSX.utils.book_new();
@@ -64,6 +73,20 @@ const BtnToExcel = ({ watchlistActive }) => {
         workbook,
         XLSX.utils.aoa_to_sheet([sheet4Title, ...sheet4Data]),
         "Kỹ thuật"
+      );
+
+      // Tạo sheet 5
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet5Title, ...sheet5Data]),
+        "Tín hiệu cảnh báo"
+      );
+
+      // Tạo sheet 6
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet6Title, ...sheet6Data]),
+        "Tin tức"
       );
 
       // Xuất workbook thành file Excel
