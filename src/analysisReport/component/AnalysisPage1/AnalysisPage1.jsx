@@ -574,10 +574,10 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                               <td className="text-left">DI+ DI-</td>
                               <td
                                 className={`text-center ${getColorBaseOnName(
-                                  dataAnalysis.rsi.rate
+                                  dataAnalysis.adx.rate
                                 )}`}
                               >
-                                {dataAnalysis.rsi.rate}
+                                {dataAnalysis.adx.rate}
                               </td>
                             </tr>
                             <tr className="font-semibold">
