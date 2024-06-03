@@ -140,11 +140,11 @@ const LineChart = ({ dataLineChart }) => {
             </span>
             <span className={`${getCorlor(dataLineChart.perChange)} font-bold`}>
               {formatNumber(dataLineChart.change)}/
-              {formatNumber(dataLineChart.perChange)}
+              {formatNumber(dataLineChart.perChange)}%
             </span>
           </p>
           <p className="font-bold m-0 text-[10px] ml-2">
-            <span className={`${getCorlor(dataLineChart.perChange)} `}>
+            <span className={`${getCorlor(dataLineChart.perChange)}`}>
               {getArrow(dataLineChart.perChange)}
             </span>
             GTGD:
