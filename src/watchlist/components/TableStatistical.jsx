@@ -353,7 +353,7 @@ const TableStatistical = ({
       dataindex: "beta",
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right">{record.beta}</div>;
+        return <div className="text-black text-right">{formatNumberCurrency(record.beta)}</div>;
       },
       sorter: (a, b) => a.beta - b.beta,
     },
