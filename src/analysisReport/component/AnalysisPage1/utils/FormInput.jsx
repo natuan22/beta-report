@@ -148,7 +148,15 @@ const FormInput = ({
                 });
               }}
               onKeyDown={(e) => {
-                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  e.ctrlKey &&
+                  (e.key === "a" ||
+                    e.key === "x" ||
+                    e.key === "c" ||
+                    e.key === "v")
+                ) {
+                  return;
+                }
                 if (
                   !(
                     (e.key >= "0" && e.key <= "9") ||
@@ -191,7 +199,15 @@ const FormInput = ({
                 });
               }}
               onKeyDown={(e) => {
-                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  e.ctrlKey &&
+                  (e.key === "a" ||
+                    e.key === "x" ||
+                    e.key === "c" ||
+                    e.key === "v")
+                ) {
+                  return;
+                }
                 if (
                   !(
                     (e.key >= "0" && e.key <= "9") ||
@@ -224,7 +240,15 @@ const FormInput = ({
                 });
               }}
               onKeyDown={(e) => {
-                // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                if (
+                  e.ctrlKey &&
+                  (e.key === "a" ||
+                    e.key === "x" ||
+                    e.key === "c" ||
+                    e.key === "v")
+                ) {
+                  return;
+                }
                 if (
                   !(
                     (e.key >= "0" && e.key <= "9") ||
@@ -315,7 +339,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||
@@ -348,7 +380,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||
@@ -381,7 +421,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||
@@ -418,7 +466,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||
@@ -451,7 +507,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||
@@ -484,7 +548,15 @@ const FormInput = ({
                     });
                   }}
                   onKeyDown={(e) => {
-                    // Chỉ cho phép nhập các ký tự số, dấu chấm thập phân và các phím điều hướng
+                    if (
+                      e.ctrlKey &&
+                      (e.key === "a" ||
+                        e.key === "x" ||
+                        e.key === "c" ||
+                        e.key === "v")
+                    ) {
+                      return;
+                    }
                     if (
                       !(
                         (e.key >= "0" && e.key <= "9") ||

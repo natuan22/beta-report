@@ -737,8 +737,16 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         document.getElementsByClassName("ant-tabs-nav-list")[0]; // Get the first element with class "ant-tabs-nav-list"
 
       if (tabsNavList) {
+        // Kiểm tra và xóa phần tử div cũ nếu nó tồn tại
+        const oldDivElement = tabsNavList.querySelector(
+          "#export1-excel-container"
+        );
+        if (oldDivElement) {
+          tabsNavList.removeChild(oldDivElement);
+        }
         // Check if tabsNavList exists
         const divElement = document.createElement("div"); // Create a new div element
+        divElement.id = "export1-excel-container"; // Đặt id để nhận diện
         const root = createRoot(divElement);
 
         root.render(<BtnToExcel watchlistActive={watchlistActive} />);
@@ -813,44 +821,48 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
           </div>
         </div>
         <div>
-          <div className="w-[219px] h-[51.56px] mt-[11px] z-30 absolute">
-            <Dropdown
-              open={isOpen}
-              menu={{
-                items,
-              }}
-            >
-              <div
-                className={`${
-                  activeKey === "0"
-                    ? "bg-[#0242BE] text-[#ffba07] border-2 border-[#FC9433] border-solid hover:text-black hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
-                    : "bg-[#ADE6F9] text-[#073882] border-2 border-[#2D4CEF] border-solid hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
-                } h-full flex text-center items-center justify-center cursor-pointer rounded-md`}
+          <div className="relative">
+            <div className="w-[219px] h-[51.56px] mt-[11px] z-30 absolute">
+              <Dropdown
+                open={isOpen}
+                menu={{
+                  items,
+                }}
               >
-                <span
-                  className="font-semibold text-lg w-[150px] whitespace-nowrap overflow-hidden text-ellipsis mr-0.5 hover:text-black"
-                  onClick={() => setActiveTab("0")}
-                >
-                  {watchlistActive?.name}
-                </span>
-                <IoCaretDownSharp
+                <div
                   className={`${
                     activeKey === "0"
-                      ? "text-[#5c87af] hover:text-[#4096ff]"
-                      : "text-[#073882] hover:text-[#4096ff]"
-                  } text-lg`}
-                  onClick={showDropdown}
-                />
-              </div>
-            </Dropdown>
+                      ? "bg-[#0242BE] text-[#ffba07] border-2 border-[#FC9433] border-solid hover:text-black hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
+                      : "bg-[#ADE6F9] text-[#073882] border-2 border-[#2D4CEF] border-solid hover:bg-gradient-to-b from-[#ffffff] from-0% to-[#08AADD] to-100%"
+                  } h-full flex text-center items-center justify-center cursor-pointer rounded-md`}
+                >
+                  <span
+                    className="font-semibold text-lg w-[150px] whitespace-nowrap overflow-hidden text-ellipsis mr-0.5 hover:text-black"
+                    onClick={() => setActiveTab("0")}
+                  >
+                    {watchlistActive?.name}
+                  </span>
+                  <IoCaretDownSharp
+                    className={`${
+                      activeKey === "0"
+                        ? "text-[#5c87af] hover:text-[#4096ff]"
+                        : "text-[#073882] hover:text-[#4096ff]"
+                    } text-lg`}
+                    onClick={showDropdown}
+                  />
+                </div>
+              </Dropdown>
+            </div>
           </div>
-          <div className="absolute top-[157px] tab-watchlist">
-            <Tabs
-              defaultActiveKey="0"
-              items={itemsTab}
-              activeKey={activeKey}
-              onChange={onChange}
-            />
+          <div className="relative">
+            <div className="absolute mt-[11px] tab-watchlist">
+              <Tabs
+                defaultActiveKey="0"
+                items={itemsTab}
+                activeKey={activeKey}
+                onChange={onChange}
+              />
+            </div>
           </div>
         </div>
       </div>
