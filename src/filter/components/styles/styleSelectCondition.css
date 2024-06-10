@@ -1,0 +1,50 @@
+.select-condition .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    background: #8BC1FF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+    border: 0;
+}
+
+.select-condition .ant-select .ant-select-selection-item {
+    color: #0D4381;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.select-condition .ant-select-single.ant-select-open .ant-select-selection-item {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.select-condition .ant-select .ant-select-arrow .anticon {
+    visibility: hidden;
+}
+
+.select-condition .ant-select .ant-select-arrow {
+    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 11" fill="none"><path d="M7 11L0.937822 0.5L13.0622 0.5L7 11Z" fill="%230E48DD"/></svg>');
+}
+
+.ant-select-dropdown {
+    background: linear-gradient(180deg, #E6EFF9 0%, #8BC1FF 100%);
+    border: 1px solid #0E48DD;
+}
+
+.custom-select-item {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 5px;
+}
+
+.custom-select-item:hover {
+   background-color: rgba(255, 255, 255, 0.25);
+}
+
+.selected-icon {
+    margin-left: 8px;
+}
