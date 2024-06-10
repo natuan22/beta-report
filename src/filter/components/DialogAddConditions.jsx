@@ -7,10 +7,10 @@ import { MdFormatListNumbered } from "react-icons/md";
 import "../components/styles/dialogAddStyle.css";
 import { hashTbStockFilter } from "../utils/hashTb";
 
-const DialogAddConditions = () => {
+const DialogAddConditions = ({ selectedItems, handleCheckboxChange }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+
   const [collapsed, setCollapsed] = useState(
     Object.keys(hashTbStockFilter).reduce((acc, key) => {
       acc[key] = false;
@@ -60,16 +60,6 @@ const DialogAddConditions = () => {
 
   const handleAddCancel = () => {
     setIsModalAddOpen(false);
-  };
-
-  const handleCheckboxChange = (itemName, isChecked) => {
-    setSelectedItems((prevItems) => {
-      if (isChecked) {
-        return [...prevItems, itemName];
-      } else {
-        return prevItems.filter((item) => item !== itemName);
-      }
-    });
   };
 
   return (
@@ -132,17 +122,14 @@ const DialogAddConditions = () => {
                   {!collapsed[key] && (
                     <div className="shadowInner bg-[#9DC4FF] grid grid-cols-3 px-6 py-2">
                       {hashTbStockFilter[key].map((item, index) => {
-                        const isChecked = selectedItems.includes(item.name);
+                        const isChecked = selectedItems.includes(item.key);
 
                         return (
                           <Row className="py-2" key={index}>
                             <Checkbox
                               checked={isChecked}
                               onChange={(e) =>
-                                handleCheckboxChange(
-                                  item.name,
-                                  e.target.checked
-                                )
+                                handleCheckboxChange(item.key, e.target.checked)
                               }
                             >
                               <span className="font-bold">{item.name}</span>
