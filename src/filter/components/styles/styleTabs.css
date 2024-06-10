@@ -1,0 +1,46 @@
+.tabs-filter .ant-tabs .ant-tabs-tab+.ant-tabs-tab {
+    margin: 0 0 0 1px;
+}
+
+.tabs-filter .ant-tabs .ant-tabs-tab:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #08AADD 100%);
+    color: black
+}
+
+.tabs-filter .ant-tabs .ant-tabs-tab {
+    font-size: 15px;
+    background-color: #ADE6F9;
+    font-weight: 700;
+}
+
+.tabs-filter .ant-tabs-tab-active {
+    background-color: #0242BE !important;
+    border: 1.5px solid #FC9433 !important;
+}
+
+.tabs-filter .ant-tabs .ant-tabs-tab-active:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #08AADD 100%);
+}
+
+.tabs-filter .ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: white;
+}
+
+.tabs-filter .ant-tabs-nav-list .ant-tabs-tab:first-child {
+    width: 219px;
+}
+
+.tabs-filter .ant-tabs-tab {
+    width: 219px;  /* 153.2px */
+    justify-content: center;
+    border: 1.5px solid #2D4CEF;
+    border-radius: 8px;
+}
+
+.tabs-filter .ant-tabs-top >.ant-tabs-nav{
+    margin: 0;
+}
+
+.tabs-filter .ant-tabs .ant-tabs-ink-bar {
+    background: none;
+}

@@ -1,0 +1,53 @@
+.parameter.ant-input-number-outlined {
+    border-color: #0D4381;
+    background: #E6EFF9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+}
+
+.parameter.ant-input-number-outlined:focus-within {
+    background: #E6EFF9;
+}
+
+.parameter.ant-input-number-outlined:hover {
+    border-color: #0D4381;
+    background: #E6EFF9;
+}
+
+.parameter.ant-input-number-outlined .ant-input-number-handler-wrap {
+    background: #E6EFF9;
+}
+
+.parameter.ant-input-number .ant-input-number-handler {
+    border-inline-start: 1px solid #0D4381;
+}
+
+.parameter.ant-input-number-outlined .ant-input-number-handler-wrap .ant-input-number-handler-down {
+    border-block-start: 1px solid #0D4381;
+}
+
+.parameter.ant-input-number .ant-input-number-input {
+    color: #0D4381;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.parameter.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled):focus-within{
+    background-color: #E6EFF9;
+}
+
+.parameter.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled) {
+    background: #E6EFF9;
+}
+
+.parameter.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled):hover {
+    background: #E6EFF9;
+}
+
+.parameter.ant-input-number.ant-input-number-status-error .ant-input-number-handler {
+    border-inline-start: 1px solid #ffa39e;
+}
+
+.parameter.ant-input-number-outlined.ant-input-number-status-error .ant-input-number-handler-wrap .ant-input-number-handler-down {
+    border-block-start: 1px solid #ffa39e;
+}
