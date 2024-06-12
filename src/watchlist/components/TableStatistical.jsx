@@ -126,7 +126,7 @@ const TableStatistical = ({
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.totalVal / 1000000000)}
+            {formatNumberCurrency(record.totalVal)}
           </div>
         );
       },
@@ -222,7 +222,7 @@ const TableStatistical = ({
       render: (_, record) => {
         return (
           <div className={`text-right ${getColorBaseOnValue(record.buyVal)}`}>
-            {formatNumberCurrency(record.buyVal / 1000000000)}
+            {formatNumberCurrency(record.buyVal)}
           </div>
         );
       },
@@ -236,7 +236,7 @@ const TableStatistical = ({
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.marketCap / 1000000000)}
+            {formatNumberCurrency(record.marketCap)}
           </div>
         );
       },
@@ -353,7 +353,11 @@ const TableStatistical = ({
       dataindex: "beta",
       align: "center",
       render: (_, record) => {
-        return <div className="text-black text-right">{formatNumberCurrency(record.beta)}</div>;
+        return (
+          <div className="text-black text-right">
+            {formatNumberCurrency(record.beta)}
+          </div>
+        );
       },
       sorter: (a, b) => a.beta - b.beta,
     },

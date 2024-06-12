@@ -111,7 +111,7 @@ const TableTechnique = ({
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.totalVal / 1000000000)}
+            {formatNumberCurrency(record.totalVal)}
           </div>
         );
       },
