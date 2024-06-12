@@ -120,7 +120,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.totalVal / 1000000000)}
+            {formatNumberCurrency(record.totalVal)}
           </div>
         );
       },
@@ -200,7 +200,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.ROA * 100)}
+            {formatNumberCurrency(record.ROA)}
           </div>
         );
       },
@@ -214,7 +214,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       render: (_, record) => {
         return (
           <div className="text-black text-right">
-            {formatNumberCurrency(record.ROE * 100)}
+            {formatNumberCurrency(record.ROE)}
           </div>
         );
       },
@@ -230,7 +230,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       width: 180,
       align: "center",
       render: (_, record) => {
-        const grossProfitMarginYear = record.grossProfitMarginYear * 100;
+        const grossProfitMarginYear = record.grossProfitMarginYear;
 
         return (
           <div className="text-black text-right">
@@ -252,7 +252,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       width: 170,
       align: "center",
       render: (_, record) => {
-        const grossProfitMarginQuarter = record.grossProfitMarginQuarter * 100;
+        const grossProfitMarginQuarter = record.grossProfitMarginQuarter;
 
         return (
           <div className="text-black text-right">
@@ -274,7 +274,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       width: 180,
       align: "center",
       render: (_, record) => {
-        const netProfitMarginYear = record.netProfitMarginYear * 100;
+        const netProfitMarginYear = record.netProfitMarginYear;
 
         return (
           <div className="text-black text-right">
@@ -295,7 +295,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       dataindex: "netProfitMarginQuarter",
       align: "center",
       render: (_, record) => {
-        const netProfitMarginQuarter = record.netProfitMarginQuarter * 100;
+        const netProfitMarginQuarter = record.netProfitMarginQuarter;
 
         return (
           <div className="text-black text-right">
