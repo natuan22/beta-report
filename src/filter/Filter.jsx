@@ -1,20 +1,20 @@
 import Button from "@mui/material/Button";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Skeleton } from "antd";
 import React, { useEffect, useState } from "react";
 import { FiFilePlus } from "react-icons/fi";
-import { HiOutlineDocumentDuplicate } from "react-icons/hi";
-import { MdSaveAlt } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
+import { getApi } from "../helper/getApi";
+import AddCodeToWatchlist from "./components/AddCodeToWatchlist";
 import ComponentConditions from "./components/ComponentConditions";
 import DialogAddConditions from "./components/DialogAddConditions";
-import { hashTbStockFilter } from "./utils/hashTb";
-import { getApi } from "../helper/getApi";
-import { Skeleton } from "antd";
-import "./components/styles/styleLoading.css";
+import ListFilters from "./components/ListFilters";
+import SaveFilter from "./components/SaveFilter";
 import TableResultsFilter from "./components/TableResultsFilter";
-import AddCodeToWatchlist from "./components/AddCodeToWatchlist";
+import "./components/styles/styleLoading.css";
+import { hashTbStockFilter } from "./utils/hashTb";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const flatFilter = Object.values(hashTbStockFilter).flat();
@@ -50,6 +50,8 @@ const Filter = () => {
   const [watchlists, setWatchlists] = useState();
   const [filteredDataMap, setFilteredDataMap] = useState({});
   const [selectParameters, setSelectParameters] = useState("5d");
+  const [filters, setFilters] = useState();
+  const [filtersActive, setFiltersActive] = useState("");
 
   useEffect(() => {
     document.title = "Bộ lọc";
@@ -67,6 +69,17 @@ const Filter = () => {
         }
       };
 
+      const fetchDataFilters = async () => {
+        try {
+          const data = await getApi(apiUrl, "/api/v1/investment/your-filter");
+
+          setFilters(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchDataFilters();
       fetchDataWatchList();
     }
   }, [isLogin]);
@@ -269,10 +282,15 @@ const Filter = () => {
   const clearConditions = () => {
     setSelectedItems([]);
     setFilteredResults([]);
+    setFiltersActive("");
   };
 
   const handleSelectParameters = (value) => {
     setSelectParameters(value);
+  };
+
+  const catchFiler = (selectedItems) => {
+    setSelectedItems(selectedItems);
   };
 
   return (
@@ -364,12 +382,11 @@ const Filter = () => {
               </div>
               <div className="2xl:w-[35%] xl:w-[50%] lg:w-[60%] md:w-full flex md:flex-row md:justify-between sm:flex-col xs:flex-col xxs:flex-col sm:items-end xs:items-end xxs:items-end pl-10">
                 <div className="mt-1">
-                  <Button variant="contained">
-                    <MdSaveAlt className="w-[25px] h-[25px]" />
-                    <span className="normal-case pl-1 text-[14px] font-semibold">
-                      Lưu bộ lọc
-                    </span>
-                  </Button>
+                  <SaveFilter
+                    filtersActive={filtersActive}
+                    selectedItems={selectedItems}
+                    setFilters={setFilters}
+                  />
                 </div>
                 <div className="mt-1">
                   <Button variant="contained" onClick={clearConditions}>
@@ -380,12 +397,14 @@ const Filter = () => {
                   </Button>
                 </div>
                 <div className="mt-1">
-                  <Button variant="contained">
-                    <HiOutlineDocumentDuplicate className="w-[25px] h-[25px]" />
-                    <span className="normal-case pl-1 text-[14px] font-semibold">
-                      Danh sách bộ lọc
-                    </span>
-                  </Button>
+                  <ListFilters
+                    setFilters={setFilters}
+                    filters={filters}
+                    filtersActive={filtersActive}
+                    catchFiler={catchFiler}
+                    setFiltersActive={setFiltersActive}
+                    selectedItems={selectedItems}
+                  />
                 </div>
               </div>
               <div className="mt-2">

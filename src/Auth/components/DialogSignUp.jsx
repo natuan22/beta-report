@@ -42,9 +42,9 @@ const DialogSignUp = ({ onSubmitSuccess }) => {
     setIsModalOpen(false);
   };
 
-  function onFinishFailed(errorInfo) {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  }
+  };
 
   const userSchema = object({
     phone: string()

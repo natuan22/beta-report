@@ -64,9 +64,9 @@ const DialogLogin = ({ onSubmitSuccess, type }) => {
     onSubmitSuccess();
   };
 
-  function onFinishFailed(errorInfo) {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  }
+  };
 
   return (
     <>
