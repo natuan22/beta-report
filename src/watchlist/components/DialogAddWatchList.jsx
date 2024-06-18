@@ -52,9 +52,9 @@ const DialogAddWatchList = ({ catchWatchlists }) => {
     fetchDataWatchList();
   };
 
-  function onFinishFailed(errorInfo) {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  }
+  };
 
   return (
     <>

@@ -18,13 +18,6 @@ const DialogAddConditions = ({ selectedItems, handleCheckboxChange }) => {
     }, {})
   );
 
-  const warning = (type, text) => {
-    messageApi.open({
-      type,
-      content: text,
-    });
-  };
-
   const hideAll = () => {
     const allCollapsedTrue = Object.keys(collapsed).reduce((acc, key) => {
       acc[key] = true;

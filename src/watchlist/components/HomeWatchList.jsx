@@ -309,9 +309,9 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     }, 200);
   };
 
-  function onFinishFailed(errorInfo) {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
-  }
+  };
 
   const items = [
     {
