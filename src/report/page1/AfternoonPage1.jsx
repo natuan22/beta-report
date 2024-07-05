@@ -53,7 +53,7 @@ const AfternoonPage1 = ({ role }) => {
       </div>
       {data ? (
         <div className="content w-full flex flex-col justify-center items-center mt-[20px] relative">
-          {role === "V0U1S" ? (
+          {role === "8Z5M8" ? (
             <div className="absolute right-0 top-0 translate-x-[300px]">
               <DialogAddText getData={getData} />
             </div>

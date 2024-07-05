@@ -37,7 +37,7 @@ const Page3 = ({ role }) => {
 
   return (
     <div className="h-[1480px] w-[800px] relative ">
-      {role === "V0U1S" ? (
+      {role === "8Z5M8" ? (
         <div className="absolute top-[15%] right-[-40%] flex flex-col justify-evenly h-[150px]  ">
           <div>
             <DialogIdentify catchText={catchText} />

@@ -45,7 +45,7 @@ const AfternoonPage2 = ({ role }) => {
 
   return (
     <div className="h-[1480px] w-[800px] relative">
-      {role === "V0U1S" ? (
+      {role === "8Z5M8" ? (
         <div className="absolute top-0 right-0 z-10 translate-x-[300px] translate-y-[200px]">
           <DialogAddImgAndText
             getImgFromInput={getImgFromInput}

@@ -69,9 +69,9 @@ const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, set
   };
 
   const handleDeleteFilter = (filter) => {
-    // Sử dụng SweetAlert để xác nhận việc xóa
+    // Sử dụng SweetAlert để xác nhận việc lưu chỉnh sửa
     Swal.fire({
-      title: "Bạn chắc chắn muốn xóa bộ lọc này?",
+      title: "Bạn chắc chắn muốn lưu chỉnh sửa bộ lọc này?",
       text: "Thao tác này không thể hoàn tác!",
       icon: "warning",
       showCancelButton: true,
@@ -120,9 +120,9 @@ const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, set
   return (
     <div>
       {contextHolder}
-      <Button variant="contained" onClick={showModal}>
-        <HiOutlineDocumentDuplicate className="w-[25px] h-[25px]" />
-        <span className="normal-case pl-1 text-[14px] font-semibold">
+      <Button variant="contained" color="mau" onClick={showModal}>
+        <HiOutlineDocumentDuplicate className="w-[25px] h-[25px] text-white" />
+        <span className="normal-case pl-1 text-[14px] font-semibold text-white">
           Danh sách bộ lọc
         </span>
       </Button>

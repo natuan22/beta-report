@@ -43,7 +43,7 @@ const Page5 = () => {
   }, []);
 
   return (
-    <div className="h-[1480px] w-[800px] relative  ">
+    <div className="h-[1200px] w-[800px] relative  ">
       <div className="header">
         <HeaderMarket date={homNay} />
       </div>

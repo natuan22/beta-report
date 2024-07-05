@@ -22,13 +22,18 @@ export const authenServices = {
   },
 
   userLogout: () => {
+    const headers = {
+      mac: localStorage.getItem("deviceId"),
+    };
+
+    const token = Cookies.get("at");
+    if (token) {
+      headers.Authorization = "Bearer " + token;
+    }
     return axios
       .create({
         baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
+        headers: headers,
       })
       .post("/api/v1/auth/logout");
   },

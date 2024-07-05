@@ -13,26 +13,38 @@ const logoutUser = async () => {
 
   window.location.reload();
 
+  const headers = {
+    mac: localStorage.getItem("deviceId"),
+  };
+
+  const token = Cookies.get("at");
+  if (token) {
+    headers.Authorization = "Bearer " + token;
+  }
+
   const res = await axios
     .create({
       baseURL: apiUrl,
-      headers: {
-        mac: localStorage.getItem("deviceId"),
-        Authorization: "Bearer " + Cookies.get("at"),
-      },
+      headers: headers,
     })
     .post("/api/v1/auth/logout");
 };
 
 export const refreshTokenAction = async () => {
+  const headers = {
+    mac: localStorage.getItem("deviceId"),
+  };
+
+  const token = Cookies.get("rt");
+  if (token) {
+    headers.Authorization = "Bearer " + token;
+  }
+
   try {
     const res = await axios
       .create({
         baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("rt"),
-        },
+        headers: headers,
       })
       .post("/api/v1/auth/refresh-token");
     Cookies.set("at", res.data.data.access_token);
@@ -43,26 +55,29 @@ export const refreshTokenAction = async () => {
 };
 
 export const postApi = async (apiUrl, url, data) => {
+  const headers = {
+    mac: localStorage.getItem("deviceId"),
+  };
+
+  const token = Cookies.get("at");
+  if (token) {
+    headers.Authorization = "Bearer " + token;
+  }
   try {
     const response = await axios
       .create({
         baseURL: apiUrl,
-        headers: {
-          mac: localStorage.getItem("deviceId"),
-          Authorization: "Bearer " + Cookies.get("at"),
-        },
+        headers: headers,
       })
       .post(url, data);
+    return response.data.data;
   } catch (err) {
     if (err.response.status === 401) {
       await refreshTokenAction();
       const response = await axios
         .create({
           baseURL: apiUrl,
-          headers: {
-            mac: localStorage.getItem("deviceId"),
-            Authorization: "Bearer " + Cookies.get("at"),
-          },
+          headers: headers,
         })
         .post(url, data);
     } else {

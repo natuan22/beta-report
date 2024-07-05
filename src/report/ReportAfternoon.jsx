@@ -117,16 +117,46 @@ const ReportAfternoon = () => {
     document.title = "Bản tin chiều";
   }, []);
 
+  const [pageActive, setPageActive] = useState(pageRefs.page1)
+
+  const scrollToPage = (pageRef) => {
+    setPageActive(pageRef)
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className=" relative">
       <div className="absolute right-[10%] top-[35px]">
         <NavBar
           isLogin={isLogin}
           user={user}
+          role={role}
           handleUserLogout={handleUserLogout}
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
+      {/* <div className="fixed top-[35%] right-[25%] pagination text-center shadow-2xl rounded-lg p-3">
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page1)} className={`cursor-pointer ${pageActive === pageRefs.page1 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 1</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page2)} className={`cursor-pointer ${pageActive === pageRefs.page2 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 2</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page3)} className={`cursor-pointer ${pageActive === pageRefs.page3 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 3</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page4)} className={`cursor-pointer ${pageActive === pageRefs.page4 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 4</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page6)} className={`cursor-pointer ${pageActive === pageRefs.page6 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 5</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page5)} className={`cursor-pointer ${pageActive === pageRefs.page5 ? 'bg-[#3237b1] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 6</span>
+        </div>
+      </div> */}
       <div>
         <div ref={pageRefs.page1}>
           <AfternoonPage1 role={role} />

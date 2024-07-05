@@ -758,7 +758,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     };
 
     addDivToTabsNavList(); // Call the function to add the div
-  }, []);
+  }, [watchlistActive]);
 
   return (
     <>

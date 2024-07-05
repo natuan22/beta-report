@@ -3,7 +3,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import calSignalText from "../../../../helper/calSignalText";
 
 const FilterSignal = ({ filter, data, onFilteredDataChange }) => {
-  const [value, setValue] = useState(filter.select[4].value);
+  const initialSelectValue = filter.select[4] ? filter.select[4].value : filter.select[0].value;
+  const [value, setValue] = useState(initialSelectValue);
 
   const handleChange = (value) => {
     setValue(value);

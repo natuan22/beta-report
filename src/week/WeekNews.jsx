@@ -72,8 +72,8 @@ const WeekNews = () => {
     const img7 = await generateImage(pageRefs.page7, 1480, 800);
     const img8 = await generateImage(pageRefs.page8, 1480, 800);
     const img9 = await generateImage(pageRefs.page9, 800, 1480);
-    const img10 = await generateImage(pageRefs.page10, 1480, 800);
-    const img11 = await generateImage(pageRefs.page11, 1480, 800);
+    // const img10 = await generateImage(pageRefs.page10, 1480, 800);
+    // const img11 = await generateImage(pageRefs.page11, 1480, 800);
     const img12 = await generateImage(pageRefs.page12, 1480, 800);
 
     pdf.addImage(img1, "JPEG", 0, 0, 210, 391);
@@ -170,16 +170,58 @@ const WeekNews = () => {
     document.title = "Bản tin tuần";
   }, []);
 
+  const [pageActive, setPageActive] = useState(pageRefs.page1)
+
+  const scrollToPage = (pageRef) => {
+    setPageActive(pageRef)
+    if (pageRef.current) {
+      pageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[35px]">
         <NavBar
           isLogin={isLogin}
           user={user}
+          role={role}
           handleUserLogout={handleUserLogout}
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
+      {/* <div className="fixed top-[25%] right-[25%] pagination text-center shadow-2xl rounded-lg p-3">
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page1)} className={`cursor-pointer ${pageActive === pageRefs.page1 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page2)} className={`cursor-pointer ${pageActive === pageRefs.page2 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 1</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page3)} className={`cursor-pointer ${pageActive === pageRefs.page3 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 2</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page4)} className={`cursor-pointer ${pageActive === pageRefs.page4 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 3</span><br/>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page5)} className={`cursor-pointer ${pageActive === pageRefs.page5 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 4</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page6)} className={`cursor-pointer ${pageActive === pageRefs.page6 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 5</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page7)} className={`cursor-pointer ${pageActive === pageRefs.page7 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 6</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page8)} className={`cursor-pointer ${pageActive === pageRefs.page8 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 7</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page9)} className={`cursor-pointer ${pageActive === pageRefs.page9 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 8</span>
+        </div>
+        <div className="my-5">
+          <span onClick={() => scrollToPage(pageRefs.page12)} className={`cursor-pointer ${pageActive === pageRefs.page12 ? 'bg-[#1E5D8B] text-white': ''} rounded-lg px-2 py-1.5`}>Trang 9</span>
+        </div>
+      </div> */}
       <div>
         <div ref={pageRefs.page1}>
           <Page1Week />

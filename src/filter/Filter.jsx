@@ -21,7 +21,7 @@ const flatFilter = Object.values(hashTbStockFilter).flat();
 
 const theme = createTheme({
   palette: {
-    primary: {
+    mau: {
       light: "#25558d",
       main: "#0D4381",
       dark: "#0b3c74",
@@ -36,10 +36,18 @@ const theme = createTheme({
 
 const Filter = () => {
   const dispatch = useDispatch();
+
   const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  const [selectedItems, setSelectedItems] = useState(["floor", "gia_hien_tai_cat_len_ma", "PE", "marketCap", "totalVol"]);
+  const [selectedItems, setSelectedItems] = useState([
+    "floor",
+    "gia_hien_tai_cat_len_ma",
+    "PE",
+    "marketCap",
+    "totalVol",
+  ]);
   const [components, setComponents] = useState([]);
 
   const [data, setData] = useState([]);
@@ -101,14 +109,17 @@ const Filter = () => {
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
+      setRole(null);
       dispatch(userLogoutAction());
       localStorage.setItem("_il", "4E8WL");
+      localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
     setIsLogin(localStorage.getItem("_il"));
+    setRole(localStorage.getItem("2ZW79"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -300,6 +311,7 @@ const Filter = () => {
           <NavBar
             isLogin={isLogin}
             user={user}
+            role={role}
             handleUserLogout={handleUserLogout}
             onSubmitSuccess={onSubmitSuccess}
           />
@@ -386,12 +398,17 @@ const Filter = () => {
                     filtersActive={filtersActive}
                     selectedItems={selectedItems}
                     setFilters={setFilters}
+                    isLogin={isLogin}
                   />
                 </div>
                 <div className="mt-1">
-                  <Button variant="contained" onClick={clearConditions}>
-                    <FiFilePlus className="w-[25px] h-[25px]" />
-                    <span className="normal-case pl-1 text-[14px] font-semibold">
+                  <Button
+                    variant="contained"
+                    color="mau"
+                    onClick={clearConditions}
+                  >
+                    <FiFilePlus className="w-[25px] h-[25px] text-white" />
+                    <span className="normal-case pl-1 text-[14px] font-semibold text-white">
                       Tạo bộ lọc mới
                     </span>
                   </Button>

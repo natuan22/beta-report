@@ -1,0 +1,47 @@
+.example-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.custom-flash-down {
+    background-color: lightcoral !important; 
+    color: white !important;
+}
+  
+.custom-flash-up {
+    background-color: lightgreen !important; 
+    color: white !important;
+}
+
+.custom-flash-ref {
+    background-color: rgb(224, 224, 19) !important; 
+    color: white !important;
+}
+
+.ag-theme-quartz {
+    --ag-value-change-value-highlight-background-color: #dbdbdb;
+}
+
+.example-wrapper .ag-header {
+    background-color: #0050AD ;
+}
+
+.example-wrapper .ag-header-cell-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+}
+
+.example-wrapper .ag-root-wrapper {
+    border: 1px solid #0050AD;
+    border-radius: 0;
+}
+
+.example-wrapper .ag-header-cell-label {
+    justify-content: center;
+}
+
+.example-wrapper .ag-header-cell-text {
+    text-align: center;
+}

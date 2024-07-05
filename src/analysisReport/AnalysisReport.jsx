@@ -31,6 +31,7 @@ const AnalysisReport = () => {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
+      window.location.reload();
       localStorage.setItem("_il", "4E8WL");
       localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
@@ -152,6 +153,7 @@ const AnalysisReport = () => {
         <NavBar
           isLogin={isLogin}
           user={user}
+          role={role}
           handleUserLogout={handleUserLogout}
           onSubmitSuccess={onSubmitSuccess}
         />

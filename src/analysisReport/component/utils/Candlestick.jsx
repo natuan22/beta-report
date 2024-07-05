@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import { MdOutlineZoomOutMap } from "react-icons/md";
+import { Modal } from "antd";
 
 const Candlestick = ({ data }) => {
   const maxVolume = Math.max(...data.map((item) => item.volume));
   const maxNet = Math.max(...data.map((item) => item.net));
+  const [isModalZoomOpen, setIsModalZoomOpen] = useState(false);
 
   const options = {
     accessibility: {
@@ -238,12 +241,53 @@ const Candlestick = ({ data }) => {
       },
     ],
   };
+
+  const showModalZoom = () => {
+    setIsModalZoomOpen(true);
+  };
+
+  const handleZoomOk = () => {
+    setIsModalZoomOpen(false);
+  };
+
+  const handleZoomCancel = () => {
+    setIsModalZoomOpen(false);
+  };
+
   return (
     <div>
       <div className="h-[365px] -translate-y-[8px]">
         <div className="relative left-[66px] z-10 top-[27px] w-[8px] h-[8px]">
           <div className="absolute" id="triangle-topright"></div>
           <div id="triangle-bottomleft"></div>
+          <div className="ml-[22.5rem] absolute -top-[4.8px] opacity-[45%] hover:opacity-[80%] hover:bg-black hover:bg-opacity-10 rounded-sm h-[18px]">
+            <MdOutlineZoomOutMap
+              className="cursor-pointer w-[16px] h-[16px]"
+              onClick={showModalZoom}
+            />
+          </div>
+          <Modal
+            centered
+            width={1400}
+            open={isModalZoomOpen}
+            onOk={handleZoomOk}
+            onCancel={handleZoomCancel}
+            footer={null}
+            className="zoom-conditions"
+          >
+            <div className="h-[850px]">
+              <div className="relative left-[517px] z-10 top-[27px] w-[8px] h-[8px]">
+                <div className="absolute" id="triangle-topright"></div>
+                <div id="triangle-bottomleft"></div>
+              </div>
+              <HighchartsReact
+                highcharts={Highcharts}
+                constructorType={"stockChart"}
+                options={options}
+                containerProps={{ style: { height: "100%", width: "100%" } }}
+              />
+            </div>
+          </Modal>
         </div>
         <HighchartsReact
           highcharts={Highcharts}

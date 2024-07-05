@@ -58,9 +58,9 @@ const DialogAddConditions = ({ selectedItems, handleCheckboxChange }) => {
   return (
     <div>
       {contextHolder}
-      <Button variant="contained" onClick={showModalAdd}>
-        <FaSearchPlus className="w-[25px] h-[25px]" />
-        <span className="normal-case pl-1 text-[14px] font-semibold">
+      <Button variant="contained" color="mau" onClick={showModalAdd}>
+        <FaSearchPlus className="w-[25px] h-[25px] text-white" />
+        <span className="normal-case pl-1 text-[14px] font-semibold text-white">
           Thêm điều kiện
         </span>
       </Button>

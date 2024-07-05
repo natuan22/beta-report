@@ -1,0 +1,66 @@
+.MuiPaper-root.MuiPickersPopper-paper {
+    background: linear-gradient(180deg, #E6EFF9 0%, #8BC1FF 100%);
+}
+
+.code-select .ant-select-selection-item {
+    font-size: 1rem;
+    color: white
+}
+
+.code-select .ant-select-arrow {
+    color: white
+}
+
+.code-select .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    background: #0050AD;
+}
+
+/* table antd TradingStrategies*/
+.table-data-trading-strategies .ant-table-thead .ant-table-cell {
+    background-color: #0050AD !important;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table .ant-table-header {
+    border-radius: 0;
+
+}
+
+.table-data-trading-strategies .ant-table-column-sorters .ant-table-column-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
+    background: white;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-cell-fix-left {
+    background: none;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-row:nth-child(odd) .ant-table-cell {
+    background-color: #F6F0EA;
+} 
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-row:nth-child(even) .ant-table-cell {
+    background-color: white;
+} 
+
+.table-data-trading-strategies .ant-table-wrapper td.ant-table-column-sort {
+    background: none;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+    border-radius: 0;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
+    border-radius: 0;
+}
+
+.table-data-trading-strategies .ant-table-wrapper .ant-table-tbody>tr>td {
+    padding: 5px 16px;
+}

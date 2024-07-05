@@ -45,7 +45,7 @@ const Page7Week = ({ role }) => {
         <HeaderWeek />
       </div>
 
-      {role === "V0U1S" ? (
+      {role === "8Z5M8" ? (
         <div className="absolute top-0 right-0 translate-x-[300px] translate-y-[200px] h-[100px] flex flex-col items-center justify-between">
           <div>
             <DialogAddNews

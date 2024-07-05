@@ -6,13 +6,17 @@ import NavBar from "../app/component/NavBar";
 const NavBar2 = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
+      setRole(null);
       dispatch(userLogoutAction());
+      window.location.reload();
       localStorage.setItem("_il", "4E8WL");
+      localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
     }
   };
@@ -23,7 +27,7 @@ const NavBar2 = () => {
   };
 
   useEffect(() => {
-    document.title = "Bộ lọc";
+    document.title = "BETA SMART";
   }, []);
 
   return (
@@ -32,11 +36,12 @@ const NavBar2 = () => {
         <NavBar
           isLogin={isLogin}
           user={user}
+          role={role}
           handleUserLogout={handleUserLogout}
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
-      Bộ lọc
+      BETA SMART
     </div>
   );
 };
