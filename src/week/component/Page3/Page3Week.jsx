@@ -44,7 +44,7 @@ const Page3Week = ({ role }) => {
         <HeaderWeek />
       </div>
 
-      {role === "V0U1S" ? (
+      {role === "8Z5M8" ? (
         <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
           <DialogAddImgAndTextWeek
             onSubmitSuccess={onSubmitSuccess}

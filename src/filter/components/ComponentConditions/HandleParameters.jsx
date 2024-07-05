@@ -9,6 +9,7 @@ import WatchlistParameters from "./HandleParameters/WatchlistParameters";
 import NoParameters from "./HandleParameters/NoParameters";
 import Type6Parameters from "./HandleParameters/Type6Parameters";
 import FilterSignal from "./HandleParameters/FilterSignal";
+import FilterSignalChange from "./HandleParameters/FilterSignalChange";
 
 const HandleParameters = ({ isLogin, watchlists, data, filter, selectCondition, onFilteredDataChange, selectParameters }) => {
   const renderComponent = (parametersType) => {
@@ -33,6 +34,8 @@ const HandleParameters = ({ isLogin, watchlists, data, filter, selectCondition, 
         return <NoParameters filter={filter} data={data} onFilteredDataChange={onFilteredDataChange} />;
       case 9:
         return <FilterSignal filter={filter} data={data} onFilteredDataChange={onFilteredDataChange}/>;
+      case 10:
+        return <FilterSignalChange filter={filter} data={data} onFilteredDataChange={onFilteredDataChange}/>;
     }
   };
 

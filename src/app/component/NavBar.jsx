@@ -6,15 +6,17 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { BsCalendar2Day, BsGraphUp } from "react-icons/bs";
 import { CiFilter } from "react-icons/ci";
 import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
+import { HiOutlineLightBulb } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineAutoGraph, MdQueryStats } from "react-icons/md";
+import { PiPresentationChartLight } from "react-icons/pi";
 import { SlGraph } from "react-icons/sl";
 import { VscCoffee } from "react-icons/vsc";
 import { NavLink, useLocation } from "react-router-dom";
 import DialogLogin from "../../Auth/components/DialogLogin";
 import DialogSignUp from "../../Auth/components/DialogSignUp";
 
-const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
+const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
   const [hasScrollbar, setHasScrollbar] = useState(false);
@@ -137,20 +139,24 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
               >
                 Phân tích
               </h3>
-              <NavLink
-                to={"/phan-tich-ky-thuat/FPT"}
-                className={
-                  activeNav.split("/").slice(0, -1).join("/") ===
-                  "/phan-tich-ky-thuat"
-                    ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                    : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                }
-              >
-                <span className="px-2">
-                  <SlGraph />
-                </span>
-                Phân tích kỹ thuật
-              </NavLink>
+              {role === "8Z5M8" ? (
+                <NavLink
+                  to={"/phan-tich-ky-thuat/FPT"}
+                  className={
+                    activeNav.split("/").slice(0, -1).join("/") ===
+                    "/phan-tich-ky-thuat"
+                      ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                      : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                  }
+                >
+                  <span className="px-2">
+                    <SlGraph />
+                  </span>
+                  Phân tích kỹ thuật
+                </NavLink>
+              ) : (
+                <></>
+              )}
               <NavLink
                 to={"/phan-tich-ky-thuat-tu-dong/FPT"}
                 className={
@@ -199,6 +205,22 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user }) => {
                 "/chien-luoc-giao-dich",
                 <MdQueryStats />,
                 "Chiến lược giao dịch"
+              )}
+              {buttonNavLink(
+                "/beta-smart",
+                <HiOutlineLightBulb />,
+                "BETA SMART"
+              )}
+              {role === "V0U1S" || !role ? (
+                <></>
+              ) : (
+                <div>
+                  {buttonNavLink(
+                    "/trading-tool",
+                    <PiPresentationChartLight />,
+                    "Trading Tool"
+                  )}
+                </div>
               )}
             </div>
           </div>

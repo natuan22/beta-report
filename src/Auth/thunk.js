@@ -20,9 +20,14 @@ export const userLoginAction = (data) => async (dispatch) => {
 
     localStorage.setItem("user", JSON.stringify(userDataWithoutTokens));
     //role : 2ZW79
-    //true : V0U1S
-    //false: 8Z5M8
-    if (res.data.data.role === 1) localStorage.setItem("2ZW79", "V0U1S");
+    //0: V0U1S Bth nhưng k đc xem trading tool
+    //1: 8Z5M8 Được xem, được sửa trading tool
+    //2: XJ20C Bth nhưng đc xem trading tool
+    if (res.data.data.role === 0) {
+      localStorage.setItem("2ZW79", "V0U1S");
+    } else if (res.data.data.role === 1) {
+      localStorage.setItem("2ZW79", "8Z5M8");
+    } else localStorage.setItem("2ZW79", "XJ20C");
     //true : 7MEvU
     //false: 4E8WL
     localStorage.setItem("_il", "7MEvU");

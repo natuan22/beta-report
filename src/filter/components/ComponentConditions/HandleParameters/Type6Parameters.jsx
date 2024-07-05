@@ -71,7 +71,6 @@ const Type6Parameters = ({ filter, selectCondition, data, onFilteredDataChange, 
       setPreviousFilteredData(filteredData);
     }
   }, [ data, filter.key, selectCondition, value, valueFrom, valueTo, onFilteredDataChange ]);
-
   return (
     <div>
       {selectCondition === "about" ? (

@@ -2,12 +2,14 @@ import { Button } from "@mui/material";
 import { Form, Input, Modal, message } from "antd";
 import React, { useState } from "react";
 import { MdSaveAlt } from "react-icons/md";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.css";
 import { getApi } from "../../helper/getApi";
 import { postApi } from "../../helper/postApi";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
-const SaveFilter = ({ selectedItems, setFilters, filtersActive }) => {
+const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -62,20 +64,39 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive }) => {
   };
 
   const saveFilter = async () => {
-    await postApi(apiUrl, `/api/v1/investment/update-filter/${filtersActive.filter_id}`, { name: filtersActive.name, value: selectedItems });
+    // Sử dụng SweetAlert để xác nhận việc xóa
+    Swal.fire({
+      title: "Bạn chắc chắn muốn xóa bộ lọc này?",
+      text: "Thao tác này không thể hoàn tác!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Xác nhận",
+      cancelButtonText: "Hủy",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        // Xác nhận xóa tin và cập nhật state
+        await postApi(
+          apiUrl,
+          `/api/v1/investment/update-filter/${filtersActive.filter_id}`,
+          { name: filtersActive.name, value: selectedItems }
+        );
 
-    fetchDataFilters();
+        fetchDataFilters();
 
-    warning("success", `Chỉnh sửa bộ lọc ${filtersActive.name} thành công`);
+        warning("success", `Chỉnh sửa bộ lọc ${filtersActive.name} thành công`);
+      }
+    });
   };
 
   return (
     <div>
       {contextHolder}
       {filtersActive === "" ? (
-        <Button variant="contained" onClick={showModal}>
-          <MdSaveAlt className="w-[25px] h-[25px]" />
-          <span className="normal-case pl-1 text-[14px] font-semibold">
+        <Button variant="contained" color="mau" onClick={showModal}>
+          <MdSaveAlt className="w-[25px] h-[25px] text-white" />
+          <span className="normal-case pl-1 text-[14px] font-semibold text-white">
             Lưu bộ lọc
           </span>
         </Button>
@@ -124,6 +145,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive }) => {
               </Form.Item>
               <Form.Item className="btnStyle">
                 <Button
+                  disabled={isLogin !== "7MEvU"}
                   type="submit"
                   variant="text"
                   sx={{
@@ -131,6 +153,11 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive }) => {
                     color: "#ffba07",
                     fontSize: "18px",
                     textTransform: "none",
+                    "&.Mui-disabled": {
+                      cursor: "not-allowed",
+                      pointerEvents: "auto",
+                      color: "rgba(0, 0, 0, 0.5)",
+                    },
                   }}
                 >
                   Tạo bộ lọc

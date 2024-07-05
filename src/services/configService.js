@@ -1,13 +1,16 @@
 import axios from "axios";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
-const accessToken = Cookies.get('at')
+const headers = {
+  mac: localStorage.getItem("deviceId"),
+};
 
+const token = Cookies.get("at");
+if (token) {
+  headers.Authorization = "Bearer " + token;
+}
 export const https = axios.create({
-    baseURL: apiUrl,
-    headers: {
-        mac: localStorage.getItem('deviceId'),
-        Authorization: "Bearer " + Cookies.get('at')
-      }
+  baseURL: apiUrl,
+  headers: headers,
 });
