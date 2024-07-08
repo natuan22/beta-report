@@ -38,7 +38,7 @@ const AnalysisPage2 = ({ stock }) => {
   }, [stock]);
   // console.log("data,", data.macdHistogram.chart);
   return (
-    <div className="h-[1480px] w-[800px] relative">
+    <div className="h-[1152px] w-[800px] relative">
       <div className="header">
         <HeaderAnalysis />
       </div>

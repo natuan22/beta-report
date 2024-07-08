@@ -47,7 +47,7 @@ const AfternoonPage1 = ({ role }) => {
   }, []);
 
   return (
-    <div className="h-[1480px] w-[800px]">
+    <div className="h-[1152px] w-[800px]">
       <div className="header">
         <HeaderAfternoon />
       </div>
@@ -89,7 +89,7 @@ const AfternoonPage1 = ({ role }) => {
                   Điểm nhấn chính:
                 </p>
                 <ul className="leading-[23px] translate-x-[-15px] text-sm text-justify font-[500]">
-                  <li className="mt-2">
+                  <li className="mt-1">
                     VN-Index {getText(data.perChange)}{" "}
                     <span className={`${getColorBaseOnValue(data.change)}`}>
                       {formatNumber(data.change)}
@@ -110,7 +110,7 @@ const AfternoonPage1 = ({ role }) => {
                     , đóng cửa tại mức {formatNumber(data.hnxClosePrice)} điểm.
                   </li>
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Biên độ dao động ngày:{" "}
                     {formatNumber(data.highPrice - data.lowPrice)} điểm (
                     {formatNumber(data.highPrice)} -{" "}
@@ -118,7 +118,7 @@ const AfternoonPage1 = ({ role }) => {
                   </li>
 
                   {data.industryAdvance?.value > 0 ? (
-                    <li className="mt-2">
+                    <li className="mt-1">
                       Ngành đóng góp{" "}
                       <span className="text-green-600">tăng</span> nổi bật cho
                       VN-Index: {data.industryAdvance?.code} (
@@ -128,13 +128,13 @@ const AfternoonPage1 = ({ role }) => {
                       ).
                     </li>
                   ) : (
-                    <li className="mt-2">
+                    <li className="mt-1">
                       Không có ngành đóng góp{" "}
                       <span className="text-green-600">tăng</span>
                     </li>
                   )}
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Ngành đóng góp <span className="text-red-600">giảm</span>{" "}
                     nổi bật cho VN-Index: {data.industryDecline?.code} (
                     <span className="text-red-500">
@@ -143,7 +143,7 @@ const AfternoonPage1 = ({ role }) => {
                     ).
                   </li>
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Cổ phiếu đóng góp tăng điểm nổi bật:{" "}
                     {data.stockAdvance.map((item, index) => (
                       <span key={item.code}>
@@ -157,7 +157,7 @@ const AfternoonPage1 = ({ role }) => {
                     .
                   </li>
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Cổ phiếu đóng góp giảm điểm nổi bật:{" "}
                     {data.stockDecline.map((item, index) => (
                       <span key={item.code}>
@@ -171,7 +171,7 @@ const AfternoonPage1 = ({ role }) => {
                     .
                   </li>
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Tổng giá trị giao dịch khớp lệnh của VN-Index đạt{" "}
                     {formatNumber(data.omVal / 1000000000)} tỷ đồng,{" "}
                     {getText(data.perOmVal)}
@@ -183,7 +183,7 @@ const AfternoonPage1 = ({ role }) => {
                     thuận là {formatNumber(data.ptVal / 1000000000)} tỷ đồng.
                   </li>
 
-                  <li className="mt-2">
+                  <li className="mt-1">
                     Độ rộng thị trường:{" "}
                     <span className="text-green-500">{data.advances}</span> mã
                     tăng,{" "}
@@ -193,7 +193,7 @@ const AfternoonPage1 = ({ role }) => {
                     giảm.
                   </li>
                   {data.netVal > 0 ? (
-                    <li className="mt-2">
+                    <li className="mt-1">
                       Giao dịch ròng của khối ngoại: mua ròng{" "}
                       <span className={`text-green-500`}>
                         {formatNumber(data.netVal / 1000000000)}
@@ -218,7 +218,7 @@ const AfternoonPage1 = ({ role }) => {
                       .
                     </li>
                   ) : (
-                    <li className="mt-2">
+                    <li className="mt-1">
                       Giao dịch ròng của khối ngoại: bán ròng{" "}
                       <span className={`text-red-500`}>
                         {formatNumber(data.netVal / 1000000000)}

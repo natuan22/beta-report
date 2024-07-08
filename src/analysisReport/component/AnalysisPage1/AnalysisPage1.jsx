@@ -123,7 +123,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
   }, [dataAnalysis]);
 
   return (
-    <div className="h-[1480px] w-[900px] relative">
+    <div className="h-[1152px] w-[900px] relative">
       <div className="absolute top-[450px] left-[860px] z-30 w-[223px]">
         {/* type tach tu dong vs ban tu dong */}
         {type === 1 && role === "8Z5M8" ? (

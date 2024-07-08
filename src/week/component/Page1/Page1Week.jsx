@@ -6,7 +6,7 @@ const Page1Week = () => {
   const date = getTimeWeek();
   const dateParts = date.split(" - ");
   return (
-    <div className="h-[1480px] w-[800px] relative  ">
+    <div className="h-[1152px] w-[800px] relative  ">
       <img src={img} alt="img" width={800} height={1125} />
       <div className="absolute top-0 left-0 translate-x-[50px] translate-y-[585px]">
         <p

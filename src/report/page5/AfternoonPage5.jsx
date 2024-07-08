@@ -5,7 +5,7 @@ import HeaderAfternoon from "../utils/component/HeaderAfternoon";
 
 const AfternoonPage5 = () => {
   return (
-    <div className="h-[1200px] w-[800px]  ">
+    <div className="h-[1152px] w-[800px]  ">
       <div className="header">
         <HeaderAfternoon />
       </div>
