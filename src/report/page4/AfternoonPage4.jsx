@@ -89,7 +89,7 @@ const AfternoonPage4 = ({ role }) => {
     }
   };
   return (
-    <div className="h-[1480px] w-[800px]">
+    <div className="h-[1152px] w-[800px]">
       <div className="header">
         <HeaderAfternoon />
       </div>

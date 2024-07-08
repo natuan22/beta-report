@@ -57,7 +57,7 @@ const Page1 = ({ role }) => {
   };
 
   return (
-    <div className="h-[1480px] w-[800px] relative  ">
+    <div className="h-[1152px] w-[800px] relative  ">
       <div className="absolute top-[30%] right-0 translate-x-[300px] ">
         {role === "8Z5M8" ? (
           <div className="flex flex-col justify-between h-[200px]">

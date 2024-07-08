@@ -5,7 +5,7 @@ import HeaderWeek from "../../utils/HeaderWeek";
 
 const Page12Week = () => {
   return (
-    <div className="h-[1200px] w-[800px]  ">
+    <div className="h-[1152px] w-[800px]  ">
       <div className="header">
         <HeaderWeek />
       </div>

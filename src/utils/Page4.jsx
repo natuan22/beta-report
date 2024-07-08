@@ -5,7 +5,7 @@ import Header from "../component/Header";
 
 const Page4 = () => {
   return (
-    <div className="h-[1480px] w-[800px]  ">
+    <div className="h-[1152px] w-[800px]  ">
       <div className="header">
         <Header date={"21/11/2023"} type={2} />
       </div>

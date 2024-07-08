@@ -5,7 +5,7 @@ import HeaderAnalysis from "../utils/HeaderAnalysis";
 
 const Page4 = () => {
   return (
-    <div className="h-[1480px] w-[800px]  ">
+    <div className="h-[1152px] w-[800px]  ">
       <div className="header">
         <HeaderAnalysis />
       </div>

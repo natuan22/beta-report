@@ -247,7 +247,7 @@ const WeekNews = () => {
         <div ref={pageRefs.page8}>
           <Page8Week />
         </div>
-        <div className="h-[1480px]" ref={pageRefs.page9}>
+        <div className="h-[827px]" ref={pageRefs.page9}>
           <Page9Week />
         </div>
         {/* <div ref={pageRefs.page10}>
