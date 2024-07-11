@@ -37,6 +37,12 @@ const getColor = (item) => {
   return "text-yellow-500";
 };
 
+const getColorTiemNangTangGia = (item, type) => {
+  if (item < 0) return "text-red-500";
+  const threshold = type === 2024 ? 12 : 25;
+  return item >= threshold ? "text-green-500" : "text-yellow-500";
+};
+
 const theme = createTheme({
   palette: {
     test: {
@@ -111,11 +117,11 @@ const TradingTool = () => {
           id: item.code,
           closePrice,
           signal:
-            item.signal == 0
+            item.signal === 0
               ? "MUA"
-              : item.signal == 1
+              : item.signal === 1
               ? "BÁN"
-              : item.signal == 2
+              : item.signal === 2
               ? "Hold mua"
               : "Hold bán",
           total: parseFloat((item.total * 100).toFixed(2)),
@@ -183,6 +189,7 @@ const TradingTool = () => {
       headerName: "Tiềm năng tăng giá 2024 (%)",
       field: "p_2024",
       width: 200,
+      cellClass: (params) => getColorTiemNangTangGia(params.data.p_2024, 2024),
       cellStyle: { textAlign: "center" },
     },
     {
@@ -195,6 +202,7 @@ const TradingTool = () => {
       headerName: "Tiềm năng tăng giá 2025 (%)",
       field: "p_2025",
       width: 200,
+      cellClass: (params) => getColorTiemNangTangGia(params.data.p_2025, 2025),
       cellStyle: { textAlign: "center" },
     },
     {
@@ -220,11 +228,11 @@ const TradingTool = () => {
       field: "signal",
       width: 130,
       cellClass: (params) =>
-        params.value == "MUA"
+        params.value === "MUA"
           ? "text-green-500"
-          : params.value == "BÁN"
+          : params.value === "BÁN"
           ? "text-red-500"
-          : params.value == "Hold mua"
+          : params.value === "Hold mua"
           ? "text-green-500"
           : "text-red-500",
       cellStyle: { fontWeight: "bold", textAlign: "center" },
@@ -263,7 +271,7 @@ const TradingTool = () => {
     if (socketConnected && data?.length > 0) {
       socket.on(`listen-ma-co-phieu`, (res) => {
         setData((prevData) => {
-          const index = prevData.findIndex((item) => item.code == res[0].code);
+          const index = prevData.findIndex((item) => item.code === res[0].code);
 
           if (index === -1) {
             console.error("Không tìm thấy mục với code:", res[0].code);
@@ -290,11 +298,11 @@ const TradingTool = () => {
               closePrice: newClosePrice,
               ma: parseFloat((res[0].ma / 1000).toFixed(2)),
               signal:
-                res[0].signal == 0
+                res[0].signal === 0
                   ? "MUA"
-                  : res[0].signal == 1
+                  : res[0].signal === 1
                   ? "BÁN"
-                  : res[0].signal == 2
+                  : res[0].signal === 2
                   ? "Hold mua"
                   : "Hold bán",
               p_2024: item.price_2024
@@ -366,15 +374,15 @@ const TradingTool = () => {
             }
 
             const signal =
-              res[0].signal == 0
+              res[0].signal === 0
                 ? "MUA"
-                : res[0].signal == 1
+                : res[0].signal === 1
                 ? "BÁN"
-                : res[0].signal == 2
+                : res[0].signal === 2
                 ? "Hold mua"
                 : "Hold bán";
 
-            if (rowNode && item.signal != signal) {
+            if (rowNode && item.signal !== signal) {
               const rowElement = document.querySelector(
                 `[row-id="${newItem.code}"]`
               );
@@ -476,11 +484,11 @@ const TradingTool = () => {
             id: code,
             name: res[0].name,
             signal_text:
-              res[0].signal == 0
+              res[0].signal === 0
                 ? "MUA"
-                : res[0].signal == 1
+                : res[0].signal === 1
                 ? "BÁN"
-                : res[0].signal == 2
+                : res[0].signal === 2
                 ? "Hold mua"
                 : "Hold bán",
           },
@@ -510,7 +518,11 @@ const TradingTool = () => {
         </div>
 
         <div className="w-full h-[919px] p-[40px]">
-          <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
+          <div
+            className={`bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center ${
+              role === "8Z5M8" ? "" : "mb-[15px]"
+            }`}
+          >
             Trading Tool
           </div>
           {role === "8Z5M8" && (
@@ -526,7 +538,9 @@ const TradingTool = () => {
             </div>
           )}
 
-          <div className="w-full h-[732px]">
+          <div
+            className={`w-full ${role === "8Z5M8" ? "h-[732px]" : "h-[785px]"}`}
+          >
             <div className="example-wrapper">
               <div className={"ag-theme-quartz w-full h-full"}>
                 <AgGridReact

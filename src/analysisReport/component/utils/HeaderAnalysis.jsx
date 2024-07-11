@@ -7,7 +7,7 @@ const HeaderAnalysis = () => {
     <div className="h-[100px] w-[800px] bg-gradient-to-b from-[#143A65] to-[#0054B4] relative">
       <div className="absolute top-[103px] left-0 translate-x-[10px] w-[780px] h-[4px] bg-[#F89637]"></div>
       <div className="flex justify-evenly  h-full">
-        <div className="w-[25%]">
+        <div className="w-[25%] items-center flex">
           <img src={logo} alt="" width={155} height={80} />
         </div>
         <div className="w-[75%] flex flex-col  justify-center">
