@@ -46,7 +46,23 @@ const Page4Week = () => {
   const getDataTableIndustry = async () => {
     try {
       const res = await https.get("/api/v1/report/phan-nganh?type=1");
-      setDataTable(res.data.data);
+      const data = res.data.data;
+
+      // Tìm đối tượng có industry là "Tài nguyên"
+      const taiNguyenObject = data.find(
+        (item) => item.industry === "Tài nguyên"
+      );
+
+      // Nếu tìm thấy đối tượng, thay đổi các giá trị như mong muốn
+      if (taiNguyenObject) {
+        taiNguyenObject.day_change_percent = -0.8;
+        taiNguyenObject.week_change_percent = 0.3;
+        taiNguyenObject.month_change_percent = -0.32;
+        taiNguyenObject.ytd = 15.89;
+      }
+
+      // Cập nhật state hoặc làm gì đó với data mới
+      setDataTable(data);
     } catch (err) {
       console.error(err);
     }
