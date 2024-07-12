@@ -47,8 +47,10 @@ const Page4Week = () => {
       if (taiNguyenObject) {
         taiNguyenObject.value = 0.3;
       }
+      // Sắp xếp theo value
+      const sortedData = data.sort((a, b) => b.value - a.value);
 
-      setDataChartIndustry(data);
+      setDataChartIndustry(sortedData);
     } catch (err) {
       console.error(err);
     }
