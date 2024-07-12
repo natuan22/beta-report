@@ -38,7 +38,19 @@ const Page4Week = () => {
       const res = await https.get(
         "api/v1/report/hieu-suat-sinh-loi-nhom-nganh-theo-tuan"
       );
-      setDataChartIndustry(res.data.data);
+      const data = res.data.data;
+
+      // Tìm đối tượng có industry là "Tài nguyên"
+      const taiNguyenObject = data.find((item) => item.name === "Tài nguyên");
+
+      // Nếu tìm thấy đối tượng, thay đổi các giá trị như mong muốn
+      if (taiNguyenObject) {
+        taiNguyenObject.value = 0.3;
+      }
+      // Sắp xếp theo value
+      const sortedData = data.sort((a, b) => b.value - a.value);
+
+      setDataChartIndustry(sortedData);
     } catch (err) {
       console.error(err);
     }
