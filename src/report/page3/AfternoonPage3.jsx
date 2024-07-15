@@ -52,23 +52,7 @@ const AfternoonPage3 = () => {
   const getDataTable = async () => {
     try {
       const response = await https.get("/api/v1/report/phan-nganh");
-      const data = response.data.data;
-
-      // Tìm đối tượng có industry là "Tài nguyên"
-      const taiNguyenObject = data.find(
-        (item) => item.industry === "Tài nguyên"
-      );
-
-      // Nếu tìm thấy đối tượng, thay đổi các giá trị như mong muốn
-      if (taiNguyenObject) {
-        taiNguyenObject.day_change_percent = -0.8;
-        taiNguyenObject.week_change_percent = 0.3;
-        taiNguyenObject.month_change_percent = -0.32;
-        taiNguyenObject.ytd = 15.89;
-      }
-
-      // Cập nhật state hoặc làm gì đó với data mới
-      setDataTable(data);
+      setDataTable(response.data.data);
     } catch (err) {
       console.error(err);
     }
