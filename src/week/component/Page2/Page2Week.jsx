@@ -18,6 +18,7 @@ const getText = (value) => {
 const Page2Week = ({ role }) => {
   const [data, setData] = useState();
   const [text, setText] = useState();
+
   const getData = async () => {
     try {
       const res = await https.get("api/v1/report/ban-tin-tuan-1");
