@@ -78,14 +78,33 @@ const ChartTopForeignTotal = ({ data, title }) => {
       {
         type: "column",
         name: "",
-        data: data.map((item) => ({
+        data: data.map((item, index) => ({
           y: item.netVal / 1000000000,
           color: item.netVal >= 0 ? "#26A69A" : "#EF5350",
+          dataLabels: {
+            enabled: true,
+            formatter: function () {
+              return formatNumberChart(this.y);
+            },
+            style: {
+              color: "#000",
+              fontSize: "10px",
+              fontWeight: "bold",
+              textOutline: "1px contrast",
+            },
+            ...(index === data.length - 1
+              ? {
+                  // Apply custom position to the last data label
+                  align: "center", // Custom align for the last label, you can adjust this
+                  y: -25, // Custom y position
+                }
+              : {}),
+          },
         })),
         yAxis: 0,
         color: "#ff0000",
         dataLabels: {
-          enabled: true, // Bật hiển thị label cho cột
+          enabled: true, // Enable labels globally, but individual points can override this
           formatter: function () {
             return formatNumberChart(this.y);
           },
@@ -119,7 +138,7 @@ const ChartTopForeignTotal = ({ data, title }) => {
               fontWeight: "bold",
             },
             x: 2, // Điều chỉnh vị trí ngang của nhãn
-            y: 16, // Điều chỉnh vị trí dọc của nhãn
+            y: 22, // Điều chỉnh vị trí dọc của nhãn
           },
         })),
 
