@@ -15,15 +15,17 @@ import React, {
 import { FaPlusCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk.js";
+import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar.jsx";
 import { getApi } from "../helper/getApi.js";
 import { postApi } from "../helper/postApi.js";
 import socket from "../helper/socket.js";
 import ActionComponents from "./components/ActionComponents.jsx";
 import DetailComponents from "./components/DetailComponents.jsx";
-import "./utils/styles/styles.css";
 import EditModal from "./components/EditModal.jsx";
+import "./utils/styles/styles.css";
 
+const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
 const flashClass = {
   up: "custom-flash-up",
@@ -504,6 +506,61 @@ const TradingTool = () => {
     }
   };
 
+  const sheetTitle = [
+    "Mã",
+    "Giá",
+    "+/-",
+    "Giá mục tiêu 2024",
+    "Tiềm năng tăng giá 2024 (%)",
+    "Giá mục tiêu 2025",
+    "Tiềm năng tăng giá 2025 (%)",
+    "MA",
+    "Giá trị MA",
+    "Hiệu suất sinh lời theo MA (%)",
+    "Tín hiệu",
+  ];
+
+  const prepareData = (item) => [
+    item.code,
+    item.closePrice,
+    item.perChange,
+    item.price_2024,
+    item.p_2024,
+    item.price_2025,
+    item.p_2025,
+    item.name,
+    item.ma,
+    item.total,
+    item.signal,
+  ];
+
+  const downloadExcel = () => {
+    try {
+      //Xử lý dữ liệu đưa vào sheet
+      const sheet1Data = data.map(prepareData);
+
+      // Tạo workbook và thêm các sheet
+      const workbook = XLSX.utils.book_new();
+
+      // Tạo sheet 1
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheetTitle, ...sheet1Data]),
+        "Trading tool"
+      );
+
+      const ngayHienTai = new Date();
+      const ngay = ngayHienTai.getDate();
+      const thang = ngayHienTai.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0
+      const nam = ngayHienTai.getFullYear();
+
+      // Xuất workbook thành file Excel
+      XLSX.writeFile(workbook, `tradingTool-${ngay}${thang}${nam}.xlsx`);
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="relative">
@@ -525,9 +582,10 @@ const TradingTool = () => {
           >
             Trading Tool
           </div>
-          {role === "8Z5M8" && (
-            <div className="flex justify-start content-center my-[15px]">
-              <div>
+
+          <div className="flex justify-start content-center my-[15px]">
+            {role === "8Z5M8" && (
+              <div className="mr-[20px]">
                 <Button variant="contained" color="test" onClick={showModalAdd}>
                   <FaPlusCircle className="w-[20px] h-[20px] text-white" />
                   <span className="normal-case pl-1 text-[14px] font-semibold text-white">
@@ -535,12 +593,16 @@ const TradingTool = () => {
                   </span>
                 </Button>
               </div>
-            </div>
-          )}
+            )}
+            <Button variant="contained" color="test" onClick={downloadExcel}>
+              <img src={icon_excel} alt="icon_excel" />
+              <span className="normal-case pl-1 text-[14px] font-semibold text-white">
+                Tải Excel
+              </span>
+            </Button>
+          </div>
 
-          <div
-            className={`w-full ${role === "8Z5M8" ? "h-[732px]" : "h-[785px]"}`}
-          >
+          <div className={`w-full h-[732px]`}>
             <div className="example-wrapper">
               <div className={"ag-theme-quartz w-full h-full"}>
                 <AgGridReact
