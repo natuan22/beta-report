@@ -23,7 +23,7 @@ const LineChart = ({ dataLineChart }) => {
     },
     credits: false,
     chart: {
-      type: "spline",
+      type: "line",
       backgroundColor: "transparent",
     },
     title: {

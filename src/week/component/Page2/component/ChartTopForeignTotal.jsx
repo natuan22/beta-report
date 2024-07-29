@@ -81,25 +81,25 @@ const ChartTopForeignTotal = ({ data, title }) => {
         data: data.map((item, index) => ({
           y: item.netVal / 1000000000,
           color: item.netVal >= 0 ? "#26A69A" : "#EF5350",
-          dataLabels: {
-            enabled: true,
-            formatter: function () {
-              return formatNumberChart(this.y);
-            },
-            style: {
-              color: "#000",
-              fontSize: "10px",
-              fontWeight: "bold",
-              textOutline: "1px contrast",
-            },
-            ...(index === data.length - 1
-              ? {
-                  // Apply custom position to the last data label
-                  align: "center", // Custom align for the last label, you can adjust this
-                  y: -25, // Custom y position
-                }
-              : {}),
-          },
+          // dataLabels: {
+          //   enabled: true,
+          //   formatter: function () {
+          //     return formatNumberChart(this.y);
+          //   },
+          //   style: {
+          //     color: "#000",
+          //     fontSize: "10px",
+          //     fontWeight: "bold",
+          //     textOutline: "1px contrast",
+          //   },
+          //   ...(index === data.length - 1
+          //     ? {
+          //         // Apply custom position to the last data label
+          //         align: "center", // Custom align for the last label, you can adjust this
+          //         y: -25, // Custom y position
+          //       }
+          //     : {}),
+          // },
         })),
         yAxis: 0,
         color: "#ff0000",
