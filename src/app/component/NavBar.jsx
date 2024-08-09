@@ -104,7 +104,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         }`}
       >
         <div id="nav" className="overflow-x-auto h-full">
-          <div className="w-full px-3 overflow-y-auto h-[830px]">
+          <div className="w-full px-3 overflow-y-auto h-[925px]">
             <div>
               <h3
                 className={`uppercase ${
