@@ -85,7 +85,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
       <div>
         <button
           onClick={toggleSidebar}
-          className={`fixed top-1 -right-4 bg-slate-100 text-black z-[999] font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
+          className={`fixed top-1 -right-[10px] bg-slate-100 text-black z-[999] font-semibold drop-shadow-xl transition-transform rounded-lg text-base px-4 pt-2 pb-1 mr-2  
             ${
               showSidebar ? "translate-x-[-520%] ease-in-out duration-500" : ""
             } `}
@@ -104,7 +104,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         }`}
       >
         <div id="nav" className="overflow-x-auto h-full">
-          <div className="w-full px-3 overflow-y-auto h-[925px]">
+          <div className="w-full px-3 overflow-y-auto h-[827px]">
             <div>
               <h3
                 className={`uppercase ${
@@ -183,7 +183,9 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   activeNav === "/danh-muc-theo-doi" ||
                   activeNav === "/bo-loc" ||
                   activeNav === "/canh-bao-tin-hieu" ||
-                  activeNav === "/chien-luoc-giao-dich"
+                  activeNav === "/chien-luoc-giao-dich" ||
+                  activeNav === "/trading-tool" ||
+                  activeNav === "/historical-pe-pb"
                     ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
                     : "text-slate-500"
                 }`}
@@ -219,6 +221,17 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                     "/trading-tool",
                     <PiPresentationChartLight />,
                     "Trading Tool"
+                  )}
+                </div>
+              )}
+              {role === "V0U1S" || !role ? (
+                <></>
+              ) : (
+                <div>
+                  {buttonNavLink(
+                    "/historical-pe-pb",
+                    <PiPresentationChartLight />,
+                    "Lịch sử P/E, P/B"
                   )}
                 </div>
               )}
