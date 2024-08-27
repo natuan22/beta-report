@@ -5,6 +5,7 @@ import AnalysisReport from "../analysisReport/AnalysisReport";
 import AnalysisReportAutomation from "../analysisReport/AnalysisReportAutomation";
 import AnalysisReportBasic from "../analysisReport/AnalysisReportBasic";
 import Filter from "../filter/Filter";
+import HistoricalPEPB from "../historicalPEPB/HistoricalPEPB";
 import ReportAfternoon from "../report/ReportAfternoon";
 import TradingStrategies from "../tradingStrategies/TradingStrategies";
 import TradingTool from "../tradingTool/TradingTool";
@@ -29,4 +30,5 @@ export const routes = [
   { path: "/chien-luoc-giao-dich", component: TradingStrategies, role: "V0U1S" },
   { path: "/beta-smart", component: NavBar2, role: "V0U1S" },
   { path: "/trading-tool", component: TradingTool, role: "8Z5M8" },
+  { path: "/historical-pe-pb", component: HistoricalPEPB, role: "8Z5M8" },
 ];
