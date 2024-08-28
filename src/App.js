@@ -20,29 +20,31 @@ function App() {
   }, []);
 
   // Hàm kiểm tra quyền truy cập
-  const checkAccess = (routeRole) => {
-    const userRole = localStorage.getItem("2ZW79") || "V0U1S";
+const checkAccess = (routeRole) => {
+  const userRole = localStorage.getItem("2ZW79") || "V0U1S";
 
-    // Người dùng có quyền cao nhất truy cập mọi route
-    if (userRole === "8Z5M8" || userRole === "XJ20C") {
-      return true;
-    }
+  // Người dùng có quyền cao nhất truy cập mọi route
+  if (userRole === "8Z5M8" || userRole === "XJ20C") {
+    return true;
+  }
 
-    // Người dùng có quyền truy cập route nếu role khớp hoặc là quyền cơ bản
-    return routeRole === "V0U1S" || userRole === routeRole;
-  };
+  // Người dùng có quyền truy cập route nếu role khớp hoặc là quyền cơ bản
+  return routeRole === "V0U1S" || userRole === routeRole;
+};
 
-  const PrivateRoute = ({ component: Component, role }) => {
-    const isAuthorized = checkAccess(role);
+// Thành phần PrivateRoute
+const PrivateRoute = ({ component: Component, role, requiresLogin = false }) => {
+  const isLogin = localStorage.getItem("_il") === "7MEvU"; // Kiểm tra trạng thái đăng nhập
+  const isAuthorized = requiresLogin ? isLogin && checkAccess(role) : checkAccess(role);
 
-    return isAuthorized ? <Component /> : <Navigate to="/" />;
-  };
+  return isAuthorized ? <Component /> : <Navigate to="/" />;
+};
 
-  const mappedRoute = routes.map(({ path, component: Component, role }) => (
+  const mappedRoute = routes.map(({ path, component: Component, role, requiresLogin }) => (
     <Route
       key={path}
       path={path}
-      element={<PrivateRoute component={Component} role={role} />}
+      element={<PrivateRoute component={Component} role={role} requiresLogin={requiresLogin}/>}
     />
   ));
 
