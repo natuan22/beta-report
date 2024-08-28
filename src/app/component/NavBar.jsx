@@ -224,7 +224,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   )}
                 </div>
               )}
-              {role === "V0U1S" || !role ? (
+              {isLogin !== "7MEvU" ? (
                 <></>
               ) : (
                 <div>
