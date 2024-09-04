@@ -333,7 +333,7 @@ const ChartLine = ({ stock, data, chartKey }) => {
   };
 
   return (
-    <div className="historical-pe-pb">
+    <div className="historical-pe-pb h-[600px]">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
