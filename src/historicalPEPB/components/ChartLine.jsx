@@ -18,22 +18,8 @@ const ChartLine = ({ stock, data, chartKey }) => {
       ];
       setTimeLine(uniqueDates);
 
-      const keys = [
-        "pe",
-        "pb",
-        "industryPe",
-        "industryPb",
-        "indexPe",
-        "indexPb",
-      ];
-      const colors = [
-        "#009565",
-        "#FF2A37",
-        "#00F1A0",
-        "#FF9BA3",
-        "#FBAC20",
-        "#FBAC20",
-      ];
+      const keys = ["pe", "pb", "industryPe", "industryPb", "indexPe", "indexPb"];
+      const colors = ["#009565", "#FF2A37", "#00F1A0", "#FF9BA3", "#FBAC20", "#FBAC20"];
 
       const transformedData = keys.map((key, index) => {
         return {
@@ -66,6 +52,42 @@ const ChartLine = ({ stock, data, chartKey }) => {
             ...item,
             name: newName,
             dashStyle,
+            dataLabels: {
+              enabled: true,
+              formatter: function () {
+                const visibleSeries = this.series.chart.series.filter(
+                  (s) => s.visible
+                );
+
+                // Get the name of the current series without the " (Trung bình)" suffix
+                const baseName = this.series.name.replace(" (Trung bình)", "");
+
+                // Check if there's only the base series and its average series visible
+                const isOnlyBaseAndAverageVisible = visibleSeries.every((s) => {
+                  const nameWithoutAverage = s.name.replace(
+                    " (Trung bình)",
+                    ""
+                  );
+                  return nameWithoutAverage === baseName;
+                });
+
+                if (!isOnlyBaseAndAverageVisible) {
+                  return null; // Hide the label if other series are visible
+                }
+
+                return this.series.visible &&
+                  this.point.index === this.series.data.length - 1
+                  ? this.point.y.toFixed(1)
+                  : null; // Show the label for the last point if the series is visible
+              },
+              style: {
+                color: "#000",
+                fontSize: "11px",
+                fontWeight: "bold",
+                textOutline: "1px contrast",
+              },
+              y: 20, // Điều chỉnh vị trí dọc của nhãn
+            },
           };
         });
 
@@ -92,6 +114,42 @@ const ChartLine = ({ stock, data, chartKey }) => {
             ...item,
             name: newName,
             dashStyle,
+            dataLabels: {
+              enabled: true,
+              formatter: function () {
+                const visibleSeries = this.series.chart.series.filter(
+                  (s) => s.visible
+                );
+
+                // Get the name of the current series without the " (Trung bình)" suffix
+                const baseName = this.series.name.replace(" (Trung bình)", "");
+
+                // Check if there's only the base series and its average series visible
+                const isOnlyBaseAndAverageVisible = visibleSeries.every((s) => {
+                  const nameWithoutAverage = s.name.replace(
+                    " (Trung bình)",
+                    ""
+                  );
+                  return nameWithoutAverage === baseName;
+                });
+
+                if (!isOnlyBaseAndAverageVisible) {
+                  return null; // Hide the label if other series are visible
+                }
+
+                return this.series.visible &&
+                  this.point.index === this.series.data.length - 1
+                  ? this.point.y.toFixed(1)
+                  : null; // Show the label for the last point if the series is visible
+              },
+              style: {
+                color: "#000",
+                fontSize: "11px",
+                fontWeight: "bold",
+                textOutline: "1px contrast",
+              },
+              y: 20, // Điều chỉnh vị trí dọc của nhãn
+            },
           };
         });
 
@@ -111,9 +169,7 @@ const ChartLine = ({ stock, data, chartKey }) => {
       // Sử dụng hàm cho peData (có lọc)
       const peAverageData = peData.map((series) => ({
         name: `${series.name} (Trung bình)`,
-        data: Array(uniqueDates.length).fill(
-          +calculateAverage(series.data, true).toFixed(1)
-        ),
+        data: Array(uniqueDates.length).fill(+calculateAverage(series.data, true).toFixed(1)),
         color: series.color,
         dashStyle: "dot",
         visible: false,
@@ -137,9 +193,7 @@ const ChartLine = ({ stock, data, chartKey }) => {
       // Sử dụng hàm cho pbData (không lọc)
       const pbAverageData = pbData.map((series) => ({
         name: `${series.name} (Trung bình)`,
-        data: Array(uniqueDates.length).fill(
-          +calculateAverage(series.data).toFixed(1)
-        ),
+        data: Array(uniqueDates.length).fill(+calculateAverage(series.data).toFixed(1)),
         color: series.color,
         dashStyle: "dot",
         visible: false,
@@ -264,13 +318,9 @@ const ChartLine = ({ stock, data, chartKey }) => {
             tooltip += `
                 <div style="display: flex; align-items: center; margin-bottom: 3px;">
                     <div style="width: 10px; height: 10px; background-color: ${color}; margin-right: 5px;"></div>
-                    <span style="color:${color}; width: 65px">${removeParentheses(
-              point.series.name
-            )}</span>
+                    <span style="color:${color}; width: 65px">${removeParentheses(point.series.name)}</span>
                     <span style="width: 60px;"><b>${point.y}</b></span>
-                    <span><b>${dataAverage[seriesIndex].data[0].toFixed(
-                      1
-                    )}</b></span>
+                    <span><b>${dataAverage[seriesIndex].data[0].toFixed(1)}</b></span>
                     <br/>
                 </div>`;
           }
@@ -294,3 +344,6 @@ const ChartLine = ({ stock, data, chartKey }) => {
 };
 
 export default ChartLine;
+
+
+
