@@ -55,7 +55,7 @@ const HistoricalPEPB = () => {
   };
 
   useEffect(() => {
-    document.title = "Historical PE PB";
+    document.title = "Lịch sử P/E P/B";
   }, []);
 
   const fetchData = async () => {
