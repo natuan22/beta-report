@@ -3,11 +3,14 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Select, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { userLogoutAction } from "../Auth/thunk";
 import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
+import { userLogoutAction } from "../Auth/thunk";
 import { getApi } from "../helper/getApi";
-import ChartLine from "./components/ChartLine";
+import LineChartPrice from "./components/LineChartPrice";
+import PieChartVal from "./components/PieChartVal";
+import StackColumnVal from "./components/StackColumnVal";
+import TableBuySell from "./components/TableBuySell";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -22,7 +25,7 @@ const theme = createTheme({
   },
 });
 
-const HistoricalPEPB = () => {
+const BuySellActive = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -31,7 +34,11 @@ const HistoricalPEPB = () => {
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("FPT");
-  const [period, setPeriod] = useState("1");
+
+  const [processedBuyData, setProcessedBuyData] = useState([]);
+  const [processedSellData, setProcessedSellData] = useState([]);
+  const [totalBuyVal, setTotalBuyVal] = useState([]);
+  const [totalSellVal, setTotalSellVal] = useState([]);
 
   const [loadingExcel, setLoadingExcel] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -55,7 +62,7 @@ const HistoricalPEPB = () => {
   };
 
   useEffect(() => {
-    document.title = "Lịch sử P/E P/B";
+    document.title = "Mua bán chủ động";
   }, []);
 
   const fetchData = async () => {
@@ -63,16 +70,27 @@ const HistoricalPEPB = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(
+        const res = await getApi(
           apiUrl,
-          `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
+          `/api/v1/tcbs/trading-info?stock=${stock}`
         );
-        setData(data);
+
+        if (res?.data.length !== data?.data?.length) {
+          setData(res); // Chỉ cập nhật nếu có sự thay đổi
+        }
       } catch (error) {
         console.error(error);
       }
+      // finally {
+      //   // Gọi lại sau 30 giây
+      //   setTimeout(fetchData, 30000);
+      // }
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [stock]);
 
   useEffect(() => {
     const fetchDataStock = async () => {
@@ -86,10 +104,6 @@ const HistoricalPEPB = () => {
 
     fetchDataStock();
   }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [stock, period]);
 
   const filterOption = (input, option) =>
     (option?.value).toLowerCase().includes(input.toLowerCase()) ||
@@ -106,61 +120,97 @@ const HistoricalPEPB = () => {
     });
   };
 
-  const sheetTitle = [
-    "Ngày",
-    "PB Vnindex",
-    "PE Vnindex",
-    "PB Ngành",
-    "PE Ngành",
-    "PB",
-    "PE",
-  ];
+  const processData = (data) => { 
+    const totals = {
+      buy: { small: 0, medium: 0, large: 0 },
+      sell: { small: 0, medium: 0, large: 0 },
+    };
+    let totalBuyVal = 0;
+    let totalSellVal = 0;
+
+    data.forEach((item) => {
+      const value = +item.formattedVal; // Convert formattedVal to a number
+      const category =
+        value < 100_000_000
+          ? "small"
+          : value < 1_000_000_000
+          ? "medium"
+          : "large";
+
+      if (item.lastColor === "S") {
+        totals.buy[category] += value;
+        totalBuyVal += value;
+      } else if (item.lastColor === "B") {
+        totals.sell[category] += value;
+        totalSellVal += value;
+      }
+    });
+    
+    return {
+      buyValData: totals.buy,
+      sellValData: totals.sell,
+      totalBuyVal,
+      totalSellVal,
+    };
+  };
+
+  useEffect(() => {
+    if (data?.data.length > 0) {
+      const { buyValData, sellValData, totalBuyVal, totalSellVal } = processData(data.data);
+
+      setProcessedBuyData(buyValData);
+      setProcessedSellData(sellValData);
+      
+      setTotalBuyVal(totalBuyVal)
+      setTotalSellVal(totalSellVal)
+    } else {
+      setProcessedBuyData(null);
+      setProcessedSellData(null);
+      
+      setTotalBuyVal(null)
+      setTotalSellVal(null)
+    }
+  }, [data]);
 
   const prepareData = (item) => [
-    item.from,
-    item.indexPb,
-    item.indexPe,
-    item.industryPb,
-    item.industryPe,
-    item.pb,
-    item.pe,
+    item.formattedTime,
+    item.lastColor === "S" ? "Mua" : "Bán",
+    Number(item.formattedVol),
+    Number(item.formattedMatchPrice),
+    Number(item.formattedChangeValue),
   ];
 
-  const downloadExcel = async () => {
-    if (stock === "") {
-      warning("warning", "Hãy nhập mã cổ phiếu");
-    } else {
-      try {
-        setLoadingExcel(true);
+  const sheet1Title = ["Giờ", "M/B", "Khối lượng", "Giá", "+/-"];
 
-        const data = await getApi(
-          apiUrl,
-          `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
-        );
+  const fetchDataAndDownloadCSV = async () => {
+    try {
+      setLoadingExcel(true);
 
-        //Xử lý dữ liệu đưa vào sheet
-        const sheet1Data = data.data.map(prepareData);
+      // Gọi API để lấy dữ liệu
+      const data = await getApi(
+        apiUrl,
+        `/api/v1/tcbs/trading-info?stock=${stock}`
+      );
 
-        // Tạo workbook và thêm các sheet
-        const workbook = XLSX.utils.book_new();
+      //Xử lý dữ liệu đưa vào sheet
+      const sheet1Data = data?.data.map(prepareData);
 
-        // Tạo sheet 1
-        XLSX.utils.book_append_sheet(
-          workbook,
-          XLSX.utils.aoa_to_sheet([sheetTitle, ...sheet1Data]),
-          "Historical PE PB"
-        );
+      // Tạo workbook và thêm các sheet
+      const workbook = XLSX.utils.book_new();
 
-        // Xuất workbook thành file Excel
-        XLSX.writeFile(
-          workbook,
-          `historical-pe-pb-${stock}-${period}year.xlsx`
-        );
-      } catch (error) {
-        console.error("Có lỗi xảy ra:", error);
-      } finally {
-        setLoadingExcel(false);
-      }
+      // Tạo sheet 1
+      XLSX.utils.book_append_sheet(
+        workbook,
+        XLSX.utils.aoa_to_sheet([sheet1Title, ...sheet1Data]),
+        "Mua bán chủ động"
+      );
+
+      // Xuất workbook thành file Excel
+      XLSX.writeFile(workbook, `dataMB_${stock}.xlsx`);
+    } catch (error) {
+      console.error("Có lỗi xảy ra:", error);
+    } finally {
+      setLoadingExcel(false);
     }
   };
 
@@ -180,11 +230,11 @@ const HistoricalPEPB = () => {
 
         <div className="w-full h-[919px] p-[40px]">
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
-            Lịch sử P/E, P/B
+            Mua bán chủ động
           </div>
-          <div className="flex flex-row items-center">
-            <div className="code-select mr-5">
-              <div className="mb-[3px] font-medium">Mã</div>
+          <div className="code-select mr-5">
+            <div className="mb-[3px] font-medium">Mã</div>
+            <div className="flex items-center">
               <Select
                 style={{
                   width: 222,
@@ -199,43 +249,6 @@ const HistoricalPEPB = () => {
                   label: code,
                 }))}
               />
-            </div>
-
-            <div className="mr-5">
-              <div className="mb-[3px] font-medium">Thời gian</div>
-              <button
-                className={`custom-btn ${
-                  period === "1" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("1");
-                }}
-              >
-                1Y
-              </button>
-              <button
-                className={`custom-btn ml-2 ${
-                  period === "3" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("3");
-                }}
-              >
-                3Y
-              </button>
-              <button
-                className={`custom-btn ml-2 ${
-                  period === "5" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("5");
-                }}
-              >
-                5Y
-              </button>
-            </div>
-
-            <div className="mt-[24px]">
               <LoadingButton
                 className="!ml-2"
                 variant="contained"
@@ -247,7 +260,7 @@ const HistoricalPEPB = () => {
                   },
                 }}
                 loading={loadingExcel}
-                onClick={downloadExcel}
+                onClick={fetchDataAndDownloadCSV}
               >
                 <div className="flex items-center p-[7.5px]">
                   <img src={icon_excel} alt="icon_excel" />
@@ -259,8 +272,24 @@ const HistoricalPEPB = () => {
             </div>
           </div>
           <div className="mt-5 grid grid-cols-2">
-            <ChartLine stock={stock} data={data} chartKey="P/E" />
-            <ChartLine stock={stock} data={data} chartKey="P/B" />
+            <div className="">
+              <LineChartPrice data={data} />
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="flex flex-col justify-around">
+                <StackColumnVal
+                  processedBuyData={processedBuyData}
+                  processedSellData={processedSellData}
+                />
+                <PieChartVal
+                  processedBuyData={processedBuyData}
+                  processedSellData={processedSellData}
+                  totalBuyVal={totalBuyVal}
+                  totalSellVal={totalSellVal}
+                />
+              </div>
+              <TableBuySell data={data} />
+            </div>
           </div>
         </div>
       </div>
@@ -268,4 +297,4 @@ const HistoricalPEPB = () => {
   );
 };
 
-export default HistoricalPEPB;
+export default BuySellActive;

@@ -30,7 +30,7 @@ const ChartLine = ({ stock, data, chartKey }) => {
       });
 
       const peData = transformedData
-        .filter((item) => item.name.toLowerCase().includes("pe"))
+        .filter((item) => item.name.toLowerCase().includes("pe"))     
         .map((item) => {
           let newName;
           let dashStyle = undefined;
