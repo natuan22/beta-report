@@ -80,15 +80,18 @@ const BuySellActive = () => {
         }
       } catch (error) {
         console.error(error);
-      } finally {
-        // Gọi lại sau 30 giây
-        setTimeout(fetchData, 30000);
       }
     }
   };
 
   useEffect(() => {
     fetchData();
+
+    // Set an interval to fetch data every minute
+    const intervalId = setInterval(fetchData, 60000); // 60 seconds
+
+    // Cleanup the interval when the component is unmounted or stock changes
+    return () => clearInterval(intervalId);
   }, [stock]);
 
   useEffect(() => {
@@ -119,7 +122,7 @@ const BuySellActive = () => {
     });
   };
 
-  const processData = (data) => { 
+  const processData = (data) => {
     const totals = {
       buy: { small: 0, medium: 0, large: 0 },
       sell: { small: 0, medium: 0, large: 0 },
@@ -144,7 +147,7 @@ const BuySellActive = () => {
         totalSellVal += value;
       }
     });
-    
+
     return {
       buyValData: totals.buy,
       sellValData: totals.sell,
@@ -155,19 +158,20 @@ const BuySellActive = () => {
 
   useEffect(() => {
     if (data?.data.length > 0) {
-      const { buyValData, sellValData, totalBuyVal, totalSellVal } = processData(data.data);
+      const { buyValData, sellValData, totalBuyVal, totalSellVal } =
+        processData(data.data);
 
       setProcessedBuyData(buyValData);
       setProcessedSellData(sellValData);
-      
-      setTotalBuyVal(totalBuyVal)
-      setTotalSellVal(totalSellVal)
+
+      setTotalBuyVal(totalBuyVal);
+      setTotalSellVal(totalSellVal);
     } else {
       setProcessedBuyData(null);
       setProcessedSellData(null);
-      
-      setTotalBuyVal(null)
-      setTotalSellVal(null)
+
+      setTotalBuyVal(null);
+      setTotalSellVal(null);
     }
   }, [data]);
 
