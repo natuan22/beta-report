@@ -9,13 +9,16 @@ import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdOutlineAutoGraph, MdQueryStats } from "react-icons/md";
-import { PiPresentationChartLight } from "react-icons/pi";
+import {
+  PiPresentationChartLight,
+  PiProjectorScreenChartLight,
+} from "react-icons/pi";
 import { SlGraph } from "react-icons/sl";
+import { TbChartLine } from "react-icons/tb";
 import { VscCoffee } from "react-icons/vsc";
 import { NavLink, useLocation } from "react-router-dom";
 import DialogLogin from "../../Auth/components/DialogLogin";
 import DialogSignUp from "../../Auth/components/DialogSignUp";
-
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
@@ -219,7 +222,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                 <div>
                   {buttonNavLink(
                     "/trading-tool",
-                    <PiPresentationChartLight />,
+                    <PiProjectorScreenChartLight />,
                     "Trading Tool"
                   )}
                 </div>
@@ -232,6 +235,17 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                     "/historical-pe-pb",
                     <PiPresentationChartLight />,
                     "Lịch sử P/E, P/B"
+                  )}
+                </div>
+              )}
+              {isLogin !== "7MEvU" ? (
+                <></>
+              ) : (
+                <div>
+                  {buttonNavLink(
+                    "/mua-ban-chu-dong",
+                    <TbChartLine />,
+                    "Mua bán chủ động"
                   )}
                 </div>
               )}

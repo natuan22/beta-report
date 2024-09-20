@@ -4,6 +4,7 @@ import NavBar3 from "../NavBarTest/NavBar3";
 import AnalysisReport from "../analysisReport/AnalysisReport";
 import AnalysisReportAutomation from "../analysisReport/AnalysisReportAutomation";
 import AnalysisReportBasic from "../analysisReport/AnalysisReportBasic";
+import BuySellActive from "../buySellActive/BuySellActive";
 import Filter from "../filter/Filter";
 import HistoricalPEPB from "../historicalPEPB/HistoricalPEPB";
 import ReportAfternoon from "../report/ReportAfternoon";
@@ -31,4 +32,5 @@ export const routes = [
   { path: "/beta-smart", component: NavBar2, role: "V0U1S" },
   { path: "/trading-tool", component: TradingTool, role: "8Z5M8" },
   { path: "/historical-pe-pb", component: HistoricalPEPB, role: "V0U1S", requiresLogin: true },
+  { path: "/mua-ban-chu-dong", component: BuySellActive, role: "V0U1S", requiresLogin: true },
 ];
