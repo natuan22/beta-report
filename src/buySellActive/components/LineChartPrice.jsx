@@ -35,6 +35,7 @@ const LineChartPrice = ({ data }) => {
       const dataRenderMB = data.dataMB
         .map((item) => processData(item))
         .map(({ timestamp, item }) => ({ x: timestamp, y: +item.value.toFixed(2) }))
+        .filter(({ x }) => x >= Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 30))
         .reverse();
 
       setDataRenderMB(dataRenderMB)

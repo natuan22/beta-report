@@ -2,35 +2,49 @@ import Highcharts from "highcharts";
 import PieChart from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 
-const PieChartVal = ({ processedBuyData, processedSellData, totalBuyVal, totalSellVal }) => {
+const PieChartVal = ({ data }) => {
+  const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
+
   const [dataPie, setDataPie] = useState([]);
-  const [dataPieSell, setDataPieSell] = useState([]);
-  const [dataPieBuy, setDataPieBuy] = useState([]);
+  const [hasData, setHasData] = useState(false);
 
   useEffect(() => {
-    if (processedBuyData && processedSellData) {
-      const dataPieSell = [
-        { name: "Lớn",        y: +(processedSellData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#d34037" },
-        { name: "Trung bình", y: +(processedSellData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#812a24" },
-        { name: "Nhỏ",        y: +(processedSellData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#572724" }
-      ];
+    if (buyValData && sellValData && totalBuyVal && totalSellVal) {
+      const isValidData = [
+        buyValData.large,
+        buyValData.medium,
+        buyValData.small,
+        sellValData.large,
+        sellValData.medium,
+        sellValData.small,
+      ].some((val) => val > 0);
 
-      const dataPieBuy = [
-        { name: "Lớn",        y: +(processedBuyData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#00d060" },
-        { name: "Trung bình", y: +(processedBuyData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#0c7640" },
-        { name: "Nhỏ",        y: +(processedBuyData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#144d31" }
-      ]
+      if (isValidData) {
+        const dataPieSell = [
+          { name: "Lớn",        y: +(sellValData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#d34037" },
+          { name: "Trung bình", y: +(sellValData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#812a24" },
+          { name: "Nhỏ",        y: +(sellValData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#572724" }
+        ];
 
-      const combinedDataPie = [
-        ...dataPieBuy.map((item) => ({ ...item, name: item.name  })), 
-        ...dataPieSell.map((item) => ({ ...item, name: item.name  })), 
-      ];
+        const dataPieBuy = [
+          { name: "Lớn",        y: +(buyValData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#00d060" },
+          { name: "Trung bình", y: +(buyValData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#0c7640" },
+          { name: "Nhỏ",        y: +(buyValData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#144d31" }
+        ]
 
-      setDataPieSell(dataPieSell);
-      setDataPieBuy(dataPieBuy);
-      setDataPie(combinedDataPie);
+        const combinedDataPie = [
+          ...dataPieBuy.map((item) => ({ ...item, name: item.name  })), 
+          ...dataPieSell.map((item) => ({ ...item, name: item.name  })), 
+        ];
+
+        setDataPie(combinedDataPie);
+
+        setHasData(true); // Mark that there's valid data
+      } else {
+        setHasData(false); // No valid data to display
+      }
     }
-  }, [processedBuyData, processedSellData, totalBuyVal, totalSellVal]);
+  }, [buyValData, sellValData, totalBuyVal, totalSellVal]);
 
   const options = {
     accessibility: { enabled: false },
@@ -43,10 +57,17 @@ const PieChartVal = ({ processedBuyData, processedSellData, totalBuyVal, totalSe
     subtitle: { text: "" },
     plotOptions: {
       pie: {
+        allowPointSelect: true,
+        cursor: "pointer",
         dataLabels: {
-          enabled: false,
+          enabled: true,
+          format: "<b>{point.percentage:.2f}%</b> ",
+          connector: {
+            enabled: true,
+            lineWidth: 0.5,
+          },
+          distance: 4,
         },
-        borderRadius: "10%",
       },
     },
     tooltip: { valueSuffix: "%" },
@@ -59,67 +80,23 @@ const PieChartVal = ({ processedBuyData, processedSellData, totalBuyVal, totalSe
       },
     },
     series: [
-      { name: "Tổng giao dịch", data: dataPie, size: "80%", innerSize: "70%" },
+      { name: "Tổng giao dịch", data: dataPie.filter(item => item.y !== 0), size: "70%", innerSize: "70%" },
     ],
   };
 
   return (
-    <div className="grid grid-cols-2 place-items-center">
-      <div>
-        <div className="font-semibold mb-2">
-          Lệnh <span className="text-green-500 uppercase font-bold">mua</span>{" "}
-          chủ động (
-          <span className="text-green-500">
-            {totalBuyVal > 0 || totalSellVal > 0
-              ? `${((totalBuyVal / (totalBuyVal + totalSellVal)) * 100).toFixed(2)}%`
-              : "-"}
-          </span>
-          )
-        </div>
-        {dataPieBuy &&
-          dataPieBuy.map((item, index) => {
-            return (
-              <div className="flex items-center gap-2 mt-1" key={index}>
-                <div
-                  className={`rounded-[50%] bg-[${item.color}] w-[10px] h-[10px]`}
-                ></div>
-                <div>{item.y ? `${item.y}%` : "-"}</div>
-                <div>{item.name}</div>
-              </div>
-            );
-          })}
-        <div className="font-semibold mb-2 mt-2">
-          Lệnh <span className="text-red-500 uppercase font-bold">bán</span> chủ
-          động (
-          <span className="text-red-500">
-            {totalBuyVal > 0 || totalSellVal > 0
-              ? `${((totalSellVal / (totalBuyVal + totalSellVal)) * 100 ).toFixed(2)}%`
-              : "-"}
-          </span>
-          )
-        </div>
-        {dataPieSell &&
-          dataPieSell.map((item, index) => {
-            return (
-              <div className="flex items-center gap-2 mt-1" key={index}>
-                <div
-                  className={`rounded-[50%] bg-[${item.color}] w-[10px] h-[10px]`}
-                ></div>
-                <div>{item.y ? `${item.y}%` : "-"}</div>
-                <div>{item.name}</div>
-              </div>
-            );
-          })}
-      </div>
-      <div className="h-[300px] w-[250px]">
-        {processedBuyData && processedSellData && totalBuyVal && totalSellVal ? (
+    <div className="flex items-center justify-center">
+      <div className="h-[350px] w-[460px]">
+        {hasData ? (
           <PieChart
             highcharts={Highcharts}
             options={options}
             containerProps={{ style: { height: "100%", width: "100%" } }}
           />
         ) : (
-          <div className="text-center mt-5 font-semibold"></div>
+          <div className="text-center mt-5 font-semibold">
+            Chưa có dữ liệu giao dịch
+          </div>
         )}
       </div>
     </div>

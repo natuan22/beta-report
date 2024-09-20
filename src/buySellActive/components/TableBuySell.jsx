@@ -9,12 +9,14 @@ const TableBuySell = ({ data }) => {
     <div>
       <div className="flex justify-around pb-1 font-semibold">
         <div>KL: {formatVolume(data?.totalVol)}</div>
-        <div>M:{" "}
+        <div>
+          M:{" "}
           <span className="text-green-500">
             {formatVolume(data?.totalBuyVol)}
           </span>
         </div>
-        <div>B:{" "}
+        <div>
+          B:{" "}
           <span className="text-red-500">
             {formatVolume(data?.totalSellVol)}
           </span>
@@ -40,7 +42,18 @@ const TableBuySell = ({ data }) => {
                 {data ? (
                   data?.data?.map((item, index) => {
                     return (
-                      <tr key={index}>
+                      <tr
+                        key={index}
+                        className={
+                          item.highlight
+                            ? item.lastColor === "S"
+                              ? "bg-[#00f4b0] bg-opacity-20"
+                              : item.lastColor === "B"
+                              ? "bg-[#ff3747] bg-opacity-20"
+                              : "bg-transparent"
+                            : "bg-transparent"
+                        }
+                      >
                         <td className="px-1 py-1 font-semibold flex">
                           <div className="w-[65%] text-center ml-2">
                             {item.formattedTime}
