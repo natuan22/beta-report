@@ -32,7 +32,7 @@ const EditModal = ({ dataEdit, setData, isModalEditOpen, setIsModalEditOpen }) =
         ma: e.target[6]?.value || 0,
         is_beta_page: 1,
       });
-      console.log(res)
+      // console.log(res)
       setData((prev) => {
         const thisItem = prev.find((item) => item.code == e.target[0].value);
         const newP2024 = parseFloat(((price_2024 - thisItem.closePrice) / thisItem.closePrice) * 100).toFixed(2);

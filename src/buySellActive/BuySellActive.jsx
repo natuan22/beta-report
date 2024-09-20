@@ -35,10 +35,7 @@ const BuySellActive = () => {
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("FPT");
 
-  const [processedBuyData, setProcessedBuyData] = useState([]);
-  const [processedSellData, setProcessedSellData] = useState([]);
-  const [totalBuyVal, setTotalBuyVal] = useState([]);
-  const [totalSellVal, setTotalSellVal] = useState([]);
+  const [processedData, setProcessedData] = useState({});
 
   const [loadingExcel, setLoadingExcel] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
@@ -64,35 +61,6 @@ const BuySellActive = () => {
   useEffect(() => {
     document.title = "Mua bán chủ động";
   }, []);
-
-  const fetchData = async () => {
-    if (stock === "") {
-      warning("warning", "Hãy nhập mã cổ phiếu");
-    } else {
-      try {
-        const res = await getApi(
-          apiUrl,
-          `/api/v1/tcbs/trading-info?stock=${stock}`
-        );
-
-        if (res?.data.length !== data?.data?.length) {
-          setData(res); // Chỉ cập nhật nếu có sự thay đổi
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-
-    // Set an interval to fetch data every minute
-    const intervalId = setInterval(fetchData, 60000); // 60 seconds
-
-    // Cleanup the interval when the component is unmounted or stock changes
-    return () => clearInterval(intervalId);
-  }, [stock]);
 
   useEffect(() => {
     const fetchDataStock = async () => {
@@ -156,24 +124,46 @@ const BuySellActive = () => {
     };
   };
 
-  useEffect(() => {
-    if (data?.data.length > 0) {
-      const { buyValData, sellValData, totalBuyVal, totalSellVal } =
-        processData(data.data);
-
-      setProcessedBuyData(buyValData);
-      setProcessedSellData(sellValData);
-
-      setTotalBuyVal(totalBuyVal);
-      setTotalSellVal(totalSellVal);
-    } else {
-      setProcessedBuyData(null);
-      setProcessedSellData(null);
-
-      setTotalBuyVal(null);
-      setTotalSellVal(null);
+  const fetchData = async () => {
+    if (!stock) {
+      warning("warning", "Hãy nhập mã cổ phiếu");
+      return null; // Return null if no stock is provided
     }
-  }, [data]);
+
+    try {
+      const res = await getApi(
+        apiUrl,
+        `/api/v1/tcbs/trading-info?stock=${stock}`
+      );
+      return res; // Return the fetched data
+    } catch (error) {
+      console.error(error);
+      return null; // Return null in case of an error
+    }
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      const fetchedData = await fetchData(); // Call fetchData and wait for the result
+
+      if (fetchedData && fetchedData.data.length !== data?.data?.length) {
+        if (fetchedData.data.length > 0) {
+          const processedData = processData(fetchedData.data);
+          
+          setProcessedData(processedData)
+        } else {
+          setProcessedData(null)
+        }
+        setData(fetchedData);
+      }
+    };
+
+    loadData();
+
+    // Uncomment this if you want to enable periodic fetching
+    const intervalId = setInterval(loadData, 60000); // 60 seconds
+    return () => clearInterval(intervalId); // Cleanup on unmount or stock change
+  }, [stock]);
 
   const prepareData = (item) => [
     item.formattedTime,
@@ -216,6 +206,9 @@ const BuySellActive = () => {
       setLoadingExcel(false);
     }
   };
+
+  const buyColor = [{ name: "Lớn", color:"#00d060" }, { name: "Trung bình", color:"#0c7640" }, { name: "Nhỏ", color:"#144d31" }]
+  const sellColor = [{ name: "Lớn", color:"#d34037" }, { name: "Trung bình" ,color:"#812a24" }, { name: "Nhỏ", color:"#572724" }]
 
   return (
     <ThemeProvider theme={theme}>
@@ -280,16 +273,37 @@ const BuySellActive = () => {
             </div>
             <div className="grid grid-cols-2">
               <div className="flex flex-col justify-around">
-                <StackColumnVal
-                  processedBuyData={processedBuyData}
-                  processedSellData={processedSellData}
-                />
-                <PieChartVal
-                  processedBuyData={processedBuyData}
-                  processedSellData={processedSellData}
-                  totalBuyVal={totalBuyVal}
-                  totalSellVal={totalSellVal}
-                />
+                <div>
+                  <div className="flex justify-evenly">
+                    <div>Lệnh <span className="text-green-500 uppercase font-bold">mua</span> chủ động</div>
+
+                    {buyColor.map((item, index) => (
+                      <div className="flex items-center gap-2" key={index}>
+                        <div
+                          style={{ backgroundColor: item.color }}
+                          className="rounded-[50%] w-[10px] h-[10px]"
+                        ></div>
+                        <div>{item.name}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex justify-evenly mt-1">
+                    <div className="w-[148px]">Lệnh <span className="text-red-500 uppercase font-bold">bán</span> chủ động</div>
+
+                    {sellColor.map((item, index) => (
+                      <div className="flex items-center gap-2" key={index}>
+                        <div
+                          style={{ backgroundColor: item.color }}
+                          className="rounded-[50%] w-[10px] h-[10px]"
+                        ></div>
+                        <div>{item.name}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <StackColumnVal data={processedData} />
+                <PieChartVal data={processedData} />
               </div>
               <TableBuySell data={data} />
             </div>

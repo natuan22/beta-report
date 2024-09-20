@@ -2,20 +2,38 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 
-const StackColumnVal = ({ processedBuyData, processedSellData }) => {
+const StackColumnVal = ({ data }) => {
+  const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
+  
   const [series, setSeries] = useState([]);
+  const [hasData, setHasData] = useState(false);
 
   useEffect(() => {
-    if (processedBuyData && processedSellData) {
-      const dataSeries = [
-        { name: "Lớn",        data: [{ y: +(processedBuyData.large / 1_000_000_000).toFixed(2), color: "#00d060" }, { y: +(processedSellData.large / 1_000_000_000).toFixed(2), color: "#d34037" }]},
-        { name: "Trung bình", data: [{ y: +(processedBuyData.medium / 1_000_000_000).toFixed(2), color: "#0c7640" }, { y: +(processedSellData.medium / 1_000_000_000).toFixed(2), color: "#812a24" }]},
-        { name: "Nhỏ",        data: [{ y: +(processedBuyData.small / 1_000_000_000).toFixed(2), color: "#144d31" }, { y: +(processedSellData.small / 1_000_000_000).toFixed(2), color: "#572724" }]},
-      ];
+    if (buyValData && sellValData) {
+      const isValidData = [
+        buyValData.large,
+        buyValData.medium,
+        buyValData.small,
+        sellValData.large,
+        sellValData.medium,
+        sellValData.small,
+      ].some((val) => val > 0); // Check if there's any positive transaction data
 
-      setSeries(dataSeries);
+      if (isValidData) {
+        const dataSeries = [
+          { name: "Lớn",        data: [{ y: +(buyValData.large / 1_000_000_000).toFixed(2), color: "#00d060" }, { y: +(sellValData.large / 1_000_000_000).toFixed(2), color: "#d34037" }]},
+          { name: "Trung bình", data: [{ y: +(buyValData.medium / 1_000_000_000).toFixed(2), color: "#0c7640" }, { y: +(sellValData.medium / 1_000_000_000).toFixed(2), color: "#812a24" }]},
+          { name: "Nhỏ",        data: [{ y: +(buyValData.small / 1_000_000_000).toFixed(2), color: "#144d31" }, { y: +(sellValData.small / 1_000_000_000).toFixed(2), color: "#572724" }]},
+        ];
+
+        setSeries(dataSeries);
+
+        setHasData(true);
+      } else {
+        setHasData(false);
+      }
     }
-  }, [processedBuyData, processedSellData]);
+  }, [buyValData, sellValData]);
 
   // Cấu hình biểu đồ
   const options = {
@@ -31,18 +49,44 @@ const StackColumnVal = ({ processedBuyData, processedSellData }) => {
     },
     xAxis: {
       categories: ["Mua", "Bán"],
+      labels: {
+        style: {
+          fontSize: "9px", // Độ lớn của chữ trục y
+          fontWeight: "bold"
+        },
+      },
     },
     yAxis: {
       title: "",
       min: 0,
       gridLineWidth: 0,
       stackLabels: {
-        enabled: false,
+        enabled: true,
+        formatter: function () {
+          const isBuySeries = this.x === 0;
+          const totalValue = totalBuyVal + totalSellVal;
+          const percentage = isBuySeries ? (totalBuyVal / totalValue) * 100 : (totalSellVal / totalValue) * 100;
+
+          const color = isBuySeries ? '#22c55e' : '#ef4444';
+
+          return `<span style="color: ${color};">${this.total} (${totalValue > 0 ? `${percentage.toFixed(2)}%` : "-"})</span>`;
+        },
+        style: {
+          fontWeight: "bold"
+        }
+      },
+      title:{
+        text: "Tỷ VNĐ",
+        style: {
+          fontSize: "9px", // Độ lớn của chữ trục y
+          fontWeight: "bold"
+        },
       },
       labels: {
         align: "right", // Canh chỉnh label về phía bên phải
         style: {
           fontSize: "9px", // Độ lớn của chữ trục y
+          fontWeight: "bold"
         },
       },
     },
@@ -79,7 +123,7 @@ const StackColumnVal = ({ processedBuyData, processedSellData }) => {
 
   return (
     <div>
-      {processedBuyData && processedSellData ? (
+      {hasData ? (
         <div className="h-[300px]">
           <HighchartsReact
             highcharts={Highcharts}
