@@ -80,11 +80,10 @@ const BuySellActive = () => {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        // Gọi lại sau 30 giây
+        setTimeout(fetchData, 30000);
       }
-      // finally {
-      //   // Gọi lại sau 30 giây
-      //   setTimeout(fetchData, 30000);
-      // }
     }
   };
 
