@@ -166,8 +166,8 @@ const BuySellActive = () => {
     loadData();
 
     // Uncomment this if you want to enable periodic fetching
-    // const intervalId = setInterval(loadData, 60000); // 60 seconds
-    // return () => clearInterval(intervalId); // Cleanup on unmount or stock change
+    const intervalId = setInterval(loadData, 60000); // 60 seconds
+    return () => clearInterval(intervalId); // Cleanup on unmount or stock change
   }, [stock]);
 
   const prepareData = (item) => [
