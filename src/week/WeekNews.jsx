@@ -152,17 +152,17 @@ const WeekNews = () => {
 
     const link8 = document.createElement("a");
     link8.href = img8;
-    link8.download = "Baocaotuan-Trang7.png";
+    link8.download = "Baocaotuan-Trang8.png";
     link8.click();
 
     const link9 = document.createElement("a");
     link9.href = img9;
-    link9.download = "Baocaotuan-Trang7.png";
+    link9.download = "Baocaotuan-Trang9.png";
     link9.click();
 
     const link10 = document.createElement("a");
     link10.href = img10;
-    link10.download = "Baocaotuan-Trang7.png";
+    link10.download = "Baocaotuan-Trang10.png";
     link10.click();
   };
 

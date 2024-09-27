@@ -1,6 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
 import Button from "@mui/material/Button";
-import { FloatButton } from "antd";
+import { FloatButton, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsCalendar2Day, BsGraphUp } from "react-icons/bs";
@@ -19,10 +19,12 @@ import { VscCoffee } from "react-icons/vsc";
 import { NavLink, useLocation } from "react-router-dom";
 import DialogLogin from "../../Auth/components/DialogLogin";
 import DialogSignUp from "../../Auth/components/DialogSignUp";
+
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
   const [hasScrollbar, setHasScrollbar] = useState(false);
+  const isDisabled = isLogin !== "7MEvU";
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -187,8 +189,10 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   activeNav === "/bo-loc" ||
                   activeNav === "/canh-bao-tin-hieu" ||
                   activeNav === "/chien-luoc-giao-dich" ||
+                  activeNav === "/beta-smart" ||
                   activeNav === "/trading-tool" ||
-                  activeNav === "/historical-pe-pb"
+                  activeNav === "/historical-pe-pb" ||
+                  activeNav === "/mua-ban-chu-dong"
                     ? "text-orange-400 border border-solid border-b-2 border-t-0 border-x-0 "
                     : "text-slate-500"
                 }`}
@@ -228,7 +232,34 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                 </div>
               )}
               {isLogin !== "7MEvU" ? (
-                <></>
+                <>
+                  <Tooltip
+                    placement="left"
+                    title={
+                      <span>
+                        Vui lòng đăng nhập/đăng ký để sử dụng tính năng này
+                      </span>
+                    }
+                    color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+                  >
+                    <NavLink
+                      to={isDisabled ? "/" : "/historical-pe-pb"}
+                      className={({ isActive }) =>
+                        isDisabled
+                          ? "cursor-not-allowed no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                          : isActive
+                          ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                          : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                      }
+                      onClick={(e) => isDisabled && e.preventDefault()}
+                    >
+                      <span className="px-2">
+                        <PiPresentationChartLight />
+                      </span>
+                      Lịch sử P/E, P/B
+                    </NavLink>
+                  </Tooltip>
+                </>
               ) : (
                 <div>
                   {buttonNavLink(
@@ -239,7 +270,34 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                 </div>
               )}
               {isLogin !== "7MEvU" ? (
-                <></>
+                <>
+                  <Tooltip
+                    placement="left"
+                    title={
+                      <span>
+                        Vui lòng đăng nhập/đăng ký để sử dụng tính năng này
+                      </span>
+                    }
+                    color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+                  >
+                    <NavLink
+                      to={isDisabled ? "/" : "/mua-ban-chu-dong"}
+                      className={({ isActive }) =>
+                        isDisabled
+                          ? "cursor-not-allowed no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                          : isActive
+                          ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                          : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
+                      }
+                      onClick={(e) => isDisabled && e.preventDefault()}
+                    >
+                      <span className="px-2">
+                        <TbChartLine />
+                      </span>
+                      Mua bán chủ động
+                    </NavLink>
+                  </Tooltip>
+                </>
               ) : (
                 <div>
                   {buttonNavLink(

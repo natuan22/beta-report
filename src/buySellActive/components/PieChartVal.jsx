@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const PieChartVal = ({ data }) => {
   const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
-
+  console.log('data',data)
   const [dataPie, setDataPie] = useState([]);
   const [hasData, setHasData] = useState(false);
 
@@ -17,7 +17,7 @@ const PieChartVal = ({ data }) => {
         sellValData.large,
         sellValData.medium,
         sellValData.small,
-      ].some((val) => val > 0);
+      ].some((val) => val >= 0);
 
       if (isValidData) {
         const dataPieSell = [
@@ -33,18 +33,18 @@ const PieChartVal = ({ data }) => {
         ]
 
         const combinedDataPie = [
-          ...dataPieBuy.map((item) => ({ ...item, name: item.name  })), 
           ...dataPieSell.map((item) => ({ ...item, name: item.name  })), 
+          ...dataPieBuy.map((item) => ({ ...item, name: item.name  })), 
         ];
 
         setDataPie(combinedDataPie);
-
+        console.log('combinedDataPie',combinedDataPie)
         setHasData(true); // Mark that there's valid data
       } else {
         setHasData(false); // No valid data to display
       }
     }
-  }, [buyValData, sellValData, totalBuyVal, totalSellVal]);
+  }, [data]);
 
   const options = {
     accessibility: { enabled: false },

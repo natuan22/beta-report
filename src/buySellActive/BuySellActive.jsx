@@ -1,7 +1,8 @@
 import { LoadingButton } from "@mui/lab";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Select, message } from "antd";
+import { Select, Tooltip, message } from "antd";
 import React, { useEffect, useState } from "react";
+import { BsInfoCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
@@ -11,6 +12,7 @@ import LineChartPrice from "./components/LineChartPrice";
 import PieChartVal from "./components/PieChartVal";
 import StackColumnVal from "./components/StackColumnVal";
 import TableBuySell from "./components/TableBuySell";
+import socket from "../helper/socket";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -39,6 +41,8 @@ const BuySellActive = () => {
 
   const [loadingExcel, setLoadingExcel] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+
+  const [socketConnected, setSocketConnected] = useState(false);
 
   const handleUserLogout = () => {
     if (isLogin) {
@@ -149,20 +153,21 @@ const BuySellActive = () => {
       if (fetchedData && fetchedData.data.length !== data?.data?.length) {
         if (fetchedData.data.length > 0) {
           const processedData = processData(fetchedData.data);
-          
-          setProcessedData(processedData)
+
+          setProcessedData(processedData);
         } else {
-          setProcessedData(null)
+          setProcessedData(null);
         }
         setData(fetchedData);
+        setSocketConnected(true);
       }
     };
 
     loadData();
 
     // Uncomment this if you want to enable periodic fetching
-    const intervalId = setInterval(loadData, 60000); // 60 seconds
-    return () => clearInterval(intervalId); // Cleanup on unmount or stock change
+    // const intervalId = setInterval(loadData, 60000); // 60 seconds
+    // return () => clearInterval(intervalId); // Cleanup on unmount or stock change
   }, [stock]);
 
   const prepareData = (item) => [
@@ -209,6 +214,18 @@ const BuySellActive = () => {
 
   const buyColor = [{ name: "Lớn", color:"#00d060" }, { name: "Trung bình", color:"#0c7640" }, { name: "Nhỏ", color:"#144d31" }]
   const sellColor = [{ name: "Lớn", color:"#d34037" }, { name: "Trung bình" ,color:"#812a24" }, { name: "Nhỏ", color:"#572724" }]
+
+  // useEffect(() => {
+  //   if (socketConnected && data) {
+  //     socket.on(`listen-trans-co-phieu-${stock}`, (newData) => {
+  //       console.log(newData)
+  //     });
+  //   }
+
+  //   return () => {
+  //     socket.off(`listen-trans-co-phieu-${stock}`);
+  //   };
+  // }, [socketConnected, data, stock]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -273,33 +290,62 @@ const BuySellActive = () => {
             </div>
             <div className="grid grid-cols-2">
               <div className="flex flex-col justify-around">
-                <div>
-                  <div className="flex justify-evenly">
-                    <div>Lệnh <span className="text-green-500 uppercase font-bold">mua</span> chủ động</div>
-
-                    {buyColor.map((item, index) => (
-                      <div className="flex items-center gap-2" key={index}>
-                        <div
-                          style={{ backgroundColor: item.color }}
-                          className="rounded-[50%] w-[10px] h-[10px]"
-                        ></div>
-                        <div>{item.name}</div>
-                      </div>
-                    ))}
+                <div className="grid grid-cols-12">
+                  <div className="col-span-1 content-center justify-self-end">
+                    <Tooltip
+                      placement="bottom"
+                      title={
+                        <div className="w-[302px] text-justify">
+                          Phân loại nhà đầu tư cho lệnh: Lớn (&gt;1 tỷ/lệnh);
+                          Trung Bình (100tr-1tỷ/lệnh) và Nhỏ (&lt;100tr/lệnh)
+                        </div>
+                      }
+                      color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+                    >
+                      <BsInfoCircle className="cursor-pointer" />
+                    </Tooltip>
                   </div>
 
-                  <div className="flex justify-evenly mt-1">
-                    <div className="w-[148px]">Lệnh <span className="text-red-500 uppercase font-bold">bán</span> chủ động</div>
-
-                    {sellColor.map((item, index) => (
-                      <div className="flex items-center gap-2" key={index}>
-                        <div
-                          style={{ backgroundColor: item.color }}
-                          className="rounded-[50%] w-[10px] h-[10px]"
-                        ></div>
-                        <div>{item.name}</div>
+                  <div className="col-span-11">
+                    <div className="flex justify-around">
+                      <div>
+                        Lệnh{" "}
+                        <span className="text-green-500 uppercase font-bold">
+                          mua
+                        </span>{" "}
+                        chủ động
                       </div>
-                    ))}
+
+                      {buyColor.map((item, index) => (
+                        <div className="flex items-center gap-2" key={index}>
+                          <div
+                            style={{ backgroundColor: item.color }}
+                            className="rounded-[50%] w-[10px] h-[10px]"
+                          ></div>
+                          <div>{item.name}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex justify-around mt-1">
+                      <div className="w-[148px]">
+                        Lệnh{" "}
+                        <span className="text-red-500 uppercase font-bold">
+                          bán
+                        </span>{" "}
+                        chủ động
+                      </div>
+
+                      {sellColor.map((item, index) => (
+                        <div className="flex items-center gap-2" key={index}>
+                          <div
+                            style={{ backgroundColor: item.color }}
+                            className="rounded-[50%] w-[10px] h-[10px]"
+                          ></div>
+                          <div>{item.name}</div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <StackColumnVal data={processedData} />
