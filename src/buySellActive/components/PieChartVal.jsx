@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 
 const PieChartVal = ({ data }) => {
   const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
-  console.log('data',data)
   const [dataPie, setDataPie] = useState([]);
   const [hasData, setHasData] = useState(false);
 
@@ -38,7 +37,6 @@ const PieChartVal = ({ data }) => {
         ];
 
         setDataPie(combinedDataPie);
-        console.log('combinedDataPie',combinedDataPie)
         setHasData(true); // Mark that there's valid data
       } else {
         setHasData(false); // No valid data to display
