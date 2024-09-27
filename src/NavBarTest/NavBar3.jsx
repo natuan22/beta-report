@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { MdOutlineErrorOutline } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
@@ -14,7 +15,6 @@ const NavBar3 = () => {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
-      window.location.reload();
       localStorage.setItem("_il", "4E8WL");
       localStorage.removeItem("2ZW79");
       localStorage.removeItem("user");
@@ -23,6 +23,7 @@ const NavBar3 = () => {
 
   const onSubmitSuccess = () => {
     setIsLogin(localStorage.getItem("_il"));
+    setRole(localStorage.getItem("2ZW79"));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -41,7 +42,15 @@ const NavBar3 = () => {
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
-      Cảnh báo tín hiệu
+      <div className="w-full h-[919px] p-[40px]">
+        <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
+          Cảnh báo tín hiệu
+        </div>
+        <div className="flex items-center justify-center h-[50%] font-semibold text-xl gap-2">
+          <MdOutlineErrorOutline className="w-[30px] h-[30px]" />
+          Chức năng đang trong quá trình phát triển
+        </div>
+      </div>
     </div>
   );
 };

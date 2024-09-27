@@ -17,7 +17,7 @@ const StackColumnVal = ({ data }) => {
         sellValData.large,
         sellValData.medium,
         sellValData.small,
-      ].some((val) => val > 0); // Check if there's any positive transaction data
+      ].some((val) => val >= 0); // Check if there's any positive transaction data
 
       if (isValidData) {
         const dataSeries = [
@@ -27,13 +27,12 @@ const StackColumnVal = ({ data }) => {
         ];
 
         setSeries(dataSeries);
-
         setHasData(true);
       } else {
         setHasData(false);
       }
     }
-  }, [buyValData, sellValData]);
+  }, [data]);
 
   // Cấu hình biểu đồ
   const options = {

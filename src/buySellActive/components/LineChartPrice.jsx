@@ -50,7 +50,7 @@ const LineChartPrice = ({ data }) => {
     xAxis: {
       type: "datetime",
       tickInterval: 30 * 60 * 1000,
-      min: Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 15),
+      min: Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 0),
       max: Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 15, 0),
       labels: {
         rotation: 0,
@@ -68,7 +68,7 @@ const LineChartPrice = ({ data }) => {
             value: data?.prevClosePrice,
             color: "#EF9C21",
             dashStyle: "dot",
-            width: 2,
+            width: 1.5,
             zIndex: 2,
           },
         ],

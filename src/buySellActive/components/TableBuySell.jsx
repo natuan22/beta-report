@@ -1,4 +1,6 @@
+import { Tooltip } from "antd";
 import React from "react";
+import { BsInfoCircle } from "react-icons/bs";
 import formatNumber from "../../helper/formatNumber";
 
 const TableBuySell = ({ data }) => {
@@ -32,7 +34,22 @@ const TableBuySell = ({ data }) => {
                 style={{ position: "sticky", top: 0 }}
               >
                 <tr className="text-white ">
-                  <th className="font-semibold px-1 py-1">Tất cả GD</th>
+                  <th className="font-semibold px-1 py-1 flex items-center justify-center">
+                    <Tooltip
+                      placement="bottom"
+                      title={
+                        <div className="w-[396px] text-justify">
+                          Khi cả dòng có tô màu xanh tức là lệnh Lớn vừa Mua chủ
+                          động (&gt;1 tỷ đồng/lệnh), tô dòng màu đỏ là lệnh vừa
+                          Bán chủ động.
+                        </div>
+                      }
+                      color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+                    >
+                      <BsInfoCircle className="cursor-pointer" />
+                    </Tooltip>
+                    <span className="pl-2">Tất cả GD</span>
+                  </th>
                   <th className="font-semibold px-1 py-1 text-right">KL</th>
                   <th className="font-semibold px-1 py-1 text-right">Giá</th>
                   <th className="font-semibold px-3 py-1 text-right">+/-</th>
@@ -67,7 +84,7 @@ const TableBuySell = ({ data }) => {
                           >
                             {item.lastColor === "S"
                               ? "M"
-                              : item.lastColor === "O" || item.lastColor === "C"
+                              : item.lastColor === "O" || item.lastColor === "C" || item.lastColor === "P" || !item.lastColor
                               ? " "
                               : "B"}
                           </div>

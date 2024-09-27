@@ -86,10 +86,12 @@
 /* tooltip */
 .ant-tooltip {
     max-width: fit-content;
+    --antd-arrow-background-color: rgb(255 255 255 / 85%)
 }
 
 .ant-tooltip .ant-tooltip-inner {
-    color: black
+    color: black;
+    background-color: white
 }
 
 /* ant-tabs */
