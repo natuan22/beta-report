@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
-import { MdOutlineZoomOutMap } from "react-icons/md";
 import { Modal } from "antd";
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts/highstock";
+import React, { useState } from "react";
+import { MdOutlineZoomOutMap } from "react-icons/md";
 
 const Candlestick = ({ data }) => {
   const maxVolume = Math.max(...data.map((item) => item.volume));

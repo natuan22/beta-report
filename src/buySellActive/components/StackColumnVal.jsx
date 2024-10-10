@@ -3,27 +3,25 @@ import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 
 const StackColumnVal = ({ data }) => {
-  const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
-  
   const [series, setSeries] = useState([]);
   const [hasData, setHasData] = useState(false);
 
-  useEffect(() => {
-    if (buyValData && sellValData) {
-      const isValidData = [
-        buyValData.large,
-        buyValData.medium,
-        buyValData.small,
-        sellValData.large,
-        sellValData.medium,
-        sellValData.small,
-      ].some((val) => val >= 0); // Check if there's any positive transaction data
+  const isValidData = (buyData, sellData) => {
+    return [buyData.large, buyData.medium, buyData.small, sellData.large, sellData.medium, sellData.small].some(val => val >= 0);
+  };
 
-      if (isValidData) {
+  useEffect(() => {
+    if (data) {
+      // Destructure buyValData và sellValData
+      const { large: buyLarge = 0, medium: buyMedium = 0, small: buySmall = 0 } = data.buyValData || {};
+      const { large: sellLarge = 0, medium: sellMedium = 0, small: sellSmall = 0 } = data.sellValData || {};
+
+      // Kiểm tra tính hợp lệ của dữ liệu
+      if (isValidData(data.buyValData || {}, data.sellValData || {})) {
         const dataSeries = [
-          { name: "Lớn",        data: [{ y: +(buyValData.large / 1_000_000_000).toFixed(2), color: "#00d060" }, { y: +(sellValData.large / 1_000_000_000).toFixed(2), color: "#d34037" }]},
-          { name: "Trung bình", data: [{ y: +(buyValData.medium / 1_000_000_000).toFixed(2), color: "#0c7640" }, { y: +(sellValData.medium / 1_000_000_000).toFixed(2), color: "#812a24" }]},
-          { name: "Nhỏ",        data: [{ y: +(buyValData.small / 1_000_000_000).toFixed(2), color: "#144d31" }, { y: +(sellValData.small / 1_000_000_000).toFixed(2), color: "#572724" }]},
+          { name: "Lớn",        data: [{ y: +(buyLarge  / 1_000_000_000).toFixed(2), color: "#00d060" }, { y: +(sellLarge  / 1_000_000_000).toFixed(2), color: "#d34037" }]},
+          { name: "Trung bình", data: [{ y: +(buyMedium / 1_000_000_000).toFixed(2), color: "#0c7640" }, { y: +(sellMedium / 1_000_000_000).toFixed(2), color: "#812a24" }]},
+          { name: "Nhỏ",        data: [{ y: +(buySmall  / 1_000_000_000).toFixed(2), color: "#144d31" }, { y: +(sellSmall  / 1_000_000_000).toFixed(2), color: "#572724" }]},
         ];
 
         setSeries(dataSeries);
@@ -50,7 +48,7 @@ const StackColumnVal = ({ data }) => {
       categories: ["Mua", "Bán"],
       labels: {
         style: {
-          fontSize: "9px", // Độ lớn của chữ trục y
+          fontSize: "12px", // Độ lớn của chữ trục y
           fontWeight: "bold"
         },
       },
@@ -63,8 +61,8 @@ const StackColumnVal = ({ data }) => {
         enabled: true,
         formatter: function () {
           const isBuySeries = this.x === 0;
-          const totalValue = totalBuyVal + totalSellVal;
-          const percentage = isBuySeries ? (totalBuyVal / totalValue) * 100 : (totalSellVal / totalValue) * 100;
+          const totalValue = data.totalBuyVal + data.totalSellVal;
+          const percentage = isBuySeries ? (data.totalBuyVal / totalValue) * 100 : (data.totalSellVal / totalValue) * 100;
 
           const color = isBuySeries ? '#22c55e' : '#ef4444';
 
@@ -131,7 +129,7 @@ const StackColumnVal = ({ data }) => {
           />
         </div>
       ) : (
-        <div className="text-center mt-5 font-semibold">
+        <div className="h-[300px] text-center mt-5 font-semibold">
           Chưa có dữ liệu giao dịch
         </div>
       )}

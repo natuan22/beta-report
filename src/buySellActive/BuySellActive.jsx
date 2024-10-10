@@ -1,18 +1,23 @@
 import { LoadingButton } from "@mui/lab";
+import { Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Select, Tooltip, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
+import { FaChartBar, FaTable } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
 import { userLogoutAction } from "../Auth/thunk";
+import formatNumber from "../helper/formatNumber";
 import { getApi } from "../helper/getApi";
+import socket from "../helper/socket";
 import LineChartPrice from "./components/LineChartPrice";
 import PieChartVal from "./components/PieChartVal";
+import PriceStep from "./components/PriceStep";
 import StackColumnVal from "./components/StackColumnVal";
 import TableBuySell from "./components/TableBuySell";
-import socket from "../helper/socket";
+import "./utils/styles/styleBtn.css";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -37,10 +42,10 @@ const BuySellActive = () => {
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("FPT");
 
-  const [processedData, setProcessedData] = useState({});
-
   const [loadingExcel, setLoadingExcel] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+
+  const [showTable, setShowTable] = useState(1); // Mặc định hiển thị TableBuySell
 
   const [socketConnected, setSocketConnected] = useState(false);
 
@@ -94,38 +99,109 @@ const BuySellActive = () => {
     });
   };
 
-  const processData = (data) => {
+  const calData = (data) => {
+    // Đảo ngược dữ liệu để tính toán từ mới nhất đến cũ nhất
+    const reversedData = [...data.data].reverse();
+
+    let totalSellVolToNow = 0;
+    let totalSellValToNow = 0;
+    let totalBuyVolToNow = 0;
+    let totalBuyValToNow = 0;
+
+    // Duyệt qua dữ liệu đã đảo ngược để tính toán
+    reversedData.forEach((item) => {
+      if (item.action === "S") {
+        totalSellVolToNow += item.volume;
+        totalSellValToNow += item.value;
+      } else if (item.action === "B") {
+        totalBuyVolToNow += item.volume;
+        totalBuyValToNow += item.value;
+      }
+
+      // Ghi tổng sell và buy vào từng object
+      item.totalSellVolToNow = totalSellVolToNow;
+      item.totalSellValToNow = totalSellValToNow;
+      item.totalBuyVolToNow = totalBuyVolToNow;
+      item.totalBuyValToNow = totalBuyValToNow;
+    });
+
+    // Sau khi tính xong 4 biến trên, đảo ngược lại dữ liệu về thứ tự ban đầu
+    reversedData.reverse();
+
+    // Tính tổng volume tổng, sell và buy
+    const { totalVol, totalVolSell, totalVolBuy } = data.data.reduce(
+      (acc, item) => {
+        acc.totalVol += item.volume;
+        if (item.action === "S") {
+          acc.totalVolSell += item.volume;
+        } else if (item.action === "B") {
+          acc.totalVolBuy += item.volume;
+        }
+        return acc;
+      },
+      { totalVol: 0, totalVolSell: 0, totalVolBuy: 0 }
+    );
+
+    // Tính tổng giá trị buy/sell theo category (small, medium, large)
     const totals = {
       buy: { small: 0, medium: 0, large: 0 },
       sell: { small: 0, medium: 0, large: 0 },
     };
+
     let totalBuyVal = 0;
     let totalSellVal = 0;
 
-    data.forEach((item) => {
-      const value = +item.formattedVal; // Convert formattedVal to a number
-      const category =
-        value < 100_000_000
-          ? "small"
-          : value < 1_000_000_000
-          ? "medium"
-          : "large";
-
-      if (item.lastColor === "S") {
-        totals.buy[category] += value;
-        totalBuyVal += value;
-      } else if (item.lastColor === "B") {
-        totals.sell[category] += value;
-        totalSellVal += value;
+    reversedData.forEach((item) => {
+      if (item.action === "B") {
+        totals.buy[item.type] += item.value;
+        totalBuyVal += item.value;
+      } else if (item.action === "S") {
+        totals.sell[item.type] += item.value;
+        totalSellVal += item.value;
       }
     });
 
-    return {
+    // Bước giá
+    const matchPriceGroups = new Map();
+
+    reversedData.forEach((item) => {
+      const group = matchPriceGroups.get(item.matchPrice) || {
+        totalBuy: 0,
+        totalSell: 0,
+        atc: 0,
+        ato: 0,
+      };
+
+      if (item.action === "B") {
+        group.totalBuy += item.value;
+      } else if (item.action === "S") {
+        group.totalSell += item.value;
+      } else if (item.action === "C") {
+        group.atc += item.value;
+      } else if (item.action === "O") {
+        group.ato += item.value;
+      }
+
+      matchPriceGroups.set(item.matchPrice, group);
+    });
+
+    // Kết quả cuối cùng sau khi tính toán
+    const dataNew = {
+      ...data,
+      totalVol,
+      totalVolSell,
+      totalVolBuy,
       buyValData: totals.buy,
       sellValData: totals.sell,
       totalBuyVal,
       totalSellVal,
+      matchPriceGroups: Array.from(matchPriceGroups, ([category, values]) => ({
+        category,
+        ...values,
+      })),
     };
+
+    return dataNew;
   };
 
   const fetchData = async () => {
@@ -137,7 +213,7 @@ const BuySellActive = () => {
     try {
       const res = await getApi(
         apiUrl,
-        `/api/v1/tcbs/trading-info?stock=${stock}`
+        `/api/v1/investment/ticker-translog?stock=${stock}`
       );
       return res; // Return the fetched data
     } catch (error) {
@@ -150,16 +226,14 @@ const BuySellActive = () => {
     const loadData = async () => {
       const fetchedData = await fetchData(); // Call fetchData and wait for the result
 
-      if (fetchedData && fetchedData.data.length !== data?.data?.length) {
-        if (fetchedData.data.length > 0) {
-          const processedData = processData(fetchedData.data);
+      if (fetchedData) {
+        const processedData = calData(fetchedData);
 
-          setProcessedData(processedData);
-        } else {
-          setProcessedData(null);
-        }
-        setData(fetchedData);
+        setData(processedData);
         setSocketConnected(true);
+      } else {
+        setData(null);
+        setSocketConnected(false);
       }
     };
 
@@ -171,14 +245,15 @@ const BuySellActive = () => {
   }, [stock]);
 
   const prepareData = (item) => [
-    item.formattedTime,
-    item.lastColor === "S" ? "Mua" : "Bán",
-    Number(item.formattedVol),
-    Number(item.formattedMatchPrice),
-    Number(item.formattedChangeValue),
+    item.time,
+    item.action === "S" ? "Bán" : item.action === "B" ? "Mua" : " ",
+    item.volume,
+    item.matchPrice,
+    item.priceChangeReference,
+    item.perChangeReference.toFixed(2),
   ];
 
-  const sheet1Title = ["Giờ", "M/B", "Khối lượng", "Giá", "+/-"];
+  const sheet1Title = ["Giờ", "Mua/Bán", "Khối lượng", "Giá", "+/-", "%"];
 
   const fetchDataAndDownloadCSV = async () => {
     try {
@@ -187,7 +262,7 @@ const BuySellActive = () => {
       // Gọi API để lấy dữ liệu
       const data = await getApi(
         apiUrl,
-        `/api/v1/tcbs/trading-info?stock=${stock}`
+        `/api/v1/investment/ticker-translog?stock=${stock}`
       );
 
       //Xử lý dữ liệu đưa vào sheet
@@ -212,20 +287,97 @@ const BuySellActive = () => {
     }
   };
 
-  const buyColor = [{ name: "Lớn", color:"#00d060" }, { name: "Trung bình", color:"#0c7640" }, { name: "Nhỏ", color:"#144d31" }]
-  const sellColor = [{ name: "Lớn", color:"#d34037" }, { name: "Trung bình" ,color:"#812a24" }, { name: "Nhỏ", color:"#572724" }]
+  const buyColor = [
+    { name: "Lớn", color: "#00d060" },
+    { name: "Trung bình", color: "#0c7640" },
+    { name: "Nhỏ", color: "#144d31" },
+  ];
+  const sellColor = [
+    { name: "Lớn", color: "#d34037" },
+    { name: "Trung bình", color: "#812a24" },
+    { name: "Nhỏ", color: "#572724" },
+  ];
 
   // useEffect(() => {
   //   if (socketConnected && data) {
-  //     socket.on(`listen-trans-co-phieu-${stock}`, (newData) => {
-  //       console.log(newData)
-  //     });
-  //   }
+  //     const updateData = (newData) => {
+  //       const { action, volume: newVolume, value: newValue, type } = newData;
+  //       const { totalBuyValToNow, totalBuyVolToNow, totalSellValToNow, totalSellVolToNow } = data.data[0]
 
-  //   return () => {
-  //     socket.off(`listen-trans-co-phieu-${stock}`);
-  //   };
+  //       const updatedTotalsToNow = {
+  //         totalBuyVolToNow: action === "B" ? totalBuyVolToNow + newVolume : totalBuyVolToNow,
+  //         totalBuyValToNow: action === "B" ? totalBuyValToNow + newValue : totalBuyValToNow,
+  //         totalSellValToNow: action === "S" ? totalSellValToNow + newValue : totalSellValToNow,
+  //         totalSellVolToNow: action === "S" ? totalSellVolToNow + newVolume : totalSellVolToNow,
+  //       };
+
+  //       // Cập nhật tổng giá trị và khối lượng
+  //       const updatedBuyValData = {
+  //         ...data.buyValData,
+  //         ...(action === "B" && { [type]: (data.buyValData[type] || 0) + newValue })
+  //       };
+
+  //       const updatedSellValData = {
+  //         ...data.sellValData,
+  //         ...(action === "S" && { [type]: (data.sellValData[type] || 0) + newValue })
+  //       };
+
+  //       // Cập nhật các giá trị tổng
+  //       const updatedTotals = {
+  //         totalVol: data.totalVol + newVolume,
+  //         totalVolBuy: action === "B" ? data.totalVolBuy + newVolume : data.totalVolBuy,
+  //         totalVolSell: action === "S" ? data.totalVolSell + newVolume : data.totalVolSell,
+  //         totalBuyVal: action === "B" ? data.totalBuyVal + newValue : data.totalBuyVal,
+  //         totalSellVal: action === "S" ? data.totalSellVal + newValue : data.totalSellVal,
+  //       };
+
+  //       // Cập nhật matchPriceGroups
+  //       const updatedMatchPriceGroups = data.matchPriceGroups.map((group) => {
+  //         if (group.category === newData.type) {
+  //           // Nếu category khớp, cập nhật tổng giá trị mua và bán
+  //           return {
+  //             ...group,
+  //             totalBuy: action === "B" ? group.totalBuy + newValue : group.totalBuy,
+  //             totalSell: action === "S" ? group.totalSell + newValue : group.totalSell,
+  //             atc: action === "C" ? group.atc + newValue : group.atc,
+  //             ato: action === "O" ? group.ato + newValue : group.ato,
+  //           };
+  //         }
+  //         return group; // Không thay đổi nhóm nếu category không khớp
+  //       });
+
+  //       // Tạo một đối tượng mới cho newData với thông tin bổ sung
+  //       const updatedNewData = {
+  //         ...newData, // Sao chép toàn bộ dữ liệu hiện có từ newData
+  //         ...updatedTotalsToNow, // Thêm các giá trị tổng mới vào newData
+  //       };
+
+  //       // Cập nhật dữ liệu mới vào danh sách
+  //       const updatedDataList = [updatedNewData, ...data.data];
+
+  //       // Cập nhật state với dữ liệu đã được xử lý
+  //       setData((prevData) => ({
+  //         ...prevData,
+  //         buyValData: updatedBuyValData,
+  //         sellValData: updatedSellValData,
+  //         data: updatedDataList,
+  //         matchPriceGroups: updatedMatchPriceGroups,
+  //         ...updatedTotals,
+  //       }));
+  //     };
+
+  //     // Đăng ký lắng nghe sự kiện từ socket
+  //     socket.on(`listen-trans-co-phieu-${stock}`, updateData);
+
+  //     return () => {
+  //       // Tắt sự kiện socket khi component unmount
+  //       socket.off(`listen-trans-co-phieu-${stock}`, updateData);
+  //     };
+  //   }
   // }, [socketConnected, data, stock]);
+
+  const formatVolume = (volume) =>
+    volume >= 1000 ? `${formatNumber(volume / 1000)} K` : volume;
 
   return (
     <ThemeProvider theme={theme}>
@@ -285,7 +437,7 @@ const BuySellActive = () => {
             </div>
           </div>
           <div className="mt-5 grid grid-cols-2">
-            <div className="">
+            <div>
               <LineChartPrice data={data} />
             </div>
             <div className="grid grid-cols-2">
@@ -295,9 +447,10 @@ const BuySellActive = () => {
                     <Tooltip
                       placement="bottom"
                       title={
-                        <div className="w-[302px] text-justify">
-                          Phân loại nhà đầu tư cho lệnh: Lớn (&gt;1 tỷ/lệnh);
-                          Trung Bình (100tr-1tỷ/lệnh) và Nhỏ (&lt;100tr/lệnh)
+                        <div className="w-[275px] text-justify">
+                          Phân loại lệnh Mua/Bán chủ động:
+                          <br /> Lớn (&gt;1 tỷ đồng/lệnh); Trung Bình (100tr-1tỷ
+                          đồng/lệnh) và Nhỏ (&lt;100 triệu đồng/lệnh)
                         </div>
                       }
                       color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
@@ -306,12 +459,12 @@ const BuySellActive = () => {
                     </Tooltip>
                   </div>
 
-                  <div className="col-span-11">
-                    <div className="flex justify-around">
+                  <div className="col-span-11 text-[15px] pr-5">
+                    <div className="flex justify-evenly">
                       <div>
                         Lệnh{" "}
                         <span className="text-green-500 uppercase font-bold">
-                          mua
+                          mua (M)
                         </span>{" "}
                         chủ động
                       </div>
@@ -327,11 +480,11 @@ const BuySellActive = () => {
                       ))}
                     </div>
 
-                    <div className="flex justify-around mt-1">
-                      <div className="w-[148px]">
+                    <div className="flex justify-evenly mt-1">
+                      <div className="w-[168px]">
                         Lệnh{" "}
                         <span className="text-red-500 uppercase font-bold">
-                          bán
+                          bán (B)
                         </span>{" "}
                         chủ động
                       </div>
@@ -348,10 +501,51 @@ const BuySellActive = () => {
                     </div>
                   </div>
                 </div>
-                <StackColumnVal data={processedData} />
-                <PieChartVal data={processedData} />
+                <StackColumnVal data={data} />
+                <PieChartVal data={data} />
               </div>
-              <TableBuySell data={data} />
+              <div>
+                <div>
+                  <button
+                    className={`w-[80px] custom-btn-line ${
+                      showTable === 1 ? "active-btn-line" : "btn-2-line"
+                    }`}
+                    onClick={() => setShowTable(1)}
+                  >
+                    Sổ lệnh
+                  </button>
+                  <button
+                    className={`w-[100px] custom-btn-line ml-3 ${
+                      showTable === 2 ? "active-btn-line" : "btn-2-line"
+                    }`}
+                    onClick={() => setShowTable(2)}
+                  >
+                    Bước giá
+                  </button>
+                </div>
+                <div className="flex justify-evenly py-1 font-semibold items-center">
+                  <div>KL: {formatVolume(data?.totalVol)}</div>
+                  <div>
+                    M:{" "}
+                    <span className="text-green-500">
+                      {formatVolume(data?.totalVolBuy)}
+                    </span>
+                  </div>
+                  <div>
+                    B:{" "}
+                    <span className="text-red-500">
+                      {formatVolume(data?.totalVolSell)}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  {showTable === 1 ? (
+                    <TableBuySell data={data} /> // Hiển thị TableBuySell nếu showTable là true
+                  ) : (
+                    <PriceStep data={data} /> // Hiển thị PriceStep nếu showTable là false
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
