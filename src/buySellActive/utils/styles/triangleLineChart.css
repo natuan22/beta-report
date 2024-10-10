@@ -1,0 +1,31 @@
+#triangle-topright-line {
+    width: 0;
+    height: 0;
+    border-top: 11px solid red;
+    border-left: 11px solid transparent;
+}
+
+#triangle-bottomleft-line {
+    width: 0;
+    height: 0;
+    border-bottom: 11px solid green;
+    border-right: 11px solid transparent;
+}
+
+@keyframes moveLeft {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .moving-div {
+    animation: moveLeft 0.5s ease-out forwards; /* Di chuyển 2s khi load */
+    animation-delay: 0.5s;
+    position: relative; /* or absolute */
+    z-index: 30; /* Set the desired z-index value */
+  }

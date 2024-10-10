@@ -3,43 +3,40 @@ import PieChart from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 
 const PieChartVal = ({ data }) => {
-  const { buyValData, sellValData, totalBuyVal, totalSellVal } = data;
   const [dataPie, setDataPie] = useState([]);
   const [hasData, setHasData] = useState(false);
 
-  useEffect(() => {
-    if (buyValData && sellValData && totalBuyVal && totalSellVal) {
-      const isValidData = [
-        buyValData.large,
-        buyValData.medium,
-        buyValData.small,
-        sellValData.large,
-        sellValData.medium,
-        sellValData.small,
-      ].some((val) => val >= 0);
+  const isValidData = (buyData, sellData) => {
+    return [buyData.large, buyData.medium, buyData.small, sellData.large, sellData.medium, sellData.small].some(val => val >= 0);
+  };
 
-      if (isValidData) {
+  useEffect(() => {
+    if (data) {
+      // Destructure buyValData và sellValData
+      const { large: buyLarge = 0, medium: buyMedium = 0, small: buySmall = 0 } = data.buyValData || {};
+      const { large: sellLarge = 0, medium: sellMedium = 0, small: sellSmall = 0 } = data.sellValData || {};
+      const totalVal = data.totalBuyVal + data.totalSellVal;
+
+      // Kiểm tra tính hợp lệ của dữ liệu
+      if (isValidData(data.buyValData || {}, data.sellValData || {})) {
         const dataPieSell = [
-          { name: "Lớn",        y: +(sellValData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#d34037" },
-          { name: "Trung bình", y: +(sellValData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#812a24" },
-          { name: "Nhỏ",        y: +(sellValData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#572724" }
+          { name: "Lớn",        y: +(sellLarge  / totalVal * 100).toFixed(2), color: "#d34037" },
+          { name: "Trung bình", y: +(sellMedium / totalVal * 100).toFixed(2), color: "#812a24" },
+          { name: "Nhỏ",        y: +(sellSmall  / totalVal * 100).toFixed(2), color: "#572724" }
         ];
 
         const dataPieBuy = [
-          { name: "Lớn",        y: +(buyValData.large / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#00d060" },
-          { name: "Trung bình", y: +(buyValData.medium / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#0c7640" },
-          { name: "Nhỏ",        y: +(buyValData.small / (totalBuyVal + totalSellVal) * 100).toFixed(2), color: "#144d31" }
-        ]
-
-        const combinedDataPie = [
-          ...dataPieSell.map((item) => ({ ...item, name: item.name  })), 
-          ...dataPieBuy.map((item) => ({ ...item, name: item.name  })), 
+          { name: "Lớn",        y: +(buyLarge  / totalVal * 100).toFixed(2), color: "#00d060" },
+          { name: "Trung bình", y: +(buyMedium / totalVal * 100).toFixed(2), color: "#0c7640" },
+          { name: "Nhỏ",        y: +(buySmall  / totalVal * 100).toFixed(2), color: "#144d31" }
         ];
 
+        const combinedDataPie = [...dataPieSell, ...dataPieBuy];
+        
         setDataPie(combinedDataPie);
-        setHasData(true); // Mark that there's valid data
+        setHasData(true);
       } else {
-        setHasData(false); // No valid data to display
+        setHasData(false); 
       }
     }
   }, [data]);
@@ -84,19 +81,19 @@ const PieChartVal = ({ data }) => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="h-[350px] w-[460px]">
         {hasData ? (
-          <PieChart
-            highcharts={Highcharts}
-            options={options}
-            containerProps={{ style: { height: "100%", width: "100%" } }}
-          />
+          <div className="h-[350px] w-[460px]">
+            <PieChart
+              highcharts={Highcharts}
+              options={options}
+              containerProps={{ style: { height: "100%", width: "100%" } }}
+            />
+          </div>
         ) : (
-          <div className="text-center mt-5 font-semibold">
+          <div className="h-[331px] w-[460px] text-center mt-5 font-semibold">
             Chưa có dữ liệu giao dịch
           </div>
         )}
-      </div>
     </div>
   );
 };
