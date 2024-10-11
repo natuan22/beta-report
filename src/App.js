@@ -13,28 +13,28 @@ function App() {
       localStorage.setItem("deviceId", JSON.stringify(generateMAC()));
     }
 
-    const _il = localStorage.getItem("_il");
+    const _il = localStorage.getItem(process.env.REACT_APP_IS_LG);
     if (!_il) {
-      localStorage.setItem("_il", "4E8WL");
+      localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
     }
   }, []);
 
   // Hàm kiểm tra quyền truy cập
 const checkAccess = (routeRole) => {
-  const userRole = localStorage.getItem("2ZW79") || "V0U1S";
+  const userRole = localStorage.getItem(process.env.REACT_APP_USER_ROLE) || process.env.REACT_APP_BASE_USER;
 
   // Người dùng có quyền cao nhất truy cập mọi route
-  if (userRole === "8Z5M8" || userRole === "XJ20C") {
+  if (userRole === process.env.REACT_APP_ADMIN || userRole === process.env.REACT_APP_WATCH_TRADING_TOOL) {
     return true;
   }
 
   // Người dùng có quyền truy cập route nếu role khớp hoặc là quyền cơ bản
-  return routeRole === "V0U1S" || userRole === routeRole;
+  return routeRole === process.env.REACT_APP_BASE_USER || userRole === routeRole;
 };
 
 // Thành phần PrivateRoute
 const PrivateRoute = ({ component: Component, role, requiresLogin = false }) => {
-  const isLogin = localStorage.getItem("_il") === "7MEvU"; // Kiểm tra trạng thái đăng nhập
+  const isLogin = localStorage.getItem(process.env.REACT_APP_IS_LG) === process.env.REACT_APP_LG_T; // Kiểm tra trạng thái đăng nhập
   const isAuthorized = requiresLogin ? isLogin && checkAccess(role) : checkAccess(role);
 
   return isAuthorized ? <Component /> : <Navigate to="/" />;

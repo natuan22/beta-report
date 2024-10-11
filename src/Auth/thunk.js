@@ -19,18 +19,13 @@ export const userLoginAction = (data) => async (dispatch) => {
     delete userDataWithoutTokens.user_id;
 
     localStorage.setItem("user", JSON.stringify(userDataWithoutTokens));
-    //role : 2ZW79
-    //0: V0U1S Bth nhưng k đc xem trading tool
-    //1: 8Z5M8 Được xem, được sửa trading tool
-    //2: XJ20C Bth nhưng đc xem trading tool
     if (res.data.data.role === 0) {
-      localStorage.setItem("2ZW79", "V0U1S");
+      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_BASE_USER);
     } else if (res.data.data.role === 1) {
-      localStorage.setItem("2ZW79", "8Z5M8");
-    } else localStorage.setItem("2ZW79", "XJ20C");
-    //true : 7MEvU
-    //false: 4E8WL
-    localStorage.setItem("_il", "7MEvU");
+      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_ADMIN);
+    } else
+      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_WATCH_TRADING_TOOL);
+    localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_T);
     Cookies.set("at", res.data.data.access_token);
     Cookies.set("rt", res.data.data.refresh_token);
   } catch (err) {
@@ -77,8 +72,8 @@ export const userLogoutAction = () => async (dispatch) => {
     Cookies.remove("at");
     Cookies.remove("rt");
     localStorage.removeItem("watchlistActive");
-    localStorage.removeItem("2ZW79");
-    localStorage.setItem("_il", "4E8WL");
+    localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
+    localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
 
     dispatch({
       type: authenTypes.USER_LOGOUT_ACTION,

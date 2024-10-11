@@ -24,7 +24,11 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
   const [hasScrollbar, setHasScrollbar] = useState(false);
-  const isDisabled = isLogin !== "7MEvU";
+
+  const [activeNav, setActiveNav] = useState(""); // State để lưu nav đang active
+  const location = useLocation(); // Hook để lấy thông tin về địa chỉ hiện tại của trang
+
+  const isDisabled = isLogin !== process.env.REACT_APP_LG_T;
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -34,12 +38,6 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const navElement = document.getElementById("nav");
-      if (navElement.scrollHeight > navElement.clientHeight) {
-        setHasScrollbar(true);
-      } else {
-        setHasScrollbar(false);
-      }
       if (window.innerWidth >= 1440) {
         setShowSidebar(true);
         setPositionBackToTopBtn(300);
@@ -55,11 +53,19 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
     };
   }, []);
 
-  const [activeNav, setActiveNav] = useState(""); // State để lưu nav đang active
-  const location = useLocation(); // Hook để lấy thông tin về địa chỉ hiện tại của trang
+  useEffect(() => {
+    const navElement = document.getElementById("nav");
+    // Kiểm tra nếu chiều cao của nội dung lớn hơn chiều cao của chính nó
+    const hasVerticalScrollbar =
+      navElement.scrollHeight > navElement.clientHeight;
+    if (hasVerticalScrollbar) {
+      setHasScrollbar(true);
+    } else {
+      setHasScrollbar(false);
+    }
+  }, [isLogin]);
 
   useEffect(() => {
-    // Khi location thay đổi, cập nhật activeNav tương ứng
     setActiveNav(location.pathname);
   }, [location]);
 
@@ -108,8 +114,8 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
           showSidebar ? "" : "translate-x-[100%] ease-in-out duration-500"
         }`}
       >
-        <div id="nav" className="overflow-x-auto h-full">
-          <div className="w-full px-3 overflow-y-auto h-[827px]">
+        <div className="overflow-x-auto h-full">
+          <div id="nav" className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[738px] lg:h-[738px] md:h-[738px]">
             <div>
               <h3
                 className={`uppercase ${
@@ -144,7 +150,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
               >
                 Phân tích
               </h3>
-              {role === "8Z5M8" ? (
+              {role === process.env.REACT_APP_ADMIN ? (
                 <NavLink
                   to={"/phan-tich-ky-thuat/FPT"}
                   className={
@@ -220,7 +226,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                 <HiOutlineLightBulb />,
                 "BETA SMART"
               )}
-              {role === "V0U1S" || !role ? (
+              {role === process.env.REACT_APP_BASE_USER || !role ? (
                 <></>
               ) : (
                 <div>
@@ -231,7 +237,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   )}
                 </div>
               )}
-              {isLogin !== "7MEvU" ? (
+              {isLogin !== process.env.REACT_APP_LG_T ? (
                 <>
                   <Tooltip
                     placement="left"
@@ -269,7 +275,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   )}
                 </div>
               )}
-              {isLogin !== "7MEvU" ? (
+              {isLogin !== process.env.REACT_APP_LG_T ? (
                 <>
                   <Tooltip
                     placement="left"
@@ -312,11 +318,11 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         </div>
         <div
           className={`fixed bottom-0 right-0 px-3 py-3 bg-slate-100 z-[2000] ${
-            hasScrollbar ? "mr-[17px]" : ""
+            hasScrollbar ? "2xl:mr-[17px]" : ""
           }`}
         >
           <div className="h-[1px] bg-slate-400 mb-2"></div>
-          {isLogin === "7MEvU" ? (
+          {isLogin === process.env.REACT_APP_LG_T ? (
             <div>
               <div className="flex my-1 justify-center items-center">
                 <UserOutlined className="mx-2" />

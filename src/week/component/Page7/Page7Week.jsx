@@ -46,7 +46,7 @@ const Page7Week = ({ role }) => {
           <HeaderWeek />
         </div>
 
-        {role === "8Z5M8" ? (
+        {role === process.env.REACT_APP_ADMIN ? (
           <div className="absolute top-0 right-0 translate-x-[300px] translate-y-[200px] h-[100px] flex flex-col items-center justify-between">
             <div>
               <DialogAddNews

@@ -331,7 +331,7 @@ const AfternoonPage4 = ({ role }) => {
             </div>
 
             <div className="content-mid relative">
-              {role === "8Z5M8" ? (
+              {role === process.env.REACT_APP_ADMIN ? (
                 <div className="absolute top-0 right-0 translate-x-[300px] flex flex-col justify-around h-[150px]">
                   <DialogNews
                     handleCatchDataNews={handleCatchDataNews}

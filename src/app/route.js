@@ -15,22 +15,72 @@ import WeekNews from "../week/WeekNews";
 
 export const routes = [
   // Bản tin
-  { path: "/", component: Home, role: "V0U1S" },
-  { path: "/ban-tin-chieu", component: ReportAfternoon, role: "V0U1S" },
-  { path: "/ban-tin-tuan", component: WeekNews, role: "V0U1S" },
+  { path: "/", component: Home, role: process.env.REACT_APP_BASE_USER },
+  {
+    path: "/ban-tin-chieu",
+    component: ReportAfternoon,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  {
+    path: "/ban-tin-tuan",
+    component: WeekNews,
+    role: process.env.REACT_APP_BASE_USER,
+  },
 
   // Phân tích
-  { path: "/phan-tich-ky-thuat/:code", component: AnalysisReport, role: "8Z5M8" },
-  { path: "/phan-tich-ky-thuat-tu-dong/:code", component: AnalysisReportAutomation, role: "V0U1S" },
-  { path: "/phan-tich-co-ban", component: AnalysisReportBasic, role: "V0U1S" },
+  {
+    path: "/phan-tich-ky-thuat/:code",
+    component: AnalysisReport,
+    role: process.env.REACT_APP_ADMIN,
+  },
+  {
+    path: "/phan-tich-ky-thuat-tu-dong/:code",
+    component: AnalysisReportAutomation,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  {
+    path: "/phan-tich-co-ban",
+    component: AnalysisReportBasic,
+    role: process.env.REACT_APP_BASE_USER,
+  },
 
   // Công cụ đầu tư
-  { path: "/danh-muc-theo-doi", component: WatchList, role: "V0U1S" },
-  { path: "/bo-loc", component: Filter, role: "V0U1S" },
-  { path: "/canh-bao-tin-hieu", component: NavBar3, role: "V0U1S" },
-  { path: "/chien-luoc-giao-dich", component: TradingStrategies, role: "V0U1S" },
-  { path: "/beta-smart", component: NavBar2, role: "V0U1S" },
-  { path: "/trading-tool", component: TradingTool, role: "8Z5M8" },
-  { path: "/historical-pe-pb", component: HistoricalPEPB, role: "V0U1S", requiresLogin: true },
-  { path: "/mua-ban-chu-dong", component: BuySellActive, role: "V0U1S", requiresLogin: true },
+  {
+    path: "/danh-muc-theo-doi",
+    component: WatchList,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  { path: "/bo-loc", component: Filter, role: process.env.REACT_APP_BASE_USER },
+  {
+    path: "/canh-bao-tin-hieu",
+    component: NavBar3,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  {
+    path: "/chien-luoc-giao-dich",
+    component: TradingStrategies,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  {
+    path: "/beta-smart",
+    component: NavBar2,
+    role: process.env.REACT_APP_BASE_USER,
+  },
+  {
+    path: "/trading-tool",
+    component: TradingTool,
+    role: process.env.REACT_APP_ADMIN,
+  },
+  {
+    path: "/historical-pe-pb",
+    component: HistoricalPEPB,
+    role: process.env.REACT_APP_BASE_USER,
+    requiresLogin: true,
+  },
+  {
+    path: "/mua-ban-chu-dong",
+    component: BuySellActive,
+    role: process.env.REACT_APP_BASE_USER,
+    requiresLogin: true,
+  },
 ];

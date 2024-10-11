@@ -1,23 +1,22 @@
 import { LoadingButton } from "@mui/lab";
-import { Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Select, Tooltip, message } from "antd";
+import { Select, Skeleton, Tooltip, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
-import { FaChartBar, FaTable } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
 import { userLogoutAction } from "../Auth/thunk";
 import formatNumber from "../helper/formatNumber";
 import { getApi } from "../helper/getApi";
-import socket from "../helper/socket";
 import LineChartPrice from "./components/LineChartPrice";
 import PieChartVal from "./components/PieChartVal";
 import PriceStep from "./components/PriceStep";
 import StackColumnVal from "./components/StackColumnVal";
 import TableBuySell from "./components/TableBuySell";
 import "./utils/styles/styleBtn.css";
+import "./utils/styles/styleLoadingBuySell.css";
+import socket from "../helper/socket";
 
 const XLSX = require("xlsx");
 const apiUrl = process.env.REACT_APP_BASE_URL;
@@ -34,9 +33,13 @@ const theme = createTheme({
 
 const BuySellActive = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
 
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
@@ -49,21 +52,26 @@ const BuySellActive = () => {
 
   const [socketConnected, setSocketConnected] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   const handleUserLogout = () => {
     if (isLogin) {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
       window.location.reload();
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -224,6 +232,9 @@ const BuySellActive = () => {
 
   useEffect(() => {
     const loadData = async () => {
+      const currentTime = new Date();
+      const hours = currentTime.getHours();
+
       const fetchedData = await fetchData(); // Call fetchData and wait for the result
 
       if (fetchedData) {
@@ -231,9 +242,15 @@ const BuySellActive = () => {
 
         setData(processedData);
         setSocketConnected(true);
+        setLoading(false);
+      } else if (fetchedData === null && hours <= 9) {
+        setData(null);
+        setSocketConnected(false);
+        setLoading(false);
       } else {
         setData(null);
         setSocketConnected(false);
+        setLoading(true);
       }
     };
 
@@ -393,13 +410,14 @@ const BuySellActive = () => {
           />
         </div>
 
-        <div className="w-full h-[919px] p-[40px]">
+        <div className="w-full p-[40px]">
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
             Mua bán chủ động
           </div>
+
           <div className="code-select mr-5">
             <div className="mb-[3px] font-medium">Mã</div>
-            <div className="flex items-center">
+            <div className="md:flex items-center sm:block">
               <Select
                 style={{
                   width: 222,
@@ -415,7 +433,7 @@ const BuySellActive = () => {
                 }))}
               />
               <LoadingButton
-                className="!ml-2"
+                className="!ml-2 md:translate-x-[0px] sm:translate-x-[-8px] md:!mt-0 sm:!mt-2"
                 variant="contained"
                 color="test"
                 sx={{
@@ -436,13 +454,132 @@ const BuySellActive = () => {
               </LoadingButton>
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-2">
+          {!loading ? (
             <div>
-              <LineChartPrice data={data} />
-            </div>
-            <div className="grid grid-cols-2">
-              <div className="flex flex-col justify-around">
-                <div className="grid grid-cols-12">
+              <div className="mt-5 xl:grid 2xl:grid-cols-2 xl:grid-cols-12 lg:grid-cols-none md:block">
+                <div className="2xl:col-auto xl:col-span-8">
+                  <LineChartPrice data={data} />
+                </div>
+
+                <div className="2xl:col-auto xl:col-span-4 grid 2xl:grid-cols-2 xl:grid-cols-none">
+                  <div className="2xl:flex xl:hidden lg:hidden md:hidden sm:hidden xs:hidden xxs:hidden flex-col justify-around">
+                    <div className="grid grid-cols-12">
+                      <div className="col-span-1 content-center justify-self-end">
+                        <Tooltip
+                          placement="bottom"
+                          title={
+                            <div className="w-[275px] text-justify">
+                              Phân loại lệnh Mua/Bán chủ động:
+                              <br /> Lớn (&gt;1 tỷ đồng/lệnh); Trung Bình
+                              (100tr-1tỷ đồng/lệnh) và Nhỏ (&lt;100 triệu
+                              đồng/lệnh)
+                            </div>
+                          }
+                          color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+                        >
+                          <BsInfoCircle className="cursor-pointer" />
+                        </Tooltip>
+                      </div>
+
+                      <div className="col-span-11 text-[15px] pr-5">
+                        <div className="flex justify-evenly">
+                          <div>
+                            Lệnh{" "}
+                            <span className="text-green-500 uppercase font-bold">
+                              mua (M)
+                            </span>{" "}
+                            chủ động
+                          </div>
+
+                          {buyColor.map((item, index) => (
+                            <div
+                              className="flex items-center gap-2"
+                              key={index}
+                            >
+                              <div
+                                style={{ backgroundColor: item.color }}
+                                className="rounded-[50%] w-[10px] h-[10px]"
+                              ></div>
+                              <div>{item.name}</div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="flex justify-evenly mt-1">
+                          <div className="w-[168px]">
+                            Lệnh{" "}
+                            <span className="text-red-500 uppercase font-bold">
+                              bán (B)
+                            </span>{" "}
+                            chủ động
+                          </div>
+
+                          {sellColor.map((item, index) => (
+                            <div
+                              className="flex items-center gap-2"
+                              key={index}
+                            >
+                              <div
+                                style={{ backgroundColor: item.color }}
+                                className="rounded-[50%] w-[10px] h-[10px]"
+                              ></div>
+                              <div>{item.name}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <StackColumnVal data={data} />
+                    <PieChartVal data={data} />
+                  </div>
+
+                  <div>
+                    <div>
+                      <button
+                        className={`custom-btn-line ${
+                          showTable === 1 ? "active-btn-line" : "btn-2-line"
+                        }`}
+                        onClick={() => setShowTable(1)}
+                      >
+                        Sổ lệnh
+                      </button>
+                      <button
+                        className={`custom-btn-line ml-3 ${
+                          showTable === 2 ? "active-btn-line" : "btn-2-line"
+                        }`}
+                        onClick={() => setShowTable(2)}
+                      >
+                        Bước giá
+                      </button>
+                    </div>
+                    <div className="flex justify-evenly py-1 font-semibold items-center">
+                      <div>KL: {formatVolume(data?.totalVol)}</div>
+                      <div>
+                        M:{" "}
+                        <span className="text-green-500">
+                          {formatVolume(data?.totalVolBuy)}
+                        </span>
+                      </div>
+                      <div>
+                        B:{" "}
+                        <span className="text-red-500">
+                          {formatVolume(data?.totalVolSell)}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      {showTable === 1 ? (
+                        <TableBuySell data={data} /> // Hiển thị TableBuySell nếu showTable là true
+                      ) : (
+                        <PriceStep data={data} /> // Hiển thị PriceStep nếu showTable là false
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="2xl:hidden xl:block">
+                <div className="md:w-[460px] sm:w-[250px] grid grid-cols-12 mx-auto my-8">
                   <div className="col-span-1 content-center justify-self-end">
                     <Tooltip
                       placement="bottom"
@@ -459,8 +596,8 @@ const BuySellActive = () => {
                     </Tooltip>
                   </div>
 
-                  <div className="col-span-11 text-[15px] pr-5">
-                    <div className="flex justify-evenly">
+                  <div className="col-span-11 text-[15px] pr-5 md:ml-0 sm:ml-3">
+                    <div className="md:flex sm:block justify-evenly">
                       <div>
                         Lệnh{" "}
                         <span className="text-green-500 uppercase font-bold">
@@ -470,7 +607,10 @@ const BuySellActive = () => {
                       </div>
 
                       {buyColor.map((item, index) => (
-                        <div className="flex items-center gap-2" key={index}>
+                        <div
+                          className="flex items-center gap-2 md:ml-0 sm:ml-3"
+                          key={index}
+                        >
                           <div
                             style={{ backgroundColor: item.color }}
                             className="rounded-[50%] w-[10px] h-[10px]"
@@ -480,7 +620,7 @@ const BuySellActive = () => {
                       ))}
                     </div>
 
-                    <div className="flex justify-evenly mt-1">
+                    <div className="md:flex sm:block justify-evenly mt-1">
                       <div className="w-[168px]">
                         Lệnh{" "}
                         <span className="text-red-500 uppercase font-bold">
@@ -490,7 +630,10 @@ const BuySellActive = () => {
                       </div>
 
                       {sellColor.map((item, index) => (
-                        <div className="flex items-center gap-2" key={index}>
+                        <div
+                          className="flex items-center gap-2 md:ml-0 sm:ml-3"
+                          key={index}
+                        >
                           <div
                             style={{ backgroundColor: item.color }}
                             className="rounded-[50%] w-[10px] h-[10px]"
@@ -501,53 +644,53 @@ const BuySellActive = () => {
                     </div>
                   </div>
                 </div>
-                <StackColumnVal data={data} />
-                <PieChartVal data={data} />
-              </div>
-              <div>
-                <div>
-                  <button
-                    className={`w-[80px] custom-btn-line ${
-                      showTable === 1 ? "active-btn-line" : "btn-2-line"
-                    }`}
-                    onClick={() => setShowTable(1)}
-                  >
-                    Sổ lệnh
-                  </button>
-                  <button
-                    className={`w-[100px] custom-btn-line ml-3 ${
-                      showTable === 2 ? "active-btn-line" : "btn-2-line"
-                    }`}
-                    onClick={() => setShowTable(2)}
-                  >
-                    Bước giá
-                  </button>
-                </div>
-                <div className="flex justify-evenly py-1 font-semibold items-center">
-                  <div>KL: {formatVolume(data?.totalVol)}</div>
-                  <div>
-                    M:{" "}
-                    <span className="text-green-500">
-                      {formatVolume(data?.totalVolBuy)}
-                    </span>
+                <div className="xl:grid grid-cols-12 md:block">
+                  <div className="xl:col-span-6 lg:col-span-8 mx-auto">
+                    <StackColumnVal data={data} />
                   </div>
-                  <div>
-                    B:{" "}
-                    <span className="text-red-500">
-                      {formatVolume(data?.totalVolSell)}
-                    </span>
+                  <div className="xl:col-span-6 lg:col-span-4 mx-auto">
+                    <PieChartVal data={data} />
                   </div>
-                </div>
-                <div>
-                  {showTable === 1 ? (
-                    <TableBuySell data={data} /> // Hiển thị TableBuySell nếu showTable là true
-                  ) : (
-                    <PriceStep data={data} /> // Hiển thị PriceStep nếu showTable là false
-                  )}
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="buy-sell-active">
+              <div className="grid grid-cols-2 gap-5">
+                <div className="mt-4">
+                  <Skeleton.Input active block size="large" className="mt-1" />
+                </div>
+                <div className="grid grid-cols-2 gap-5">
+                  <div clas>
+                    <div className="mt-4">
+                      <Skeleton.Input
+                        active
+                        block
+                        size="large"
+                        className="mt-1"
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <Skeleton.Input
+                        active
+                        block
+                        size="large"
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+                  <div className="table-price mt-4">
+                    <Skeleton.Input
+                      active
+                      block
+                      size="large"
+                      className="mt-1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </ThemeProvider>

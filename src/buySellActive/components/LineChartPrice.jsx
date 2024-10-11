@@ -1,10 +1,12 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
-import '../utils/styles/triangleLineChart.css'
+import "../utils/styles/triangleLineChart.css";
+import "../utils/styles/hide-legend-icon.css";
+import { MdFilterList } from "react-icons/md";
 
 const LineChartPrice = ({ data }) => {
-  const [seriesConfigLineChart, setSeriesConfigLineChart] = useState(0); 
+  const [seriesConfigLineChart, setSeriesConfigLineChart] = useState(0);
   const [seriesData, setSeriesData] = useState([]);
 
   useEffect(() => {
@@ -19,16 +21,35 @@ const LineChartPrice = ({ data }) => {
       const dataRenderVol = dataReversed.map((item) => ({
         x: item.timestamp,
         y: item.volume,
-        color: item.action === "B" ? "green" : item.action === "S" ? "red" : "black",
+        color:
+          item.action === "B" ? "green" : item.action === "S" ? "red" : "black",
       }));
 
-      const dataRenderMB = dataReversed.map((item) => ({
-        x: item.timestamp,
-        y: item.totalSellVolToNow !== 0 ? +(item.totalBuyVolToNow / item.totalSellVolToNow).toFixed(2) : 0 // Sử dụng null nếu phép chia sẽ dẫn đến Infinity
-      })).filter((item) => item.x >= Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9, 30));
+      const dataRenderMB = dataReversed
+        .map((item) => ({
+          x: item.timestamp,
+          y:
+            item.totalSellVolToNow !== 0
+              ? +(item.totalBuyVolToNow / item.totalSellVolToNow).toFixed(2)
+              : 0, // Sử dụng null nếu phép chia sẽ dẫn đến Infinity
+        }))
+        .filter(
+          (item) =>
+            item.x >=
+            Date.UTC(
+              new Date().getFullYear(),
+              new Date().getMonth(),
+              new Date().getDate(),
+              9,
+              30
+            )
+        );
 
       const dataRenderArea = dataReversed.map((item) => {
-        const totalValueDifference = +((item.totalBuyValToNow - item.totalSellValToNow) / 1_000_000_000).toFixed(2);
+        const totalValueDifference = +(
+          (item.totalBuyValToNow - item.totalSellValToNow) /
+          1_000_000_000
+        ).toFixed(2);
         return {
           x: item.timestamp,
           y: totalValueDifference,
@@ -45,7 +66,7 @@ const LineChartPrice = ({ data }) => {
           yAxis: 1,
           dataLabels: {
             enabled: false,
-          }
+          },
         },
         {
           type: "line",
@@ -53,10 +74,7 @@ const LineChartPrice = ({ data }) => {
           data: dataRenderMB.length ? dataRenderMB : [null],
           yAxis: 2,
           zoneAxis: "y",
-          zones: [
-            { value: 1, color: "#d92323" },
-            { color: "#24bf0f" },
-          ],
+          zones: [{ value: 1, color: "#d92323" }, { color: "#24bf0f" }],
           dataLabels: {
             enabled: true,
             formatter: function () {
@@ -74,18 +92,15 @@ const LineChartPrice = ({ data }) => {
         },
       ];
 
-      // Cấu hình series option 2: Luỹ kế
+      // Cấu hình series option 2: Lũy kế
       const seriesOption2 = [
         {
           type: "area",
-          name: "Luỹ kế",
+          name: "Lũy kế",
           data: dataRenderArea.length ? dataRenderArea : [null],
           yAxis: 1,
           zoneAxis: "y",
-          zones: [
-            { value: 0, color: "#d92323" },
-            { color: "#24bf0f" },
-          ],
+          zones: [{ value: 0, color: "#d92323" }, { color: "#24bf0f" }],
           dataLabels: {
             enabled: true,
             formatter: function () {
@@ -118,7 +133,7 @@ const LineChartPrice = ({ data }) => {
             enabled: true,
             formatter: function () {
               return this.point.index === this.series.data.length - 1
-                ? this.point.y.toFixed(1)
+                ? this.point.y.toFixed(2)
                 : null;
             },
             style: {
@@ -129,10 +144,10 @@ const LineChartPrice = ({ data }) => {
             },
           },
         },
-        ...seriesConfigLineChart === 0 ? seriesOption1 : seriesOption2, // Chọn series cấu hình dựa vào `seriesConfig`
-      ]
+        ...(seriesConfigLineChart === 0 ? seriesOption1 : seriesOption2), // Chọn series cấu hình dựa vào `seriesConfig`
+      ];
 
-      setSeriesData(combinedSeries)
+      setSeriesData(combinedSeries);
     }
   }, [data, seriesConfigLineChart]);
 
@@ -140,7 +155,11 @@ const LineChartPrice = ({ data }) => {
     accessibility: { enabled: false },
     credits: false,
     title: { text: "" },
-    legend: { enabled: seriesConfigLineChart === 0, verticalAlign: "top", itemStyle: { fontWeight: "bold", fontSize: "11px" } },
+    legend: {
+      enabled: true,
+      verticalAlign: "top",
+      itemStyle: { fontWeight: "bold", fontSize: "11px" },
+    },
     xAxis: {
       type: "datetime",
       tickInterval: 30 * 60 * 1000,
@@ -191,7 +210,10 @@ const LineChartPrice = ({ data }) => {
           x: 22,
           style: { fontSize: "9px", fontWeight: "bold" },
         },
-        title: { text: seriesConfigLineChart === 0 ? '' : "Tỷ VNĐ" , style: { fontSize: "9px", fontWeight: "bold" } },
+        title: {
+          text: seriesConfigLineChart === 0 ? "" : "Tỷ VNĐ",
+          style: { fontSize: "9px", fontWeight: "bold" },
+        },
       },
       {
         top: "60%",
@@ -228,9 +250,9 @@ const LineChartPrice = ({ data }) => {
     <div>
       {data ? (
         <div>
-          <div>
+          <div className="w-fit">
             <button
-              className={`w-[220px] custom-btn-line ${
+              className={`custom-btn-line ${
                 seriesConfigLineChart === 0 ? "active-btn-line" : "btn-2-line"
               }`}
               onClick={() => setSeriesConfigLineChart(0)}
@@ -238,40 +260,60 @@ const LineChartPrice = ({ data }) => {
               Khối lượng M/B chủ động
             </button>
             <button
-              className={`w-[80px] custom-btn-line ml-3 ${
+              className={`md:mt-0 sm:mt-4 custom-btn-line ml-4 md:translate-x-0 sm:translate-x-[-16px] ${
                 seriesConfigLineChart === 1 ? "active-btn-line" : "btn-2-line"
               }`}
               onClick={() => setSeriesConfigLineChart(1)}
             >
-              Luỹ kế
+              Lũy kế
             </button>
           </div>
           {seriesConfigLineChart === 0 ? (
-            <div className={`${seriesData ? 'moving-div' : ''} opacity-0`}>
-              <div className="relative flex left-[359px] z-10 top-[37px] w-[16px] h-[2px]">
+            <div className={`${seriesData ? "moving-left-div" : ""} opacity-0`}>
+              <div className="relative flex z-10 top-[35px] 2xl:left-[359px] xl:left-[352px] lg:left-[370px] md:left-[240px] sm:left-[70px] w-[16px] h-[2px]">
                 <div className="w-[8px] h-[2px] bg-[#008000]"></div>
                 <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
               </div>
-              <div className="relative left-[421px] z-10 top-[29px] w-[8px] h-[8px]">
+              <div className="relative z-10 top-[27px] 2xl:left-[421px] xl:left-[417px] lg:left-[435px] md:left-[307px] sm:left-[137px] w-[8px] h-[6px]">
                 <div className="absolute" id="triangle-topright-line"></div>
                 <div id="triangle-bottomleft-line"></div>
               </div>
-              <div className="relative flex left-[519px] z-10 top-[27px] w-[16px] h-[2px]">
+              <div className="relative flex z-10 top-[27px] 2xl:left-[519px] xl:left-[513px] lg:left-[530px] md:left-[403px] sm:left-[230px] w-[16px] h-[2px]">
                 <div className="w-[8px] h-[2px] bg-[#008000]"></div>
                 <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
               </div>
             </div>
           ) : (
-            <div></div>
+            <div
+              className={`${seriesData ? "moving-right-div" : ""} opacity-0`}
+            >
+              <div className="relative flex z-10 top-[35px] 2xl:left-[401px] xl:left-[395px] lg:left-[412px] md:left-[284px] sm:left-[115px] w-[16px] h-[2px]">
+                <div className="w-[8px] h-[2px] bg-[#008000]"></div>
+                <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
+              </div>
+              <div className="relative z-10 top-[45px] 2xl:left-[462px] xl:left-[457px] lg:left-[476px] md:left-[345px] sm:left-[177px] w-[8px] h-[8px]">
+                <div className="relative flex top-[-16px] left-[2px] z-10 w-[16px] h-[2px]">
+                  <div className="w-[6px] h-[2px] bg-[#008000]"></div>
+                  <div className="w-[6px] h-[2px] bg-[#ff0000]"></div>
+                </div>
+                <div className="relative flex top-[-15px] left-[4px] z-10 w-[16px] h-[2px]">
+                  <div className="w-[4px] h-[2px] bg-[#008000]"></div>
+                  <div className="w-[4px] h-[2px] bg-[#ff0000]"></div>
+                </div>
+                <div className="relative flex top-[-14px] left-[6px] z-10 w-[16px] h-[2px]">
+                  <div className="w-[1.5px] h-[2px] bg-[#008000]"></div>
+                  <div className="w-[1.5px] h-[2px] bg-[#ff0000]"></div>
+                </div>
+              </div>
+            </div>
           )}
-          <div className="h-[677px]">
+          <div className="h-[672px] line-chart-mb">
             <HighchartsReact
               highcharts={Highcharts}
               options={chartOptions}
               containerProps={{ style: { height: "100%", width: "100%" } }}
             />
           </div>
-          
         </div>
       ) : (
         <div className="text-center mt-5 font-semibold">

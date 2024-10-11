@@ -24,8 +24,12 @@ const theme = createTheme({
 const TradingStrategies = () => {
   const dispatch = useDispatch();
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const [selectedStrategy, setSelectedStrategy] = useState("");
@@ -46,15 +50,18 @@ const TradingStrategies = () => {
       setRole(null);
       dispatch(userLogoutAction());
       window.location.reload();
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -96,7 +103,10 @@ const TradingStrategies = () => {
                     {selectedMainCategory === key &&
                       selectTradingStrategy[key]
                         .filter((strategy) => {
-                          if (role === "8Z5M8" || role === "XJ20C") {
+                          if (
+                            role === process.env.REACT_APP_ADMIN ||
+                            role === process.env.REACT_APP_WATCH_TRADING_TOOL
+                          ) {
                             // Show both "MA VVIP" and "MA đại pháp"
                             return true;
                           } else {

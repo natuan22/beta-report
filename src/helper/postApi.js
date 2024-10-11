@@ -8,8 +8,8 @@ const logoutUser = async () => {
   Cookies.remove("rt");
   localStorage.removeItem("user");
   localStorage.removeItem("watchlistActive");
-  localStorage.removeItem("2ZW79");
-  localStorage.setItem("_il", "4E8WL");
+  localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
+  localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
 
   window.location.reload();
 

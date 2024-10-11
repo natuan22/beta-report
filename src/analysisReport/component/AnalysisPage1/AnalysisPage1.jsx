@@ -126,7 +126,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
     <div className="h-[1152px] w-[900px] relative">
       <div className="absolute top-[450px] left-[860px] z-30 w-[223px]">
         {/* type tach tu dong vs ban tu dong */}
-        {type === 1 && role === "8Z5M8" ? (
+        {type === 1 && role === process.env.REACT_APP_ADMIN ? (
           <DialogAddTechnicalReportInfor
             stock={stock}
             getImgFromInput={getImgFromInput}

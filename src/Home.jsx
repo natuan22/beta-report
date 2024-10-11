@@ -14,8 +14,12 @@ import Page5 from "./utils/Page5";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const handleUserLogout = () => {
@@ -23,14 +27,17 @@ const Home = () => {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -114,11 +121,11 @@ const Home = () => {
   useEffect(() => {
     document.title = "Bản tin sáng";
   }, []);
- 
-  const [pageActive, setPageActive] = useState(pageRefs.page1)
+
+  const [pageActive, setPageActive] = useState(pageRefs.page1);
 
   const scrollToPage = (pageRef) => {
-    setPageActive(pageRef)
+    setPageActive(pageRef);
     if (pageRef.current) {
       pageRef.current.scrollIntoView({ behavior: "smooth" });
     }
