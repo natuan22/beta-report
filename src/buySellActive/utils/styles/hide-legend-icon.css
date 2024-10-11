@@ -1,0 +1,27 @@
+.line-chart-mb .highcharts-legend-item.highcharts-series-0 .highcharts-graph {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-0 .highcharts-point {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-1 .highcharts-point {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-2 .highcharts-graph {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-2 .highcharts-point {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-1 .highcharts-graph {
+    opacity: 0;
+}
+
+.line-chart-mb .highcharts-legend-item.highcharts-series-1 .highcharts-area {
+    opacity: 0;
+}

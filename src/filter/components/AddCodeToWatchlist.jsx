@@ -130,7 +130,7 @@ const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLo
             />
           </svg>
         }
-        disabled={isLogin !== "7MEvU"}
+        disabled={isLogin !== process.env.REACT_APP_LG_T}
         sx={{
           "&.Mui-disabled": {
             cursor: "not-allowed",

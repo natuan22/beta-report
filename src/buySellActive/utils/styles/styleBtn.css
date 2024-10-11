@@ -1,48 +1,112 @@
 .custom-btn-line {
-    height: 30px;
-    border-radius: 6px;
-    font-weight: 600;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    outline: none;
-    font-size: 15px;
-  }
+  position: relative;
+  padding: 5.5px 25px;
+  border-radius: 7px;
+  border: 2px solid rgb(61, 106, 255);
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
   
-  .btn-2-line {
-    border-radius: 6px;
-    border: 2px dashed #99c7fc;
-    /* background-color: #8BC1FF; */
-    color:#0050AD;
+.btn-2-line {
+  border-radius: 6px;
+  border: 2px dashed #99c7fc;
+  color:#0050AD;
+  box-shadow: 0 0 10px 3px white;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.btn-2-line:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.btn-2-line::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 80%;
+  position: absolute;
+  top: 6%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #1f7aeb;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+.btn-2-line:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
+
+.active-btn-line {
+  background: rgb(61, 106, 255);
+  box-shadow: 0 0 10px 3px rgba(0, 142, 236, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.active-btn-line:hover::before {
+  -webkit-animation: sh02 0.5s 0s linear;
+  -moz-animation: sh02 0.5s 0s linear;
+  animation: sh02 0.5s 0s linear;
+}
+
+.active-btn-line::before {
+  content: '';
+  display: block;
+  width: 0px;
+  height: 80%;
+  position: absolute;
+  top: 6%;
+  left: 0%;
+  opacity: 0;
+  background: #fff;
+  box-shadow: 0 0 50px 30px #fff;
+  -webkit-transform: skewX(-20deg);
+  -moz-transform: skewX(-20deg);
+  -ms-transform: skewX(-20deg);
+  -o-transform: skewX(-20deg);
+  transform: skewX(-20deg);
+}
+
+@keyframes sh02 {
+  from {
+    opacity: 0;
+    left: 0%;
   }
-  
-  .btn-2-line:before {
-    height: 0%;
-    width: 2px;
+
+  50% {
+    opacity: 1;
   }
-  
-  .btn-2-line:hover {
-    box-shadow: inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
-      inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+
+  to {
+    opacity: 0;
+    left: 100%;
   }
-  
-  .active-btn-line {
-    border-radius: 6px;
-    border: 2px solid #0050AD;
-    /* background-color: #0050AD; */
-    color: #0050AD;
-  }
-  
-  .active-btn-line:before {
-    height: 0%;
-    width: 2px;
-  }
-  
-  .active-btn-line:hover {
-    box-shadow: inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
-      inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
-  }
+}
+
+.active-btn-line:active {
+  box-shadow: 0 0 0 0 transparent;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  -moz-transition: box-shadow 0.2s ease-in;
+  transition: box-shadow 0.2s ease-in;
+}
   

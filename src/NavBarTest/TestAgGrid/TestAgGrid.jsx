@@ -29,7 +29,7 @@
 
 // const TestAgGrid = () => {
 //   const dispatch = useDispatch();
-//   const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+//   const [isLogin, setIsLogin] = useState(localStorage.getItem(process.env.REACT_APP_IS_LG));
 //   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
 //   const [watchlists, setWatchlists] = useState([]);
@@ -44,13 +44,13 @@
 //     if (isLogin) {
 //       setIsLogin(null);
 //       dispatch(userLogoutAction());
-//       localStorage.setItem("_il", "4E8WL");
+//       localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
 //       localStorage.removeItem("user");
 //     }
 //   };
 
 //   const onSubmitSuccess = () => {
-//     setIsLogin(localStorage.getItem("_il"));
+//     setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
 //     setUser(JSON.parse(localStorage.getItem("user")));
 //   };
 
@@ -59,7 +59,7 @@
 //   }, []);
 
 //   useEffect(() => {
-//     if (isLogin === "7MEvU") {
+//     if (isLogin === process.env.REACT_APP_LG_T) {
 //       const fetchDataWatchList = async () => {
 //         try {
 //           const data = await getApi(apiUrl, "/api/v1/watchlist");
@@ -270,7 +270,7 @@
 //           onSubmitSuccess={onSubmitSuccess}
 //         />
 //       </div>
-//       <div className="w-[1200px] h-[919px] p-[40px]">
+//       <div className="w-[1200px] p-[40px]">
 //         <div className="w-full h-full">
 //           <div className="example-wrapper">
 //             <div className={"ag-theme-quartz w-full h-full"}>

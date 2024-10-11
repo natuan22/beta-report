@@ -13,19 +13,37 @@
 }
 
 @keyframes moveLeft {
-    from {
-      transform: translateX(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+  from {
+    transform: translateX(20px);
+    opacity: 0;
   }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveRight {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
   
-  .moving-div {
-    animation: moveLeft 0.5s ease-out forwards; /* Di chuyển 2s khi load */
-    animation-delay: 0.5s;
-    position: relative; /* or absolute */
-    z-index: 30; /* Set the desired z-index value */
-  }
+.moving-left-div {
+  animation: moveLeft 0.25s ease-out forwards; /* Di chuyển 2s khi load */
+  animation-delay: 0.3s;
+  position: relative; /* or absolute */
+  z-index: 30; /* Set the desired z-index value */
+}
+
+.moving-right-div {
+  animation: moveRight 0.25s ease-out forwards; /* Di chuyển 2s khi load */
+  animation-delay: 0.3s;
+  position: relative; /* or absolute */
+  z-index: 30; /* Set the desired z-index value */
+}

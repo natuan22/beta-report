@@ -59,7 +59,7 @@ const Page1 = ({ role }) => {
   return (
     <div className="h-[1152px] w-[800px] relative  ">
       <div className="absolute top-[30%] right-0 translate-x-[300px] ">
-        {role === "8Z5M8" ? (
+        {role === process.env.REACT_APP_ADMIN ? (
           <div className="flex flex-col justify-between h-[200px]">
             <DialogNews
               handleCatchDataNews={handleCatchDataNews}

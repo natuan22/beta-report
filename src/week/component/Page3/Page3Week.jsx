@@ -45,7 +45,7 @@ const Page3Week = ({ role }) => {
           <HeaderWeek />
         </div>
 
-        {role === "8Z5M8" ? (
+        {role === process.env.REACT_APP_ADMIN ? (
           <div className="absolute top-0 right-0 translate-x-[250px] translate-y-[250px]">
             <DialogAddImgAndTextWeek
               onSubmitSuccess={onSubmitSuccess}

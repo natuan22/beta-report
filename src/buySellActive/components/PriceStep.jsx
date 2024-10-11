@@ -17,7 +17,7 @@ const PriceStep = ({ data }) => {
           atc: item.atc,
           ato: item.ato,
         }))
-        .sort((a, b) => a.category - b.category); // Sắp xếp theo price
+        .sort((a, b) => b.category - a.category); // Sắp xếp theo price
 
       const categories = sortedData.map((item) => item.category);
 
@@ -74,7 +74,10 @@ const PriceStep = ({ data }) => {
     title: { text: "" },
     xAxis: {
       categories,
-      title: { text: "Nghìn VNĐ", style: { fontSize: "9px", fontWeight: "bold" } },
+      title: {
+        text: "Nghìn VNĐ",
+        style: { fontSize: "9px", fontWeight: "bold" },
+      },
       labels: {
         style: {
           fontSize: "9px",
@@ -88,8 +91,15 @@ const PriceStep = ({ data }) => {
       gridLineWidth: 0,
       labels: { style: { fontSize: "9px", fontWeight: "bold" } },
     },
-    legend: { enabled: true, verticalAlign: "top", itemStyle: { fontWeight: "bold", fontSize: "11px" } },
+    legend: {
+      enabled: true,
+      verticalAlign: "top",
+      itemStyle: { fontWeight: "bold", fontSize: "11px" },
+    },
     plotOptions: {
+      series: {
+        turboThreshold: 100_000_000_000,
+      },
       bar: {
         stacking: "normal",
         dataLabels: {
@@ -119,7 +129,7 @@ const PriceStep = ({ data }) => {
   };
 
   return (
-    <div className="h-[656px] w-[459px]">
+    <div className="h-[653px]">
       {hasData ? (
         <HighchartsReact
           highcharts={Highcharts}

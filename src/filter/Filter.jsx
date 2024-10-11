@@ -37,8 +37,12 @@ const theme = createTheme({
 const Filter = () => {
   const dispatch = useDispatch();
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   const [selectedItems, setSelectedItems] = useState([
@@ -66,7 +70,7 @@ const Filter = () => {
   }, []);
 
   useEffect(() => {
-    if (isLogin === "7MEvU") {
+    if (isLogin === process.env.REACT_APP_LG_T) {
       const fetchDataWatchList = async () => {
         try {
           const data = await getApi(apiUrl, "/api/v1/watchlist");
@@ -111,15 +115,18 @@ const Filter = () => {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -436,7 +443,7 @@ const Filter = () => {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="style-filter">
               <div className="2xl:flex xl:block lg:block">
                 <div className="2xl:w-[70%] xl:w-full">
                   <Skeleton.Input active block className="mt-1" />

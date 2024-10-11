@@ -57,9 +57,13 @@ const theme = createTheme({
 
 const TradingTool = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
 
   const [socketConnected, setSocketConnected] = useState(false);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
@@ -80,15 +84,18 @@ const TradingTool = () => {
       setRole(null);
       dispatch(userLogoutAction());
       window.location.reload();
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
 
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
@@ -162,7 +169,7 @@ const TradingTool = () => {
     {
       headerName: "Mã",
       field: "code",
-      width: role === "XJ20C" ? 130 : 90,
+      width: role === process.env.REACT_APP_WATCH_TRADING_TOOL ? 130 : 90,
       cellRenderer: DetailComponents,
       cellClass: (params) => getColor(params.data.change),
       cellStyle: { fontWeight: "bold", textAlign: "center" },
@@ -170,14 +177,14 @@ const TradingTool = () => {
     {
       headerName: "Giá",
       field: "closePrice",
-      width: role === "XJ20C" ? 130 : 90,
+      width: role === process.env.REACT_APP_WATCH_TRADING_TOOL ? 130 : 90,
       cellClass: (params) => getColor(params.data.change),
       cellStyle: { fontWeight: "bold", textAlign: "center" },
     },
     {
       headerName: "+/-",
       field: "perChange",
-      width: role === "XJ20C" ? 130 : 90,
+      width: role === process.env.REACT_APP_WATCH_TRADING_TOOL ? 130 : 90,
       cellClass: (params) => getColor(params.data.change),
       cellStyle: { fontWeight: "bold", textAlign: "center" },
     },
@@ -241,7 +248,7 @@ const TradingTool = () => {
     },
   ];
 
-  if (role === "8Z5M8") {
+  if (role === process.env.REACT_APP_ADMIN) {
     columnDefs.push({
       headerName: "",
       field: "actions",
@@ -574,17 +581,17 @@ const TradingTool = () => {
           />
         </div>
 
-        <div className="w-full h-[919px] p-[40px]">
+        <div className="w-full p-[40px]">
           <div
             className={`bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center ${
-              role === "8Z5M8" ? "" : "mb-[15px]"
+              role === process.env.REACT_APP_ADMIN ? "" : "mb-[15px]"
             }`}
           >
             Trading Tool
           </div>
 
           <div className="flex justify-start content-center my-[15px]">
-            {role === "8Z5M8" && (
+            {role === process.env.REACT_APP_ADMIN && (
               <div className="mr-[20px]">
                 <Button variant="contained" color="test" onClick={showModalAdd}>
                   <FaPlusCircle className="w-[20px] h-[20px] text-white" />

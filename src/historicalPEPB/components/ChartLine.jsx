@@ -11,26 +11,18 @@ const ChartLine = ({ stock, data, chartKey }) => {
 
   useEffect(() => {
     if (data?.data?.length > 0) {
-      const uniqueDates = [
-        ...new Set(
-          data.data.map((item) => moment(item.from).format("DD/MM/YYYY"))
-        ),
-      ];
+      const uniqueDates = [...new Set(data.data.map((item) => moment(item.from).format("DD/MM/YYYY")))];
       setTimeLine(uniqueDates);
 
       const keys = ["pe", "pb", "industryPe", "industryPb", "indexPe", "indexPb"];
       const colors = ["#009565", "#FF2A37", "#00F1A0", "#FF9BA3", "#FBAC20", "#FBAC20"];
 
       const transformedData = keys.map((key, index) => {
-        return {
-          name: key,
-          data: data.data.map((item) => item[key]),
-          color: colors[index],
-        };
+        return { name: key, data: data.data.map((item) => item[key]), color: colors[index] };
       });
 
       const peData = transformedData
-        .filter((item) => item.name.toLowerCase().includes("pe"))     
+        .filter((item) => item.name.toLowerCase().includes("pe"))
         .map((item) => {
           let newName;
           let dashStyle = undefined;
@@ -59,26 +51,52 @@ const ChartLine = ({ stock, data, chartKey }) => {
                   (s) => s.visible
                 );
 
-                // Get the name of the current series without the " (Trung bình)" suffix
-                const baseName = this.series.name.replace(" (Trung bình)", "");
+                // Kiểm tra nếu có bất kỳ series nào chứa "VNIndex" và nó đang hiển thị
+                const hasVNIndexInVisibleSeries = visibleSeries.some((s) =>
+                  s.name.toLowerCase().includes("vnindex")
+                );
 
-                // Check if there's only the base series and its average series visible
-                const isOnlyBaseAndAverageVisible = visibleSeries.every((s) => {
-                  const nameWithoutAverage = s.name.replace(
-                    " (Trung bình)",
-                    ""
-                  );
-                  return nameWithoutAverage === baseName;
-                });
-
-                if (!isOnlyBaseAndAverageVisible) {
-                  return null; // Hide the label if other series are visible
+                // Nếu "VNIndex" đang được hiển thị, ẩn nhãn
+                if (hasVNIndexInVisibleSeries) {
+                  return null; // Ẩn nhãn nếu có "VNIndex" trong các series đang hiển thị
                 }
 
-                return this.series.visible &&
-                  this.point.index === this.series.data.length - 1
-                  ? this.point.y.toFixed(1)
-                  : null; // Show the label for the last point if the series is visible
+                // Kiểm tra xem có series nào chứa " (Trung bình)" không
+                const hasAverageSeries = visibleSeries.some((s) =>
+                  s.name.includes(" (Trung bình)")
+                );
+
+                // Nếu không có series nào là " (Trung bình)", hiển thị giá trị cuối luôn
+                if (!hasAverageSeries) {
+                  return this.point.index === this.series.data.length - 1
+                    ? this.point.y.toFixed(1)
+                    : null;
+                }
+
+                // Lấy tên cơ bản của các series (bỏ phần " (Trung bình)")
+                const baseNames = visibleSeries.map((s) =>
+                  s.name.replace(" (Trung bình)", "")
+                );
+
+                // Lấy tên cơ bản của series hiện tại
+                const currentBaseName = this.series.name.replace(
+                  " (Trung bình)",
+                  ""
+                );
+
+                // Kiểm tra nếu tất cả các series có cùng tên cơ bản
+                const isAllBaseNamesSame = baseNames.every(
+                  (name) => name === currentBaseName
+                );
+
+                // Hiển thị nhãn chỉ khi tất cả các series có cùng tên cơ bản
+                if (isAllBaseNamesSame) {
+                  return this.point.index === this.series.data.length - 1
+                    ? this.point.y.toFixed(1) // Hiển thị giá trị cuối cùng
+                    : null;
+                }
+
+                return null; // Ẩn nhãn nếu không thỏa mãn điều kiện
               },
               style: {
                 color: "#000",
@@ -121,26 +139,52 @@ const ChartLine = ({ stock, data, chartKey }) => {
                   (s) => s.visible
                 );
 
-                // Get the name of the current series without the " (Trung bình)" suffix
-                const baseName = this.series.name.replace(" (Trung bình)", "");
+                // Kiểm tra nếu có bất kỳ series nào chứa "VNIndex" và nó đang hiển thị
+                const hasVNIndexInVisibleSeries = visibleSeries.some((s) =>
+                  s.name.toLowerCase().includes("vnindex")
+                );
 
-                // Check if there's only the base series and its average series visible
-                const isOnlyBaseAndAverageVisible = visibleSeries.every((s) => {
-                  const nameWithoutAverage = s.name.replace(
-                    " (Trung bình)",
-                    ""
-                  );
-                  return nameWithoutAverage === baseName;
-                });
-
-                if (!isOnlyBaseAndAverageVisible) {
-                  return null; // Hide the label if other series are visible
+                // Nếu "VNIndex" đang được hiển thị, ẩn nhãn
+                if (hasVNIndexInVisibleSeries) {
+                  return null; // Ẩn nhãn nếu có "VNIndex" trong các series đang hiển thị
                 }
 
-                return this.series.visible &&
-                  this.point.index === this.series.data.length - 1
-                  ? this.point.y.toFixed(1)
-                  : null; // Show the label for the last point if the series is visible
+                // Kiểm tra xem có series nào chứa " (Trung bình)" không
+                const hasAverageSeries = visibleSeries.some((s) =>
+                  s.name.includes(" (Trung bình)")
+                );
+
+                // Nếu không có series nào là " (Trung bình)", hiển thị giá trị cuối luôn
+                if (!hasAverageSeries) {
+                  return this.point.index === this.series.data.length - 1
+                    ? this.point.y.toFixed(1)
+                    : null;
+                }
+
+                // Lấy tên cơ bản của các series (bỏ phần " (Trung bình)")
+                const baseNames = visibleSeries.map((s) =>
+                  s.name.replace(" (Trung bình)", "")
+                );
+
+                // Lấy tên cơ bản của series hiện tại
+                const currentBaseName = this.series.name.replace(
+                  " (Trung bình)",
+                  ""
+                );
+
+                // Kiểm tra nếu tất cả các series có cùng tên cơ bản
+                const isAllBaseNamesSame = baseNames.every(
+                  (name) => name === currentBaseName
+                );
+
+                // Hiển thị nhãn chỉ khi tất cả các series có cùng tên cơ bản
+                if (isAllBaseNamesSame) {
+                  return this.point.index === this.series.data.length - 1
+                    ? this.point.y.toFixed(1) // Hiển thị giá trị cuối cùng
+                    : null;
+                }
+
+                return null; // Ẩn nhãn nếu không thỏa mãn điều kiện
               },
               style: {
                 color: "#000",
@@ -169,7 +213,9 @@ const ChartLine = ({ stock, data, chartKey }) => {
       // Sử dụng hàm cho peData (có lọc)
       const peAverageData = peData.map((series) => ({
         name: `${series.name} (Trung bình)`,
-        data: Array(uniqueDates.length).fill(+calculateAverage(series.data, true).toFixed(1)),
+        data: Array(uniqueDates.length).fill(
+          +calculateAverage(series.data, true).toFixed(1)
+        ),
         color: series.color,
         dashStyle: "dot",
         visible: false,
@@ -193,7 +239,9 @@ const ChartLine = ({ stock, data, chartKey }) => {
       // Sử dụng hàm cho pbData (không lọc)
       const pbAverageData = pbData.map((series) => ({
         name: `${series.name} (Trung bình)`,
-        data: Array(uniqueDates.length).fill(+calculateAverage(series.data).toFixed(1)),
+        data: Array(uniqueDates.length).fill(
+          +calculateAverage(series.data).toFixed(1)
+        ),
         color: series.color,
         dashStyle: "dot",
         visible: false,
@@ -318,9 +366,13 @@ const ChartLine = ({ stock, data, chartKey }) => {
             tooltip += `
                 <div style="display: flex; align-items: center; margin-bottom: 3px;">
                     <div style="width: 10px; height: 10px; background-color: ${color}; margin-right: 5px;"></div>
-                    <span style="color:${color}; width: 65px">${removeParentheses(point.series.name)}</span>
+                    <span style="color:${color}; width: 65px">${removeParentheses(
+              point.series.name
+            )}</span>
                     <span style="width: 60px;"><b>${point.y}</b></span>
-                    <span><b>${dataAverage[seriesIndex].data[0].toFixed(1)}</b></span>
+                    <span><b>${dataAverage[seriesIndex].data[0].toFixed(
+                      1
+                    )}</b></span>
                     <br/>
                 </div>`;
           }
@@ -344,6 +396,3 @@ const ChartLine = ({ stock, data, chartKey }) => {
 };
 
 export default ChartLine;
-
-
-

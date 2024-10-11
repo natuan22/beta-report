@@ -22,9 +22,13 @@ const AnalysisReport = () => {
   const [isFocus, setIsFocus] = useState(false);
   const wrapperRef = useRef(null); // Ref cho phần div chứa dữ liệu
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("_il"));
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem(process.env.REACT_APP_IS_LG)
+  );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [role, setRole] = useState(localStorage.getItem("2ZW79"));
+  const [role, setRole] = useState(
+    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
+  );
 
   const handleUserLogout = () => {
     if (isLogin) {
@@ -32,14 +36,17 @@ const AnalysisReport = () => {
       setRole(null);
       dispatch(userLogoutAction());
       window.location.reload();
-      localStorage.setItem("_il", "4E8WL");
-      localStorage.removeItem("2ZW79");
+      localStorage.setItem(
+        process.env.REACT_APP_IS_LG,
+        process.env.REACT_APP_LG_F
+      );
+      localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
   };
   const onSubmitSuccess = () => {
-    setIsLogin(localStorage.getItem("_il"));
-    setRole(localStorage.getItem("2ZW79"));
+    setIsLogin(localStorage.getItem(process.env.REACT_APP_IS_LG));
+    setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
   const pageRefs = {

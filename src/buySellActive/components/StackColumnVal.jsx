@@ -121,7 +121,7 @@ const StackColumnVal = ({ data }) => {
   return (
     <div>
       {hasData ? (
-        <div className="h-[300px]">
+        <div className="h-[335px]">
           <HighchartsReact
             highcharts={Highcharts}
             options={options}

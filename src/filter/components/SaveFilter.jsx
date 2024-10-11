@@ -145,7 +145,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
               </Form.Item>
               <Form.Item className="btnStyle">
                 <Button
-                  disabled={isLogin !== "7MEvU"}
+                  disabled={isLogin !== process.env.REACT_APP_LG_T}
                   type="submit"
                   variant="text"
                   sx={{

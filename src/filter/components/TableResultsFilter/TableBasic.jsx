@@ -514,7 +514,7 @@ const TableBasic = ({ filteredResults, watchlists, catchWatchlists, isLogin }) =
                 className="flex items-center justify-center rounded-md cursor-pointer font-semibold text-[16px]"
                 onClick={showModalCreate}
                 startIcon={<FiPlusCircle />}
-                disabled={isLogin !== "7MEvU"}
+                disabled={isLogin !== process.env.REACT_APP_LG_T}
                 sx={{
                   "&.Mui-disabled": {
                     cursor: "not-allowed",
@@ -584,7 +584,7 @@ const TableBasic = ({ filteredResults, watchlists, catchWatchlists, isLogin }) =
                 variant="contained"
                 color="xanh"
                 onClick={handleAddCodeToWatchlist}
-                disabled={isLogin !== "7MEvU"}
+                disabled={isLogin !== process.env.REACT_APP_LG_T}
                 sx={{
                   "&.Mui-disabled": {
                     cursor: "not-allowed",
