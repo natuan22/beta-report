@@ -12,8 +12,6 @@ import ListResults from "./StrategyMA/ListResults";
 import ScatterChart from "./StrategyMA/ScatterChart";
 import { getApi } from "../../helper/getApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const StrategyMAVVIP = () => {
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
@@ -30,7 +28,7 @@ const StrategyMAVVIP = () => {
   useEffect(() => {
     const fetchDataStock = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/investment/all-stock");
+        const data = await getApi("/api/v1/investment/all-stock");
         setDataStocks(data);
       } catch (error) {
         console.error(error);
@@ -61,7 +59,6 @@ const StrategyMAVVIP = () => {
     } else {
       try {
         const data = await getApi(
-          apiUrl,
           `/api/v1/investment/test?stock=${stock}&from=${dayjs(fromDate).format(
             "YYYY-MM-DD"
           )}&to=${dayjs(toDate).format("YYYY-MM-DD")}`,

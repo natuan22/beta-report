@@ -9,8 +9,6 @@ import "sweetalert2/dist/sweetalert2.css";
 import { getApi } from "../../helper/getApi";
 import { postApi } from "../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, setFilters, selectedItems }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +58,7 @@ const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, set
 
   const fetchDataFilters = async () => {
     try {
-      const data = await getApi(apiUrl, "/api/v1/investment/your-filter");
+      const data = await getApi("/api/v1/investment/your-filter");
 
       setFilters(data);
     } catch (error) {
@@ -83,7 +81,6 @@ const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, set
       if (result.isConfirmed) {
         // Xác nhận xóa tin và cập nhật state
         await postApi(
-          apiUrl,
           `/api/v1/investment/delete-filter/${filter.filter_id}`
         );
         fetchDataFilters();
@@ -107,7 +104,7 @@ const ListFilters = ({ filters, filtersActive, catchFiler, setFiltersActive, set
     // Gán giá trị mới cho trường name của editedItem
     editedItem.name = editValue;
 
-    await postApi(apiUrl, `/api/v1/investment/update-filter/${editedItem.filter_id}`, { name: editedItem.name, value: selectedItems });
+    await postApi(`/api/v1/investment/update-filter/${editedItem.filter_id}`, { name: editedItem.name, value: selectedItems });
 
     warning("success", `Chỉnh sửa thành công bộ lọc`);
 

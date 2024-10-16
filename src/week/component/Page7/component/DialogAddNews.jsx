@@ -12,7 +12,6 @@ import "sweetalert2/dist/sweetalert2.css";
 import "../../../../component/styles/btnStyle.css";
 import { postApi } from "../../../../helper/postApi";
 import { https } from "../../../../services/configService";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -203,7 +202,7 @@ export default function DialogAddNews({
     if (editingIndex !== null) {
       return warning("Vui lòng hoàn tất chỉnh sửa");
     } else {
-      await postApi(apiUrl, "/api/v1/report/luu-tin", formData);
+      await postApi("/api/v1/report/luu-tin", formData);
       await getNews(idQuery);
 
       handleCatchDataNews(
@@ -236,7 +235,7 @@ export default function DialogAddNews({
         setArrSelectedNews([]);
         success("Đã xóa tất cả tin thành công!");
         // Gọi API saveNews với formData mới (rỗng)
-        postApi(apiUrl, "/api/v1/report/luu-tin", updatedformData);
+        postApi("/api/v1/report/luu-tin", updatedformData);
         setOpen(false);
       }
     });

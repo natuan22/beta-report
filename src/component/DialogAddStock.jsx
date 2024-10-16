@@ -6,7 +6,6 @@ import { postApi } from "../helper/postApi";
 import { https } from "../services/configService";
 import InputFormBuy from "./utils/InputFormBuy";
 import InputFormSell from "./utils/InputFormSell";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const DialogAddStock = ({ catchStock }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -143,7 +142,7 @@ const DialogAddStock = ({ catchStock }) => {
       stock_buy: [],
       stock_sell: [],
     });
-    postApi(apiUrl, "/api/v1/report/luu-co-phieu-khuyen-nghi", {
+    postApi("/api/v1/report/luu-co-phieu-khuyen-nghi", {
       stock_buy: [],
       stock_sell: [],
     });
@@ -151,7 +150,7 @@ const DialogAddStock = ({ catchStock }) => {
 
   const handleOk = async () => {
     setIsModalOpen(false);
-    await postApi(apiUrl, "/api/v1/report/luu-co-phieu-khuyen-nghi", arrStock);
+    await postApi("/api/v1/report/luu-co-phieu-khuyen-nghi", arrStock);
     getStock();
     warning("success", "Thêm cổ phiếu khuyến nghị thành công");
   };

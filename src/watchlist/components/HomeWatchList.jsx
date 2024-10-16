@@ -23,8 +23,6 @@ import TableSignalWarning from "./TableSignalWarning";
 import TableStatistical from "./TableStatistical";
 import TableTechnique from "./TableTechnique";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
@@ -42,7 +40,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   const [socketConnected, setSocketConnected] = useState(false);
 
   const getDataTable = async (id) => {
-    const data = await getApi(apiUrl, `/api/v1/watchlist/${id}`);
+    const data = await getApi(`/api/v1/watchlist/${id}`);
     const dataWithKey =
       Array.isArray(data) &&
       data?.map((item, index) => ({
@@ -112,7 +110,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Xác nhận xóa tin và cập nhật state
-        await postApi(apiUrl, "/api/v1/watchlist/delete", { id });
+        await postApi("/api/v1/watchlist/delete", { id });
         warning("success", "Đã xóa watchlist thành công!");
         const newData = await fetchDataWatchList();
         setWatchlistActive(newData[newData.length - 1]);
@@ -150,7 +148,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
     // Gán giá trị mới cho trường name của editedItem
     editedItem.name = editValue;
 
-    await postApi(apiUrl, "/api/v1/watchlist/update", editedItem);
+    await postApi("/api/v1/watchlist/update", editedItem);
     warning("success", `Chỉnh sửa thành công watchlist`);
 
     const newData = await fetchDataWatchList();
@@ -274,7 +272,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
   const fetchDataWatchList = async () => {
     try {
-      const data = await getApi(apiUrl, "/api/v1/watchlist");
+      const data = await getApi("/api/v1/watchlist");
       catchWatchlists(data);
       return data;
     } catch (error) {
@@ -283,11 +281,11 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   };
 
   const onFinish = async (values) => {
-    await postApi(apiUrl, "/api/v1/watchlist/create", values);
+    await postApi("/api/v1/watchlist/create", values);
 
     const fetchDataWatchList = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/watchlist");
+        const data = await getApi("/api/v1/watchlist");
         catchWatchlists(data);
         const newWatchlist = data.find(
           (watchlist) => watchlist.name === values.name
@@ -550,7 +548,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         updatedCodes = [...watchlistActive.code, code];
 
         // Fetch new data for the added code
-        newData = await getApi(apiUrl, `/api/v1/watchlist/data?stock=${code}`);
+        newData = await getApi(`/api/v1/watchlist/data?stock=${code}`);
         const newKey = data.length + 1;
         newData = { ...newData, key: newKey };
       }
@@ -571,7 +569,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       }
 
       setLoadingTb(false);
-      await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+      await postApi("/api/v1/watchlist/update", updatedWatchlist);
     }
   };
 
@@ -596,7 +594,6 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
 
           // Fetch new data for the added code
           newData = await getApi(
-            apiUrl,
             `/api/v1/watchlist/data?stock=${dataSearch[0].code}`
           );
           const newKey = data.length + 1;
@@ -622,7 +619,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
         }
 
         setLoadingTb(false);
-        await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+        await postApi("/api/v1/watchlist/update", updatedWatchlist);
       }
     }
   };
@@ -641,7 +638,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       // Cập nhật lại watchlistActive
       setWatchlistActive(updatedWatchlist);
       localStorage.setItem("watchlistActive", JSON.stringify(updatedWatchlist));
-      await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+      await postApi("/api/v1/watchlist/update", updatedWatchlist);
       setData(data.filter((record) => record.code !== item));
     }
   };

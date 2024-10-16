@@ -7,7 +7,6 @@ import { getApi } from "../helper/getApi";
 import DialogAddWatchList from "./components/DialogAddWatchList";
 import HomeWatchList from "./components/HomeWatchList";
 import "./components/styles/modalStyle.css";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const WatchList = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const WatchList = () => {
     if (isLogin === process.env.REACT_APP_LG_T) {
       const fetchDataWatchList = async () => {
         try {
-          const data = await getApi(apiUrl, "/api/v1/watchlist");
+          const data = await getApi("/api/v1/watchlist");
           setWatchlists(data);
           setLoading(false);
         } catch (error) {

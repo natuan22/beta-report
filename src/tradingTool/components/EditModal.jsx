@@ -5,8 +5,6 @@ import React, { useState } from "react";
 import "sweetalert2/dist/sweetalert2.css";
 import { postApi } from "../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const EditModal = ({ dataEdit, setData, isModalEditOpen, setIsModalEditOpen }) => {
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +23,7 @@ const EditModal = ({ dataEdit, setData, isModalEditOpen, setIsModalEditOpen }) =
     const price_2024 = e.target[2]?.value || 0;
     const price_2025 = e.target[4]?.value || 0;
     try {
-      const res = await postApi(apiUrl, "/api/v1/investment/update-beta-watch-list", {
+      const res = await postApi("/api/v1/investment/update-beta-watch-list", {
         code: e.target[0].value,
         price_2024,
         price_2025,

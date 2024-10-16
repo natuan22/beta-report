@@ -1,8 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { refreshTokenAction } from "./postApi";
+import { apiUrl } from "../services/configService";
 
-export const getApi = async (apiUrl, url, type) => {
+export const getApi = async (url, type) => {
   if (type === 1) {
     const headers = {
       mac: localStorage.getItem("deviceId"),

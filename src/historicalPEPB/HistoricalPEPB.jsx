@@ -10,7 +10,6 @@ import { getApi } from "../helper/getApi";
 import ChartLine from "./components/ChartLine";
 
 const XLSX = require("xlsx");
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const theme = createTheme({
   palette: {
@@ -71,7 +70,6 @@ const HistoricalPEPB = () => {
     } else {
       try {
         const data = await getApi(
-          apiUrl,
           `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
         );
         setData(data);
@@ -84,7 +82,7 @@ const HistoricalPEPB = () => {
   useEffect(() => {
     const fetchDataStock = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/investment/all-stock");
+        const data = await getApi("/api/v1/investment/all-stock");
         setDataStocks(data);
       } catch (error) {
         console.error(error);
@@ -141,7 +139,6 @@ const HistoricalPEPB = () => {
         setLoadingExcel(true);
 
         const data = await getApi(
-          apiUrl,
           `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
         );
 

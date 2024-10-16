@@ -7,8 +7,6 @@ import "sweetalert2/dist/sweetalert2.css";
 import { getApi } from "../../helper/getApi";
 import { postApi } from "../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +32,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
 
   const fetchDataFilters = async () => {
     try {
-      const data = await getApi(apiUrl, "/api/v1/investment/your-filter");
+      const data = await getApi("/api/v1/investment/your-filter");
 
       setFilters(data);
     } catch (error) {
@@ -44,7 +42,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
 
   const onFinish = async (values) => {
     if (selectedItems.length > 0) {
-      await postApi(apiUrl, "/api/v1/investment/save-filter", {
+      await postApi("/api/v1/investment/save-filter", {
         name: values.name,
         value: selectedItems,
       });
@@ -78,7 +76,6 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
       if (result.isConfirmed) {
         // Xác nhận xóa tin và cập nhật state
         await postApi(
-          apiUrl,
           `/api/v1/investment/update-filter/${filtersActive.filter_id}`,
           { name: filtersActive.name, value: selectedItems }
         );

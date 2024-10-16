@@ -7,7 +7,6 @@ import React, { Fragment, forwardRef, useEffect, useState } from "react";
 import { postApi } from "../helper/postApi";
 import { https } from "../services/configService";
 import Textarea from "./utils/Textarea";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -82,7 +81,7 @@ export default function DialogIdentify({ catchText }) {
   const handleAddText = async () => {
     if (text1.trim() !== "" && text2.trim() !== "") {
       const newTextArr = [text1, text2];
-      await postApi(apiUrl, "/api/v1/report/luu-nhan-dinh-thi-truong", {
+      await postApi("/api/v1/report/luu-nhan-dinh-thi-truong", {
         text: newTextArr,
       });
       // Cập nhật textArr sau khi gọi API thành công

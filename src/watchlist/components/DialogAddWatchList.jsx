@@ -3,7 +3,6 @@ import { Form, Input, Modal, message } from "antd";
 import React, { useState } from "react";
 import { getApi } from "../../helper/getApi";
 import { postApi } from "../../helper/postApi";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const DialogAddWatchList = ({ catchWatchlists }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -29,12 +28,12 @@ const DialogAddWatchList = ({ catchWatchlists }) => {
   };
 
   const onFinish = async (values) => {
-    await postApi(apiUrl, "/api/v1/watchlist/create", values);
+    await postApi("/api/v1/watchlist/create", values);
     setIsModalOpen(false);
 
     const fetchDataWatchList = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/watchlist");
+        const data = await getApi("/api/v1/watchlist");
         catchWatchlists(data);
 
         // Lấy tên của watchlist mới được thêm vào

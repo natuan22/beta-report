@@ -115,7 +115,10 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         }`}
       >
         <div className="overflow-x-auto h-full">
-          <div id="nav" className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[738px] lg:h-[738px] md:h-[738px]">
+          <div
+            id="nav"
+            className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[738px] lg:h-[738px] md:h-[738px]"
+          >
             <div>
               <h3
                 className={`uppercase ${
@@ -221,10 +224,16 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                 <MdQueryStats />,
                 "Chiến lược giao dịch"
               )}
-              {buttonNavLink(
-                "/beta-smart",
-                <HiOutlineLightBulb />,
-                "BETA SMART"
+              {role === process.env.REACT_APP_BASE_USER || !role ? (
+                <></>
+              ) : (
+                <div>
+                  {buttonNavLink(
+                    "/beta-smart",
+                    <HiOutlineLightBulb />,
+                    "BETA SMART"
+                  )}
+                </div>
               )}
               {role === process.env.REACT_APP_BASE_USER || !role ? (
                 <></>
@@ -237,45 +246,17 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   )}
                 </div>
               )}
-              {isLogin !== process.env.REACT_APP_LG_T ? (
-                <>
-                  <Tooltip
-                    placement="left"
-                    title={
-                      <span>
-                        Vui lòng đăng nhập/đăng ký để sử dụng tính năng này
-                      </span>
-                    }
-                    color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
-                  >
-                    <NavLink
-                      to={isDisabled ? "/" : "/historical-pe-pb"}
-                      className={({ isActive }) =>
-                        isDisabled
-                          ? "cursor-not-allowed no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                          : isActive
-                          ? "no-underline block text-white bg-[#1E5D8B] hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                          : "no-underline block text-black hover:bg-[#1E5D8B] hover:text-white px-2 py-2 my-3 rounded-md text-base font-medium border border-solid border-collapse border-[#1E5D8B]"
-                      }
-                      onClick={(e) => isDisabled && e.preventDefault()}
-                    >
-                      <span className="px-2">
-                        <PiPresentationChartLight />
-                      </span>
-                      Lịch sử P/E, P/B
-                    </NavLink>
-                  </Tooltip>
-                </>
-              ) : (
-                <div>
-                  {buttonNavLink(
-                    "/historical-pe-pb",
-                    <PiPresentationChartLight />,
-                    "Lịch sử P/E, P/B"
-                  )}
-                </div>
+              {buttonNavLink(
+                "/historical-pe-pb",
+                <PiPresentationChartLight />,
+                "Lịch sử P/E, P/B"
               )}
-              {isLogin !== process.env.REACT_APP_LG_T ? (
+              {buttonNavLink(
+                "/mua-ban-chu-dong",
+                <TbChartLine />,
+                "Mua bán chủ động"
+              )}
+              {/* {isLogin !== process.env.REACT_APP_LG_T ? (
                 <>
                   <Tooltip
                     placement="left"
@@ -312,7 +293,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                     "Mua bán chủ động"
                   )}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

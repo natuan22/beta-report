@@ -5,7 +5,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { postApi } from "../../../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
 const FormInput = ({
@@ -42,7 +41,6 @@ const FormInput = ({
 
     // Gửi yêu cầu POST
     await postApi(
-      apiUrl,
       `/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`,
       formData
     );
