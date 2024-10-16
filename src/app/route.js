@@ -31,6 +31,6 @@ export const routes = [
   { path: "/chien-luoc-giao-dich", component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
   { path: "/beta-smart", component: BetaSmart, role: process.env.REACT_APP_ADMIN },
   { path: "/trading-tool", component: TradingTool, role: process.env.REACT_APP_ADMIN },
-  { path: "/historical-pe-pb", component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER },
-  { path: "/mua-ban-chu-dong", component: BuySellActive, role: process.env.REACT_APP_BASE_USER },
+  { path: "/historical-pe-pb", component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
+  { path: "/mua-ban-chu-dong", component: BuySellActive, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
 ];
