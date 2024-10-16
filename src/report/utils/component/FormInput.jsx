@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { postApi } from "../../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
 const FormInput = ({
@@ -26,7 +25,6 @@ const FormInput = ({
 
     // Gửi yêu cầu POST
     await postApi(
-      apiUrl,
       `/api/v1/report/luu-nhan-dinh-thi-truong-${query}`,
       formData
     );

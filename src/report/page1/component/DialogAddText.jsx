@@ -3,7 +3,7 @@ import { Form, Input, Modal, message } from "antd";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { postApi } from "../../../helper/postApi";
-const apiUrl = process.env.REACT_APP_BASE_URL;
+
 const { TextArea } = Input;
 
 const DialogAddText = ({ getData }) => {
@@ -19,7 +19,7 @@ const DialogAddText = ({ getData }) => {
       content: "",
     },
     onSubmit: async (values) => {
-      await postApi(apiUrl, "api/v1/report/luu-dien-bien-thi-truong", {
+      await postApi("api/v1/report/luu-dien-bien-thi-truong", {
         text: [values.title, values.subTitle, values.content],
       });
       await getData();

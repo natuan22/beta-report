@@ -16,7 +16,6 @@ import TableResultsFilter from "./components/TableResultsFilter";
 import "./components/styles/styleLoading.css";
 import { hashTbStockFilter } from "./utils/hashTb";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
 const flatFilter = Object.values(hashTbStockFilter).flat();
 
 const theme = createTheme({
@@ -73,7 +72,7 @@ const Filter = () => {
     if (isLogin === process.env.REACT_APP_LG_T) {
       const fetchDataWatchList = async () => {
         try {
-          const data = await getApi(apiUrl, "/api/v1/watchlist");
+          const data = await getApi("/api/v1/watchlist");
 
           setWatchlists(data);
         } catch (error) {
@@ -83,7 +82,7 @@ const Filter = () => {
 
       const fetchDataFilters = async () => {
         try {
-          const data = await getApi(apiUrl, "/api/v1/investment/your-filter");
+          const data = await getApi("/api/v1/investment/your-filter");
 
           setFilters(data);
         } catch (error) {
@@ -99,7 +98,7 @@ const Filter = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/filter");
+        const data = await getApi("/api/v1/filter");
         setData(data);
         setLoading(false);
       } catch (error) {

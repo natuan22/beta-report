@@ -19,7 +19,6 @@ import "./utils/styles/styleLoadingBuySell.css";
 import socket from "../helper/socket";
 
 const XLSX = require("xlsx");
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const theme = createTheme({
   palette: {
@@ -82,7 +81,7 @@ const BuySellActive = () => {
   useEffect(() => {
     const fetchDataStock = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/investment/all-stock");
+        const data = await getApi("/api/v1/investment/all-stock");
         setDataStocks(data);
       } catch (error) {
         console.error(error);
@@ -220,7 +219,6 @@ const BuySellActive = () => {
 
     try {
       const res = await getApi(
-        apiUrl,
         `/api/v1/investment/ticker-translog?stock=${stock}`
       );
       return res; // Return the fetched data
@@ -243,7 +241,7 @@ const BuySellActive = () => {
         setData(processedData);
         setSocketConnected(true);
         setLoading(false);
-      } else if (fetchedData === null && hours <= 9) {
+      } else if (fetchedData === null && hours >= 8 && hours < 23) {
         setData(null);
         setSocketConnected(false);
         setLoading(false);
@@ -278,7 +276,6 @@ const BuySellActive = () => {
 
       // Gọi API để lấy dữ liệu
       const data = await getApi(
-        apiUrl,
         `/api/v1/investment/ticker-translog?stock=${stock}`
       );
 
@@ -433,7 +430,7 @@ const BuySellActive = () => {
                 }))}
               />
               <LoadingButton
-                className="!ml-2 md:translate-x-[0px] sm:translate-x-[-8px] md:!mt-0 sm:!mt-2"
+                className="!ml-2 md:translate-x-[0px] sm:translate-x-[-8px] xs:translate-x-[-8px] xxs:translate-x-[-8px] md:!mt-0 sm:!mt-2 xs:!mt-2 xxs:!mt-2"
                 variant="contained"
                 color="test"
                 sx={{
@@ -544,7 +541,7 @@ const BuySellActive = () => {
                         Sổ lệnh
                       </button>
                       <button
-                        className={`custom-btn-line ml-3 ${
+                        className={`custom-btn-line ml-3 xs:translate-x-0 xxs:-translate-x-3 xs:mt-0 xxs:mt-4 ${
                           showTable === 2 ? "active-btn-line" : "btn-2-line"
                         }`}
                         onClick={() => setShowTable(2)}
@@ -552,7 +549,7 @@ const BuySellActive = () => {
                         Bước giá
                       </button>
                     </div>
-                    <div className="flex justify-evenly py-1 font-semibold items-center">
+                    <div className="flex justify-evenly py-1 font-semibold items-center xs:text-base xxs:text-[13px]">
                       <div>KL: {formatVolume(data?.totalVol)}</div>
                       <div>
                         M:{" "}
@@ -579,7 +576,7 @@ const BuySellActive = () => {
               </div>
 
               <div className="2xl:hidden xl:block">
-                <div className="md:w-[460px] sm:w-[250px] grid grid-cols-12 mx-auto my-8">
+                <div className="md:w-[460px] sm:w-[250px] xs:w-[250px] xxs:w-[250px] grid grid-cols-12 mx-auto my-8">
                   <div className="col-span-1 content-center justify-self-end">
                     <Tooltip
                       placement="bottom"
@@ -596,7 +593,7 @@ const BuySellActive = () => {
                     </Tooltip>
                   </div>
 
-                  <div className="col-span-11 text-[15px] pr-5 md:ml-0 sm:ml-3">
+                  <div className="col-span-11 text-[15px] pr-5 md:ml-0 sm:ml-3 xs:ml-3 xxs:ml-3">
                     <div className="md:flex sm:block justify-evenly">
                       <div>
                         Lệnh{" "}
@@ -608,7 +605,7 @@ const BuySellActive = () => {
 
                       {buyColor.map((item, index) => (
                         <div
-                          className="flex items-center gap-2 md:ml-0 sm:ml-3"
+                          className="flex items-center gap-2 md:ml-0 sm:ml-3 xs:ml-3 xxs:ml-3"
                           key={index}
                         >
                           <div
@@ -631,7 +628,7 @@ const BuySellActive = () => {
 
                       {sellColor.map((item, index) => (
                         <div
-                          className="flex items-center gap-2 md:ml-0 sm:ml-3"
+                          className="flex items-center gap-2 md:ml-0 sm:ml-3 xs:ml-3 xxs:ml-3"
                           key={index}
                         >
                           <div
@@ -656,36 +653,21 @@ const BuySellActive = () => {
             </div>
           ) : (
             <div className="buy-sell-active">
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid lg:grid-cols-2 md:grid-cols-none gap-5">
                 <div className="mt-4">
                   <Skeleton.Input active block size="large" className="mt-1" />
                 </div>
-                <div className="grid grid-cols-2 gap-5">
-                  <div clas>
+                <div className="grid md:grid-cols-2 sm:grid-cols-none gap-5">
+                  <div>
                     <div className="mt-4">
-                      <Skeleton.Input
-                        active
-                        block
-                        size="large"
-                        className="mt-1"
-                      />
+                      <Skeleton.Input active block size="large" className="mt-1" />
                     </div>
                     <div className="mt-4">
-                      <Skeleton.Input
-                        active
-                        block
-                        size="large"
-                        className="mt-1"
-                      />
+                      <Skeleton.Input active block size="large" className="mt-1" />
                     </div>
                   </div>
                   <div className="table-price mt-4">
-                    <Skeleton.Input
-                      active
-                      block
-                      size="large"
-                      className="mt-1"
-                    />
+                    <Skeleton.Input active block size="large" className="mt-1" />
                   </div>
                 </div>
               </div>

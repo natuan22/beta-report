@@ -1,9 +1,8 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
-import "../utils/styles/triangleLineChart.css";
 import "../utils/styles/hide-legend-icon.css";
-import { MdFilterList } from "react-icons/md";
+import "../utils/styles/triangleLineChart.css";
 
 const LineChartPrice = ({ data }) => {
   const [seriesConfigLineChart, setSeriesConfigLineChart] = useState(0);
@@ -248,37 +247,37 @@ const LineChartPrice = ({ data }) => {
 
   return (
     <div>
+      <div className="w-fit">
+        <button
+          className={`custom-btn-line ${
+            seriesConfigLineChart === 0 ? "active-btn-line" : "btn-2-line"
+          }`}
+          onClick={() => setSeriesConfigLineChart(0)}
+        >
+          Khối lượng M/B chủ động
+        </button>
+        <button
+          className={`md:mt-0 sm:mt-4 xs:mt-4 xxs:mt-4 custom-btn-line ml-4 md:translate-x-0 sm:translate-x-[-16px] xs:translate-x-[-16px] xxs:translate-x-[-16px] ${
+            seriesConfigLineChart === 1 ? "active-btn-line" : "btn-2-line"
+          }`}
+          onClick={() => setSeriesConfigLineChart(1)}
+        >
+          Lũy kế
+        </button>
+      </div>
       {data ? (
         <div>
-          <div className="w-fit">
-            <button
-              className={`custom-btn-line ${
-                seriesConfigLineChart === 0 ? "active-btn-line" : "btn-2-line"
-              }`}
-              onClick={() => setSeriesConfigLineChart(0)}
-            >
-              Khối lượng M/B chủ động
-            </button>
-            <button
-              className={`md:mt-0 sm:mt-4 custom-btn-line ml-4 md:translate-x-0 sm:translate-x-[-16px] ${
-                seriesConfigLineChart === 1 ? "active-btn-line" : "btn-2-line"
-              }`}
-              onClick={() => setSeriesConfigLineChart(1)}
-            >
-              Lũy kế
-            </button>
-          </div>
           {seriesConfigLineChart === 0 ? (
             <div className={`${seriesData ? "moving-left-div" : ""} opacity-0`}>
-              <div className="relative flex z-10 top-[35px] 2xl:left-[359px] xl:left-[352px] lg:left-[370px] md:left-[240px] sm:left-[70px] w-[16px] h-[2px]">
+              <div className="relative flex z-10 top-[35px] 2xl:left-[359px] xl:left-[352px] lg:left-[370px] md:left-[240px] sm:left-[70px] xs:left-[45px] xxs:left-[29px] w-[16px] h-[2px]">
                 <div className="w-[8px] h-[2px] bg-[#008000]"></div>
                 <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
               </div>
-              <div className="relative z-10 top-[27px] 2xl:left-[421px] xl:left-[417px] lg:left-[435px] md:left-[307px] sm:left-[137px] w-[8px] h-[6px]">
+              <div className="relative z-10 top-[27px] 2xl:left-[421px] xl:left-[417px] lg:left-[435px] md:left-[307px] sm:left-[137px] xs:left-[111px] xxs:left-[136px] w-[8px] h-[6px]">
                 <div className="absolute" id="triangle-topright-line"></div>
                 <div id="triangle-bottomleft-line"></div>
               </div>
-              <div className="relative flex z-10 top-[27px] 2xl:left-[519px] xl:left-[513px] lg:left-[530px] md:left-[403px] sm:left-[230px] w-[16px] h-[2px]">
+              <div className="relative flex z-10 xs:top-[27px] 2xl:left-[519px] xl:left-[513px] lg:left-[530px] md:left-[403px] sm:left-[230px] xs:left-[205px] xxs:left-[29px] xxs:top-[45px] w-[16px] h-[2px]">
                 <div className="w-[8px] h-[2px] bg-[#008000]"></div>
                 <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
               </div>
@@ -287,11 +286,11 @@ const LineChartPrice = ({ data }) => {
             <div
               className={`${seriesData ? "moving-right-div" : ""} opacity-0`}
             >
-              <div className="relative flex z-10 top-[35px] 2xl:left-[401px] xl:left-[395px] lg:left-[412px] md:left-[284px] sm:left-[115px] w-[16px] h-[2px]">
+              <div className="relative flex z-10 top-[35px] 2xl:left-[401px] xl:left-[395px] lg:left-[412px] md:left-[284px] sm:left-[115px] xs:left-[90px] xxs:left-[62px] w-[16px] h-[2px]">
                 <div className="w-[8px] h-[2px] bg-[#008000]"></div>
                 <div className="w-[8px] h-[2px] bg-[#ff0000]"></div>
               </div>
-              <div className="relative z-10 top-[45px] 2xl:left-[462px] xl:left-[457px] lg:left-[476px] md:left-[345px] sm:left-[177px] w-[8px] h-[8px]">
+              <div className="relative z-10 top-[45px] 2xl:left-[462px] xl:left-[457px] lg:left-[476px] md:left-[345px] sm:left-[177px] xs:left-[151px] xxs:left-[123px] w-[8px] h-[8px]">
                 <div className="relative flex top-[-16px] left-[2px] z-10 w-[16px] h-[2px]">
                   <div className="w-[6px] h-[2px] bg-[#008000]"></div>
                   <div className="w-[6px] h-[2px] bg-[#ff0000]"></div>

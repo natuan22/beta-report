@@ -13,8 +13,8 @@ const TableBuySell = ({ data }) => {
     <div>
       <div className="w-full">
         <div className="relative flex flex-col min-w-0 break-words bg-transparent w-full rounded">
-          <div className="block w-full overflow-y-scroll h-[653px] bg-transparent border-1 border-[#0050AD] border-solid border-collapse">
-            <table className="bg-transparent border-collapse w-full">
+          <div className="block w-full overflow-y-scroll sm:h-[653px] xs:h-[300px] xxs:h-[300px] bg-transparent border-1 border-[#0050AD] border-solid border-collapse">
+            <table className="bg-transparent border-collapse w-full sm:text-base xs:text-[12.5px] xxs:text-[9px]">
               <thead
                 className="bg-[#0050AD] z-10"
                 style={{ position: "sticky", top: 0 }}
@@ -24,10 +24,10 @@ const TableBuySell = ({ data }) => {
                     <Tooltip
                       placement="bottom"
                       title={
-                        <div className="w-[291px] text-justify">
+                        <div className="w-[300px] text-justify">
                           Khi cả dòng có tô màu xanh tức là lệnh Lớn Mua chủ
                           động (&gt;1 tỷ đồng/lệnh), tô dòng màu đỏ tức là lệnh
-                          Bán chủ động (&gt;1 tỷ đồng/lệnh).
+                          Lớn Bán chủ động (&gt;1 tỷ đồng/lệnh).
                         </div>
                       }
                       color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}

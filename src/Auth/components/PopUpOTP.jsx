@@ -2,10 +2,8 @@ import { Modal, message } from "antd";
 import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
-import { https } from "../../services/configService";
+import { apiUrl, https } from "../../services/configService";
 import "../utils/otpForm.css";
-
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const PopUpOTP = ({ open, userID }) => {
   const navigate = useNavigate();

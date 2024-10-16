@@ -3,7 +3,6 @@ import { Form, Input, Modal, message } from "antd";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { postApi } from "../../../../helper/postApi";
-const apiUrl = process.env.REACT_APP_BASE_URL;
 const { TextArea } = Input;
 
 const AddText = ({ handleGetTextInpur }) => {
@@ -18,7 +17,7 @@ const AddText = ({ handleGetTextInpur }) => {
     },
     onSubmit: (values) => {
       // console.log({ text: [values.title, values.subTitle, values.content] })
-      postApi(apiUrl, "api/v1/report/luu-dien-bien-thi-truong-tuan", {
+      postApi("api/v1/report/luu-dien-bien-thi-truong-tuan", {
         text: [values.title, values.subTitle, values.content],
       });
       handleGetTextInpur(values.text);

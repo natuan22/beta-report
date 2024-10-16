@@ -6,8 +6,6 @@ import { FiPlusCircle } from "react-icons/fi";
 import { postApi } from "../../helper/postApi";
 import { getApi } from "../../helper/getApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLogin }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
@@ -45,11 +43,11 @@ const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLo
   };
 
   const onFinish = async (values) => {
-    await postApi(apiUrl, "/api/v1/watchlist/create", values);
+    await postApi("/api/v1/watchlist/create", values);
 
     const fetchDataWatchList = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/watchlist");
+        const data = await getApi("/api/v1/watchlist");
         catchWatchlists(data);
         const newWatchlist = data.find(
           (watchlist) => watchlist.name === values.name
@@ -93,10 +91,10 @@ const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLo
       ...watchlistActive,
       code: updatedWatchlistCodes,
     };
-    await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+    await postApi("/api/v1/watchlist/update", updatedWatchlist);
 
     // Fetch updated watchlists from the server
-    const data = await getApi(apiUrl, "/api/v1/watchlist");
+    const data = await getApi("/api/v1/watchlist");
     catchWatchlists(data);
 
     setIsModalAddOpen(false);

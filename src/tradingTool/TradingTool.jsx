@@ -26,7 +26,6 @@ import EditModal from "./components/EditModal.jsx";
 import "./utils/styles/styles.css";
 
 const XLSX = require("xlsx");
-const apiUrl = process.env.REACT_APP_BASE_URL;
 const flashClass = {
   up: "custom-flash-up",
   down: "custom-flash-down",
@@ -104,7 +103,7 @@ const TradingTool = () => {
   }, []);
 
   const getDataTable = async () => {
-    const data = await getApi(apiUrl, `/api/v1/investment/beta-watch-list`);
+    const data = await getApi(`/api/v1/investment/beta-watch-list`);
     const dataWithKey =
       Array.isArray(data) &&
       data?.map((item, index) => {
@@ -444,7 +443,6 @@ const TradingTool = () => {
     const price_2025 = e.target[4].value;
     try {
       const res = await postApi(
-        apiUrl,
         "/api/v1/investment/create-beta-watch-list",
         {
           code,

@@ -11,7 +11,6 @@ import { hashTbStockFilter } from "../../utils/hashTb";
 import GauChart from "../../../watchlist/components/GauChart";
 
 const flatFilter = Object.values(hashTbStockFilter).flat();
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedItems, selectParameters, isLogin }) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -115,11 +114,11 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
   };
 
   const onFinish = async (values) => {
-    await postApi(apiUrl, "/api/v1/watchlist/create", values);
+    await postApi("/api/v1/watchlist/create", values);
 
     const fetchDataWatchList = async () => {
       try {
-        const data = await getApi(apiUrl, "/api/v1/watchlist");
+        const data = await getApi("/api/v1/watchlist");
         catchWatchlists(data);
         const newWatchlist = data.find(
           (watchlist) => watchlist.name === values.name
@@ -151,10 +150,10 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
       code: updatedWatchlistCodes,
     };
 
-    await postApi(apiUrl, "/api/v1/watchlist/update", updatedWatchlist);
+    await postApi("/api/v1/watchlist/update", updatedWatchlist);
 
     // Fetch updated watchlists from the server
-    const data = await getApi(apiUrl, "/api/v1/watchlist");
+    const data = await getApi("/api/v1/watchlist");
     catchWatchlists(data);
 
     setIsModalAddOpen(false);

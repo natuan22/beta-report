@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
 
-const NavBar2 = () => {
+const BetaSmart = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem(process.env.REACT_APP_IS_LG)
@@ -19,6 +19,7 @@ const NavBar2 = () => {
       setIsLogin(null);
       setRole(null);
       dispatch(userLogoutAction());
+      window.location.reload();
       localStorage.setItem(
         process.env.REACT_APP_IS_LG,
         process.env.REACT_APP_LG_F
@@ -49,7 +50,7 @@ const NavBar2 = () => {
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
-      <div className="w-full h-[919px] p-[40px]">
+      <div className="w-full p-[40px]">
         <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
           BETA SMART
         </div>
@@ -62,4 +63,4 @@ const NavBar2 = () => {
   );
 };
 
-export default NavBar2;
+export default BetaSmart;

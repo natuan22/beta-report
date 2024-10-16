@@ -19,7 +19,6 @@ import {
 import { Tooltip } from "antd";
 
 const XLSX = require("xlsx");
-const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const BtnToExcel = ({ watchlistActive }) => {
   const [loadingExcel, setLoadingExcel] = useState(false);
@@ -29,7 +28,6 @@ const BtnToExcel = ({ watchlistActive }) => {
       setLoadingExcel(true);
       // Gọi API để lấy dữ liệu
       const data = await getApi(
-        apiUrl,
         `/api/v1/watchlist/${watchlistActive.id}`
       );
 

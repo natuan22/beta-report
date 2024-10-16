@@ -20,7 +20,6 @@
 // import TotalValRenderer from "./totalValRenderer.jsx";
 // import TotalVolRenderer from "./totalVolRenderer.jsx";
 
-// const apiUrl = process.env.REACT_APP_BASE_URL;
 // const flashClass = {
 //   up: "custom-flash-up",
 //   down: "custom-flash-down",
@@ -62,7 +61,7 @@
 //     if (isLogin === process.env.REACT_APP_LG_T) {
 //       const fetchDataWatchList = async () => {
 //         try {
-//           const data = await getApi(apiUrl, "/api/v1/watchlist");
+//           const data = await getApi("/api/v1/watchlist");
 //           setWatchlists(data);
 //         } catch (error) {
 //           console.error(error);
@@ -74,7 +73,7 @@
 //   }, [isLogin]);
 
 //   const getDataTable = async (id) => {
-//     const data = await getApi(apiUrl, `/api/v1/watchlist/${id}`);
+//     const data = await getApi(`/api/v1/watchlist/${id}`);
 //     const dataWithKey =
 //       Array.isArray(data) &&
 //       data?.map((item, index) => ({

@@ -1,8 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { https } from "../../services/configService";
-
-const apiUrl = process.env.REACT_APP_BASE_URL;
+import { apiUrl, https } from "../../services/configService";
 
 export const authenServices = {
   userLogin: (data) => {

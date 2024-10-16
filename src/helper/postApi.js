@@ -1,7 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
-const apiUrl = process.env.REACT_APP_BASE_URL;
+import { apiUrl } from "../services/configService";
 
 const logoutUser = async () => {
   Cookies.remove("at");
@@ -54,7 +53,7 @@ export const refreshTokenAction = async () => {
   }
 };
 
-export const postApi = async (apiUrl, url, data) => {
+export const postApi = async (url, data) => {
   const headers = {
     mac: localStorage.getItem("deviceId"),
   };

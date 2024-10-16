@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 import { postApi } from "../../helper/postApi";
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
 export default ({ params, setData, showModal }) => {
   const handleDelete = (code) => {
     // Sử dụng SweetAlert để xác nhận việc xóa
@@ -24,7 +22,7 @@ export default ({ params, setData, showModal }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         // Xác nhận xóa tin và cập nhật state
-        await postApi(apiUrl, "/api/v1/investment/delete-beta-watch-list", {
+        await postApi("/api/v1/investment/delete-beta-watch-list", {
           code,
         });
         setData((prev) => {
