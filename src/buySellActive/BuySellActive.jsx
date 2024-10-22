@@ -172,24 +172,41 @@ const BuySellActive = () => {
     const matchPriceGroups = new Map();
 
     reversedData.forEach((item) => {
-      const group = matchPriceGroups.get(item.matchPrice) || {
-        totalBuy: 0,
-        totalSell: 0,
-        atc: 0,
-        ato: 0,
-      };
-
-      if (item.action === "B") {
-        group.totalBuy += item.value;
-      } else if (item.action === "S") {
-        group.totalSell += item.value;
-      } else if (item.action === "C") {
-        group.atc += item.value;
-      } else if (item.action === "O") {
-        group.ato += item.value;
+      if (!matchPriceGroups.has(item.matchPrice)) {
+        matchPriceGroups.set(item.matchPrice, {
+          totalValBuy: 0,
+          totalValSell: 0,
+          atcVal: 0,
+          atoVal: 0,
+          totalVolBuy: 0,
+          totalVolSell: 0,
+          atcVol: 0,
+          atoVol: 0,
+        });
       }
 
-      matchPriceGroups.set(item.matchPrice, group);
+      const group = matchPriceGroups.get(item.matchPrice);
+
+      switch (item.action) {
+        case "B":
+          group.totalValBuy += item.value;
+          group.totalVolBuy += item.volume;
+          break;
+        case "S":
+          group.totalValSell += item.value;
+          group.totalVolSell += item.volume;
+          break;
+        case "C":
+          group.atcVal += item.value;
+          group.atcVol += item.volume;
+          break;
+        case "O":
+          group.atoVal += item.value;
+          group.atoVol += item.volume;
+          break;
+        default:
+          break;
+      }
     });
 
     // Kết quả cuối cùng sau khi tính toán
@@ -235,9 +252,9 @@ const BuySellActive = () => {
 
       const fetchedData = await fetchData(); // Call fetchData and wait for the result
 
-      if (fetchedData) {
+      if (fetchedData !== null) {
         const processedData = calData(fetchedData);
-
+        
         setData(processedData);
         setSocketConnected(true);
         setLoading(false);
@@ -533,7 +550,7 @@ const BuySellActive = () => {
                   <div>
                     <div>
                       <button
-                        className={`custom-btn-line ${
+                        className={`custom-btn-line cursor-pointer ${
                           showTable === 1 ? "active-btn-line" : "btn-2-line"
                         }`}
                         onClick={() => setShowTable(1)}
@@ -541,7 +558,7 @@ const BuySellActive = () => {
                         Sổ lệnh
                       </button>
                       <button
-                        className={`custom-btn-line ml-3 xs:translate-x-0 xxs:-translate-x-3 xs:mt-0 xxs:mt-4 ${
+                        className={`custom-btn-line cursor-pointer ml-3 xs:translate-x-0 xxs:-translate-x-3 xs:mt-0 xxs:mt-4 ${
                           showTable === 2 ? "active-btn-line" : "btn-2-line"
                         }`}
                         onClick={() => setShowTable(2)}
@@ -660,14 +677,29 @@ const BuySellActive = () => {
                 <div className="grid md:grid-cols-2 sm:grid-cols-none gap-5">
                   <div>
                     <div className="mt-4">
-                      <Skeleton.Input active block size="large" className="mt-1" />
+                      <Skeleton.Input
+                        active
+                        block
+                        size="large"
+                        className="mt-1"
+                      />
                     </div>
                     <div className="mt-4">
-                      <Skeleton.Input active block size="large" className="mt-1" />
+                      <Skeleton.Input
+                        active
+                        block
+                        size="large"
+                        className="mt-1"
+                      />
                     </div>
                   </div>
                   <div className="table-price mt-4">
-                    <Skeleton.Input active block size="large" className="mt-1" />
+                    <Skeleton.Input
+                      active
+                      block
+                      size="large"
+                      className="mt-1"
+                    />
                   </div>
                 </div>
               </div>

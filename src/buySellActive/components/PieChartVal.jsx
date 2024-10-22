@@ -1,92 +1,50 @@
 import Highcharts from "highcharts";
 import PieChart from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
+import formatNumberCurrency from "../../helper/formatNumberCurrency";
 
 const PieChartVal = ({ data }) => {
   const [dataPie, setDataPie] = useState([]);
   const [hasData, setHasData] = useState(false);
 
   const isValidData = (buyData, sellData) => {
-    return [
-      buyData.large,
-      buyData.medium,
-      buyData.small,
-      sellData.large,
-      sellData.medium,
-      sellData.small,
-    ].some((val) => val >= 0);
+    return ([buyData.large, buyData.medium, buyData.small].every((val) => val >= 0) && [sellData.large, sellData.medium, sellData.small].every((val) => val >= 0));
   };
 
   useEffect(() => {
-    if (data) {
-      // Destructure buyValData và sellValData
-      const {
-        large: buyLarge = 0,
-        medium: buyMedium = 0,
-        small: buySmall = 0,
-      } = data.buyValData || {};
-      const {
-        large: sellLarge = 0,
-        medium: sellMedium = 0,
-        small: sellSmall = 0,
-      } = data.sellValData || {};
-      const totalVal = data.totalBuyVal + data.totalSellVal;
+    if (!data) {
+      setHasData(false);
+      return;
+    }
 
-      // Kiểm tra tính hợp lệ của dữ liệu
-      if (isValidData(data.buyValData || {}, data.sellValData || {})) {
-        const dataPieSell = [
-          {
-            name: "Lớn",
-            y: +((sellLarge / totalVal) * 100).toFixed(2),
-            color: "#d34037",
-          },
-          {
-            name: "Trung bình",
-            y: +((sellMedium / totalVal) * 100).toFixed(2),
-            color: "#812a24",
-          },
-          {
-            name: "Nhỏ",
-            y: +((sellSmall / totalVal) * 100).toFixed(2),
-            color: "#572724",
-          },
+    const totalVal = data?.totalBuyVal + data?.totalSellVal;
+
+    // Kiểm tra tính hợp lệ của dữ liệu
+    if (isValidData(data.buyValData || {}, data.sellValData || {})) {
+      const createDataPie = (buyOrSellData, colorSet) => {
+        return [
+          { name: "Lớn",        y: (buyOrSellData.large  / totalVal) * 100, color: colorSet[0] },
+          { name: "Trung bình", y: (buyOrSellData.medium / totalVal) * 100, color: colorSet[1] },
+          { name: "Nhỏ",        y: (buyOrSellData.small  / totalVal) * 100, color: colorSet[2] },
         ];
+      };
+    
+      const dataPieSell = createDataPie(data.sellValData, ["#d34037", "#812a24", "#572724"]);
+      const dataPieBuy = createDataPie(data.buyValData, ["#00d060", "#0c7640", "#144d31"]);
+    
+      const combinedDataPie = [...dataPieSell, ...dataPieBuy];
 
-        const dataPieBuy = [
-          {
-            name: "Lớn",
-            y: +((buyLarge / totalVal) * 100).toFixed(2),
-            color: "#00d060",
-          },
-          {
-            name: "Trung bình",
-            y: +((buyMedium / totalVal) * 100).toFixed(2),
-            color: "#0c7640",
-          },
-          {
-            name: "Nhỏ",
-            y: +((buySmall / totalVal) * 100).toFixed(2),
-            color: "#144d31",
-          },
-        ];
-
-        const combinedDataPie = [...dataPieSell, ...dataPieBuy];
-
-        setDataPie(combinedDataPie);
-        setHasData(true);
-      } else {
-        setHasData(false);
-      }
+      setDataPie(combinedDataPie);
+      setHasData(true);
+    } else {
+      setHasData(false);
     }
   }, [data]);
 
   const options = {
     accessibility: { enabled: false },
     credits: false,
-    chart: {
-      type: "pie",
-      backgroundColor: "transparent",
-    },
+    chart: { type: "pie", backgroundColor: "transparent" },
     title: { text: "" },
     subtitle: { text: "" },
     plotOptions: {
@@ -95,16 +53,17 @@ const PieChartVal = ({ data }) => {
         cursor: "pointer",
         dataLabels: {
           enabled: true,
-          format: "<b>{point.percentage:.2f}%</b> ",
-          connector: {
-            enabled: true,
-            lineWidth: 0.5,
+          formatter: function () {
+            return this.y !== 0
+              ? `${formatNumberCurrency(this.percentage)}%`
+              : null;
           },
+          connector: { enabled: true, lineWidth: 0.5 },
           distance: 4,
         },
       },
     },
-    tooltip: { valueSuffix: "%" },
+    tooltip: { valueSuffix: "%", enabled: false },
     legend: {
       align: "center",
       verticalAlign: "top",
