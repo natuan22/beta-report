@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 import "../utils/styles/hide-legend-icon.css";
 import "../utils/styles/triangleLineChart.css";
+import formatNumberCurrency from "../../helper/formatNumberCurrency";
 
 const LineChartPrice = ({ data }) => {
   const [seriesConfigLineChart, setSeriesConfigLineChart] = useState(0);
@@ -78,7 +79,7 @@ const LineChartPrice = ({ data }) => {
             enabled: true,
             formatter: function () {
               return this.point.index === this.series.data.length - 1
-                ? this.point.y.toFixed(2)
+                ? formatNumberCurrency(this.point.y)
                 : null;
             },
             style: {
@@ -104,7 +105,7 @@ const LineChartPrice = ({ data }) => {
             enabled: true,
             formatter: function () {
               return this.point.index === this.series.data.length - 1
-                ? this.point.y.toFixed(2)
+                ? formatNumberCurrency(this.point.y)
                 : null;
             },
             style: {
@@ -132,7 +133,7 @@ const LineChartPrice = ({ data }) => {
             enabled: true,
             formatter: function () {
               return this.point.index === this.series.data.length - 1
-                ? this.point.y.toFixed(2)
+                ? formatNumberCurrency(this.point.y)
                 : null;
             },
             style: {
@@ -230,7 +231,7 @@ const LineChartPrice = ({ data }) => {
         marker: { radius: 1 },
         lineWidth: 2,
         color: "#000",
-        turboThreshold: 100_000_000_000,
+        turboThreshold: 100_000_000,
       },
     },
     tooltip: {
@@ -239,7 +240,9 @@ const LineChartPrice = ({ data }) => {
       valueSuffix: " ",
       backgroundColor: "#fff",
       pointFormatter: function () {
-        return `<span style="color:${this.color}">●</span> ${this.series.name}: <b>${this.y}</b><br/>`;
+        return `<span style="color:${this.color}">●</span> ${
+          this.series.name
+        }: <b>${formatNumberCurrency(this.y)}</b><br/>`;
       },
     },
     series: seriesData || [null],
@@ -249,7 +252,7 @@ const LineChartPrice = ({ data }) => {
     <div>
       <div className="w-fit">
         <button
-          className={`custom-btn-line ${
+          className={`custom-btn-line cursor-pointer ${
             seriesConfigLineChart === 0 ? "active-btn-line" : "btn-2-line"
           }`}
           onClick={() => setSeriesConfigLineChart(0)}
@@ -257,7 +260,7 @@ const LineChartPrice = ({ data }) => {
           Khối lượng M/B chủ động
         </button>
         <button
-          className={`md:mt-0 sm:mt-4 xs:mt-4 xxs:mt-4 custom-btn-line ml-4 md:translate-x-0 sm:translate-x-[-16px] xs:translate-x-[-16px] xxs:translate-x-[-16px] ${
+          className={`cursor-pointer md:mt-0 sm:mt-4 xs:mt-4 xxs:mt-4 custom-btn-line ml-4 md:translate-x-0 sm:translate-x-[-16px] xs:translate-x-[-16px] xxs:translate-x-[-16px] ${
             seriesConfigLineChart === 1 ? "active-btn-line" : "btn-2-line"
           }`}
           onClick={() => setSeriesConfigLineChart(1)}

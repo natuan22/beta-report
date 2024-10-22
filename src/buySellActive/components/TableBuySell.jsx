@@ -13,7 +13,7 @@ const TableBuySell = ({ data }) => {
     <div>
       <div className="w-full">
         <div className="relative flex flex-col min-w-0 break-words bg-transparent w-full rounded">
-          <div className="block w-full overflow-y-scroll sm:h-[653px] xs:h-[300px] xxs:h-[300px] bg-transparent border-1 border-[#0050AD] border-solid border-collapse">
+          <div className="block w-full overflow-y-scroll sm:h-[650px] xs:h-[300px] xxs:h-[300px] bg-transparent border-1 border-[#0050AD] border-solid border-collapse">
             <table className="bg-transparent border-collapse w-full sm:text-base xs:text-[12.5px] xxs:text-[9px]">
               <thead
                 className="bg-[#0050AD] z-10"

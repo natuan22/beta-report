@@ -1,0 +1,13 @@
+.underline-mock {
+    position: relative;
+}
+  
+.underline-mock::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2.5px; /* Độ dày của underline */
+    background-color: #0050AD; /* Màu của underline */
+    bottom: -3px; /* Khoảng cách từ text đến underline */
+    left: 0;
+}
