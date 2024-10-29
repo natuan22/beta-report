@@ -182,74 +182,35 @@ const HistoricalPEPB = () => {
           />
         </div>
 
-        <div className="w-full p-[40px]">
+        <div className="w-full p-[40px] font-[Roboto]">
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
             Lịch sử P/E, P/B
           </div>
-          <div className="flex flex-row items-center">
+          <div className="md:flex sm:block items-center">
             <div className="code-select mr-5">
               <div className="mb-[3px] font-medium">Mã</div>
               <Select
-                style={{
-                  width: 222,
-                  height: 40,
-                }}
+                style={{ width: 222, height: 40 }}
                 defaultValue={stock}
                 showSearch
                 onChange={onChange}
                 filterOption={filterOption}
-                options={dataStocks.map((code) => ({
-                  value: code,
-                  label: code,
-                }))}
+                options={dataStocks.map((code) => ({ value: code, label: code }))}
               />
             </div>
 
             <div className="mr-5">
               <div className="mb-[3px] font-medium">Thời gian</div>
-              <button
-                className={`custom-btn ${
-                  period === "1" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("1");
-                }}
-              >
-                1Y
-              </button>
-              <button
-                className={`custom-btn ml-2 ${
-                  period === "3" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("3");
-                }}
-              >
-                3Y
-              </button>
-              <button
-                className={`custom-btn ml-2 ${
-                  period === "5" ? "active-btn" : "btn-2"
-                }`}
-                onClick={() => {
-                  setPeriod("5");
-                }}
-              >
-                5Y
-              </button>
+              <button className={`custom-btn ${period === "1" ? "active-btn" : "btn-2"} xs:inline xxs:block`} onClick={() => { setPeriod("1"); }}>1Y</button>
+              <button className={`custom-btn ${period === "3" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("3"); }}>3Y</button>
+              <button className={`custom-btn ${period === "5" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("5"); }}>5Y</button>
             </div>
 
-            <div className="mt-[24px]">
+            <div className="mt-[22px]">
               <LoadingButton
-                className="!ml-2"
                 variant="contained"
                 color="test"
-                sx={{
-                  padding: "0px",
-                  "& .MuiLoadingButton-loadingIndicator": {
-                    color: "#FC9433", // Customize the color of the loading spinner
-                  },
-                }}
+                sx={{ padding: "0px", "& .MuiLoadingButton-loadingIndicator": { color: "#FC9433" }}}
                 loading={loadingExcel}
                 onClick={downloadExcel}
               >
@@ -262,7 +223,7 @@ const HistoricalPEPB = () => {
               </LoadingButton>
             </div>
           </div>
-          <div className="mt-5 grid grid-cols-2">
+          <div className="mt-5 grid xl:grid-cols-2 lg:grid-cols-none">
             <ChartLine stock={stock} data={data} chartKey="P/E" />
             <ChartLine stock={stock} data={data} chartKey="P/B" />
           </div>

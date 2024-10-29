@@ -47,7 +47,7 @@ const TableNews = ({ data, loading }) => {
 
   return (
     <div className="shadow-lg">
-      <div className="mx-1 mt-3">
+      <div className="mx-1 mt-2">
         <Select
           mode="multiple"
           allowClear
@@ -61,8 +61,8 @@ const TableNews = ({ data, loading }) => {
           className="select-code-news"
         />
       </div>
-      <div className="my-3 grid grid-cols-2">
-        <div className="h-[800px] 2xl:w-[800px] xl:w-[650px] lg:w-[540px] md:w-[530px] overflow-auto">
+      <div className="my-2 grid grid-cols-2">
+        <div className="h-[623px] 2xl:w-[800px] xl:w-[650px] lg:w-[540px] md:w-[530px] overflow-auto">
           {!loading ? (
             Array.isArray(filteredData) &&
             filteredData.map((item, index) => {
@@ -135,7 +135,7 @@ const TableNews = ({ data, loading }) => {
               );
             })
           ) : (
-            <div className="h-[800px] flex items-center justify-center">
+            <div className="h-[623px] flex items-center justify-center">
               <Loading />
             </div>
           )}
@@ -151,11 +151,11 @@ const TableNews = ({ data, loading }) => {
               <iframe
                 src={clickItem.href}
                 title={clickItem.title}
-                className="h-[800px] 2xl:w-[800px] xl:w-[650px] lg:w-[540px] md:w-[530px]"
+                className="h-[623px] 2xl:w-[800px] xl:w-[650px] lg:w-[540px] md:w-[530px]"
               />
             </div>
           ) : (
-            <div className="h-[800px] flex items-center justify-center dark:text-white text-black uppercase font-bold">
+            <div className="h-[623px] flex items-center justify-center dark:text-white text-black uppercase font-bold">
               Chọn tin để đọc
             </div>
           )}

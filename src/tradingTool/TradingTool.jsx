@@ -442,16 +442,13 @@ const TradingTool = () => {
     const price_2024 = e.target[2].value;
     const price_2025 = e.target[4].value;
     try {
-      const res = await postApi(
-        "/api/v1/investment/create-beta-watch-list",
-        {
-          code,
-          price_2024,
-          price_2025,
-          ma: e.target[6]?.value || 0,
-          is_beta_page: 1,
-        }
-      );
+      const res = await postApi("/api/v1/investment/create-beta-watch-list", {
+        code,
+        price_2024,
+        price_2025,
+        ma: e.target[6]?.value || 0,
+        is_beta_page: 1,
+      });
 
       const closePrice = parseFloat((res[0].closePrice / 1000).toFixed(2));
       const newP2024 = parseFloat(
@@ -579,7 +576,7 @@ const TradingTool = () => {
           />
         </div>
 
-        <div className="w-full p-[40px]">
+        <div className="w-full p-[40px] font-[Roboto]">
           <div
             className={`bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center ${
               role === process.env.REACT_APP_ADMIN ? "" : "mb-[15px]"

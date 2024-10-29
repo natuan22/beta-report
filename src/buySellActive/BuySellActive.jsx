@@ -424,7 +424,7 @@ const BuySellActive = () => {
           />
         </div>
 
-        <div className="w-full p-[40px]">
+        <div className="w-full p-[40px] font-[Roboto]">
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
             Mua bán chủ động
           </div>
@@ -520,7 +520,7 @@ const BuySellActive = () => {
                         </div>
 
                         <div className="flex justify-evenly mt-1">
-                          <div className="w-[168px]">
+                          <div className="w-[163px]">
                             Lệnh{" "}
                             <span className="text-red-500 uppercase font-bold">
                               bán (B)

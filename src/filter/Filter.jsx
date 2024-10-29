@@ -322,7 +322,7 @@ const Filter = () => {
             onSubmitSuccess={onSubmitSuccess}
           />
         </div>
-        <div className="px-[40px] py-[40px] font-[Roboto]">
+        <div className="p-[40px] font-[Roboto]">
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
             Bộ lọc cổ phiếu
           </div>

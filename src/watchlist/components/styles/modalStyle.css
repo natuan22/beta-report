@@ -123,6 +123,10 @@
     color: white;
 }
 
+.tab-watchlist .ant-tabs-top >.ant-tabs-nav::before {
+    border-bottom: 0px;
+}
+
 .tab-watchlist .ant-tabs-nav-list .ant-tabs-tab:first-child {
     width: 219px;
 }
@@ -143,51 +147,51 @@
 }
 
 /* table antd watchlist*/
-.table-data-watchlist .ant-table-thead .ant-table-cell {
+.table-data-antd .ant-table-thead .ant-table-cell {
     background-color: #278AFF !important;
     font-size: 15px;
     font-weight: 700;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table .ant-table-header {
+.table-data-antd .ant-table-wrapper .ant-table .ant-table-header {
     border-radius: 0;
 
 }
 
-.table-data-watchlist .ant-table-column-sorters .ant-table-column-title {
+.table-data-antd .ant-table-column-sorters .ant-table-column-title {
     font-size: 15px;
     font-weight: 700;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
+.table-data-antd .ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
     background: white;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-cell-fix-left {
+.table-data-antd .ant-table-wrapper .ant-table-cell-fix-left {
     background: none;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-row:nth-child(odd) .ant-table-cell {
+.table-data-antd .ant-table-wrapper .ant-table-row:nth-child(odd) .ant-table-cell {
     background-color: #d9e9fd;
 } 
 
-.table-data-watchlist .ant-table-wrapper .ant-table-row:nth-child(even) .ant-table-cell {
+.table-data-antd .ant-table-wrapper .ant-table-row:nth-child(even) .ant-table-cell {
     background-color: white;
 } 
 
-.table-data-watchlist .ant-table-wrapper td.ant-table-column-sort {
+.table-data-antd .ant-table-wrapper td.ant-table-column-sort {
     background: none;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
+.table-data-antd .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child {
     border-radius: 0;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
+.table-data-antd .ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
     border-radius: 0;
 }
 
-.table-data-watchlist .ant-table-wrapper .ant-table-tbody>tr>td {
+.table-data-antd .ant-table-wrapper .ant-table-tbody>tr>td {
     padding: 5px 16px;
 }
 

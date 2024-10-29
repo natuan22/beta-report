@@ -8,7 +8,14 @@ import { getApi } from "../../../helper/getApi";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import { postApi } from "../../../helper/postApi";
 
-const TableBasic = ({ filteredResults, watchlists, catchWatchlists, isLogin }) => {
+const TableBasic = ({
+  filteredResults,
+  watchlists,
+  catchWatchlists,
+  isLogin,
+}) => {
+  const rowHeight = 45;
+  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -166,7 +173,7 @@ const TableBasic = ({ filteredResults, watchlists, catchWatchlists, isLogin }) =
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record, index) => {
         return (
@@ -465,14 +472,19 @@ const TableBasic = ({ filteredResults, watchlists, catchWatchlists, isLogin }) =
   return (
     <div>
       {contextHolder}
-      <div className="table-data-watchlist mt-0.5">
+      <div className="table-data-antd mt-0.5">
         <Table
           showSorterTooltip={false}
           columns={columns}
-          scroll={{ x: 1870 }}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          scroll={
+            filteredResults.length * rowHeight > maxHeight
+              ? { x: 1870, y: maxHeight }
+              : { x: 1870 }
+          }
+          pagination={false}
         />
       </div>
       <Modal
