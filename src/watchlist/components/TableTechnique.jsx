@@ -12,6 +12,9 @@ const TableTechnique = ({
   loading,
   loadingTb,
 }) => {
+  const rowHeight = 88;
+  const maxHeight = 620;
+
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -27,7 +30,7 @@ const TableTechnique = ({
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record) => {
         return (
@@ -147,15 +150,20 @@ const TableTechnique = ({
       {!loading && data ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1387px] mt-0.5">
+            <div className="table-data-antd w-[1358px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1370, y: 580 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}
-                pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                // pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                scroll={
+                  data.length * rowHeight > maxHeight
+                    ? { y: maxHeight }
+                    : undefined
+                }
+                pagination={false}
               />
             </div>
           ) : (

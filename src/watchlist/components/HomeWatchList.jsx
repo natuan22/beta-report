@@ -760,7 +760,7 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
   return (
     <>
       {contextHolder}
-      <div className="p-[40px]">
+      <div className="p-[40px] h-screen">
         <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] w-[410px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
           Danh mục theo dõi
         </div>

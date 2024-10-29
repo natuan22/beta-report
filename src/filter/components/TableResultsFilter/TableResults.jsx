@@ -12,7 +12,16 @@ import GauChart from "../../../watchlist/components/GauChart";
 
 const flatFilter = Object.values(hashTbStockFilter).flat();
 
-const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedItems, selectParameters, isLogin }) => {
+const TableResults = ({
+  filteredResults,
+  watchlists,
+  catchWatchlists,
+  selectedItems,
+  selectParameters,
+  isLogin,
+}) => {
+  const rowHeight = 45;
+  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -170,7 +179,7 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record, index) => {
         return (
@@ -354,7 +363,8 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
       }
 
       const dataIndex =
-        flatFilterItem.key === "avg_totalVol_" || flatFilterItem.key === "perChangeOmVol_"
+        flatFilterItem.key === "avg_totalVol_" ||
+        flatFilterItem.key === "perChangeOmVol_"
           ? `${flatFilterItem.key}${selectParameters}`
           : flatFilterItem.key;
 
@@ -362,7 +372,7 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
         title: flatFilterItem.name,
         dataIndex,
         align: "center",
-        width: 120,
+        width: 150,
         render: (_, record) => (
           <div className="text-black text-right">
             {formatNumberCurrency(record[dataIndex])}
@@ -378,14 +388,19 @@ const TableResults = ({ filteredResults, watchlists, catchWatchlists, selectedIt
   return (
     <div>
       {contextHolder}
-      <div className="table-data-watchlist mt-0.5">
+      <div className="table-data-antd mt-0.5">
         <Table
           showSorterTooltip={false}
           columns={allColumns}
-          scroll={{ x: 1823 }}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          scroll={
+            filteredResults.length * rowHeight > maxHeight
+              ? { y: maxHeight }
+              : undefined
+          }
+          pagination={false}
         />
       </div>
       <Modal

@@ -9,6 +9,9 @@ const TableSignalWarning = ({
   loading,
   loadingTb,
 }) => {
+  const rowHeight = 39;
+  const maxHeight = 620;
+
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -24,7 +27,7 @@ const TableSignalWarning = ({
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record) => {
         return (
@@ -68,15 +71,20 @@ const TableSignalWarning = ({
       {!loading && data ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1840px] mt-0.5">
+            <div className="table-data-antd w-[1060px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1000 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}
-                pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                // pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                scroll={
+                  data.length * rowHeight > maxHeight
+                    ? { y: maxHeight }
+                    : undefined
+                }
+                pagination={false}
               />
             </div>
           ) : (

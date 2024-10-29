@@ -6,6 +6,9 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import Loading from "../../loading/Loading";
 
 const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
+  const rowHeight = 39;
+  const maxHeight = 596;
+
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -21,7 +24,7 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record) => {
         return (
@@ -314,15 +317,20 @@ const TableBasic = ({ data, handleDelCodeInWatchlist, loading, loadingTb }) => {
       {!loading && data ? (
         <div>
           {Array.isArray(data) && data?.length > 0 ? (
-            <div className="table-data-watchlist w-[1840px] mt-0.5">
+            <div className="table-data-antd w-[1840px] mt-0.5">
               <Table
                 loading={loadingTb}
                 showSorterTooltip={false}
-                scroll={{ x: 1870 }}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}
-                pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                // pagination={{ defaultPageSize: 14, showSizeChanger: false }}
+                scroll={
+                  data.length * rowHeight > maxHeight
+                    ? { x: 1870, y: maxHeight }
+                    : { x: 1870 }
+                }
+                pagination={false}
               />
             </div>
           ) : (

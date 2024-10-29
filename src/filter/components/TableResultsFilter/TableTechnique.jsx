@@ -9,7 +9,14 @@ import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import { postApi } from "../../../helper/postApi";
 import GauChart from "../../../watchlist/components/GauChart";
 
-const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin }) => {
+const TableTechnique = ({
+  filteredResults,
+  watchlists,
+  catchWatchlists,
+  isLogin,
+}) => {
+  const rowHeight = 88;
+  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -167,7 +174,7 @@ const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin 
       title: "Mã CP",
       dataindex: "code",
       fixed: true,
-      width: 200,
+      width: 180,
       align: "center",
       render: (_, record, index) => {
         return (
@@ -206,9 +213,14 @@ const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin 
       sorter: (a, b) => a.code.localeCompare(b.code),
     },
     {
-      title: "Thị giá (đồng)",
+      title: (
+        <span>
+          Thị giá <br />
+          (đồng)
+        </span>
+      ),
       dataindex: "closePrice",
-      width: 150,
+      width: 100,
       align: "center",
       render: (_, record) => {
         return (
@@ -238,9 +250,14 @@ const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin 
       sorter: (a, b) => a.perChange1D - b.perChange1D,
     },
     {
-      title: "KLGD (CP)",
+      title: (
+        <span>
+          KLGD <br />
+          (CP)
+        </span>
+      ),
       dataindex: "totalVol",
-      width: 130,
+      width: 110,
       align: "center",
       render: (_, record) => {
         return (
@@ -252,9 +269,14 @@ const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin 
       sorter: (a, b) => a.totalVol - b.totalVol,
     },
     {
-      title: "GTGD (tỷ đồng)",
+      title: (
+        <span>
+          GTGD <br />
+          (tỷ đồng)
+        </span>
+      ),
       dataindex: "totalVal",
-      width: 160,
+      width: 120,
       align: "center",
       render: (_, record) => {
         return (
@@ -293,14 +315,19 @@ const TableTechnique = ({ filteredResults, watchlists, catchWatchlists, isLogin 
   return (
     <div>
       {contextHolder}
-      <div className="table-data-watchlist w-[1387px] mt-0.5">
+      <div className="table-data-antd w-[1300px] mt-0.5">
         <Table
           showSorterTooltip={false}
           columns={columns}
-          scroll={{ x: 1370 }}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+          scroll={
+            filteredResults.length * rowHeight > maxHeight
+              ? { y: maxHeight }
+              : undefined
+          }
+          pagination={false}
         />
       </div>
       <Modal
