@@ -33,10 +33,6 @@ const NavBar4 = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "Chiến lược giao dịch";
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

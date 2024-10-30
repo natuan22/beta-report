@@ -40,6 +40,7 @@ const BuySellActive = () => {
     localStorage.getItem(process.env.REACT_APP_USER_ROLE)
   );
 
+  const [isVisible, setIsVisible] = useState(true);
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("FPT");
@@ -73,10 +74,6 @@ const BuySellActive = () => {
     setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
-
-  useEffect(() => {
-    document.title = "Mua bán chủ động";
-  }, []);
 
   useEffect(() => {
     const fetchDataStock = async () => {
@@ -246,6 +243,19 @@ const BuySellActive = () => {
   };
 
   useEffect(() => {
+    // Page Visibility API
+    const handleVisibilityChange = () => {
+      setIsVisible(document.visibilityState === "visible");
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
     const loadData = async () => {
       const currentTime = new Date();
       const hours = currentTime.getHours();
@@ -254,7 +264,7 @@ const BuySellActive = () => {
 
       if (fetchedData !== null) {
         const processedData = calData(fetchedData);
-        
+
         setData(processedData);
         setSocketConnected(true);
         setLoading(false);
@@ -271,10 +281,10 @@ const BuySellActive = () => {
 
     loadData();
 
-    // Uncomment this if you want to enable periodic fetching
-    const intervalId = setInterval(loadData, 60000); // 60 seconds
+    /// Set up periodic fetching only if the page is visible
+    const intervalId = isVisible ? setInterval(loadData, 60000) : null;
     return () => clearInterval(intervalId); // Cleanup on unmount or stock change
-  }, [stock]);
+  }, [stock, isVisible]);
 
   const prepareData = (item) => [
     item.time,

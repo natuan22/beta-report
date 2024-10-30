@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import "../styles/average-legend.css";
+import formatNumberCurrency from "../../helper/formatNumberCurrency";
 
 const ChartLine = ({ stock, data, chartKey }) => {
   const [timeLine, setTimeLine] = useState();
@@ -11,14 +12,36 @@ const ChartLine = ({ stock, data, chartKey }) => {
 
   useEffect(() => {
     if (data?.data?.length > 0) {
-      const uniqueDates = [...new Set(data.data.map((item) => moment(item.from).format("DD/MM/YYYY")))];
+      const uniqueDates = [
+        ...new Set(
+          data.data.map((item) => moment(item.from).format("DD/MM/YYYY"))
+        ),
+      ];
       setTimeLine(uniqueDates);
 
-      const keys = ["pe", "pb", "industryPe", "industryPb", "indexPe", "indexPb"];
-      const colors = ["#009565", "#FF2A37", "#00F1A0", "#FF9BA3", "#FBAC20", "#FBAC20"];
+      const keys = [
+        "pe",
+        "pb",
+        "industryPe",
+        "industryPb",
+        "indexPe",
+        "indexPb",
+      ];
+      const colors = [
+        "#009565",
+        "#FF2A37",
+        "#00F1A0",
+        "#FF9BA3",
+        "#FBAC20",
+        "#FBAC20",
+      ];
 
       const transformedData = keys.map((key, index) => {
-        return { name: key, data: data.data.map((item) => item[key]), color: colors[index] };
+        return {
+          name: key,
+          data: data.data.map((item) => item[key]),
+          color: colors[index],
+        };
       });
 
       const peData = transformedData
@@ -366,13 +389,9 @@ const ChartLine = ({ stock, data, chartKey }) => {
             tooltip += `
                 <div style="display: flex; align-items: center; margin-bottom: 3px;">
                     <div style="width: 10px; height: 10px; background-color: ${color}; margin-right: 5px;"></div>
-                    <span style="color:${color}; width: 65px">${removeParentheses(
-              point.series.name
-            )}</span>
-                    <span style="width: 60px;"><b>${point.y}</b></span>
-                    <span><b>${dataAverage[seriesIndex].data[0].toFixed(
-                      1
-                    )}</b></span>
+                    <span style="color:${color}; width: 65px">${removeParentheses(point.series.name)}</span>
+                    <span style="width: 60px;"><b>${formatNumberCurrency(point.y)}</b></span>
+                    <span><b>${formatNumberCurrency(dataAverage[seriesIndex].data[0])}</b></span>
                     <br/>
                 </div>`;
           }

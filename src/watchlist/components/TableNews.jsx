@@ -78,7 +78,7 @@ const TableNews = ({ data, loading }) => {
                     )} px-2 py-1 font-semibold text-lg sticky top-0 bg-[#d9e9fd] rounded-lg shadow-lg border border-[#2D4CEF] border-solid`}
                   >
                     {item.code}: {formatNumberCurrency(item.closePrice * 1000)}{" "}
-                    ({item.perChange.toFixed(2)}%)
+                    ({formatNumberCurrency(item.perChange)}%)
                   </div>
                   {visibleNews.map((newsItem, newsIndex) => (
                     <motion.div
