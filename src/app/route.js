@@ -15,22 +15,22 @@ import WeekNews from "../week/WeekNews";
 
 export const routes = [
   // Bản tin
-  { path: "/", component: Home, role: process.env.REACT_APP_BASE_USER },
-  { path: "/ban-tin-chieu", component: ReportAfternoon, role: process.env.REACT_APP_BASE_USER },
-  { path: "/ban-tin-tuan", component: WeekNews, role: process.env.REACT_APP_BASE_USER },
+  { path: "/", title: 'Bản tin sáng', component: Home, role: process.env.REACT_APP_BASE_USER },
+  { path: "/ban-tin-chieu", title: 'Bản tin chiều', component: ReportAfternoon, role: process.env.REACT_APP_BASE_USER },
+  { path: "/ban-tin-tuan", title: 'Bản tin tuần', component: WeekNews, role: process.env.REACT_APP_BASE_USER },
 
   // Phân tích
-  { path: "/phan-tich-ky-thuat/:code", component: AnalysisReport, role: process.env.REACT_APP_ADMIN },
-  { path: "/phan-tich-ky-thuat-tu-dong/:code", component: AnalysisReportAutomation, role: process.env.REACT_APP_BASE_USER },
-  { path: "/phan-tich-co-ban", component: AnalysisReportBasic, role: process.env.REACT_APP_BASE_USER },
+  { path: "/phan-tich-ky-thuat/:code", title: 'Phân tích kỹ thuật', component: AnalysisReport, role: process.env.REACT_APP_ADMIN },
+  { path: "/phan-tich-ky-thuat-tu-dong/:code", title: 'Phân tích kỹ thuật tự động', component: AnalysisReportAutomation, role: process.env.REACT_APP_BASE_USER },
+  { path: "/phan-tich-co-ban", title: 'Phân tích cơ bản', component: AnalysisReportBasic, role: process.env.REACT_APP_BASE_USER },
 
   // Công cụ đầu tư
-  { path: "/danh-muc-theo-doi", component: WatchList, role: process.env.REACT_APP_BASE_USER },
-  { path: "/bo-loc", component: Filter, role: process.env.REACT_APP_BASE_USER },
-  { path: "/canh-bao-tin-hieu", component: NavBar3, role: process.env.REACT_APP_BASE_USER },
-  { path: "/chien-luoc-giao-dich", component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
-  { path: "/beta-smart", component: BetaSmart, role: process.env.REACT_APP_ADMIN },
-  { path: "/trading-tool", component: TradingTool, role: process.env.REACT_APP_ADMIN },
-  { path: "/historical-pe-pb", component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
-  { path: "/mua-ban-chu-dong", component: BuySellActive, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
+  { path: "/danh-muc-theo-doi", title: 'Danh mục theo dõi', component: WatchList, role: process.env.REACT_APP_BASE_USER },
+  { path: "/bo-loc", title: 'Bộ lọc', component: Filter, role: process.env.REACT_APP_BASE_USER },
+  { path: "/canh-bao-tin-hieu", title: 'Cảnh báo tín hiệu', component: NavBar3, role: process.env.REACT_APP_BASE_USER },
+  { path: "/chien-luoc-giao-dich", title: 'Chiến lược giao dịch', component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
+  { path: "/beta-smart", title: 'BETA SMART', component: BetaSmart, role: process.env.REACT_APP_ADMIN },
+  { path: "/trading-tool", title: 'Trading Tool', component: TradingTool, role: process.env.REACT_APP_ADMIN },
+  { path: "/historical-pe-pb", title: 'Lịch sử P/E P/B', component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
+  { path: "/mua-ban-chu-dong", title: 'Mua bán chủ động', component: BuySellActive, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
 ];

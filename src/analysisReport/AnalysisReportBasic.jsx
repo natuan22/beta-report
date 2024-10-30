@@ -34,10 +34,6 @@ const AnalysisReportBasic = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "Phân tích cơ bản";
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

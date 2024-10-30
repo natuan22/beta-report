@@ -118,10 +118,6 @@ const Home = () => {
     pdf.save(`BetaMorningNews-${homNay}.pdf`);
   };
 
-  useEffect(() => {
-    document.title = "Bản tin sáng";
-  }, []);
-
   const [pageActive, setPageActive] = useState(pageRefs.page1);
 
   const scrollToPage = (pageRef) => {

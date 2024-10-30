@@ -1,4 +1,6 @@
-import { Skeleton, Table } from "antd";
+import { Slider } from "@mui/material";
+import { Skeleton, Table, Tooltip } from "antd";
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
@@ -9,7 +11,6 @@ import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
 import socket from "../helper/socket";
 import "./utils/styles/styleLoading.css";
 import "./utils/styles/table-antd-custom.css";
-import _ from "lodash";
 
 const BetaSmart = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,24 @@ const BetaSmart = () => {
   };
 
   useEffect(() => {
-    document.title = "BETA SMART";
+    const checkTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      // Nếu giờ là 8:59 đúng, đặt lại data thành rỗng
+      if (hours === 8 && minutes === 59) {
+        setData([]);
+      }
+    };
+
+    // Kiểm tra ngay khi component mount
+    checkTime();
+
+    // Đặt khoảng thời gian kiểm tra mỗi phút
+    const interval = setInterval(checkTime, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const rowClassName = (record, index) => {
@@ -123,9 +141,20 @@ const BetaSmart = () => {
       align: "center",
       render: (_, record) => {
         return (
-          <div className="text-black text-center font-bold text-base">
-            {record.code}
-          </div>
+          <Tooltip
+            placement="left"
+            title={<span className="">Click vào mã CP để xem báo cáo</span>}
+            color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
+          >
+            <a
+              className="text-black text-center font-bold text-base cursor-pointer no-underline hover:text-[#0164F8] hover:underline"
+              href={`/phan-tich-ky-thuat-tu-dong/${record.code}`}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {record.code}
+            </a>
+          </Tooltip>
         );
       },
       sorter: (a, b) => a.code.localeCompare(b.code),
@@ -346,6 +375,7 @@ const BetaSmart = () => {
     {
       title: "ROE (%)",
       dataindex: "ROE",
+      width: 80,
       align: "center",
       render: (_, record) => {
         return (
@@ -355,6 +385,73 @@ const BetaSmart = () => {
         );
       },
       sorter: (a, b) => a.ROE - b.ROE,
+    },
+    {
+      title: "Biến động 52 tuần",
+      align: "center",
+      render: (_, record) => {
+        const lowestPrice = +record.PRICE_LOWEST_CR_52W.toFixed(2);
+        const highestPrice = +record.PRICE_HIGHEST_CR_52W.toFixed(2);
+
+        const isHighestPrice = record.closePrice === highestPrice;
+        const isLowestPrice = record.closePrice === lowestPrice;
+
+        const thumbColor = isHighestPrice
+          ? "#3dcc91"
+          : isLowestPrice
+          ? "#d1686a"
+          : "#137ab9";
+        const borderTopColor = isHighestPrice
+          ? "#3dcc91"
+          : isLowestPrice
+          ? "#d1686a"
+          : "#137ab9";
+
+        return (
+          <div className="w-[120px] h-[28px] -translate-y-[5px] translate-x-[7px]">
+            <Slider
+              disabled
+              value={record.closePrice}
+              min={lowestPrice}
+              max={highestPrice}
+              track={false}
+              marks={[
+                { value: lowestPrice, label: formatNumberCurrency(lowestPrice) },
+                { value: highestPrice, label: formatNumberCurrency(highestPrice) },
+              ]}
+              sx={{
+                "& .MuiSlider-rail": {
+                  backgroundColor: "#838383",
+                },
+                "& .MuiSlider-markLabel": {
+                  fontSize: "12px", // Kích thước chữ
+                  top: "20px",
+                  fontWeight: 600,
+                },
+                "& .MuiSlider-thumb": {
+                  width: "2px",
+                  height: "4px",
+                  backgroundColor: thumbColor,
+                  borderRadius: 0,
+                },
+                "& .MuiSlider-thumb::after": {
+                  width: "0px",
+                  height: "0px",
+                  borderLeft: "4px solid transparent",
+                  borderRight: "4px solid transparent",
+                  borderTop: `4px solid ${borderTopColor}`,
+                  borderRadius: 0,
+                  top: "-2.5px",
+                  left: "1px",
+                },
+                "& .MuiSlider-root": {
+                  padding: "0px 0px",
+                },
+              }}
+            />
+          </div>
+        );
+      },
     },
   ];
 
@@ -376,6 +473,8 @@ const BetaSmart = () => {
       PB: dataBasic.PB,
       ROA: dataBasic.ROA,
       ROE: dataBasic.ROE,
+      PRICE_HIGHEST_CR_52W: dataBasic.PRICE_HIGHEST_CR_52W,
+      PRICE_LOWEST_CR_52W: dataBasic.PRICE_LOWEST_CR_52W,
     });
 
     const updateData = (res, dataBasic = {}) => {
@@ -457,14 +556,14 @@ const BetaSmart = () => {
         </div>
         <div className="table-antd-betasmart mt-6">
           {!loading && data ? (
-            <div className="2xl:w-[1450px] xl:w-full">
+            <div className="2xl:w-[1581px] xl:w-full">
               <Table
                 showSorterTooltip={false}
                 columns={columns}
                 dataSource={data}
                 rowClassName={rowClassName}
                 // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
-                scroll={{ x: 1450 }}
+                scroll={{ x: 1581 }}
                 pagination={false}
               />
             </div>

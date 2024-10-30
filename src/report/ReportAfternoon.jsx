@@ -120,10 +120,6 @@ const ReportAfternoon = () => {
     pdf.save(`${formattedDate}.dailyreport.pdf`);
   };
 
-  useEffect(() => {
-    document.title = "Bản tin chiều";
-  }, []);
-
   const [pageActive, setPageActive] = useState(pageRefs.page1);
 
   const scrollToPage = (pageRef) => {

@@ -65,10 +65,6 @@ const TradingStrategies = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "Chiến lược giao dịch";
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <div className="relative">

@@ -34,10 +34,6 @@ const NavBar3 = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "Bộ lọc";
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

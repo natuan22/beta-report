@@ -41,13 +41,11 @@ const TableStatistical = ({
             />
             <Tooltip
               placement="left"
-              title={
-                <span className="">Click vào mã cổ phiếu để xem báo cáo</span>
-              }
+              title={<span className="">Click vào mã CP để xem báo cáo</span>}
               color={"linear-gradient(to bottom, #E6EFF9, #61A6F6)"}
             >
               <a
-                className="text-[#0D4381] cursor-pointer no-underline hover:text-[#0164F8]"
+                className="text-[#0D4381] cursor-pointer no-underline hover:text-[#0164F8] hover:underline"
                 href={`/phan-tich-ky-thuat-tu-dong/${record.code}`}
                 target="_blank"
                 rel="noreferrer noopener"
@@ -145,7 +143,7 @@ const TableStatistical = ({
           <div
             className={`text-right ${getColorBaseOnValue(record.perChangeW)}`}
           >
-            {record.perChangeW}
+            {formatNumberCurrency(record.perChangeW)}
           </div>
         );
       },
@@ -161,7 +159,7 @@ const TableStatistical = ({
           <div
             className={`text-right ${getColorBaseOnValue(record.perChangeM)}`}
           >
-            {record.perChangeM}
+            {formatNumberCurrency(record.perChangeM)}
           </div>
         );
       },
@@ -177,7 +175,7 @@ const TableStatistical = ({
           <div
             className={`text-right ${getColorBaseOnValue(record.perChangeYtD)}`}
           >
-            {record.perChangeYtD}
+            {formatNumberCurrency(record.perChangeYtD)}
           </div>
         );
       },
@@ -193,7 +191,7 @@ const TableStatistical = ({
           <div
             className={`text-right ${getColorBaseOnValue(record.perChangeY)}`}
           >
-            {record.perChangeY}
+            {formatNumberCurrency(record.perChangeY)}
           </div>
         );
       },
@@ -318,8 +316,14 @@ const TableStatistical = ({
               max={highestPrice}
               track={false}
               marks={[
-                { value: lowestPrice, label: lowestPrice },
-                { value: highestPrice, label: highestPrice },
+                {
+                  value: lowestPrice,
+                  label: formatNumberCurrency(lowestPrice),
+                },
+                {
+                  value: highestPrice,
+                  label: formatNumberCurrency(highestPrice),
+                },
               ]}
               sx={{
                 "& .MuiSlider-markLabel": {

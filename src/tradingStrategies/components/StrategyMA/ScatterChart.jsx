@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 
 const ScatterChart = ({ data }) => {
   const [series, setSeries] = useState([
@@ -82,7 +83,13 @@ const ScatterChart = ({ data }) => {
       },
     },
     tooltip: {
-      pointFormat: "MA {point.name} <br/> Hiệu suất: {point.y} %",
+      shared: true,
+      useHTML: true,
+      valueSuffix: " ",
+      backgroundColor: "#fff",
+      pointFormatter: function () {
+        return `<span style="color:${this.color}">●</span>MA ${this.name}: <b>${formatNumberCurrency(this.y)} %</b><br/>`;
+      },
     },
     series: series,
     colors: ["rgb(255,255,255)"], //Fill color marker

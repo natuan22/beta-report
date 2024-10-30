@@ -60,10 +60,6 @@ const HistoricalPEPB = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "Lịch sử P/E P/B";
-  }, []);
-
   const fetchData = async () => {
     if (stock === "") {
       warning("warning", "Hãy nhập mã cổ phiếu");

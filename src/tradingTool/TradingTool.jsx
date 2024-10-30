@@ -24,6 +24,7 @@ import ActionComponents from "./components/ActionComponents.jsx";
 import DetailComponents from "./components/DetailComponents.jsx";
 import EditModal from "./components/EditModal.jsx";
 import "./utils/styles/styles.css";
+import formatNumberCurrency from "../helper/formatNumberCurrency.js";
 
 const XLSX = require("xlsx");
 const flashClass = {
@@ -98,25 +99,17 @@ const TradingTool = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    document.title = "TradingTool";
-  }, []);
-
   const getDataTable = async () => {
     const data = await getApi(`/api/v1/investment/beta-watch-list`);
     const dataWithKey =
       Array.isArray(data) &&
       data?.map((item, index) => {
-        const closePrice = parseFloat((item.closePrice / 1000).toFixed(2));
+        const closePrice = item.closePrice / 1000;
         const p_2024 = item.price_2024
-          ? parseFloat(
-              (((item.price_2024 - closePrice) / closePrice) * 100).toFixed(2)
-            )
+          ? ((item.price_2024 - closePrice) / closePrice) * 100
           : 0;
         const p_2025 = item.price_2025
-          ? parseFloat(
-              (((item.price_2025 - closePrice) / closePrice) * 100).toFixed(2)
-            )
+          ? ((item.price_2025 - closePrice) / closePrice) * 100
           : 0;
 
         return {
@@ -132,26 +125,15 @@ const TradingTool = () => {
               : item.signal === 2
               ? "Hold mua"
               : "Hold bán",
-          total: parseFloat((item.total * 100).toFixed(2)),
-          price_2024: parseFloat(item.price_2024.toFixed(2)),
-          price_2025: parseFloat(item.price_2025.toFixed(2)),
+          total: item.total * 100,
+          price_2024: item.price_2024,
+          price_2025: item.price_2025,
           p_2024,
           p_2025,
-          ma: parseFloat((item.ma / 1000).toFixed(2)),
-          change: parseFloat(
-            (
-              ((item.closePrice - item.closePricePrev) / item.closePricePrev) *
-              100
-            ).toFixed(2)
-          ),
-          perChange:
-            parseFloat(
-              (
-                ((item.closePrice - item.closePricePrev) /
-                  item.closePricePrev) *
-                100
-              ).toFixed(2)
-            ) + "%",
+          ma: item.ma / 1000,
+          change:
+            ((item.closePrice - item.closePricePrev) / item.closePricePrev) *
+            100,
         };
       });
     setData(dataWithKey);
@@ -163,6 +145,10 @@ const TradingTool = () => {
   }, []);
 
   const gridRef = useRef();
+
+  const formatPercentage = (value) => {
+    return `${formatNumberCurrency(value)}%`;
+  };
 
   const columnDefs = [
     {
@@ -178,13 +164,15 @@ const TradingTool = () => {
       field: "closePrice",
       width: role === process.env.REACT_APP_WATCH_TRADING_TOOL ? 130 : 90,
       cellClass: (params) => getColor(params.data.change),
+      valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { fontWeight: "bold", textAlign: "center" },
     },
     {
       headerName: "+/-",
-      field: "perChange",
+      field: "change",
       width: role === process.env.REACT_APP_WATCH_TRADING_TOOL ? 130 : 90,
       cellClass: (params) => getColor(params.data.change),
+      valueFormatter: (params) => formatPercentage(params.value),
       cellStyle: { fontWeight: "bold", textAlign: "center" },
     },
     {
@@ -198,6 +186,7 @@ const TradingTool = () => {
       field: "p_2024",
       width: 200,
       cellClass: (params) => getColorTiemNangTangGia(params.data.p_2024, 2024),
+      valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { textAlign: "center" },
     },
     {
@@ -211,6 +200,7 @@ const TradingTool = () => {
       field: "p_2025",
       width: 200,
       cellClass: (params) => getColorTiemNangTangGia(params.data.p_2025, 2025),
+      valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { textAlign: "center" },
     },
     {
@@ -223,12 +213,14 @@ const TradingTool = () => {
       headerName: "Giá trị MA",
       field: "ma",
       width: 130,
+      valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { textAlign: "center" },
     },
     {
       headerName: "Hiệu suất sinh lời theo MA (%)",
       field: "total",
       width: 280,
+      valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { textAlign: "center" },
     },
     {
@@ -287,24 +279,17 @@ const TradingTool = () => {
           }
 
           const item = prevData[index];
-          const closePrice = parseFloat(item.closePrice.toFixed(2));
-          const newClosePrice = parseFloat(
-            (res[0].closePrice / 1000).toFixed(2)
-          );
-          const closePricePrev = parseFloat(
-            (item.closePricePrev / 1000).toFixed(2)
-          );
-          const change = parseFloat(
-            (((newClosePrice - closePricePrev) / closePricePrev) * 100).toFixed(
-              2
-            )
-          );
+          const closePrice = item.closePrice;
+          const newClosePrice = res[0].closePrice / 1000;
+          const closePricePrev = item.closePricePrev / 1000;
+          const change =
+            ((newClosePrice - closePricePrev) / closePricePrev) * 100;
 
           if (closePrice !== newClosePrice) {
             const newItem = {
               ...item,
               closePrice: newClosePrice,
-              ma: parseFloat((res[0].ma / 1000).toFixed(2)),
+              ma: res[0].ma / 1000,
               signal:
                 res[0].signal === 0
                   ? "MUA"
@@ -314,24 +299,13 @@ const TradingTool = () => {
                   ? "Hold mua"
                   : "Hold bán",
               p_2024: item.price_2024
-                ? parseFloat(
-                    (
-                      ((item.price_2024 - newClosePrice) / newClosePrice) *
-                      100
-                    ).toFixed(2)
-                  )
+                ? ((item.price_2024 - newClosePrice) / newClosePrice) * 100
                 : 0,
               p_2025: item.price_2025
-                ? parseFloat(
-                    (
-                      ((item.price_2025 - newClosePrice) / newClosePrice) *
-                      100
-                    ).toFixed(2)
-                  )
+                ? ((item.price_2025 - newClosePrice) / newClosePrice) * 100
                 : 0,
-              total: parseFloat((res[0].total * 100).toFixed(2)),
+              total: res[0].total * 100,
               change,
-              perChange: change + "%",
             };
 
             const rowNode = gridRef?.current?.api?.getRowNode(newItem.code);
@@ -341,7 +315,7 @@ const TradingTool = () => {
               );
               const columnIds = [
                 "closePrice",
-                "perChange",
+                "change",
                 "ma",
                 "p_2024",
                 "p_2025",
@@ -450,41 +424,26 @@ const TradingTool = () => {
         is_beta_page: 1,
       });
 
-      const closePrice = parseFloat((res[0].closePrice / 1000).toFixed(2));
-      const newP2024 = parseFloat(
-        (((price_2024 - closePrice) / closePrice) * 100).toFixed(2)
-      );
-      const newP2025 = parseFloat(
-        (((price_2025 - closePrice) / closePrice) * 100).toFixed(2)
-      );
+      const closePrice = res[0].closePrice / 1000;
+      const newP2024 = ((price_2024 - closePrice) / closePrice) * 100;
+      const newP2025 = ((price_2025 - closePrice) / closePrice) * 100;
 
       setData((prev) => {
         const newData = [
           ...prev,
           {
             ...res[0],
-            change: parseFloat(
-              (
-                ((res[0].closePrice - res[0].closePricePrev) /
-                  res[0].closePricePrev) *
-                100
-              ).toFixed(2)
-            ),
-            perChange:
-              parseFloat(
-                (
-                  ((res[0].closePrice - res[0].closePricePrev) /
-                    res[0].closePricePrev) *
-                  100
-                ).toFixed(2)
-              ) + "%",
+            change:
+              ((res[0].closePrice - res[0].closePricePrev) /
+                res[0].closePricePrev) *
+              100,
             closePrice,
             price_2024: Number(price_2024),
             price_2025: Number(price_2025),
             p_2024: newP2024,
             p_2025: newP2025,
-            ma: parseFloat((res[0].ma / 1000).toFixed(2)),
-            total: parseFloat((res[0].total * 100).toFixed(2)),
+            ma: res[0].ma / 1000,
+            total: res[0].total * 100,
             id: code,
             name: res[0].name,
             signal_text:
@@ -525,7 +484,7 @@ const TradingTool = () => {
   const prepareData = (item) => [
     item.code,
     item.closePrice,
-    item.perChange,
+    item.change,
     item.price_2024,
     item.p_2024,
     item.price_2025,

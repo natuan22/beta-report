@@ -149,10 +149,6 @@ const AnalysisReportAutomation = () => {
     }
   };
 
-  useEffect(() => {
-    document.title = `${code} - Phân tích kỹ thuật tự động`;
-  }, []);
-
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[1%]">

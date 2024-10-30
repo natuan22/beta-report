@@ -173,10 +173,6 @@ const WeekNews = () => {
     link10.click();
   };
 
-  useEffect(() => {
-    document.title = "Bản tin tuần";
-  }, []);
-
   const [pageActive, setPageActive] = useState(pageRefs.page1);
 
   const scrollToPage = (pageRef) => {
