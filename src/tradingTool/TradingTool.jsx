@@ -101,45 +101,37 @@ const TradingTool = () => {
 
   const getDataTable = async () => {
     const data = await getApi(`/api/v1/investment/beta-watch-list`);
-    const dataWithKey =
-      Array.isArray(data) &&
-      data?.map((item, index) => {
-        const closePrice = item.closePrice / 1000;
-        const p_2024 = item.price_2024
-          ? ((item.price_2024 - closePrice) / closePrice) * 100
-          : 0;
-        const p_2025 = item.price_2025
-          ? ((item.price_2025 - closePrice) / closePrice) * 100
-          : 0;
+    const dataWithKey = Array.isArray(data) && data?.map((item, index) => {
+      const closePrice = item.closePrice / 1000;
+      const p_2024 = item.price_2024 ? ((item.price_2024 - closePrice) / closePrice) * 100 : 0;
+      const p_2025 = item.price_2025 ? ((item.price_2025 - closePrice) / closePrice) * 100 : 0;
 
-        return {
-          ...item,
-          key: index,
-          id: item.code,
-          closePrice,
-          signal:
-            item.signal === 0
-              ? "MUA"
-              : item.signal === 1
-              ? "BÁN"
-              : item.signal === 2
-              ? "Hold mua"
-              : "Hold bán",
-          total: item.total * 100,
-          price_2024: item.price_2024,
-          price_2025: item.price_2025,
-          p_2024,
-          p_2025,
-          ma: item.ma / 1000,
-          change:
-            ((item.closePrice - item.closePricePrev) / item.closePricePrev) *
-            100,
-        };
-      });
+      return {
+        ...item,
+        key: index,
+        id: item.code,
+        closePrice,
+        signal:
+          item.signal === 0
+            ? "MUA"
+            : item.signal === 1
+            ? "BÁN"
+            : item.signal === 2
+            ? "Hold mua"
+            : "Hold bán",
+        total: item.total * 100,
+        price_2024: item.price_2024,
+        price_2025: item.price_2025,
+        p_2024,
+        p_2025,
+        ma: item.ma / 1000,
+        change: ((item.closePrice - item.closePricePrev) / item.closePricePrev) * 100,
+      };
+    });
     setData(dataWithKey);
     setSocketConnected(true);
   };
-
+  
   useEffect(() => {
     getDataTable();
   }, []);
@@ -281,9 +273,8 @@ const TradingTool = () => {
           const item = prevData[index];
           const closePrice = item.closePrice;
           const newClosePrice = res[0].closePrice / 1000;
-          const closePricePrev = item.closePricePrev / 1000;
-          const change =
-            ((newClosePrice - closePricePrev) / closePricePrev) * 100;
+          const closePricePrev = res[0].closePricePrev / 1000;
+          const change = ((newClosePrice - closePricePrev) / closePricePrev) * 100;
 
           if (closePrice !== newClosePrice) {
             const newItem = {
@@ -298,29 +289,16 @@ const TradingTool = () => {
                   : res[0].signal === 2
                   ? "Hold mua"
                   : "Hold bán",
-              p_2024: item.price_2024
-                ? ((item.price_2024 - newClosePrice) / newClosePrice) * 100
-                : 0,
-              p_2025: item.price_2025
-                ? ((item.price_2025 - newClosePrice) / newClosePrice) * 100
-                : 0,
+              p_2024: item.price_2024 ? ((item.price_2024 - newClosePrice) / newClosePrice) * 100 : 0,
+              p_2025: item.price_2025 ? ((item.price_2025 - newClosePrice) / newClosePrice) * 100 : 0,
               total: res[0].total * 100,
               change,
             };
 
             const rowNode = gridRef?.current?.api?.getRowNode(newItem.code);
             if (rowNode) {
-              const rowElement = document.querySelector(
-                `[row-id="${newItem.code}"]`
-              );
-              const columnIds = [
-                "closePrice",
-                "change",
-                "ma",
-                "p_2024",
-                "p_2025",
-                "total",
-              ];
+              const rowElement = document.querySelector(`[row-id="${newItem.code}"]`);
+              const columnIds = ["closePrice", "change", "ma", "p_2024", "p_2025", "total"];
               const className =
                 newClosePrice > closePricePrev
                   ? flashClass.up
@@ -330,9 +308,7 @@ const TradingTool = () => {
 
               // Add the class name for visual feedback
               columnIds.forEach((colId) => {
-                const cellElement = rowElement?.querySelector(
-                  `[col-id="${colId}"]`
-                );
+                const cellElement = rowElement?.querySelector(`[col-id="${colId}"]`);
                 if (cellElement) {
                   cellElement.classList.add(className);
                 }
@@ -341,15 +317,9 @@ const TradingTool = () => {
               // Remove the class names after 500 milliseconds
               setTimeout(() => {
                 columnIds.forEach((colId) => {
-                  const cellElement = rowElement?.querySelector(
-                    `[col-id="${colId}"]`
-                  );
+                  const cellElement = rowElement?.querySelector(`[col-id="${colId}"]`);
                   if (cellElement) {
-                    cellElement.classList.remove(
-                      flashClass.up,
-                      flashClass.down,
-                      flashClass.ref
-                    );
+                    cellElement.classList.remove(flashClass.up, flashClass.down, flashClass.ref);
                   }
                 });
               }, 500);
@@ -365,15 +335,9 @@ const TradingTool = () => {
                 : "Hold bán";
 
             if (rowNode && item.signal !== signal) {
-              const rowElement = document.querySelector(
-                `[row-id="${newItem.code}"]`
-              );
-              const childElementSignal =
-                rowElement?.querySelector('[col-id="signal"]');
-              const classNameSignal =
-                res[0].signal === 0 || res[0].signal === 2
-                  ? flashClass.up
-                  : flashClass.down;
+              const rowElement = document.querySelector(`[row-id="${newItem.code}"]`);
+              const childElementSignal = rowElement?.querySelector('[col-id="signal"]');
+              const classNameSignal = res[0].signal === 0 || res[0].signal === 2 ? flashClass.up : flashClass.down;
 
               childElementSignal?.classList.add(classNameSignal);
 

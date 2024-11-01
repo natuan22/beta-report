@@ -49,8 +49,8 @@ const BetaSmart = () => {
       const hours = now.getHours();
       const minutes = now.getMinutes();
 
-      // Nếu giờ là 8:59 đúng, đặt lại data thành rỗng
-      if (hours === 8 && minutes === 59) {
+      // Nếu giờ là 9:00 đúng, đặt lại data thành rỗng
+      if (hours === 9 && minutes === 0) {
         setData([]);
       }
     };
