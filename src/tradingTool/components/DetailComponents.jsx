@@ -1,5 +1,6 @@
 import { Modal, Tooltip } from "antd";
 import React, { useState } from "react";
+import formatNumberCurrency from "../../helper/formatNumberCurrency";
 
 export default (params) => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
@@ -50,35 +51,35 @@ export default (params) => {
             <p className="m-1 w-[75%]">Giá</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.closePrice}
+              {dataDetail && formatNumberCurrency(dataDetail?.closePrice)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Giá mục tiêu 2024</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.price_2024}
+              {dataDetail && formatNumberCurrency(dataDetail?.price_2024)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Tiềm năng tăng giá 2024 (%)</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.p_2024}
+              {dataDetail && formatNumberCurrency(dataDetail?.p_2024)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Giá mục tiêu 2025</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.price_2025}
+              {dataDetail && formatNumberCurrency(dataDetail?.price_2025)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Tiềm năng tăng giá 2025 (%)</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.p_2025}
+              {dataDetail && formatNumberCurrency(dataDetail?.p_2025)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
@@ -92,14 +93,14 @@ export default (params) => {
             <p className="m-1 w-[75%]">Giá trị MA</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.ma}
+              {dataDetail && formatNumberCurrency(dataDetail?.ma)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Hiệu suất sinh lời theo MA (%)</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail?.total}
+              {dataDetail && formatNumberCurrency(dataDetail?.total)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
