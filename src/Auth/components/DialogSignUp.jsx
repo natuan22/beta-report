@@ -43,7 +43,7 @@ const DialogSignUp = ({ onSubmitSuccess }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
 
   const userSchema = object({

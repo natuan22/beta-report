@@ -6,7 +6,12 @@ import { FiPlusCircle } from "react-icons/fi";
 import { postApi } from "../../helper/postApi";
 import { getApi } from "../../helper/getApi";
 
-const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLogin }) => {
+const AddCodeToWatchlist = ({
+  watchlists,
+  filteredResults,
+  catchWatchlists,
+  isLogin,
+}) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -65,7 +70,7 @@ const AddCodeToWatchlist = ({ watchlists, filteredResults, catchWatchlists, isLo
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
 
   const showModalCreate = () => {

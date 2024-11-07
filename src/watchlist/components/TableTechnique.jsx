@@ -156,11 +156,7 @@ const TableTechnique = ({
                 dataSource={data}
                 rowClassName={rowClassName}
                 // pagination={{ defaultPageSize: 14, showSizeChanger: false }}
-                scroll={
-                  data.length * rowHeight > maxHeight
-                    ? { y: maxHeight }
-                    : undefined
-                }
+                scroll={ data.length * rowHeight > maxHeight ? { y: maxHeight } : { x: 1358, undefined }}
                 pagination={false}
               />
             </div>

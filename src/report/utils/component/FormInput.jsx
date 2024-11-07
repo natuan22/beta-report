@@ -65,7 +65,7 @@ const FormInput = ({
         setImgSrc(e.target.result); // set hình base64
         getImgFromInput(e.target.result);
       };
-      //   console.log("file", file);
+      // console.log("file", file);
       // truyền dữ liệu lên form
       setFieldValue("img", file);
     }

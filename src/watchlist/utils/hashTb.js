@@ -1,3 +1,4 @@
+import moment from "moment";
 import calSignalText from "../../helper/calSignalText";
 
 export const sheet1Title = [
@@ -127,7 +128,7 @@ export const prepareData5 = (item) => [item.code];
 export const prepareData6 = (item) => {
   return item.news.map((news, index) => [
     index === 0 ? item.code : "", // Chỉ đặt code vào hàng đầu tiên
-    news.date,
+    moment(news.date).format("DD/MM/YYYY"),
     news.title,
     news.href,
   ]);

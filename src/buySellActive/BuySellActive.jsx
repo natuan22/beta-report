@@ -17,6 +17,7 @@ import TableBuySell from "./components/TableBuySell";
 import "./utils/styles/styleBtn.css";
 import "./utils/styles/styleLoadingBuySell.css";
 import socket from "../helper/socket";
+import moment from "moment";
 
 const XLSX = require("xlsx");
 
@@ -287,7 +288,7 @@ const BuySellActive = () => {
   }, [stock, isVisible]);
 
   const prepareData = (item) => [
-    item.time,
+    moment(item.time, "HH:mm:ss").format("HH:mm:ss"),
     item.action === "S" ? "Bán" : item.action === "B" ? "Mua" : " ",
     item.volume,
     item.matchPrice,

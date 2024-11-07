@@ -58,7 +58,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
 
   const saveFilter = async () => {

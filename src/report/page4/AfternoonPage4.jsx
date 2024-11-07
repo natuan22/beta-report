@@ -516,7 +516,7 @@ const AfternoonPage4 = ({ role }) => {
                           // Phần sau dấu ':' (trim() để loại bỏ khoảng trắng ở đầu và cuối)
                           afterColon = parts[1].trim();
                         } else {
-                          console.log("Không tìm thấy dấu : trong chuỗi.");
+                          console.error("Không tìm thấy dấu : trong chuỗi.");
                         }
                         return (
                           <li className="mb-1 " key={index}>
