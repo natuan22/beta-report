@@ -8,6 +8,7 @@ import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
 import { getApi } from "../helper/getApi";
 import ChartLine from "./components/ChartLine";
+import moment from "moment";
 
 const XLSX = require("xlsx");
 
@@ -118,7 +119,7 @@ const HistoricalPEPB = () => {
   ];
 
   const prepareData = (item) => [
-    item.from,
+    moment(item.from).format("DD/MM/YYYY"), // Format to "DD/MM/YYYY"
     item.indexPb,
     item.indexPe,
     item.industryPb,

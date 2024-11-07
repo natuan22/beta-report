@@ -43,13 +43,24 @@ const AreaChart = () => {
       labels: {
         style: {
           color: "#000",
-          fontSize: "9px",
+          fontSize: "10px",
           fontWeight: "600",
         },
       },
-      categories: data
-        ?.map((item) => moment(item.date).format("DD/MM"))
-        .reverse(),
+      categories: data?.map((item) => moment(item.date).format("DD/MM")).reverse(),
+      tickInterval: Math.ceil(data?.length / 6),
+      tickPositioner: function () {
+        const tickPositions = [];
+        const interval = Math.ceil(data?.length / 5);
+
+        for (let i = 0; i < data.length; i += interval) {
+          tickPositions.push(i);
+        }
+        if (data.length - 1 !== tickPositions[tickPositions.length - 1]) {
+          tickPositions.push(data.length - 1);
+        }
+        return tickPositions;
+      },
     },
     yAxis: {
       title: {

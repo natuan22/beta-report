@@ -44,3 +44,7 @@
 .tabs-filter .ant-tabs .ant-tabs-ink-bar {
     background: none;
 }
+
+.tabs-filter .ant-tabs-top >.ant-tabs-nav::before {
+    border-bottom: 0px;
+}

@@ -77,12 +77,27 @@ const StackingAreaChart = () => {
     xAxis: {
       categories: uniqueDates,
       tickmarkPlacement: "on",
+      tickInterval: Math.ceil(uniqueDates?.length / 6),
+      tickPositioner: function () {
+        const tickPositions = [];
+        const interval = Math.ceil(uniqueDates?.length / 5);
+
+        for (let i = 0; i < uniqueDates.length; i += interval) {
+          tickPositions.push(i);
+        }
+        if (uniqueDates.length - 1 !== tickPositions[tickPositions.length - 1]) {
+          tickPositions.push(uniqueDates.length - 1);
+        }
+        return tickPositions;
+      },
       title: {
         enabled: true,
       },
       labels: {
         style: {
           color: localStorage.getItem("color"),
+          fontSize: "10px",
+          fontWeight: 600,
         },
       },
       crosshair: {
@@ -114,9 +129,7 @@ const StackingAreaChart = () => {
       },
       enabled: true,
       labelFormatter: function () {
-        const hoveredPoint = hoveredValue?.find(
-          (point) => point.name === this.name
-        );
+        const hoveredPoint = hoveredValue?.find((point) => point.name === this.name);
         const valueString = hoveredPoint ? `: ${hoveredPoint.value}` : "";
         return `${this.name}${valueString}`;
       },

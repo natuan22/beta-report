@@ -20,12 +20,24 @@ export const userLoginAction = (data) => async (dispatch) => {
 
     localStorage.setItem("user", JSON.stringify(userDataWithoutTokens));
     if (res.data.data.role === 0) {
-      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_BASE_USER);
+      localStorage.setItem(
+        process.env.REACT_APP_USER_ROLE,
+        process.env.REACT_APP_BASE_USER
+      );
     } else if (res.data.data.role === 1) {
-      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_ADMIN);
+      localStorage.setItem(
+        process.env.REACT_APP_USER_ROLE,
+        process.env.REACT_APP_ADMIN
+      );
     } else
-      localStorage.setItem(process.env.REACT_APP_USER_ROLE, process.env.REACT_APP_WATCH_TRADING_TOOL);
-    localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_T);
+      localStorage.setItem(
+        process.env.REACT_APP_USER_ROLE,
+        process.env.REACT_APP_PREMIUM_USER
+      );
+    localStorage.setItem(
+      process.env.REACT_APP_IS_LG,
+      process.env.REACT_APP_LG_T
+    );
     Cookies.set("at", res.data.data.access_token);
     Cookies.set("rt", res.data.data.refresh_token);
   } catch (err) {
@@ -73,11 +85,12 @@ export const userLogoutAction = () => async (dispatch) => {
     Cookies.remove("rt");
     localStorage.removeItem("watchlistActive");
     localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
-    localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
+    localStorage.setItem(
+      process.env.REACT_APP_IS_LG,
+      process.env.REACT_APP_LG_F
+    );
 
-    dispatch({
-      type: authenTypes.USER_LOGOUT_ACTION,
-    });
+    dispatch({ type: authenTypes.USER_LOGOUT_ACTION });
   } catch (err) {
     console.error(err);
   }

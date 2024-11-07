@@ -58,7 +58,6 @@ const StackColumnVal = ({ data }) => {
       },
     },
     yAxis: {
-      title: "",
       min: 0,
       gridLineWidth: 0,
       stackLabels: {
@@ -72,11 +71,7 @@ const StackColumnVal = ({ data }) => {
 
           const color = isBuySeries ? "#22c55e" : "#ef4444";
 
-          return `<span style="color: ${color};">${formatNumberCurrency(
-            this.total
-          )} (${
-            totalValue > 0 ? `${formatNumberCurrency(percentage)}%` : "-"
-          })</span>`;
+          return `<span style="color: ${color};">${formatNumberCurrency(this.total)} (${ totalValue > 0 ? `${formatNumberCurrency(percentage)}%` : "-" })</span>`;
         },
         style: {
           fontWeight: "bold",
@@ -118,15 +113,7 @@ const StackColumnVal = ({ data }) => {
       valueSuffix: " ",
       backgroundColor: "#fff",
       pointFormatter: function () {
-        return (
-          '<span style="color:' +
-          this.color +
-          '">●</span> ' +
-          this.series.name +
-          ": <b>" +
-          formatNumberCurrency(this.y) +
-          "</b> tỷ đồng</span><br/>"
-        );
+        return ('<span style="color:' + this.color + '">●</span> ' + this.series.name + ": <b>" + formatNumberCurrency(this.y) + "</b> tỷ đồng</span><br/>");
       },
     },
   };

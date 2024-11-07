@@ -101,7 +101,7 @@ const TradingStrategies = () => {
                         .filter((strategy) => {
                           if (
                             role === process.env.REACT_APP_ADMIN ||
-                            role === process.env.REACT_APP_WATCH_TRADING_TOOL
+                            role === process.env.REACT_APP_PREMIUM_USER
                           ) {
                             // Show both "MA VVIP" and "MA đại pháp"
                             return true;

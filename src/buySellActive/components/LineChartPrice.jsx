@@ -204,7 +204,6 @@ const LineChartPrice = ({ data }) => {
       {
         top: "60%",
         height: "40%",
-        title: "",
         gridLineWidth: 0,
         labels: {
           x: 22,

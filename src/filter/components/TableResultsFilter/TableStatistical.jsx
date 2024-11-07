@@ -140,7 +140,7 @@ const TableStatistical = ({
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
 
   const handleAddCodeToWatchlist = async () => {
