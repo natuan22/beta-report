@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import convertUrlToDataURL from "../../helper/convertUrlToDataURL";
 import formatNumber from "../../helper/formatNumber";
 import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
-import { https } from "../../services/configService";
+import { https, resourceURL } from "../../services/configService";
 import DialogAddImgAndText from "../utils/component/DialogAddImgAndText";
 import FooterAfternoon from "../utils/component/FooterAfternoon";
 import HeaderAfternoon from "../utils/component/HeaderAfternoon";
-const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const AfternoonPage2 = ({ role }) => {
   const [data, setData] = useState();

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import calculateChartValues from "../../../helper/calculateChartValues";
+import calSignalText from "../../../helper/calSignalText";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import formatNumberCurrency from "../../../helper/formatNumberCurrency";
-import { https } from "../../../services/configService";
+import { https, resourceURL } from "../../../services/configService";
 import Candlestick from "../utils/Candlestick";
 import FooterAnalysis from "../utils/FooterAnalysis";
 import GauChartGenAnalReportAuto from "../utils/GauChartGenAnalReportAuto";
@@ -13,9 +13,7 @@ import DialogAddTechnicalReportInfor from "./utils/DialogAddTechnicalReportInfor
 import LineChart from "./utils/LineChart";
 import Table from "./utils/Table";
 import TableSR from "./utils/TableSR";
-import calSignalText from "../../../helper/calSignalText";
 
-const resourceURL = process.env.REACT_APP_IMG_URL;
 const getColorBaseOnName = (value) => {
   if (value === "Tích cực") return "text-green-500";
   if (value === "Tiêu cực") return "text-red-500";
