@@ -8,19 +8,21 @@ const PieChartVal = ({ data }) => {
   const [hasData, setHasData] = useState(false);
 
   const isValidData = (buyData, sellData) => {
-    return ([buyData.large, buyData.medium, buyData.small].every((val) => val >= 0) && [sellData.large, sellData.medium, sellData.small].every((val) => val >= 0));
+    return ([buyData?.large, buyData?.medium, buyData?.small].every((val) => val >= 0) && 
+            [sellData?.large, sellData?.medium, sellData?.small].every((val) => val >= 0));
   };
 
   useEffect(() => {
-    if (!data) {
+    if (!data || !data.totals) {
       setHasData(false);
       return;
     }
-
+    
+    const { buy = {}, sell = {} } = data.totals;
     const totalVal = data?.totalBuyVal + data?.totalSellVal;
-
+    
     // Kiểm tra tính hợp lệ của dữ liệu
-    if (isValidData(data.buyValData || {}, data.sellValData || {})) {
+    if (isValidData(buy, sell)) {
       const createDataPie = (buyOrSellData, colorSet) => {
         return [
           { name: "Lớn",        y: (buyOrSellData.large  / totalVal) * 100, color: colorSet[0] },
@@ -29,8 +31,8 @@ const PieChartVal = ({ data }) => {
         ];
       };
     
-      const dataPieSell = createDataPie(data.sellValData, ["#d34037", "#812a24", "#572724"]);
-      const dataPieBuy = createDataPie(data.buyValData, ["#00d060", "#0c7640", "#144d31"]);
+      const dataPieSell = createDataPie(sell, ["#d34037", "#812a24", "#572724"]);
+      const dataPieBuy = createDataPie(buy, ["#00d060", "#0c7640", "#144d31"]);
     
       const combinedDataPie = [...dataPieSell, ...dataPieBuy];
 
@@ -53,11 +55,7 @@ const PieChartVal = ({ data }) => {
         cursor: "pointer",
         dataLabels: {
           enabled: true,
-          formatter: function () {
-            return this.y !== 0
-              ? `${formatNumberCurrency(this.percentage)}%`
-              : null;
-          },
+          formatter: function () { return this.y !== 0 ? `${formatNumberCurrency(this.percentage)}%` : null },
           connector: { enabled: true, lineWidth: 0.5 },
           distance: 4,
         },
@@ -67,10 +65,7 @@ const PieChartVal = ({ data }) => {
     legend: {
       align: "center",
       verticalAlign: "top",
-      itemStyle: {
-        fontSize: "10px",
-        color: localStorage.getItem("color"),
-      },
+      itemStyle: { fontSize: "10px", color: localStorage.getItem("color") },
     },
     series: [
       {
@@ -85,7 +80,7 @@ const PieChartVal = ({ data }) => {
   return (
     <div className="flex items-center justify-center">
       {hasData ? (
-        <div className="h-[335px]">
+        <div className="h-[313px]">
           <PieChart
             highcharts={Highcharts}
             options={options}
@@ -93,7 +88,7 @@ const PieChartVal = ({ data }) => {
           />
         </div>
       ) : (
-        <div className="h-[329px] text-center mt-5 font-semibold">
+        <div className="h-[297px] text-center mt-5 font-semibold">
           Chưa có dữ liệu giao dịch
         </div>
       )}

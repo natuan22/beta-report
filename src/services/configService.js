@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export const apiUrl = process.env.REACT_APP_BASE_URL;
+export const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const headers = {
   mac: localStorage.getItem("deviceId"),

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import convertUrlToDataURL from "../../../helper/convertUrlToDataURL";
 import formatNumber from "../../../helper/formatNumber";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
-import { https } from "../../../services/configService";
+import { https, resourceURL } from "../../../services/configService";
 import FooterWeek from "../../utils/FooterWeek";
 import HeaderWeek from "../../utils/HeaderWeek";
 import DialogAddImgAndTextWeek from "./component/DialogAddImgAndTextWeek";
-const resourceURL = process.env.REACT_APP_IMG_URL;
 
 const Page3Week = ({ role }) => {
   const [data, setData] = useState();

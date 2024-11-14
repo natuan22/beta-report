@@ -42,7 +42,10 @@ const BuySellActive = () => {
   );
 
   const [isVisible, setIsVisible] = useState(true);
+
   const [data, setData] = useState();
+  const [dataCashFlowAnalysis, setDataCashFlowAnalysis] = useState();
+
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("FPT");
 
@@ -50,6 +53,7 @@ const BuySellActive = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [showTable, setShowTable] = useState(1); // Mặc định hiển thị TableBuySell
+  const [timeFrame, setTimeFrame] = useState(0);
 
   const [socketConnected, setSocketConnected] = useState(false);
 
@@ -147,25 +151,6 @@ const BuySellActive = () => {
       { totalVol: 0, totalVolSell: 0, totalVolBuy: 0 }
     );
 
-    // Tính tổng giá trị buy/sell theo category (small, medium, large)
-    const totals = {
-      buy: { small: 0, medium: 0, large: 0 },
-      sell: { small: 0, medium: 0, large: 0 },
-    };
-
-    let totalBuyVal = 0;
-    let totalSellVal = 0;
-
-    reversedData.forEach((item) => {
-      if (item.action === "B") {
-        totals.buy[item.type] += item.value;
-        totalBuyVal += item.value;
-      } else if (item.action === "S") {
-        totals.sell[item.type] += item.value;
-        totalSellVal += item.value;
-      }
-    });
-
     // Bước giá
     const matchPriceGroups = new Map();
 
@@ -213,10 +198,6 @@ const BuySellActive = () => {
       totalVol,
       totalVolSell,
       totalVolBuy,
-      buyValData: totals.buy,
-      sellValData: totals.sell,
-      totalBuyVal,
-      totalSellVal,
       matchPriceGroups: Array.from(matchPriceGroups, ([category, values]) => ({
         category,
         ...values,
@@ -224,6 +205,52 @@ const BuySellActive = () => {
     };
 
     return dataNew;
+  };
+
+  const calDataCashFlowAnalysis = (data) => {
+    const totals = {
+      buy: { small: 0, medium: 0, large: 0 },
+      sell: { small: 0, medium: 0, large: 0 },
+    };
+
+    let totalBuyVal = 0;
+    let totalSellVal = 0;
+
+    data.forEach((item, index) => {
+      if (timeFrame === 0 || timeFrame === 1) {
+        if (index === 0) {
+          const startTime =
+            item.action !== "B" && item.action !== "S" && data[index + 1]
+              ? moment(data[index + 1].time, "HH:mm:ss")
+              : moment(item.time, "HH:mm:ss");
+          const cutoffTime = startTime.clone().subtract(30, "minutes"); // Subtract 30 minutes
+
+          // Process items within the 30-minute window
+          data.forEach((innerItem) => {
+            const currentItemTime = moment(innerItem.time, "HH:mm:ss");
+            if (currentItemTime.isSameOrAfter(cutoffTime)) {
+              if (innerItem.action === "B") {
+                totals.buy[innerItem.type] += innerItem.value;
+                totalBuyVal += innerItem.value;
+              } else if (innerItem.action === "S") {
+                totals.sell[innerItem.type] += innerItem.value;
+                totalSellVal += innerItem.value;
+              }
+            }
+          });
+        }
+      } else {
+        if (item.action === "B") {
+          totals.buy[item.type] += item.value;
+          totalBuyVal += item.value;
+        } else if (item.action === "S") {
+          totals.sell[item.type] += item.value;
+          totalSellVal += item.value;
+        }
+      }
+    });
+
+    return { totals, totalBuyVal, totalSellVal };
   };
 
   const fetchData = async () => {
@@ -286,6 +313,13 @@ const BuySellActive = () => {
     const intervalId = isVisible ? setInterval(loadData, 60000) : null;
     return () => clearInterval(intervalId); // Cleanup on unmount or stock change
   }, [stock, isVisible]);
+
+  useEffect(() => {
+    if (data) {
+      const cashFlowAnalysis = calDataCashFlowAnalysis(data.data);
+      setDataCashFlowAnalysis(cashFlowAnalysis);
+    }
+  }, [data, timeFrame]);
 
   const prepareData = (item) => [
     moment(item.time, "HH:mm:ss").format("HH:mm:ss"),
@@ -554,8 +588,34 @@ const BuySellActive = () => {
                         </div>
                       </div>
                     </div>
-                    <StackColumnVal data={data} />
-                    <PieChartVal data={data} />
+                    <div className="my-2 px-7">
+                      <button
+                        className={`custom-btn-line cursor-pointer ${
+                          timeFrame === 0 ? "active-btn-line" : "btn-2-line"
+                        }`}
+                        onClick={() => setTimeFrame(0)}
+                      >
+                        30 phút
+                      </button>
+                      <button
+                        className={`custom-btn-line cursor-pointer ml-3 xs:translate-x-0 xxs:-translate-x-3 xs:mt-0 xxs:mt-4 ${
+                          timeFrame === 1 ? "active-btn-line" : "btn-2-line"
+                        }`}
+                        onClick={() => setTimeFrame(1)}
+                      >
+                        2 giờ
+                      </button>
+                      <button
+                        className={`custom-btn-line cursor-pointer ml-3 xs:translate-x-0 xxs:-translate-x-3 xs:mt-0 xxs:mt-4 ${
+                          timeFrame === 2 ? "active-btn-line" : "btn-2-line"
+                        }`}
+                        onClick={() => setTimeFrame(2)}
+                      >
+                        1 ngày
+                      </button>
+                    </div>
+                    <StackColumnVal data={dataCashFlowAnalysis} />
+                    <PieChartVal data={dataCashFlowAnalysis} />
                   </div>
 
                   <div>
@@ -604,7 +664,7 @@ const BuySellActive = () => {
               </div>
 
               <div className="2xl:hidden xl:block">
-                <div className="md:w-[460px] sm:w-[250px] xs:w-[250px] xxs:w-[250px] grid grid-cols-12 mx-auto my-8">
+                <div className="md:w-[460px] sm:w-[250px] xs:w-[250px] xxs:w-[250px] grid grid-cols-12 mx-auto mt-8">
                   <div className="col-span-1 content-center justify-self-end">
                     <Tooltip
                       placement="bottom"
@@ -669,12 +729,38 @@ const BuySellActive = () => {
                     </div>
                   </div>
                 </div>
+                <div className="mx-auto w-fit my-3">
+                  <button
+                    className={`sm:inline xs:block custom-btn-line cursor-pointer ${
+                      timeFrame === 0 ? "active-btn-line" : "btn-2-line"
+                    }`}
+                    onClick={() => setTimeFrame(0)}
+                  >
+                    30 phút
+                  </button>
+                  <button
+                    className={`sm:inline xs:block custom-btn-line cursor-pointer ml-3 sm:translate-x-0 xs:-translate-x-3 xxs:-translate-x-3 sm:mt-0 xs:mt-4 xxs:mt-4 ${
+                      timeFrame === 1 ? "active-btn-line" : "btn-2-line"
+                    }`}
+                    onClick={() => setTimeFrame(1)}
+                  >
+                    2 giờ
+                  </button>
+                  <button
+                    className={`sm:inline xs:block custom-btn-line cursor-pointer ml-3 sm:translate-x-0 xs:-translate-x-3 xxs:-translate-x-3 sm:mt-0 xs:mt-4 xxs:mt-4 ${
+                      timeFrame === 2 ? "active-btn-line" : "btn-2-line"
+                    }`}
+                    onClick={() => setTimeFrame(2)}
+                  >
+                    1 ngày
+                  </button>
+                </div>
                 <div className="xl:grid grid-cols-12 md:block">
                   <div className="xl:col-span-6 lg:col-span-8 mx-auto">
-                    <StackColumnVal data={data} />
+                    <StackColumnVal data={dataCashFlowAnalysis} />
                   </div>
                   <div className="xl:col-span-6 lg:col-span-4 mx-auto">
-                    <PieChartVal data={data} />
+                    <PieChartVal data={dataCashFlowAnalysis} />
                   </div>
                 </div>
               </div>
