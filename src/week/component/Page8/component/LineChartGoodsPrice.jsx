@@ -14,9 +14,10 @@ const LineChartGoodsPrice = ({ dataChart, name1, name2 }) => {
   useEffect(() => {
     if (dataChart?.length > 0) {
       const uniqueDates = [
-        ...new Set(dataChart?.map((item) => moment(item.date).format("DD/MM"))),
-      ];
+        ...new Set(dataChart?.map((item) => moment(item.date).format("DD/MM/YY"))),
+      ].map((date) => date.slice(0, -3)); // Cắt bỏ 3 ký tự cuối cùng (/YY)
       setTimeLine(uniqueDates);
+
       const result = [];
       dataChart?.forEach((item) => {
         const name =
