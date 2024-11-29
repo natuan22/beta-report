@@ -1,5 +1,11 @@
 import Home from "../Home";
 import NavBar3 from "../NavBarTest/NavBar3";
+import AdminBlogs from "../admin-blogs/AdminBlogs";
+import AddPost from "../admin-blogs/components/Post/AddPost";
+import EditPost from "../admin-blogs/components/Post/EditPost";
+import PreviewPost from "../admin-blogs/components/Post/PreviewPost";
+import Categories from "../admin-blogs/partials/blogs/Categories";
+import Posts from "../admin-blogs/partials/blogs/Posts";
 import AnalysisReport from "../analysisReport/AnalysisReport";
 import AnalysisReportAutomation from "../analysisReport/AnalysisReportAutomation";
 import AnalysisReportBasic from "../analysisReport/AnalysisReportBasic";
@@ -29,8 +35,25 @@ export const routes = [
   { path: "/bo-loc", title: 'Bộ lọc', component: Filter, role: process.env.REACT_APP_BASE_USER },
   { path: "/canh-bao-tin-hieu", title: 'Cảnh báo tín hiệu', component: NavBar3, role: process.env.REACT_APP_BASE_USER },
   { path: "/chien-luoc-giao-dich", title: 'Chiến lược giao dịch', component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
-  { path: "/beta-smart", title: 'BETA SMART', component: BetaSmart, role: process.env.REACT_APP_ADMIN },
-  { path: "/trading-tool", title: 'Trading Tool', component: TradingTool, role: process.env.REACT_APP_ADMIN },
+  { path: "/beta-smart", title: 'BETA SMART', component: BetaSmart, role: process.env.REACT_APP_PREMIUM_USER },
+  { path: "/trading-tool", title: 'Trading Tool', component: TradingTool, role: process.env.REACT_APP_PREMIUM_USER },
   { path: "/historical-pe-pb", title: 'Lịch sử P/E P/B', component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
   { path: "/mua-ban-chu-dong", title: 'Mua bán chủ động', component: BuySellActive, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
+];
+
+// Admin Blogs
+export const adminBlogsRoutes = [
+  {
+    path: "/admin-blogs/*", title: 'Admin Blogs', component: AdminBlogs, role: process.env.REACT_APP_ADMIN_BLOGS,
+    children: [
+      { path: "danh-muc", title: 'Admin Blogs - Danh mục', component: Categories, role: process.env.REACT_APP_ADMIN_BLOGS },
+      { path: "bai-viet", title: 'Admin Blogs - Bài viết', component: Posts, role: process.env.REACT_APP_ADMIN_BLOGS,
+        children: [
+          { path: "bai-viet/add", title: 'Admin Blogs - Thêm bài viết', component: AddPost, role: process.env.REACT_APP_ADMIN_BLOGS },
+          { path: "bai-viet/edit/:id", title: 'Admin Blogs - Chỉnh sửa bài viết', component: EditPost, role: process.env.REACT_APP_ADMIN_BLOGS },
+          { path: "bai-viet/preview/:titlePost", title: 'Xem trước bài viết', component: PreviewPost, role: process.env.REACT_APP_ADMIN_BLOGS }
+        ]
+      },
+    ],
+  },
 ];

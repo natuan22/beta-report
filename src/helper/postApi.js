@@ -77,10 +77,10 @@ export const postApi = async (url, data) => {
         .create({
           baseURL: apiUrl,
           headers: headers,
-        })
-        .post(url, data);
+        }).post(url, data);
+      return response.data;
     } else {
-      console.error(err);
+      return err.response.data;
     }
   }
 };

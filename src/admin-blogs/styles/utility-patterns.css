@@ -1,0 +1,74 @@
+/* TinyMCE */
+#form-blogs .ant-form-item .ant-form-item-label > label[title="Nội dung"]::after {
+  @apply me-[5px]
+}
+
+#form-blogs .ant-form-item .ant-form-item-label > label[title="Danh mục"]::after {
+  @apply me-[1px]
+}
+
+#form-blogs .tox-statusbar__branding {
+  @apply hidden
+}
+
+/* Antd form */
+#form-blogs.ant-form .ant-form-item .ant-form-item-label > label {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+#form-blogs.ant-form .ant-checkbox-wrapper {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.ant-modal.blogs-modal .ant-modal-close {
+  @apply text-gray-500 dark:text-gray-400;
+  @apply hover:bg-gray-100 dark:hover:bg-gray-700/50;
+}
+
+/* Typography */
+#admin-blogs .h1 { @apply text-4xl font-extrabold tracking-tighter; }
+#admin-blogs .h2 { @apply text-3xl font-extrabold tracking-tighter; }
+#admin-blogs .h3 { @apply text-3xl font-extrabold; }
+#admin-blogs .h4 { @apply text-2xl font-extrabold tracking-tight; }
+
+@screen md {
+  #admin-blogs .h1 { @apply text-5xl; }
+  #admin-blogs .h2 { @apply text-4xl; }
+}
+
+
+/* Buttons */
+#admin-blogs .btn, .btn-lg, .btn-sm, .btn-xs {
+  @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded-lg leading-5 shadow-sm transition;
+}
+
+#admin-blogs .btn { @apply px-3 py-2; }
+#admin-blogs .btn-lg { @apply px-4 py-3; }
+#admin-blogs .btn-sm { @apply px-2 py-1; }
+#admin-blogs .btn-xs { @apply px-2 py-0.5; }
+
+
+/* Before */
+#admin-blogs :before, :after { --tw-content: ""; }
+#admin-blogs .before\:absolute:before { @apply absolute; }
+#admin-blogs .before\:inset-0:before { @apply inset-0; }
+#admin-blogs .before\:-z-10:before { @apply z-[-10]; }
+#admin-blogs .before\:bg-white:before { @apply bg-white; }
+#admin-blogs .before\:backdrop-blur-md:before { @apply backdrop-blur-md; }
+
+
+/* Dark mode background overrides */
+#admin-blogs .dark\:before\:bg-gray-800:is(.dark *):before { @apply bg-gray-800; }
+#admin-blogs .dark\:before\:bg-gray-900:is(.dark *):before { @apply bg-gray-900; }
+
+
+/* Custom Media Queries for breakpoint adjustments */
+@media not all and (min-width: 1024px) {
+  #admin-blogs .max-lg\:before\:bg-white\/90:before { @apply bg-white/90; }
+  #admin-blogs .dark\:max-lg\:before\:bg-gray-800\/90:is(.dark *):before { @apply bg-gray-800/90; }
+}
+
+@media (min-width: 1024px) {
+  #admin-blogs .lg\:before\:bg-gray-100\/90:before { @apply bg-gray-100/90; }
+  #admin-blogs .dark\:lg\:before\:bg-gray-900\/90:is(.dark *):before { @apply bg-gray-900/90; }
+}

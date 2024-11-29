@@ -1,0 +1,72 @@
+/**
+* 
+* Sidebar 
+* 
+**/
+#sidebar a {
+  text-decoration-line: none;
+}
+
+#sidebar li {
+  list-style: none;
+}
+
+#sidebar ul.mt-3 {
+  padding-inline-start: 0px;
+}
+
+/**
+* 
+* Button 
+* 
+**/
+button {
+  cursor: pointer;
+}
+
+#admin-blogs header button, #sidebar button {
+  border: 0;
+}
+
+#admin-blogs header button, #sidebar button {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  text-transform: none;
+  appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+/**
+* 
+* Modal antd
+* 
+**/
+.ant-modal.blogs-modal .ant-modal-content {
+  padding: 0px;
+}
+
+#form-blogs .ant-form-item {
+  margin-bottom: 30px
+}
+
+/* Select dropdown */
+.ant-select-dropdown.ant-tree-select-dropdown {
+  background: #fff;
+  border: 1px solid #1677ff;
+}
+
+.ant-select-dropdown.blogs-post-dropdown {
+  background: #fff;
+  border: 1px solid #1677ff;
+}
+
