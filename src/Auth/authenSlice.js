@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import * as authenTypes from "./utils/constant";
 const initialState = {
   userData: null,

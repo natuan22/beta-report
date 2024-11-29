@@ -19,25 +19,23 @@ export const userLoginAction = (data) => async (dispatch) => {
     delete userDataWithoutTokens.user_id;
 
     localStorage.setItem("user", JSON.stringify(userDataWithoutTokens));
-    if (res.data.data.role === 0) {
-      localStorage.setItem(
-        process.env.REACT_APP_USER_ROLE,
-        process.env.REACT_APP_BASE_USER
-      );
-    } else if (res.data.data.role === 1) {
-      localStorage.setItem(
-        process.env.REACT_APP_USER_ROLE,
-        process.env.REACT_APP_ADMIN
-      );
-    } else
-      localStorage.setItem(
-        process.env.REACT_APP_USER_ROLE,
-        process.env.REACT_APP_PREMIUM_USER
-      );
-    localStorage.setItem(
-      process.env.REACT_APP_IS_LG,
-      process.env.REACT_APP_LG_T
-    );
+    let userRole;
+    switch (res.data.data.role) {
+      case 1:
+        userRole = process.env.REACT_APP_ADMIN;
+        break;
+      case 2:
+        userRole = process.env.REACT_APP_PREMIUM_USER;
+        break;
+      case 3:
+        userRole = process.env.REACT_APP_ADMIN_BLOGS;
+        break;
+      default:
+        userRole = process.env.REACT_APP_BASE_USER;
+        break;
+    }
+    localStorage.setItem(process.env.REACT_APP_USER_ROLE, userRole);
+    localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_T);
     Cookies.set("at", res.data.data.access_token);
     Cookies.set("rt", res.data.data.refresh_token);
   } catch (err) {

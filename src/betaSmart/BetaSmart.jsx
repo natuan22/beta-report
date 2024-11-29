@@ -21,6 +21,7 @@ const BetaSmart = () => {
     localStorage.getItem(process.env.REACT_APP_USER_ROLE)
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [lastActiveTime, setLastActiveTime] = useState(Date.now());
 
   const handleUserLogout = () => {
     if (isLogin) {
@@ -43,26 +44,7 @@ const BetaSmart = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  useEffect(() => {
-    const checkTime = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-
-      // Nếu giờ là 9:00 đúng, đặt lại data thành rỗng
-      if (hours === 9 && minutes === 0) {
-        setData([]);
-      }
-    };
-
-    // Kiểm tra ngay khi component mount
-    checkTime();
-
-    // Đặt khoảng thời gian kiểm tra mỗi phút
-    const interval = setInterval(checkTime, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
+  
 
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
@@ -98,6 +80,41 @@ const BetaSmart = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      // Nếu giờ là 9:00 đúng, đặt lại data thành rỗng
+      if (hours === 9 && minutes === 0) {
+        setData([]);
+      }
+    };
+
+    // Kiểm tra ngay khi component mount
+    checkTime();
+
+    // Đặt khoảng thời gian kiểm tra mỗi phút
+    const interval = setInterval(checkTime, 60000);
+
+    // Đặt thời gian theo dõi 4 tiếng cho fetchData
+    const timeout = setTimeout(() => {
+      const now = Date.now();
+      const timeDiff = now - lastActiveTime;
+
+      if (timeDiff >= 4 * 60 * 60 * 1000) { // Nếu đã 4 tiếng (240 phút)
+        fetchData();
+      }
+    }, 4 * 60 * 60 * 1000); // 4 tiếng (240 phút)
+
+    // Dọn dẹp interval và timeout khi component unmount
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [lastActiveTime]);
 
   const fetchDataStockBasic = async (code) => {
     try {

@@ -135,14 +135,14 @@ const DialogAddStock = ({ catchStock }) => {
     setComponents(updatedComponents);
   };
 
-  const removeAll = () => {
+  const removeAll = async () => {
     catchStock([]);
     setComponents([]);
     setArrStock({
       stock_buy: [],
       stock_sell: [],
     });
-    postApi("/api/v1/report/luu-co-phieu-khuyen-nghi", {
+    await postApi("/api/v1/report/luu-co-phieu-khuyen-nghi", {
       stock_buy: [],
       stock_sell: [],
     });

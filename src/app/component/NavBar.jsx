@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { FloatButton, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { BiCategoryAlt } from "react-icons/bi";
-import { BsCalendar2Day, BsGraphUp } from "react-icons/bs";
+import { BsCalendar2Day, BsGraphUp, BsPostcardHeart } from "react-icons/bs";
 import { CiFilter } from "react-icons/ci";
 import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
 import { HiOutlineLightBulb } from "react-icons/hi";
@@ -23,7 +23,6 @@ import DialogSignUp from "../../Auth/components/DialogSignUp";
 const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [positionBackToTopBtn, setPositionBackToTopBtn] = useState(20);
-  const [hasScrollbar, setHasScrollbar] = useState(false);
 
   const [activeNav, setActiveNav] = useState(""); // State để lưu nav đang active
   const location = useLocation(); // Hook để lấy thông tin về địa chỉ hiện tại của trang
@@ -52,18 +51,6 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    const navElement = document.getElementById("nav");
-    // Kiểm tra nếu chiều cao của nội dung lớn hơn chiều cao của chính nó
-    const hasVerticalScrollbar =
-      navElement.scrollHeight > navElement.clientHeight;
-    if (hasVerticalScrollbar) {
-      setHasScrollbar(true);
-    } else {
-      setHasScrollbar(false);
-    }
-  }, [isLogin]);
 
   useEffect(() => {
     setActiveNav(location.pathname);
@@ -117,8 +104,14 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         <div className="overflow-x-auto h-full">
           <div
             id="nav"
-            className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[738px] lg:h-[738px] md:h-[738px]"
+            className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[738px] lg:h-[738px] md:h-[738px] no-scrollbar"
           >
+            {role === process.env.REACT_APP_ADMIN_BLOGS && (
+              <div>
+                <h3 className="uppercase text-slate-500">Blogs</h3>
+                {buttonNavLink("/admin-blogs", <BsPostcardHeart />, "Admin Blogs")}
+              </div>
+            )}
             <div>
               <h3
                 className={`uppercase ${
@@ -153,7 +146,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
               >
                 Phân tích
               </h3>
-              {role === process.env.REACT_APP_ADMIN ? (
+              {role === process.env.REACT_APP_ADMIN || role === process.env.REACT_APP_ADMIN_BLOGS ? (
                 <NavLink
                   to={"/phan-tich-ky-thuat/FPT"}
                   className={
@@ -326,9 +319,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
           </div>
         </div>
         <div
-          className={`fixed bottom-0 right-0 px-3 py-3 bg-slate-100 z-[2000] ${
-            hasScrollbar ? "2xl:mr-[17px]" : ""
-          }`}
+          className={`fixed bottom-0 right-0 px-3 py-3 bg-slate-100 z-[2000]`}
         >
           <div className="h-[1px] bg-slate-400 mb-2"></div>
           {isLogin === process.env.REACT_APP_LG_T ? (
