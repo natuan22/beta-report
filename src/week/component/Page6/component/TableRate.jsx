@@ -22,7 +22,7 @@ const TableRate = ({ data }) => {
               <tr key={index}>
                 <td className="text-center px-2 py-1 font-bold flex items-center text-[11px]">
                   <img
-                    src={`/${item.code}.png`}
+                    src={`/assets/exchange_rate_flag/${item.code}.png`}
                     alt="icon"
                     width={20}
                     height={20}

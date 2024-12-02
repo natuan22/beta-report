@@ -115,7 +115,7 @@ const Page3 = ({ role }) => {
                 >
                   <div className="flex flex-col items-center w-[130px] h-auto ">
                     <img
-                      src={`/logo_${item.code.toUpperCase()}.png`}
+                      src={`/assets/logo/logo_${item.code.toUpperCase()}.png`}
                       alt="imgStock"
                       width="55%"
                       height="55%"
