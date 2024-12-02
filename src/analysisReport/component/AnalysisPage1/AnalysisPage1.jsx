@@ -150,7 +150,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
                         className={` ${
                           stock === "PDV" ? "w-[17%]" : "w-[25%]"
                         }`}
-                        src={`/logo_${stock.toUpperCase()}.png`}
+                        src={`/assets/logo/logo_${stock.toUpperCase()}.png`}
                         alt="stock"
                       />
                     ) : (

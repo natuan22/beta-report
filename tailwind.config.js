@@ -27,7 +27,7 @@ module.exports = {
       fontFamily: { inter: ["Inter", "sans-serif"] },
       keyframes: { marquee: { "0%": { transform: "translateX(0%)" }, "100%": { transform: "translateX(-100%)" } }},
       animation: { marquee: "marquee 30s linear infinite" },
-      backgroundImage: { worldBackground: `url('/public/bgWorld.png')`, vnBackground: `url('/public/mapVN.png')`, cityBackground: `url('/public/bgCity.png')` },
+      backgroundImage: { worldBackground: `url('/public/assets/img/bgWorld.png')`, vnBackground: `url('/public/assets/img/mapVN.png')`, cityBackground: `url('/public/assets/img/bgCity.png')` },
       height: { 100: "800px" },
       with: { 101: "1000px" },
       lineClamp: { 15: "15" },
@@ -46,14 +46,15 @@ module.exports = {
     function ({ addComponents, theme }) {
       addComponents({
         ".container-blogs": {
-          maxWidth: "1200px",
+          maxWidth: "824px",
           margin: "0 auto",
-          "@screen xxs": { maxWidth: "320px" },
-          "@screen xs":  { maxWidth: "375px" },
-          "@screen md":  { maxWidth: "640px" },
-          "@screen lg":  { maxWidth: "800px" },
-          "@screen xl":  { maxWidth: "1024px" },
-          "@screen 2xl": { maxWidth: "1200px" },
+          "@screen xxs": { maxWidth: "320px" },    // xxs: "375px"
+          "@screen xs":  { maxWidth: "375px" },    // xs:  "375px",
+          "@screen sm":  { maxWidth: "425px" },    // sm:  "425px",
+          "@screen md":  { maxWidth: "640px" },    // md:  "768px",
+          "@screen lg":  { maxWidth: "824px" },    // lg:  "1024px",
+          "@screen xl":  { maxWidth: "824px" },    // xl:  "1440px",
+          "@screen 2xl": { maxWidth: "824px" },    // 2xl: "1920px",
         },
       });
     }

@@ -140,7 +140,7 @@ const AfternoonPage4 = ({ role }) => {
                           <td className="text-center  font-bold flex items-center text-[12px] h-full">
                             <div className="flex items-center justify-evenly">
                               <img
-                                src={`/${item.code}.png`}
+                                src={`/assets/exchange_rate_flag/${item.code}.png`}
                                 alt="icon"
                                 width={20}
                                 height={20}

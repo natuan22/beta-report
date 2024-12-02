@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { Form, Input, InputNumber } from "antd";
 import { useFormik } from "formik";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import React, { useState } from "react";
 import { postApi } from "../../../../helper/postApi";
 
 const { TextArea } = Input;
@@ -292,17 +291,25 @@ const FormInput = ({
             />
           </Form.Item>
           <Form.Item label="Content">
-            <CKEditor
-              editor={ClassicEditor}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                // console.log("data", data);
-                handleChange({
-                  target: {
-                    name: "text1",
-                    value: data,
-                  },
-                });
+            <Editor
+              tinymceScriptSrc={`/assets/tinymce/js/tinymce/tinymce.min.js`}
+              licenseKey='gpl'
+              init={{
+                height: 302,
+                resize: false,
+                menubar: false,
+                branding: false,
+                plugins: [
+                  "advlist", "autolink", "lists", "link", "image", "charmap", "preview", "anchor", "searchreplace",
+                  "visualblocks", "fullscreen", "insertdatetime", "media", "table", "help", "wordcount", "emoticons", 'image'
+                ],
+                toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link table | align lineheight | bullist numlist outdent indent | emoticons charmap removeformat | fullscreen",
+                image_title: false,
+                automatic_uploads: false,
+                file_picker_types: "image",
+              }}
+              onEditorChange={(content, editor) => {
+                handleChange({ target: { name: "text1", value: content } });
               }}
             />
           </Form.Item>

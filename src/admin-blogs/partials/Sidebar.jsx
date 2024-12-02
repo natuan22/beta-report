@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import banner from "../../app/asset/img/logo.png";
 import { RiHomeHeartLine } from "react-icons/ri";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen, variant = "default" }) => {
   const location = useLocation();
