@@ -70,3 +70,19 @@ button {
   border: 1px solid #1677ff;
 }
 
+/**
+*
+* Label required
+*
+**/
+.item-required::after {
+  display: inline-block;
+  margin-inline-end: 1px;
+  margin-inline-start: 2px;
+  color: #ff4d4f;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: "*";
+}
+

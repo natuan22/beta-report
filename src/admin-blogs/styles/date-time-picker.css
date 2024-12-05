@@ -1,0 +1,12 @@
+.MuiList-root.MuiList-padding.MuiMultiSectionDigitalClockSection-root::-webkit-scrollbar {
+  display: none; /* For WebKit browsers (Chrome, Safari) */
+}
+
+.MuiList-root.MuiList-padding.MuiMultiSectionDigitalClockSection-root {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.MuiList-root.MuiList-padding.MuiMultiSectionDigitalClockSection-root::after {
+  height: auto;
+}

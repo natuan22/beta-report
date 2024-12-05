@@ -7,10 +7,10 @@ import React, { useEffect, useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
+import { getApi } from "../../helper/getApi";
 import "../utils/styles/cssDatePicker.css";
 import ListResults from "./StrategyMA/ListResults";
 import ScatterChart from "./StrategyMA/ScatterChart";
-import { getApi } from "../../helper/getApi";
 
 const StrategyMAVVIP = () => {
   const [data, setData] = useState();
@@ -58,11 +58,7 @@ const StrategyMAVVIP = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(
-          `/api/v1/investment/test?stock=${stock}&from=${dayjs(fromDate).format(
-            "YYYY-MM-DD"
-          )}&to=${dayjs(toDate).format("YYYY-MM-DD")}`,
-        );
+        const data = await getApi(`/api/v1/investment/test?stock=${stock}&from=${moment(fromDate).format("YYYY-MM-DD")}&to=${moment(toDate).format("YYYY-MM-DD")}`);
         setData(data);
       } catch (error) {
         console.error(error);
@@ -205,7 +201,7 @@ const StrategyMAVVIP = () => {
                 format="DD/MM/YYYY"
                 margin="normal"
                 disableFuture
-                formatDate={(date) => moment(date).format("DD/MM/YYYY")}
+                formatDate={(date) => dayjs(date).format("DD/MM/YYYY")}
                 value={fromDate}
                 onChange={(newValue) => {
                   setFromDate(newValue);

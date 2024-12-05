@@ -7,12 +7,12 @@ import React, { useEffect, useState } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
+import { getApi } from "../../helper/getApi";
 import "../utils/styles/cssDatePicker.css";
 import ListResults from "./StrategyMA/ListResults";
 import ScatterChart from "./StrategyMA/ScatterChart";
-import { getApi } from "../../helper/getApi";
 
-const StrategyMA = ({ role }) => {
+const StrategyMA = () => {
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("");
@@ -58,12 +58,7 @@ const StrategyMA = ({ role }) => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(
-          `/api/v1/investment/test?stock=${stock}&from=${dayjs(fromDate).format(
-            "YYYY-MM-DD"
-          )}&to=${dayjs(toDate).format("YYYY-MM-DD")}`,
-          1
-        );
+        const data = await getApi(`/api/v1/investment/test?stock=${stock}&from=${moment(fromDate).format("YYYY-MM-DD")}&to=${moment(toDate).format("YYYY-MM-DD")}`, 1);
         setData(data);
       } catch (error) {
         console.error(error);

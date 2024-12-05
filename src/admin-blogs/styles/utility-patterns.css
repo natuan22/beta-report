@@ -15,7 +15,9 @@
 #form-blogs.ant-form .ant-form-item .ant-form-item-label > label {
   @apply text-gray-600 dark:text-gray-400;
 }
-
+#form-blogs.ant-form legend {
+  @apply w-0
+}
 #form-blogs.ant-form .ant-checkbox-wrapper {
   @apply text-gray-600 dark:text-gray-400;
 }
