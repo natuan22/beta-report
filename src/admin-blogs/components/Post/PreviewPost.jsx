@@ -7,15 +7,14 @@ import {
   PhoneOutlined,
   YoutubeOutlined,
 } from "@ant-design/icons";
+import { Button } from "antd";
 import { motion } from "framer-motion";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { FaTiktok } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { getApi } from "../../../helper/getApi";
 import { apiUrl, resourceURL } from "../../../services/configService";
-import { FaAngleDoubleDown } from "react-icons/fa";
-import { Button } from "antd";
 
 moment.updateLocale("vi", {
   weekdays: [
@@ -61,15 +60,14 @@ moment.updateLocale("vi", {
 
 const PreviewPost = () => {
   const count = 12;
-
+  const { idPost } = useParams()
+  
   const [previewPost, setPreviewPost] = useState(null);
   const [fromData, setFromData] = useState(null);
   const [relatedBlogs, setRelatedBlogs] = useState(null);
   const [visibleBlogsCount, setVisibleBlogsCount] = useState(5);
 
-  const handleShowMore = () => {
-    setVisibleBlogsCount((prevCount) => prevCount + 5); // Hiển thị thêm 4 bài
-  };
+  const handleShowMore = () => { setVisibleBlogsCount((prevCount) => prevCount + 5) };
 
   const fetchDataPost = async (id) => {
     try {
@@ -83,11 +81,9 @@ const PreviewPost = () => {
   const fetchDataPostWithTags = async (tags) => {
     try {
       const tagsString = tags.join(",");
-      const relatedBlogs = await getApi(
-        `/api/v1/blogs/post-tags?tags=${tagsString}`
-      );
+      const relatedBlogs = await getApi(`/api/v1/blogs/post-tags?tags=${tagsString}`);
 
-      setRelatedBlogs(relatedBlogs);
+      return relatedBlogs
     } catch (error) {
       console.error(error);
     }
@@ -95,23 +91,33 @@ const PreviewPost = () => {
 
   useEffect(() => {
     const storedPost = localStorage.getItem("previewPost");
-
     if (storedPost) {
       const parsedPost = JSON.parse(storedPost);
       setFromData(parsedPost.from);
-
-      if (parsedPost.from === "editOnSave" && parsedPost.id) {
-        fetchDataPost(parsedPost.id);
+      
+      if (parsedPost.from === "editOnSave" && parsedPost.id && idPost == parsedPost.id) {
+        fetchDataPost(idPost);
       } else {
         setPreviewPost(parsedPost);
       }
     }
-  }, []);
+  }, [idPost]);
 
   useEffect(() => {
-    if (previewPost && previewPost.tags && previewPost.tags.length > 0) {
-      fetchDataPostWithTags(previewPost.tags);
-    }
+    const fetchAndSetRelatedBlogs = async () => {
+      if (previewPost && previewPost.tags && previewPost.tags.length > 0) {
+        try {
+          const relatedBlogs = await fetchDataPostWithTags(previewPost.tags);
+          const filteredBlogs = relatedBlogs.filter((item) => item.id !== Number(previewPost.id));
+  
+          setRelatedBlogs(filteredBlogs);
+        } catch (error) {
+          console.error("Error fetching related blogs:", error);
+        }
+      }
+    };
+  
+    fetchAndSetRelatedBlogs();
   }, [previewPost]);
 
   const addClassToImages = (htmlContent) => {
@@ -143,9 +149,7 @@ const PreviewPost = () => {
     return doc.body.innerHTML;
   };
 
-  const processedContent = previewPost?.content
-    ? addClassToImages(previewPost.content)
-    : "";
+  const processedContent = previewPost?.content ? addClassToImages(previewPost.content) : "";
 
   return (
     <div>
@@ -189,35 +193,24 @@ const PreviewPost = () => {
       <div id="header-blogs" className="py-16 bg-[#f5f6f9]">
         <div className="container-blogs mx-auto">
           <div className="text-center flex flex-col gap-4">
-            <h1 className="m-0">{previewPost?.title}</h1>
+            <h1 className="m-0 dark:text-gray-300 text-black">{previewPost?.title}</h1>
             <div className="flex justify-center items-center gap-3">
               <div className="text-[#00b71f]">{previewPost?.category.name}</div>
               <div className="text-[#bbb]">|</div>
-              <div>
-                {previewPost?.created_at
-                  ? moment(previewPost.created_at)
-                      .locale("vi")
-                      .format("dddd, DD/MM/YYYY")
-                  : moment().format("dddd, DD/MM/YYYY")}
+              <div className="dark:text-gray-300 text-black">
+                {previewPost?.created_at ? moment(previewPost.created_at).locale("vi").format("dddd, DD/MM/YYYY") : moment().format("dddd, DD/MM/YYYY")}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div
-        id="body-blogs"
-        className="container-blogs mx-auto px-3 py-5 text-justify"
-      >
+      <div id="body-blogs" className="container-blogs mx-auto px-3 pt-5 text-justify">
         <div className="text-lg pb-5">
           <strong>{previewPost?.description}</strong>
         </div>
         <div className="flex justify-center">
           <img
-            src={
-              fromData === "editOnSave"
-                ? `${resourceURL}${previewPost?.thumbnail}`
-                : `${previewPost?.thumbnail}`
-            }
+            src={fromData === "editOnSave" ? `${resourceURL}${previewPost?.thumbnail}` : `${previewPost?.thumbnail}`}
             alt="thumbnail-post"
             className="my-1 block float-none align-top relative max-w-[100%]"
           ></img>
@@ -225,7 +218,7 @@ const PreviewPost = () => {
         <div dangerouslySetInnerHTML={{ __html: processedContent }}></div>
       </div>
       <div id="footer-blogs" className="container-blogs mx-auto">
-        <hr className="h-px my-7 border-0 bg-gray-600/50"></hr>
+        <hr className="h-px mt-7 border-0 bg-gray-600/50"></hr>
         <div>
           <div class="flex items-center gap-2">
             <div class="min-w-[3px] h-[35px] bg-[#0050AD] rounded-t-[100px]"></div>
@@ -266,10 +259,10 @@ const PreviewPost = () => {
                         <div className="text-lg font-medium mb-3">
                           {item.title}
                         </div>
-                        <div className="text-gray-700 text-[15px] mb-3 line-clamp-2">
+                        <div className=" dark:text-gray-600 text-gray-400 text-[15px] mb-3 line-clamp-2">
                           {item.description}
                         </div>
-                        <div className="text-gray-600 text-sm">
+                        <div className="dark:text-gray-600 text-gray-400 text-sm">
                           {moment(item.created_at).format("DD/MM/YYYY")}
                         </div>
                       </motion.div>
@@ -314,7 +307,7 @@ const PreviewPost = () => {
                 )}
               </>
             ) : (
-              <div>Không có bài viết liên quan nào</div>
+              <div className="p-3 text-lg">Không có bài viết liên quan nào</div>
             )}
           </div>
         </div>

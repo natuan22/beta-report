@@ -1,15 +1,15 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Checkbox } from "antd";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PiChartLineUpBold } from "react-icons/pi";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
 import StrategyMA from "./components/StrategyMA";
+import StrategyMAVVIP from "./components/StrategyMAVVIP";
 import { selectTradingStrategy } from "./utils/hashTb";
 import "./utils/styles/cssDatePicker.css";
-import StrategyMAVVIP from "./components/StrategyMAVVIP";
 
 const theme = createTheme({
   palette: {
@@ -97,34 +97,27 @@ const TradingStrategies = () => {
                       {key}
                     </Checkbox>
                     {selectedMainCategory === key &&
-                      selectTradingStrategy[key]
-                        .filter((strategy) => {
-                          if (
-                            role === process.env.REACT_APP_ADMIN ||
-                            role === process.env.REACT_APP_PREMIUM_USER
-                          ) {
-                            // Show both "MA VVIP" and "MA đại pháp"
-                            return true;
-                          } else {
-                            // Show only "MA đại pháp"
-                            return strategy.name !== "MA VVIP";
-                          }
-                        })
-                        .map((strategy, strategyIndex) => (
-                          <div key={strategyIndex} className="pl-4">
-                            <Checkbox
-                              checked={selectedStrategy === strategy.key}
-                              value={strategy.key}
-                              onChange={() =>
-                                handleStrategyChange(strategy.key)
-                              }
-                            >
-                              {strategy.name === "MA VVIP"
-                                ? "MA VVIP"
-                                : strategy.name}
-                            </Checkbox>
-                          </div>
-                        ))}
+                      selectTradingStrategy[key].filter((strategy) => {
+                        if (role === process.env.REACT_APP_ADMIN || role === process.env.REACT_APP_PREMIUM_USER || role === process.env.REACT_APP_ADMIN_BLOGS) {
+                          // Show both "MA VVIP" and "MA đại pháp"
+                          return true;
+                        } else {
+                          // Show only "MA đại pháp"
+                          return strategy.name !== "MA VVIP";
+                        }
+                      }).map((strategy, strategyIndex) => (
+                        <div key={strategyIndex} className="pl-4">
+                          <Checkbox
+                            checked={selectedStrategy === strategy.key}
+                            value={strategy.key}
+                            onChange={() =>
+                              handleStrategyChange(strategy.key)
+                            }
+                          >
+                            {strategy.name === "MA VVIP" ? "MA VVIP" : strategy.name}
+                          </Checkbox>
+                        </div>
+                      ))}
                   </div>
                 ))}
               </div>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ThemeProvider from "./ThemeContext";
-import Sidebar from "../partials/Sidebar";
-import Header from "../partials/Header";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../../Auth/thunk";
+import Header from "../partials/Header";
+import Sidebar from "../partials/Sidebar";
+import ThemeProvider from "./ThemeContext";
 
 /**
  * Higher-Order Component for wrapping components with the AdminBlogs layout.
@@ -32,30 +32,6 @@ const withLayout = (WrappedComponent) => {
         localStorage.removeItem("user");
       }
     };
-
-    useEffect(() => {
-      const html = document.querySelector("html");
-      const body = document.querySelector("body");
-
-      // Theme setup
-      const isLightTheme = localStorage.theme === "light" || !("theme" in localStorage);
-      html.classList.toggle("light", isLightTheme);
-      html.style.colorScheme = isLightTheme ? "light" : "dark";
-
-      // Sidebar setup
-      const isSidebarExpanded = localStorage.getItem("sidebar-expanded") === "true";
-      body.classList.toggle("sidebar-expanded", isSidebarExpanded);
-
-      return () => {
-        // Cleanup logic
-        localStorage.removeItem("theme");
-        localStorage.removeItem("sidebar-expanded");
-        localStorage.removeItem("previewPost");
-        html.classList.remove("light");
-        html.style.colorScheme = "";
-        body.classList.remove("sidebar-expanded");
-      };
-    }, []);
 
     return (
       <ThemeProvider>

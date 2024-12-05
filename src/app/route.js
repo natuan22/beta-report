@@ -51,7 +51,7 @@ export const adminBlogsRoutes = [
         children: [
           { path: "bai-viet/add", title: 'Admin Blogs - Thêm bài viết', component: AddPost, role: process.env.REACT_APP_ADMIN_BLOGS },
           { path: "bai-viet/edit/:id", title: 'Admin Blogs - Chỉnh sửa bài viết', component: EditPost, role: process.env.REACT_APP_ADMIN_BLOGS },
-          { path: "bai-viet/preview/:titlePost", title: 'Xem trước bài viết', component: PreviewPost, role: process.env.REACT_APP_ADMIN_BLOGS }
+          { path: "bai-viet/preview/:titlePost/:idPost", title: 'Xem trước bài viết', component: PreviewPost, role: process.env.REACT_APP_ADMIN_BLOGS }
         ]
       },
     ],
