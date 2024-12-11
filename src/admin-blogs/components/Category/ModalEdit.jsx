@@ -1,9 +1,27 @@
-import { Button, Checkbox, Col, Form, Input, message, Modal, Row, Tooltip, TreeSelect } from "antd";
+import {
+  Button,
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  message,
+  Modal,
+  Row,
+  Tooltip,
+  TreeSelect,
+} from "antd";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { postApi } from "../../../helper/postApi";
 const { TextArea } = Input;
 
-const ModalEdit = ({ dataEdit, isModalEditOpen, setIsModalEditOpen, dataCategories, fetchDataCategories }) => {
+const ModalEdit = ({
+  dataEdit,
+  isModalEditOpen,
+  setIsModalEditOpen,
+  dataCategories,
+  fetchDataCategories,
+}) => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [form] = Form.useForm();
@@ -11,11 +29,19 @@ const ModalEdit = ({ dataEdit, isModalEditOpen, setIsModalEditOpen, dataCategori
   const [checked, setChecked] = useState(false);
   const [disableTreeSelect, setDisableTreeSelect] = useState(false);
 
-  const warning = (text, type) => { messageApi.open({ type, content: text }) };
+  const warning = (text, type) => {
+    messageApi.open({ type, content: text });
+  };
 
-  const handleEditOk = () => { setIsModalEditOpen(false) };
-  const handleEditCancel = () => { setIsModalEditOpen(false) };
-  const onCheckboxChange = (e) => { setChecked(e.target.checked) };
+  const handleEditOk = () => {
+    setIsModalEditOpen(false);
+  };
+  const handleEditCancel = () => {
+    setIsModalEditOpen(false);
+  };
+  const onCheckboxChange = (e) => {
+    setChecked(e.target.checked);
+  };
 
   const onFinish = async (values) => {
     const transformedValues = {
@@ -27,15 +53,27 @@ const ModalEdit = ({ dataEdit, isModalEditOpen, setIsModalEditOpen, dataCategori
     };
 
     try {
-      const newCategory = await postApi("/api/v1/blogs/category/update", transformedValues);
+      const confirmDelete = await Swal.fire({
+        title: `Bạn có chắc chắn?`,
+        text: `Bạn muốn chỉnh sửa danh mục?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xác nhận",
+        cancelButtonText: "Hủy",
+      });
 
-      if (newCategory?.id) {
-        fetchDataCategories();
-        warning(`Chỉnh sửa danh mục ${newCategory.name} thành công`, "success");
-        form.resetFields();
-        setIsModalEditOpen(false);
-      } else {
-        warning(newCategory.message || "Không thể tạo danh mục", "warning");
+      if (confirmDelete.isConfirmed) {
+        const newCategory = await postApi("/api/v1/blogs-admin/category/update", transformedValues);
+        if (newCategory?.id) {
+          fetchDataCategories();
+          warning(`Chỉnh sửa danh mục ${newCategory.name} thành công`, "success");
+          form.resetFields();
+          setIsModalEditOpen(false);
+        } else {
+          warning(newCategory.message || "Không thể tạo danh mục", "warning");
+        }
       }
     } catch (error) {
       console.error("Error creating category:", error);
@@ -79,15 +117,23 @@ const ModalEdit = ({ dataEdit, isModalEditOpen, setIsModalEditOpen, dataCategori
               <Form.Item
                 label="Tên danh mục"
                 name="name"
-                rules={[{ required: true, message: "Name of category is required!" }]}
+                rules={[
+                  { required: true, message: "Name of category is required!" },
+                ]}
               >
-                <Input placeholder="Nhập tên danh mục" />
+                <Input
+                  placeholder="Nhập tên danh mục"
+                  showCount
+                  maxLength={255}
+                />
               </Form.Item>
               <Form.Item label="Mô tả" name="description">
                 <TextArea
                   style={{ resize: "none" }}
                   rows={8}
                   placeholder="Mô tả ngắn cho danh mục"
+                  showCount
+                  maxLength={255}
                 />
               </Form.Item>
               <Form.Item label="Danh mục cha" name="parent_id">

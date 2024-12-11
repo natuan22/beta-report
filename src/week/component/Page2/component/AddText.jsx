@@ -16,7 +16,6 @@ const AddText = ({ handleGetTextInpur }) => {
       content: "",
     },
     onSubmit: (values) => {
-      // console.log({ text: [values.title, values.subTitle, values.content] })
       postApi("api/v1/report/luu-dien-bien-thi-truong-tuan", {
         text: [values.title, values.subTitle, values.content],
       });

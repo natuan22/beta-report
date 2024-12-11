@@ -6,8 +6,6 @@ import moment from "moment";
 const ColumnChart = ({ data }) => {
   const max = Math?.ceil(Math?.max(...data?.map((item) => item.value)));
   const min = Math?.floor(Math?.min(...data?.map((item) => item.value)));
-  // console.log(max);
-  // console.log(min);
   const date = data?.map((item) => moment(item.date).format("DD/MM"));
   // Lấy giá trị đầu tiên và cuối cùng của mảng date
 

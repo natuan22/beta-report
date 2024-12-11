@@ -161,7 +161,6 @@ const ColumnChart1 = ({ data, title, unit, currency, translateX }) => {
       },
     },
   };
-  // console.log(translateX)
   return (
     <div className="h-[250px] relative ">
       {translateX != null ? (

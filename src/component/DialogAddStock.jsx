@@ -21,7 +21,6 @@ const DialogAddStock = ({ catchStock }) => {
       const response = await https.get(
         "/api/v1/report/nhan-dinh-thi-truong-redis"
       );
-      // console.log(response.data.data.stock_buy)
       catchStock(response.data.data.stock_buy);
       loadComponents(response.data.data);
       setArrStock((preArrStock) => ({

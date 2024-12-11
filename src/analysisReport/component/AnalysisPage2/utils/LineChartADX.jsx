@@ -18,7 +18,6 @@ const LineChartADX = ({ data }) => {
 
   const max = Math.max(maxDataADX, maxDataPDI, maxDataMDI);
   const min = Math.max(minDataADX, minDataPDI, minDataMDI);
-  // console.log(max)
   const options = {
     accessibility: {
       enabled: false,

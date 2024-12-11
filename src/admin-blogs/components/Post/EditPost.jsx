@@ -1,7 +1,19 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { StaticDateTimePicker } from "@mui/x-date-pickers";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button, Checkbox, Form, Input, message, Modal, Select, Tooltip, TreeSelect, Upload } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Image,
+  Input,
+  message,
+  Modal,
+  Select,
+  Tooltip,
+  TreeSelect,
+  Upload,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import dayjs from "dayjs";
 import { useFormik } from "formik";
@@ -12,6 +24,15 @@ import { getApi } from "../../../helper/getApi";
 import { postApi } from "../../../helper/postApi";
 import { resourceURL } from "../../../services/configService";
 import moment from "moment";
+import Swal from "sweetalert2";
+
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 
 const EditPost = () => {
   const navigate = useNavigate();
@@ -39,20 +60,35 @@ const EditPost = () => {
   const [scheduledAt, setScheduledAt] = useState(null);
   const [content, setContent] = useState();
   const [thumbnail, setThumbnail] = useState();
-
-  const onCheckboxChange = (e) => { setChecked(e.target.checked) };
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const handlePreviewImg = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+  };
+  const onCheckboxChange = (e) => {
+    setChecked(e.target.checked);
+  };
 
   const [submitted, setSubmitted] = useState(false);
 
-  const warning = (text, type) => { messageApi.open({ type, content: text }) };
+  const warning = (text, type) => {
+    messageApi.open({ type, content: text });
+  };
 
   const fetchDataTagsAndCategories = async () => {
     try {
-      const dataTags = await getApi(`/api/v1/blogs/tag`);
+      const dataTags = await getApi(`/api/v1/blogs-admin/tag`);
       setDataTags(dataTags);
 
-      const dataCategories = await getApi(`/api/v1/blogs/category`);
-      const allChildren = dataCategories.filter((item) => item.children && item.children.length > 0).map((item) => item.children).flat();
+      const dataCategories = await getApi(`/api/v1/blogs-admin/category`);
+      const allChildren = dataCategories
+        .filter((item) => item.children && item.children.length > 0)
+        .map((item) => item.children)
+        .flat();
       setDataCategories(allChildren);
     } catch (error) {
       console.error(error);
@@ -61,7 +97,7 @@ const EditPost = () => {
 
   const fetchDataPost = async () => {
     try {
-      const dataPost = await getApi(`/api/v1/blogs/post/${id}`);
+      const dataPost = await getApi(`/api/v1/blogs-admin/post/${id}`);
       setDataPost(dataPost);
     } catch (error) {
       console.error(error);
@@ -75,7 +111,13 @@ const EditPost = () => {
 
   useEffect(() => {
     if (dataPost) {
-      const { title, description, content, published, scheduledAt: postScheduledAt } = dataPost;
+      const {
+        title,
+        description,
+        content,
+        published,
+        scheduledAt: postScheduledAt,
+      } = dataPost;
       const category_id = dataPost.category.id;
       const tags = dataPost.tags.map((item) => item.name);
 
@@ -94,11 +136,26 @@ const EditPost = () => {
       setChecked(published === 1);
       setScheduledAt(postScheduledAt ? dayjs(postScheduledAt) : null);
 
-      setFileList([{ uid: "-1", name: "thumbnail.png", status: "done", url: `${resourceURL}${dataPost.thumbnail}` }]);
+      setFileList([
+        {
+          uid: "-1",
+          name: "thumbnail.png",
+          status: "done",
+          url: `${resourceURL}${dataPost.thumbnail}`,
+        },
+      ]);
       setFieldValue("thumbnail", dataPost.thumbnail);
       setThumbnail(`${resourceURL}${dataPost.thumbnail}`);
 
-      form.setFieldsValue({ title, description, content, published, category_id, tags, scheduledAt: dayjs(postScheduledAt) });
+      form.setFieldsValue({
+        title,
+        description,
+        content,
+        published,
+        category_id,
+        tags,
+        scheduledAt: dayjs(postScheduledAt),
+      });
     }
   }, [dataPost, form]);
 
@@ -112,11 +169,15 @@ const EditPost = () => {
     formData.append("thumbnail", data.thumbnail);
     formData.append("published", Number(data.published));
     formData.append("category_id", Number(data.category_id));
-    if (scheduledAt) { formData.append("scheduledAt", scheduledAt) }
-    data.tags.forEach((tag) => { formData.append("tags[]", tag) });
+    if (scheduledAt) {
+      formData.append("scheduledAt", scheduledAt);
+    }
+    data.tags.forEach((tag) => {
+      formData.append("tags[]", tag);
+    });
 
     // Gửi yêu cầu POST
-    const res = await postApi(`/api/v1/blogs/post/update`, formData);
+    const res = await postApi(`/api/v1/blogs-admin/post/update`, formData);
     return res;
   };
 
@@ -125,19 +186,37 @@ const EditPost = () => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        const payload = { ...values, published: checked ? 1 : 0 };
-        const editPost = await saveDataAndFile(payload);
+        const confirmDelete = await Swal.fire({
+          title: `Bạn có chắc chắn?`,
+          text: `Bạn muốn chỉnh sửa bài viết?`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Xác nhận",
+          cancelButtonText: "Hủy",
+        });
 
-        if (editPost.id) {
-          warning(`Chỉnh sửa bài viết ${editPost.title} thành công`, "success");
-          setSubmitted(true);
-          openModal();
-        } else {
-          warning(editPost.message || "Không thể chỉnh sửa bài viết", "warning");
+        if (confirmDelete.isConfirmed) {
+          const payload = { ...values, published: checked ? 1 : 0 };
+          const editPost = await saveDataAndFile(payload);
+          if (editPost.id) {
+            warning(`Chỉnh sửa bài viết ${editPost.title} thành công`, "success");
+            setSubmitted(true);
+            openModal();
+          } else {
+            warning(
+              editPost.message || "Không thể chỉnh sửa bài viết",
+              "warning"
+            );
+          }
         }
       } catch (err) {
         console.error("Error creating post:", err);
-        warning("Đã có lỗi xảy ra khi thêm bài viết. Vui lòng thử lại.", "error");
+        warning(
+          "Đã có lỗi xảy ra khi thêm bài viết. Vui lòng thử lại.",
+          "error"
+        );
       }
     },
   });
@@ -186,7 +265,11 @@ const EditPost = () => {
   const handleChangeFile = (e) => {
     const file = e.fileList[0]?.originFileObj;
     if (file) {
-      if (file?.type === "image/png" || file?.type === "image/jpeg" || file?.type === "image/gif") {
+      if (
+        file?.type === "image/png" ||
+        file?.type === "image/jpeg" ||
+        file?.type === "image/gif"
+      ) {
         setFieldValue("thumbnail", file);
         setFileList(e.fileList);
         let reader = new FileReader();
@@ -208,43 +291,78 @@ const EditPost = () => {
       const formData = new FormData();
       formData.append("file", blobInfo.blob());
 
-      postApi(`/api/v1/blogs/post/content-image-upload`, formData).then((result) => {
-        if (result && result.urls && Array.isArray(result.urls) && result.urls.length > 0) {
-          resolve(`${resourceURL}${result.urls[0]}`);
-        } else {
-          reject("Image upload failed");
-        }
-      }).catch((error) => {
-        reject("Image upload failed", error);
-      });
+      postApi(`/api/v1/blogs-admin/post/content-image-upload`, formData)
+        .then((result) => {
+          if (
+            result &&
+            result.urls &&
+            Array.isArray(result.urls) &&
+            result.urls.length > 0
+          ) {
+            resolve(`${resourceURL}${result.urls[0]}`);
+          } else {
+            reject("Image upload failed");
+          }
+        })
+        .catch((error) => {
+          reject("Image upload failed", error);
+        });
     });
   };
 
-  const handleDateScheduledAt = (e) => { setScheduledAt(e ? dayjs(e).toISOString() : null) };
+  const handleDateScheduledAt = (e) => {
+    setScheduledAt(e ? dayjs(e).toISOString() : null);
+  };
 
   const handlePreview = () => {
     const title = form.getFieldValue("title");
-    const category = dataCategories.find((item) => item.id === form.getFieldValue("category_id"));
-    localStorage.setItem("previewPost", JSON.stringify({ ...form.getFieldValue(), content, id, thumbnail, category, from: submitted ? "editOnSave" : "editNoSave" }));
-    
+    const category = dataCategories.find(
+      (item) => item.id === form.getFieldValue("category_id")
+    );
+    localStorage.setItem(
+      "previewPost",
+      JSON.stringify({
+        ...form.getFieldValue(),
+        content,
+        id,
+        thumbnail,
+        category,
+        from: submitted ? "editOnSave" : "editNoSave",
+      })
+    );
+
     if (!title || title.trim() === "") {
       warning("Vui lòng nhập tiêu đề bài viết!", "error");
       return;
     }
 
-    const previewUrl = `/admin-blogs/bai-viet/preview/${formatTitle(title)}/${id}`;
+    const previewUrl = `/admin-blogs/bai-viet/preview/${formatTitle(
+      title
+    )}/${id}`;
     window.open(previewUrl, "_blank");
   };
 
   const renderLabel = (label, required = false, gird) => (
-    <div className={`text-gray-600 dark:text-gray-400 text-[14px] font-semibold h-[30px] content-center ${gird} ${required ? "item-required" : ""}`}>{label}</div>
+    <div
+      className={`text-gray-600 dark:text-gray-400 text-[14px] font-semibold h-[30px] content-center ${gird} ${
+        required ? "item-required" : ""
+      }`}
+    >
+      {label}
+    </div>
   );
 
   const [isModalScheduleAt, setIsModalScheduleAt] = useState(false);
 
-  const showModalScheduleAt = () => { setIsModalScheduleAt(true) };
-  const handleScheduleAtOk = () => { setIsModalScheduleAt(false) };
-  const handleScheduleAtCancel = () => { setIsModalScheduleAt(false) };
+  const showModalScheduleAt = () => {
+    setIsModalScheduleAt(true);
+  };
+  const handleScheduleAtOk = () => {
+    setIsModalScheduleAt(false);
+  };
+  const handleScheduleAtCancel = () => {
+    setIsModalScheduleAt(false);
+  };
 
   return (
     <div className="p-4 w-full max-w-9xl mx-auto">
@@ -276,11 +394,21 @@ const EditPost = () => {
               <div className="xl:col-span-8 lg:col-span-full">
                 {/* Title */}
                 <div className="grid lg:grid-cols-12 md:grid-cols-none">
-                  {renderLabel('Tiêu đề', true, 'col-span-1')}
-                  <Form.Item className="col-span-11" name="title" rules={[{ required: true, message: "Title of post is required!" }]}>
+                  {renderLabel("Tiêu đề", true, "col-span-1")}
+                  <Form.Item
+                    className="col-span-11"
+                    name="title"
+                    rules={[
+                      { required: true, message: "Title of post is required!" },
+                    ]}
+                  >
                     <Input
                       placeholder="Nhập tiêu đề bài viết"
-                      onChange={(e) => { handleChange({ target: { name: "title", value: e.target.value } })}}
+                      onChange={(e) => {
+                        handleChange({
+                          target: { name: "title", value: e.target.value },
+                        });
+                      }}
                       showCount
                       maxLength={255}
                     />
@@ -289,23 +417,48 @@ const EditPost = () => {
 
                 {/* Description */}
                 <div className="grid lg:grid-cols-12 md:grid-cols-none">
-                  {renderLabel('Mô tả', true, 'col-span-1')}
-                  <Form.Item className="col-span-11" name="description" rules={[{ required: true, message: "Description of post is required!" }]}>
+                  {renderLabel("Mô tả", true, "col-span-1")}
+                  <Form.Item
+                    className="col-span-11"
+                    name="description"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Description of post is required!",
+                      },
+                    ]}
+                  >
                     <TextArea
                       style={{ resize: "none" }}
                       rows={3}
                       placeholder="Nhập mô tả bài viết"
                       showCount
                       maxLength={255}
-                      onChange={(e) => { handleChange({ target: { name: "description", value: e.target.value } })}}
+                      onChange={(e) => {
+                        handleChange({
+                          target: {
+                            name: "description",
+                            value: e.target.value,
+                          },
+                        });
+                      }}
                     />
                   </Form.Item>
                 </div>
 
                 {/* Content */}
                 <div className="grid lg:grid-cols-12 md:grid-cols-none">
-                  {renderLabel('Nội dung', true, 'col-span-1')}
-                  <Form.Item className="h-[400px] col-span-11" name="content" rules={[{ required: true, message: "Content of post is required!" }]}>
+                  {renderLabel("Nội dung", true, "col-span-1")}
+                  <Form.Item
+                    className="h-[400px] col-span-11"
+                    name="content"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Content of post is required!",
+                      },
+                    ]}
+                  >
                     <Editor
                       value={content}
                       tinymceScriptSrc={`/assets/tinymce/js/tinymce/tinymce.min.js`}
@@ -315,18 +468,45 @@ const EditPost = () => {
                         resize: false,
                         menubar: false,
                         branding: false,
-                        plugins: ["advlist", "autolink", "lists", "link", "image", "charmap", "preview", "anchor", "searchreplace", "visualblocks", "fullscreen", "insertdatetime", "media", "table", "help", "wordcount", "emoticons", "image" ],
-                        toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image media table | align lineheight | bullist numlist outdent indent | emoticons charmap removeformat | fullscreen",
+                        plugins: [
+                          "advlist",
+                          "autolink",
+                          "lists",
+                          "link",
+                          "image",
+                          "charmap",
+                          "preview",
+                          "anchor",
+                          "searchreplace",
+                          "visualblocks",
+                          "fullscreen",
+                          "insertdatetime",
+                          "media",
+                          "table",
+                          "help",
+                          "wordcount",
+                          "emoticons",
+                          "image",
+                        ],
+                        toolbar:
+                          "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image media table | align lineheight | bullist numlist outdent indent | emoticons charmap removeformat | fullscreen",
                         image_title: true,
                         automatic_uploads: true,
                         file_picker_types: "image",
                         images_upload_handler: handleImageUpload,
                       }}
                       onEditorChange={(content, editor) => {
-                        handleChange({ target: { name: "content", value: content }});
-                        form.setFieldValue("content", content === "" ? undefined : content);
+                        handleChange({
+                          target: { name: "content", value: content },
+                        });
+                        form.setFieldValue(
+                          "content",
+                          content === "" ? undefined : content
+                        );
                         setContent(content);
-                        if (!content || content.trim() === "") { form.validateFields(["content"]) }
+                        if (!content || content.trim() === "") {
+                          form.validateFields(["content"]);
+                        }
                       }}
                     />
                   </Form.Item>
@@ -337,39 +517,72 @@ const EditPost = () => {
                 <div>
                   {/* Thumbnail */}
                   <div className="grid md:grid-cols-12 sm:grid-cols-none">
-                    {renderLabel('Ảnh đại diện', true, 'col-span-3')}
+                    {renderLabel("Ảnh đại diện", true, "col-span-3")}
                     <Form.Item className="col-span-9" valuePropName="thumbnail">
                       <Upload
                         listType="picture-card"
                         beforeUpload={() => false}
                         maxCount={1}
                         fileList={filelist}
+                        onPreview={handlePreviewImg}
                         onChange={handleChangeFile}
                       >
-                        <button style={{ border: 0, background: "none" }} type="button">
+                        <button
+                          style={{ border: 0, background: "none" }}
+                          type="button"
+                        >
                           <PlusOutlined />
                           <div style={{ marginTop: 8 }}>Tải ảnh</div>
                         </button>
                       </Upload>
+                      {previewImage && (
+                        <Image
+                          wrapperStyle={{ display: "none" }}
+                          preview={{
+                            visible: previewOpen,
+                            onVisibleChange: (visible) =>
+                              setPreviewOpen(visible),
+                            afterOpenChange: (visible) =>
+                              !visible && setPreviewImage(""),
+                          }}
+                          src={previewImage}
+                        />
+                      )}
                     </Form.Item>
                   </div>
 
                   {/* Category_id */}
                   <div className="grid md:grid-cols-12 sm:grid-cols-none">
-                    {renderLabel('Danh mục', true, 'col-span-3')}
-                    <Form.Item className="col-span-9" name="category_id" rules={[{ required: true, message: "Category of post is required!" }]}>
+                    {renderLabel("Danh mục", true, "col-span-3")}
+                    <Form.Item
+                      className="col-span-9"
+                      name="category_id"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Category of post is required!",
+                        },
+                      ]}
+                    >
                       <TreeSelect
                         allowClear
-                        treeData={dataCategories?.map((item) => ({ title: item.name, value: item.id }))}
+                        treeData={dataCategories?.map((item) => ({
+                          title: item.name,
+                          value: item.id,
+                        }))}
                         placeholder="Chọn danh mục cho bài viết"
-                        onChange={(value) => { handleChange({ target: { name: "category_id", value: value }}) }}
+                        onChange={(value) => {
+                          handleChange({
+                            target: { name: "category_id", value: value },
+                          });
+                        }}
                       />
                     </Form.Item>
-                  </div>  
+                  </div>
 
                   {/* Tags */}
                   <div className="grid md:grid-cols-12 sm:grid-cols-none">
-                    {renderLabel('Tags', false, 'col-span-3')}
+                    {renderLabel("Tags", false, "col-span-3")}
                     <Form.Item className="col-span-9" name="tags">
                       <Select
                         allowClear
@@ -377,31 +590,72 @@ const EditPost = () => {
                         mode="tags"
                         style={{ width: "100%" }}
                         placeholder="Tags"
-                        onChange={(value) => { handleChange({ target: { name: "tags", value: value } }) }}
-                        options={dataTags?.length > 0 ? dataTags.map((item) => ({ value: item.name, label: item.name })) : []}
+                        onChange={(value) => {
+                          handleChange({
+                            target: { name: "tags", value: value },
+                          });
+                        }}
+                        options={
+                          dataTags?.length > 0
+                            ? dataTags.map((item) => ({
+                                value: item.name,
+                                label: item.name,
+                              }))
+                            : []
+                        }
                         maxTagCount={6}
                       />
                     </Form.Item>
                   </div>
                 </div>
-                
+
                 <div className="xl:static lg:relative">
                   <div className="xl:absolute bottom-[185px]">
-                    {/* Published */} 
-                    <Form.Item style={{ marginBottom: '0px' }} name="published" valuePropName="checked">
-                      <Tooltip placement="right" title={<div>Lựa chọn ẩn hoặc hiển thị bài viết</div>}>
-                        <Checkbox className="font-semibold" checked={checked} onChange={onCheckboxChange}>
+                    {/* Published */}
+                    <Form.Item
+                      style={{ marginBottom: "0px" }}
+                      name="published"
+                      valuePropName="checked"
+                    >
+                      <Tooltip
+                        placement="right"
+                        title={<div>Lựa chọn ẩn hoặc hiển thị bài viết</div>}
+                      >
+                        <Checkbox
+                          className="font-semibold"
+                          checked={checked}
+                          onChange={onCheckboxChange}
+                        >
                           Xuất bản {""}
-                          <i className="underline">{checked && (<span>{`(${moment().format('DD/MM/YYYY HH:mm')})`}</span>)}{!checked && dataPost && dataPost.scheduledAt && (<span>{`(${moment(dataPost.scheduledAt).format('DD/MM/YYYY HH:mm')})`}</span>)}</i>
+                          <i className="underline">
+                            {checked && (
+                              <span>{`(${moment().format(
+                                "DD/MM/YYYY HH:mm"
+                              )})`}</span>
+                            )}
+                            {!checked && dataPost && dataPost.scheduledAt && (
+                              <span>{`(${moment(dataPost.scheduledAt).format(
+                                "DD/MM/YYYY HH:mm"
+                              )})`}</span>
+                            )}
+                          </i>
                         </Checkbox>
                       </Tooltip>
                     </Form.Item>
 
                     {/* Scheduled At */}
-                    <div className={`text-[#1677ff] hover:text-[#59b4ff] text-[15px] h-[40px] content-center ${checked ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!checked ? showModalScheduleAt : undefined}>
-                      Thiết lập ngày cụ thể
-                    </div>
-                    <Modal 
+                    {!checked && (
+                      <div
+                        className={`text-[#1677ff] hover:text-[#59b4ff] text-[15px] h-[40px] content-center ${
+                          checked ? "cursor-not-allowed" : "cursor-pointer"
+                        }`}
+                        onClick={!checked ? showModalScheduleAt : undefined}
+                      >
+                        Thiết lập ngày cụ thể
+                      </div>
+                    )}
+
+                    <Modal
                       centered
                       width={530}
                       open={isModalScheduleAt}
@@ -416,7 +670,9 @@ const EditPost = () => {
                             format="DD/MM/YYYY hh:mm A"
                             margin="normal"
                             minDate={dayjs()}
-                            formatDate={(date) => dayjs(date).format("DD/MM/YYYY hh:mm A")}
+                            formatDate={(date) =>
+                              dayjs(date).format("DD/MM/YYYY hh:mm A")
+                            }
                             value={scheduledAt ? dayjs(scheduledAt) : null}
                             onChange={handleDateScheduledAt}
                             disabled={checked}
@@ -424,8 +680,14 @@ const EditPost = () => {
                               handleDateScheduledAt(value);
                               setIsModalScheduleAt(false);
                             }}
-                            onClose={(e) => setIsModalScheduleAt(!isModalScheduleAt)}
-                            slotProps={{ actionBar: { actions: ['clear', 'cancel', 'accept'] }}}
+                            onClose={(e) =>
+                              setIsModalScheduleAt(!isModalScheduleAt)
+                            }
+                            slotProps={{
+                              actionBar: {
+                                actions: ["clear", "cancel", "accept"],
+                              },
+                            }}
                           />
                         </Form.Item>
                       </div>
@@ -434,8 +696,14 @@ const EditPost = () => {
 
                   {/*  Preview, Submit */}
                   <div className="lg:absolute lg:mt-0 md:mt-7 sm:mt-7 bottom-0 w-full flex justify-between">
-                    <Button type="primary" ghost onClick={handlePreview}>Xem trước</Button>
-                    <Form.Item label={null}><Button type="primary" htmlType="submit">Lưu</Button></Form.Item>
+                    <Button type="primary" ghost onClick={handlePreview}>
+                      Xem trước
+                    </Button>
+                    <Form.Item label={null}>
+                      <Button type="primary" htmlType="submit">
+                        Lưu
+                      </Button>
+                    </Form.Item>
                   </div>
                 </div>
               </div>

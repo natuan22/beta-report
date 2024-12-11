@@ -60,18 +60,20 @@ moment.updateLocale("vi", {
 
 const PreviewPost = () => {
   const count = 12;
-  const { idPost } = useParams()
-  
+  const { idPost } = useParams();
+
   const [previewPost, setPreviewPost] = useState(null);
   const [fromData, setFromData] = useState(null);
   const [relatedBlogs, setRelatedBlogs] = useState(null);
   const [visibleBlogsCount, setVisibleBlogsCount] = useState(5);
 
-  const handleShowMore = () => { setVisibleBlogsCount((prevCount) => prevCount + 5) };
+  const handleShowMore = () => {
+    setVisibleBlogsCount((prevCount) => prevCount + 5);
+  };
 
   const fetchDataPost = async (id) => {
     try {
-      const dataPost = await getApi(`/api/v1/blogs/post/${id}`);
+      const dataPost = await getApi(`/api/v1/blogs-admin/post/${id}`);
       setPreviewPost(dataPost);
     } catch (error) {
       console.error(error);
@@ -81,9 +83,11 @@ const PreviewPost = () => {
   const fetchDataPostWithTags = async (tags) => {
     try {
       const tagsString = tags.join(",");
-      const relatedBlogs = await getApi(`/api/v1/blogs/post-tags?tags=${tagsString}`);
+      const relatedBlogs = await getApi(
+        `/api/v1/blogs-admin/post-tags?tags=${tagsString}`
+      );
 
-      return relatedBlogs
+      return relatedBlogs;
     } catch (error) {
       console.error(error);
     }
@@ -94,8 +98,12 @@ const PreviewPost = () => {
     if (storedPost) {
       const parsedPost = JSON.parse(storedPost);
       setFromData(parsedPost.from);
-      
-      if (parsedPost.from === "editOnSave" && parsedPost.id && idPost == parsedPost.id) {
+
+      if (
+        parsedPost.from === "editOnSave" &&
+        parsedPost.id &&
+        idPost == parsedPost.id
+      ) {
         fetchDataPost(idPost);
       } else {
         setPreviewPost(parsedPost);
@@ -108,15 +116,17 @@ const PreviewPost = () => {
       if (previewPost && previewPost.tags && previewPost.tags.length > 0) {
         try {
           const relatedBlogs = await fetchDataPostWithTags(previewPost.tags);
-          const filteredBlogs = relatedBlogs.filter((item) => item.id !== Number(previewPost.id));
-  
+          const filteredBlogs = relatedBlogs.filter(
+            (item) => item.id !== Number(previewPost.id)
+          );
+
           setRelatedBlogs(filteredBlogs);
         } catch (error) {
           console.error("Error fetching related blogs:", error);
         }
       }
     };
-  
+
     fetchAndSetRelatedBlogs();
   }, [previewPost]);
 
@@ -149,7 +159,9 @@ const PreviewPost = () => {
     return doc.body.innerHTML;
   };
 
-  const processedContent = previewPost?.content ? addClassToImages(previewPost.content) : "";
+  const processedContent = previewPost?.content
+    ? addClassToImages(previewPost.content)
+    : "";
 
   return (
     <div>
@@ -193,24 +205,37 @@ const PreviewPost = () => {
       <div id="header-blogs" className="py-16 bg-[#f5f6f9]">
         <div className="container-blogs mx-auto">
           <div className="text-center flex flex-col gap-4">
-            <h1 className="m-0 dark:text-gray-300 text-black">{previewPost?.title}</h1>
+            <h1 className="m-0 dark:text-gray-300 text-black">
+              {previewPost?.title}
+            </h1>
             <div className="flex justify-center items-center gap-3">
               <div className="text-[#00b71f]">{previewPost?.category.name}</div>
               <div className="text-[#bbb]">|</div>
               <div className="dark:text-gray-300 text-black">
-                {previewPost?.created_at ? moment(previewPost.created_at).locale("vi").format("dddd, DD/MM/YYYY") : moment().format("dddd, DD/MM/YYYY")}
+                {previewPost?.created_at
+                  ? moment(previewPost.created_at)
+                      .locale("vi")
+                      .format("dddd, DD/MM/YYYY")
+                  : moment().format("dddd, DD/MM/YYYY")}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div id="body-blogs" className="container-blogs mx-auto px-3 pt-5 text-justify">
+      <div
+        id="body-blogs"
+        className="container-blogs mx-auto px-3 pt-5 text-justify"
+      >
         <div className="text-lg pb-5">
           <strong>{previewPost?.description}</strong>
         </div>
         <div className="flex justify-center">
           <img
-            src={fromData === "editOnSave" ? `${resourceURL}${previewPost?.thumbnail}` : `${previewPost?.thumbnail}`}
+            src={
+              fromData === "editOnSave"
+                ? `${resourceURL}${previewPost?.thumbnail}`
+                : `${previewPost?.thumbnail}`
+            }
             alt="thumbnail-post"
             className="my-1 block float-none align-top relative max-w-[100%]"
           ></img>
@@ -238,7 +263,7 @@ const PreviewPost = () => {
                       transition: { duration: 0.4 },
                     }}
                   >
-                    <div className="flex gap-10 justify-between">
+                    <div className="flex gap-8 justify-between">
                       <motion.div
                         className="w-[77%]"
                         initial={{ opacity: 0 }}
@@ -273,11 +298,11 @@ const PreviewPost = () => {
                         transition={{ duration: 0.5 }}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="h-[150px]">
+                        <div className="flex justify-center h-[150px]">
                           <motion.img
                             src={`${resourceURL}${item.thumbnail}`}
                             alt={item.title}
-                            className="w-full h-full rounded"
+                            className="max-w-[100%] block float-none align-top relative h-full rounded"
                             whileHover={{
                               scale: 1.1,
                               transition: { duration: 0.3 },
@@ -312,6 +337,7 @@ const PreviewPost = () => {
           </div>
         </div>
       </div>
+
       <div className="container mx-auto">
         <footer
           className={`relative z-10 pt-10 pb-10 px-10 my-2.5 bg-cover`}
