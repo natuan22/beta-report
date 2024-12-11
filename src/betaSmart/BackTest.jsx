@@ -239,7 +239,14 @@ const BackTest = () => {
       // Lắng nghe sự kiện socket
       const handleSocketResponse = (res) => {
         const newData = [...data];
-  
+
+        // Tìm và cập nhật `priceNow` cho những mục không có `status = 0` khi socket kết nối
+        data.forEach((item, i) => {
+          if (item.code === res[0].code) {
+            newData[i] = { ...item, priceNow: res[0].priceNow };
+          }
+        });
+
         // Tìm và cập nhật mục có `status = 0` chỉ khi `toDate.isSame(dayjs(), 'day')`
         if (toDate.isSame(dayjs(), 'day')) {
           const index = data.findIndex((item) => item.code === res[0].code && item.status === 0);
@@ -247,14 +254,7 @@ const BackTest = () => {
             newData[index] = { ...data[index], ...res[0] };
           }
         }
-  
-        // Tìm và cập nhật `priceNow` cho những mục không có `status = 0` khi socket kết nối
-        data.forEach((item, i) => {
-          if (item.code === res[0].code) {
-            newData[i] = { ...item, priceNow: res[0].priceNow };
-          }
-        });
-  
+        
         // Cập nhật state
         setData(newData);
       };
