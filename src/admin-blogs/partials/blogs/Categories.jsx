@@ -32,7 +32,7 @@ const Categories = () => {
 
   const fetchDataCategories = async () => {
     try {
-      const data = await getApi(`/api/v1/blogs/category`);
+      const data = await getApi(`/api/v1/blogs-admin/category`);
       setDataCategories(data);
       setLoading(false);
     } catch (error) {
@@ -70,7 +70,7 @@ const Categories = () => {
               </div>
             )}
           </td>
-          <td className="p-1 whitespace-nowrap">
+          <td className="p-1">
             <div>
               <div style={{ paddingLeft: `${depth * 40}px` }}>
                 <div
@@ -82,7 +82,9 @@ const Categories = () => {
                 >
                   {category.name}
                 </div>
-                <div className="text-left">{category.description}</div>
+                <div className="text-left line-clamp-1">
+                  {category.description}
+                </div>
               </div>
             </div>
           </td>

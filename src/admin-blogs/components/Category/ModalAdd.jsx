@@ -42,7 +42,7 @@ const ModalAdd = ({ dataCategories, fetchDataCategories }) => {
 
     try {
       const newCategory = await postApi(
-        "/api/v1/blogs/category/create",
+        "/api/v1/blogs-admin/category/create",
         transformedValues
       );
 
@@ -100,9 +100,15 @@ const ModalAdd = ({ dataCategories, fetchDataCategories }) => {
               <Form.Item
                 label="Tên danh mục"
                 name="name"
-                rules={[{ required: true, message: "Name of category is required!" }]}
+                rules={[
+                  { required: true, message: "Name of category is required!" },
+                ]}
               >
-                <Input placeholder="Nhập tên danh mục" showCount maxLength={255} />
+                <Input
+                  placeholder="Nhập tên danh mục"
+                  showCount
+                  maxLength={255}
+                />
               </Form.Item>
               <Form.Item label="Mô tả" name="description">
                 <TextArea

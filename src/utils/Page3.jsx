@@ -10,7 +10,6 @@ import { https } from "../services/configService";
 const Page3 = ({ role }) => {
   const [data, setData] = useState();
   const [dataStock, setDataStock] = useState([]);
-  // console.log(dataStock)
 
   useEffect(() => {
     const getTextAndStock = async () => {

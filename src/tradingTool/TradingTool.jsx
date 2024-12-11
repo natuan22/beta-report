@@ -456,7 +456,6 @@ const TradingTool = () => {
                 : "Hold bán",
           },
         ];
-        // console.log(newData);
         return newData;
       });
       setLoading(false);

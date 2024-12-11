@@ -85,7 +85,6 @@ const DialogSignUp = ({ onSubmitSuccess }) => {
         };
         try {
           const response = await dispatch(userRegisterAction(normalizedValues));
-          // console.log(response)
           if (response.status === 201) {
             setUserID(response?.data.data.user_id);
             setOpenOTP(true);

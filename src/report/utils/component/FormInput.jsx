@@ -61,11 +61,9 @@ const FormInput = ({
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e) => {
-        // console.log(e.target.result)
         setImgSrc(e.target.result); // set hình base64
         getImgFromInput(e.target.result);
       };
-      // console.log("file", file);
       // truyền dữ liệu lên form
       setFieldValue("img", file);
     }

@@ -95,7 +95,6 @@ const AnalysisPage1 = ({ stock, type, role }) => {
     getDataColumnChart();
     getDataAnalysis();
   }, [stock]);
-  // console.log(stock, data);
 
   const onSubmitSuccess = () => {
     getStockPage1();

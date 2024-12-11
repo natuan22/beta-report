@@ -3,7 +3,6 @@ import formatNumber from "../../../../helper/formatNumber";
 import { getColorBaseOnValue } from "../../../../helper/getColorBaseOnValue";
 
 const TableRate = ({ data }) => {
-  // console.log({ data })
   return (
     <div>
       <table className="bg-transparent border-collapse w-[370px]  h-[290px]">

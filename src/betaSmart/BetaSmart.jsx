@@ -11,15 +11,14 @@ import { getColorBaseOnValue } from "../helper/getColorBaseOnValue";
 import socket from "../helper/socket";
 import "./utils/styles/styleLoading.css";
 import "./utils/styles/table-antd-custom.css";
+import BackTest from "./BackTest";
 
 const BetaSmart = () => {
+  const rowHeight = 39;
+  const maxHeight = 272;
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(
-    localStorage.getItem(process.env.REACT_APP_IS_LG)
-  );
-  const [role, setRole] = useState(
-    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
-  );
+  const [isLogin, setIsLogin] = useState(localStorage.getItem(process.env.REACT_APP_IS_LG));
+  const [role, setRole] = useState(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [lastActiveTime, setLastActiveTime] = useState(Date.now());
 
@@ -44,8 +43,6 @@ const BetaSmart = () => {
     setUser(JSON.parse(localStorage.getItem("user")));
   };
 
-  
-
   const rowClassName = (record, index) => {
     if (index % 2 === 0) {
       // Dòng lẻ màu trắng
@@ -63,15 +60,10 @@ const BetaSmart = () => {
   const fetchData = async () => {
     try {
       const data = await getApi(`/api/v1/investment/beta-smart`);
-      const dataWithKey =
-        Array.isArray(data) &&
-        data?.map((item, index) => {
-          return {
-            ...item,
-            key: index,
-            signal: item.signal === 0 ? "MUA" : "BÁN",
-          };
-        });
+      const dataWithKey =  Array.isArray(data) && data?.map((item, index) => {
+        return { ...item, key: index, signal: item.signal === 0 ? "MUA" : "BÁN" };
+      });
+
       setData(dataWithKey);
       setLoading(false);
 
@@ -567,28 +559,39 @@ const BetaSmart = () => {
           onSubmitSuccess={onSubmitSuccess}
         />
       </div>
+
       <div className="w-full p-[40px] font-[Roboto]">
-        <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
-          BETA SMART
+        {/* Phần đầu tiên: BETA SMART */}
+        <div className="h-[420px]">
+          <div className="flex-1 flex flex-col">
+            <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
+              BETA SMART
+            </div>
+            <div className="table-antd-betasmart mt-6">
+              {!loading && data ? (
+                <div className="2xl:w-[1600px] xl:w-full">
+                  <Table
+                    showSorterTooltip={false}
+                    columns={columns}
+                    dataSource={data}
+                    rowClassName={rowClassName}
+                    // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
+                    scroll={data.length * rowHeight > maxHeight ? { x: 1581, y: maxHeight } : { x: 1581 }}
+                    pagination={false}
+                  />
+                </div>
+              ) : (
+                <div className="beta-smart">
+                  <Skeleton.Input active block size="large" />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-        <div className="table-antd-betasmart mt-6">
-          {!loading && data ? (
-            <div className="2xl:w-[1581px] xl:w-full">
-              <Table
-                showSorterTooltip={false}
-                columns={columns}
-                dataSource={data}
-                rowClassName={rowClassName}
-                // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
-                scroll={{ x: 1581 }}
-                pagination={false}
-              />
-            </div>
-          ) : (
-            <div className="beta-smart">
-              <Skeleton.Input active block size="large" />
-            </div>
-          )}
+        
+        {/* Phần thứ hai: HIỆU SUẤT SINH LỜI */}
+        <div className="flex-1 flex flex-col pt-6">
+          <BackTest />
         </div>
       </div>
     </div>

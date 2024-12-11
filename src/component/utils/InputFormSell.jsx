@@ -22,7 +22,6 @@ const InputFormSell = ({ catchStockInput, isBuy, data, index }) => {
       isBuy,
     },
     onSubmit: (values) => {
-      // console.log(values)
       catchStockInput("stock_buy", values, index);
       success("Thêm mã thành công");
     },

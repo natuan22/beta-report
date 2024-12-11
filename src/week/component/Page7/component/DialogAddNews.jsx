@@ -191,7 +191,6 @@ export default function DialogAddNews({
         // Xác nhận xóa tin và cập nhật state
         const updatedformData = { ...formData };
         updatedformData.value.splice(index, 1);
-        // console.log(updatedformData)
         setFormData(updatedformData);
         success("Đã xóa tin thành công!");
       }

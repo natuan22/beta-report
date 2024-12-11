@@ -36,7 +36,7 @@ const AnalysisPage2 = ({ stock }) => {
     if (!stock && stock.split("")?.length < 3) return;
     getData();
   }, [stock]);
-  // console.log("data,", data.macdHistogram.chart);
+  
   return (
     <div className="h-[1152px] w-[800px] relative">
       <div className="header">

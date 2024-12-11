@@ -23,7 +23,6 @@ const Page9Week = () => {
     if (val) return "%";
     if (!val) return "";
   };
-  // console.log(data)
   return (
     <div className="h-[800px] w-[1480px] relative">
       <div className="header h-[120px]">
