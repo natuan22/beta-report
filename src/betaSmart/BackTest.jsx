@@ -280,7 +280,7 @@ const BackTest = () => {
             <DatePicker
               format="DD/MM/YYYY"
               margin="normal"
-              minDate={dayjs("2024-10-23")}
+              minDate={dayjs("2024-10-01")}
               disableFuture
               formatDate={(date) => dayjs(date).format("DD/MM/YYYY")}
               value={fromDate}
