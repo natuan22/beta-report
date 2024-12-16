@@ -32,12 +32,17 @@ const ModalAdd = ({ dataCategories, fetchDataCategories }) => {
     messageApi.open({ type, content: text });
   };
 
+  const [checked, setChecked] = useState(false);
+  const onCheckboxChange = (e) => {
+    setChecked(e.target.checked);
+  };
+
   const onFinish = async (values) => {
     const transformedValues = {
       name: values.name,
       description: values.description,
       parent_id: values.parent_id || null,
-      published: values.published ? 1 : 0,
+      published: checked ? 1 : 0,
     };
 
     try {
@@ -141,7 +146,9 @@ const ModalAdd = ({ dataCategories, fetchDataCategories }) => {
                       placement="right"
                       title={<div>Lựa chọn ẩn hoặc hiển thị danh mục</div>}
                     >
-                      <Checkbox>Xuất bản</Checkbox>
+                      <Checkbox checked={checked} onChange={onCheckboxChange}>
+                        Xuất bản
+                      </Checkbox>
                     </Tooltip>
                   </Form.Item>
                 </Col>
