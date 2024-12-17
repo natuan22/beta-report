@@ -65,10 +65,10 @@ const PreviewPost = () => {
   const [previewPost, setPreviewPost] = useState(null);
   const [fromData, setFromData] = useState(null);
   const [relatedBlogs, setRelatedBlogs] = useState(null);
-  const [visibleBlogsCount, setVisibleBlogsCount] = useState(5);
+  const [visibleBlogsCount, setVisibleBlogsCount] = useState(3);
 
   const handleShowMore = () => {
-    setVisibleBlogsCount((prevCount) => prevCount + 5);
+    setVisibleBlogsCount((prevCount) => prevCount + 3);
   };
 
   const fetchDataPost = async (id) => {
@@ -242,20 +242,18 @@ const PreviewPost = () => {
         </div>
         <div dangerouslySetInnerHTML={{ __html: processedContent }}></div>
       </div>
-      <div id="footer-blogs" className="container-blogs mx-auto">
+      <div id="footer-blogs">
         <hr className="h-px mt-7 border-0 bg-gray-600/50"></hr>
         <div>
-          <div class="flex items-center gap-2">
-            <div class="min-w-[3px] h-[35px] bg-[#0050AD] rounded-t-[100px]"></div>
-            <h2>Bài viết liên quan</h2>
+          <div className="flex items-center justify-center gap-2 dark:text-gray-300 text-black">
+            <h2 className="my-7">Bài viết liên quan</h2>
           </div>
-          <div>
+          <div className="w-[65%] mx-auto grid grid-cols-9 gap-4">
             {relatedBlogs && relatedBlogs.length > 0 ? (
               <>
                 {relatedBlogs.slice(0, visibleBlogsCount).map((item, index) => (
                   <motion.div
-                    key={index}
-                    className="flex flex-col p-2"
+                    className="col-span-3 flex flex-col gap-4 px-2"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     whileHover={{
@@ -263,61 +261,49 @@ const PreviewPost = () => {
                       transition: { duration: 0.4 },
                     }}
                   >
-                    <div className="flex gap-8 justify-between">
-                      <motion.div
-                        className="w-[77%]"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <div className="flex gap-3">
-                          {item.tags.map((tag, tagIndex) => (
-                            <motion.div
-                              key={tagIndex}
-                              className="text-[#0050AD] text-base"
-                              whileHover={{ scale: 1.1 }}
-                            >
+                    <div className="h-[200px]">
+                      <motion.img
+                        src={`${resourceURL}${item.thumbnail}`}
+                        alt={item.title}
+                        className="w-full h-full block float-none align-top relative rounded"
+                        whileHover={{
+                          scale: 1.04,
+                          transition: { duration: 0.3 },
+                        }}
+                      ></motion.img>
+                    </div>
+                    <div>
+                      <div className="flex gap-[6px]">
+                        {item.tags.map((tag, tagIndex) => (
+                          <NavLink
+                            to={`/cong-cu-dau-tu/kien-thuc-dau-tu?tags=${tag.name}`}
+                            key={tagIndex}
+                            className="no-underline text-[#faad14] text-[13px]"
+                          >
+                            <motion.div whileHover={{ scale: 1.1 }}>
                               #{tag.name}
                             </motion.div>
-                          ))}
-                        </div>
-                        <div className="text-lg font-medium mb-3">
+                          </NavLink>
+                        ))}
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <div className="text-lg font-medium text-[#2989f9] line-clamp-2">
                           {item.title}
                         </div>
-                        <div className=" dark:text-gray-600 text-gray-400 text-[15px] mb-3 line-clamp-2">
+                        <div className="text-gray-500 text-[15px] line-clamp-2">
                           {item.description}
                         </div>
-                        <div className="dark:text-gray-600 text-gray-400 text-sm">
+                        <div className="text-gray-500 text-[13px] text-right">
                           {moment(item.created_at).format("DD/MM/YYYY")}
                         </div>
-                      </motion.div>
-                      <motion.div
-                        className="card-img w-[23%]"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="flex justify-center h-[150px]">
-                          <motion.img
-                            src={`${resourceURL}${item.thumbnail}`}
-                            alt={item.title}
-                            className="max-w-[100%] block float-none align-top relative h-full rounded"
-                            whileHover={{
-                              scale: 1.1,
-                              transition: { duration: 0.3 },
-                            }}
-                          />
-                        </div>
-                      </motion.div>
+                      </div>
                     </div>
-                    <div className="border-solid border-b-[1px] border-x-0 border-t-0 border-gray-600/50 mt-[14px]"></div>
                   </motion.div>
                 ))}
 
                 {visibleBlogsCount < relatedBlogs.length && (
                   <motion.div
-                    className="flex justify-center items-center py-2"
+                    className="col-span-full flex justify-center items-center py-2"
                     onClick={handleShowMore}
                     whileHover={{ scale: 1.1 }}
                   >
@@ -332,7 +318,9 @@ const PreviewPost = () => {
                 )}
               </>
             ) : (
-              <div className="p-3 text-lg">Không có bài viết liên quan nào</div>
+              <div className="mx-auto col-span-full p-3 text-lg dark:text-gray-300 text-black font-medium">
+                Không có bài viết liên quan nào
+              </div>
             )}
           </div>
         </div>
