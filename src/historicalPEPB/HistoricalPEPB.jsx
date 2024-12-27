@@ -119,7 +119,7 @@ const HistoricalPEPB = () => {
   ];
 
   const prepareData = (item) => [
-    moment(item.from).format("DD/MM/YYYY"), // Format to "DD/MM/YYYY"
+    new Date(item.from),
     item.indexPb,
     item.indexPe,
     item.industryPb,

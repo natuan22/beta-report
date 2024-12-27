@@ -13,6 +13,7 @@ import GauChart from "../../../watchlist/components/GauChart";
 const flatFilter = Object.values(hashTbStockFilter).flat();
 
 const TableResults = ({
+  loadingTb,
   filteredResults,
   watchlists,
   catchWatchlists,
@@ -20,8 +21,6 @@ const TableResults = ({
   selectParameters,
   isLogin,
 }) => {
-  const rowHeight = 45;
-  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -388,17 +387,13 @@ const TableResults = ({
       {contextHolder}
       <div className="table-data-antd mt-0.5">
         <Table
+          loading={loadingTb}
           showSorterTooltip={false}
           columns={allColumns}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
-          scroll={
-            filteredResults.length * rowHeight > maxHeight
-              ? { y: maxHeight }
-              : undefined
-          }
-          pagination={false}
+          scroll={{ x: 1823 }}
+          pagination={{ defaultPageSize: 10, showSizeChanger: false }}
         />
       </div>
       <Modal
