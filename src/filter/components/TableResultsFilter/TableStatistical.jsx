@@ -10,13 +10,12 @@ import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import { postApi } from "../../../helper/postApi";
 
 const TableStatistical = ({
+  loadingTb,
   filteredResults,
   watchlists,
   catchWatchlists,
   isLogin,
 }) => {
-  const rowHeight = 45;
-  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -274,7 +273,7 @@ const TableStatistical = ({
         </span>
       ),
       dataindex: "totalVal",
-      width: 120,
+      width: 150,
       align: "center",
       render: (_, record) => {
         return (
@@ -521,17 +520,13 @@ const TableStatistical = ({
       {contextHolder}
       <div className="table-data-antd mt-0.5">
         <Table
+          loading={loadingTb}
           showSorterTooltip={false}
           columns={columns}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
-          scroll={
-            filteredResults.length * rowHeight > maxHeight
-              ? { x: 2131, y: maxHeight }
-              : { x: 2131 }
-          }
-          pagination={false}
+          scroll={{ x: 2150 }}
+          pagination={{ defaultPageSize: 10, showSizeChanger: false }}
         />
       </div>
       <Modal

@@ -10,13 +10,12 @@ import { postApi } from "../../../helper/postApi";
 import GauChart from "../../../watchlist/components/GauChart";
 
 const TableTechnique = ({
+  loadingTb,
   filteredResults,
   watchlists,
   catchWatchlists,
   isLogin,
 }) => {
-  const rowHeight = 88;
-  const maxHeight = 450;
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
@@ -315,17 +314,12 @@ const TableTechnique = ({
       {contextHolder}
       <div className="table-data-antd w-[1300px] mt-0.5">
         <Table
+          loading={loadingTb}
           showSorterTooltip={false}
           columns={columns}
           dataSource={filteredResults}
           rowClassName={rowClassName}
-          // pagination={{ defaultPageSize: 15, showSizeChanger: false }}
-          scroll={
-            filteredResults.length * rowHeight > maxHeight
-              ? { y: maxHeight }
-              : undefined
-          }
-          pagination={false}
+          pagination={{ defaultPageSize: 5, showSizeChanger: false }}
         />
       </div>
       <Modal

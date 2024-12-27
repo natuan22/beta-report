@@ -9,7 +9,7 @@ import "./styles/styleTabs.css";
 import ExportExcel from "./TableResultsFilter/ExportExcel";
 import "./styles/tableFilter.css"
 
-const TableResultsFilter = ({ filteredResults, watchlists, catchWatchlists, selectedItems, selectParameters, isLogin }) => {
+const TableResultsFilter = ({ loadingTb, filteredResults, watchlists, catchWatchlists, selectedItems, selectParameters, isLogin }) => {
   const [activeKey, setActiveKey] = useState("0");
 
   const onChange = (key) => {
@@ -20,22 +20,22 @@ const TableResultsFilter = ({ filteredResults, watchlists, catchWatchlists, sele
     {
       key: "0",
       label: "Kết quả",
-      children: <TableResults isLogin={isLogin} selectParameters={selectParameters} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} selectedItems={selectedItems} />,
+      children: <TableResults loadingTb={loadingTb} isLogin={isLogin} selectParameters={selectParameters} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} selectedItems={selectedItems} />,
     },
     {
       key: "1",
       label: "Thống kê",
-      children: <TableStatistical isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
+      children: <TableStatistical loadingTb={loadingTb} isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
     },
     {
       key: "2",
       label: "Cơ bản",
-      children: <TableBasic isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
+      children: <TableBasic loadingTb={loadingTb} isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
     },
     {
       key: "3",
       label: "Kỹ thuật",
-      children: <TableTechnique isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
+      children: <TableTechnique loadingTb={loadingTb} isLogin={isLogin} filteredResults={filteredResults} watchlists={watchlists} catchWatchlists={catchWatchlists} />,
     },
   ];
 

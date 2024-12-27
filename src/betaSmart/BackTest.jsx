@@ -274,8 +274,8 @@ const BackTest = () => {
         HIỆU SUẤT SINH LỜI
       </div>
       <div className="mt-6 grid grid-cols-12 gap-4">
-        <div className="col-span-3">
-          <div className="py-3 px-[50px] flex gap-5 items-center">
+        <div className="2xl:col-span-3 xl:col-span-full col-span-full mx-auto">
+          <div className="py-3 sm:px-[50px] xs:px-[2px] flex xs:gap-5 xxs:gap-1 items-center">
             <div className="text-[#0050AD] font-semibold w-[33px]">Từ: </div>
             <DatePicker
               format="DD/MM/YYYY"
@@ -301,7 +301,7 @@ const BackTest = () => {
               }}
             />
           </div>
-          <div className="py-3 px-[50px] flex gap-5 items-center">
+          <div className="py-3 sm:px-[50px] xs:px-[2px] flex xs:gap-5 xxs:gap-1 items-center">
             <div className="text-[#0050AD] font-semibold">Đến: </div>
             <DatePicker
               format="DD/MM/YYYY"
@@ -329,7 +329,7 @@ const BackTest = () => {
             <div className="text-[#0050AD] font-semibold">(*)</div>
           </div>
         </div>
-        <div className="table-antd-betasmart col-span-9">
+        <div className="table-antd-betasmart 2xl:col-span-9 xl:col-span-full col-span-full">
           {!loading && data ? (
             <div className="2xl:w-[1136px] xl:w-full">
               <Table
