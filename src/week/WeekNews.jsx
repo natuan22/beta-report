@@ -264,7 +264,7 @@ const WeekNews = () => {
         <div ref={pageRefs.page8}>
           <Page8Week />
         </div>
-        {dataPage9.length > 0 && (
+        {dataPage9?.length > 0 && (
           <div className="h-[827px]" ref={pageRefs.page9}>
             <Page9Week data={dataPage9} />
           </div>
