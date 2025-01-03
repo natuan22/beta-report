@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import formatNumberTable from "../../../helper/formatNumberTable";
 import formatNumberWeek from "../../../helper/formatNumberWeek";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
-import { https } from "../../../services/configService";
 import FooterLandscape from "../../utils/FooterLandscape";
 import HeaderLandscape from "../../utils/HeaderLandscape";
 
-const Page9Week = () => {
-  const [data, setData] = useState();
-  const getData = async () => {
-    try {
-      const res = await https.get("/api/v1/report/co-phieu-khuyen-nghi-tuan");
-      setData(res.data.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+const Page9Week = ({data}) => {
   const percentIcon = (val) => {
     if (val) return "%";
     if (!val) return "";
@@ -54,65 +41,65 @@ const Page9Week = () => {
             <thead className="bg-[#0155B7]  border border-[#0155B7] border-solid border-collapse">
               <tr className="text-white ">
                 <th className="font-semibold px-1 py-1 text-[11px] ">Mã CP</th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[100px]  ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[100px]">
                   Ngày
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[80px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Giá khuyến nghị
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[80px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Giá mục tiêu
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[80px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Giá dừng lỗ
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px]  ">
+                <th className="font-semibold px-1 py-1 text-[11px]">
                   Tỷ suất sinh <br />
                   lời kỳ vọng
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[80px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Thời gian nắm giữ dự kiến (tháng)
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[100px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[100px]">
                   Ghi chú
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px]  ">
+                <th className="font-semibold px-1 py-1 text-[11px]">
                   Giá thị trường
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px]  w-[60px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
                   Tỷ suất lợi nhuận
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[80px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Giá bán
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[60px] ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
                   Tỷ suất sinh lời/lỗ
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px]  w-[60px]  ">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
                   Thời gian nắm giữ{" "}
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px]  w-[85px]">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[85px]">
                   Ghi chú
                 </th>
               </tr>
             </thead>
-            <tbody className="border border-[#0155B7] border-solid border-collapse ">
+            <tbody className="border border-[#0155B7] border-solid border-collapse">
               {data?.length > 0 ? (
                 data.map((item, index) => {
                   return (
                     <tr
-                      className="text-center text-[14px] border border-y border-[#0155B7] border-solid  border-collapse "
+                      className="text-center text-[14px] border border-y border-[#0155B7] border-solid border-collapse"
                       key={index}
                     >
-                      <td className=" py-1 px-1 font-bold ">{item.code}</td>
-                      <td className=" py-1 px-1 ">{item.date}</td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1 font-bold">{item.code}</td>
+                      <td className="py-1 px-1">{item.date}</td>
+                      <td className="py-1 px-1">
                         {formatNumberWeek(Math.ceil(item.gia_khuyen_nghi))}
                       </td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1">
                         {formatNumberWeek(Math.ceil(item.gia_muc_tieu))}
                       </td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1">
                         {formatNumberWeek(Math.ceil(item.gia_dung_lo))}
                       </td>
                       <td
@@ -123,11 +110,11 @@ const Page9Week = () => {
                         {formatNumberTable(item.ty_suat_sinh_loi_ky_vong * 100)}
                         {percentIcon(item.ty_suat_sinh_loi_ky_vong)}
                       </td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1">
                         {item.thoi_gian_nam_giu_du_kien}
                       </td>
-                      <td className=" py-1 px-1 ">{item.ghi_chu}</td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1">{item.ghi_chu}</td>
+                      <td className="py-1 px-1">
                         {formatNumberWeek(Math.ceil(item.gia_thi_truong))}
                       </td>
                       <td
@@ -138,7 +125,7 @@ const Page9Week = () => {
                         {formatNumberTable(item.ty_suat_loi_nhuan * 100)}
                         {percentIcon(item.ty_suat_loi_nhuan)}
                       </td>
-                      <td className=" py-1 px-1 ">
+                      <td className="py-1 px-1">
                         {formatNumberWeek(item.gia_ban)}
                       </td>
                       <td
@@ -149,8 +136,8 @@ const Page9Week = () => {
                         {formatNumberTable(item.ty_suat_sinh_loi_lo * 100)}
                         {percentIcon(item.ty_suat_sinh_loi_lo)}{" "}
                       </td>
-                      <td className=" py-1 px-1 ">{item.thoi_gian_nam_giu}</td>
-                      <td className=" py-1 px-1 ">{item.ghi_chu_2}</td>
+                      <td className="py-1 px-1">{item.thoi_gian_nam_giu}</td>
+                      <td className="py-1 px-1">{item.ghi_chu_2}</td>
                     </tr>
                   );
                 })
