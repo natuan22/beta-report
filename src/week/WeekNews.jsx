@@ -16,6 +16,7 @@ import Page6Week from "./component/Page6/Page6Week";
 import Page7Week from "./component/Page7/Page7Week";
 import Page8Week from "./component/Page8/Page8Week";
 import Page9Week from "./component/Page9/Page9Week";
+import { https } from "../services/configService";
 
 const weekDate = getTimeWeek();
 
@@ -182,6 +183,19 @@ const WeekNews = () => {
     }
   };
 
+  const [dataPage9, setDataPage9] = useState();
+  const getData = async () => {
+    try {
+      const res = await https.get("/api/v1/report/co-phieu-khuyen-nghi-tuan");
+      setDataPage9(res.data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div className="relative">
       <div className="absolute right-[10%] top-[35px]">
@@ -250,9 +264,11 @@ const WeekNews = () => {
         <div ref={pageRefs.page8}>
           <Page8Week />
         </div>
-        <div className="h-[827px]" ref={pageRefs.page9}>
-          <Page9Week />
-        </div>
+        {dataPage9.length > 0 && (
+          <div className="h-[827px]" ref={pageRefs.page9}>
+            <Page9Week data={dataPage9} />
+          </div>
+        )}
         {/* <div ref={pageRefs.page10}>
               <Page10Week />
             </div>
