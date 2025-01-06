@@ -170,7 +170,7 @@ const AfternoonPage4 = ({ role }) => {
                               item.year
                             )} text-[12px] text-center px-1 `}
                           >
-                            {formatNumber(item.year)}
+                            {formatNumber(item.ytd)}
                           </td>
                         </tr>
                       );
@@ -246,7 +246,7 @@ const AfternoonPage4 = ({ role }) => {
                               item.year
                             )} text-[12px] text-center  px-2 `}
                           >
-                            {formatNumber(item.year)}
+                            {formatNumber(item.ytd)}
                           </td>
                         </tr>
                       );

@@ -129,7 +129,7 @@ const Page2 = () => {
                         item.year
                       )} text-center px-1 py-1`}
                     >
-                      {formatNumber(item.year)}
+                      {formatNumber(item.ytd)}
                     </td>
                   </tr>
                 );
@@ -180,7 +180,7 @@ const Page2 = () => {
                       item.year
                     )} text-center px-1 py-3`}
                   >
-                    {formatNumber(item.year)}
+                    {formatNumber(item.ytd)}
                   </td>
                 </tr>
               ))}
