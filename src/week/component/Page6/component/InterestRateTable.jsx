@@ -13,6 +13,7 @@ const InterestRateTable = ({ data }) => {
             <th className="font-semibold px-1 py-1 ">%W</th>
             <th className="font-semibold px-1 py-1 ">%1M</th>
             <th className="font-semibold px-1 py-1 ">%YtD</th>
+            <th className="font-semibold px-1 py-1 ">%YtY</th>
           </tr>
         </thead>
         <tbody className="border border-[#0155B7] border-solid border-collapse  ">
@@ -43,7 +44,14 @@ const InterestRateTable = ({ data }) => {
                   item.year
                 )} text-center px-1 py-3 text-[11px]`}
               >
-                {formatNumber(item.year)}
+                {formatNumber(item.ytd)}
+              </td>
+              <td
+                className={`${getColorBaseOnValue(
+                  item.year
+                )} text-center px-1 py-3 text-[11px]`}
+              >
+                {formatNumber(item.yty)}
               </td>
             </tr>
           ))}
