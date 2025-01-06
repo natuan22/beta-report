@@ -20,30 +20,30 @@ const EditModal = ({ dataEdit, setData, isModalEditOpen, setIsModalEditOpen }) =
     e.preventDefault();
     setLoading(true);
 
-    const price_2024 = e.target[2]?.value || 0;
-    const price_2025 = e.target[4]?.value || 0;
+    const currPT = e.target[2]?.value || 0;
+    const nextPT = e.target[4]?.value || 0;
     try {
       const res = await postApi("/api/v1/investment/update-beta-watch-list", {
         code: e.target[0].value,
-        price_2024,
-        price_2025,
+        currPT,
+        nextPT,
         ma: e.target[6]?.value || 0,
         is_beta_page: 1,
       });
       setData((prev) => {
         const thisItem = prev.find((item) => item.code == e.target[0].value);
-        const newP2024 = parseFloat(((price_2024 - thisItem.closePrice) / thisItem.closePrice) * 100).toFixed(2);
-        const newP2025 = parseFloat(((price_2025 - thisItem.closePrice) / thisItem.closePrice) * 100).toFixed(2);
+        const priceIncCY = parseFloat(((currPT - thisItem.closePrice) / thisItem.closePrice) * 100).toFixed(2);
+        const priceIncNY = parseFloat(((nextPT - thisItem.closePrice) / thisItem.closePrice) * 100).toFixed(2);
 
         const index = prev.findIndex((item) => item.code == e.target[0].value);
         const newData = [...prev];
 
         newData[index] = {
           ...thisItem,
-          price_2024: parseFloat(parseFloat(price_2024).toFixed(2)),
-          price_2025: parseFloat(parseFloat(price_2025).toFixed(2)),
-          p_2024: newP2024,
-          p_2025: newP2025,
+          currPT: parseFloat(parseFloat(currPT).toFixed(2)),
+          nextPT: parseFloat(parseFloat(nextPT).toFixed(2)),
+          priceIncCY,
+          priceIncNY,
           name: `MA_${e.target[6]?.value}`,
           ma: parseFloat((res[0].ma / 1000).toFixed(2)),
           total: parseFloat((res[0].total * 100).toFixed(2)),
@@ -72,8 +72,8 @@ const EditModal = ({ dataEdit, setData, isModalEditOpen, setIsModalEditOpen }) =
       <div className="m-[15px]">
         <form onSubmit={handleSubmitEdit}>
           <TextField defaultValue={dataEdit?.code} disabled label="Mã" fullWidth className="!mb-[20px]" />
-          <TextField defaultValue={dataEdit?.price_2024} label="Giá mục tiêu 2024" fullWidth className="!mb-[20px]" />
-          <TextField defaultValue={dataEdit?.price_2025} label="Giá mục tiêu 2025" fullWidth className="!mb-[20px]" />
+          <TextField defaultValue={dataEdit?.currPT} label="Giá mục tiêu 2025" fullWidth className="!mb-[20px]" />
+          <TextField defaultValue={dataEdit?.nextPT} label="Giá mục tiêu 2026" fullWidth className="!mb-[20px]" />
           <TextField defaultValue={dataEdit?.name.slice(3)} label="MA" fullWidth className="!mb-[20px]" />
           <LoadingButton variant="contained" type="submit" fullWidth loading={loading}>
             Chỉnh sửa
