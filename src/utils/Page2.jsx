@@ -126,7 +126,7 @@ const Page2 = () => {
                     </td>
                     <td
                       className={`${getColorBaseOnValue(
-                        item.year
+                        item.ytd
                       )} text-center px-1 py-1`}
                     >
                       {formatNumber(item.ytd)}
@@ -177,7 +177,7 @@ const Page2 = () => {
                   </td>
                   <td
                     className={`${getColorBaseOnValue(
-                      item.year
+                      item.ytd
                     )} text-center px-1 py-3`}
                   >
                     {formatNumber(item.ytd)}

@@ -167,7 +167,7 @@ const AfternoonPage4 = ({ role }) => {
                           </td>
                           <td
                             className={`${getColorBaseOnValue(
-                              item.year
+                              item.ytd
                             )} text-[12px] text-center px-1 `}
                           >
                             {formatNumber(item.ytd)}
@@ -243,7 +243,7 @@ const AfternoonPage4 = ({ role }) => {
                           </td>
                           <td
                             className={`${getColorBaseOnValue(
-                              item.year
+                              item.ytd
                             )} text-[12px] text-center  px-2 `}
                           >
                             {formatNumber(item.ytd)}
