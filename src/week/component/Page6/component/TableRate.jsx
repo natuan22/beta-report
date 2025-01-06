@@ -13,7 +13,7 @@ const TableRate = ({ data }) => {
             <th className="font-semibold px-1 py-1  ">%W</th>
             <th className="font-semibold px-1 py-1  ">%1M</th>
             <th className="font-semibold px-1 py-1  ">%YtD</th>
-            <th className="font-semibold px-1 py-1  ">%YtY</th>
+            <th className="font-semibold px-1 py-1  ">%YoY</th>
           </tr>
         </thead>
         <tbody className="border border-[#0155B7] border-solid border-collapse ">
@@ -48,17 +48,17 @@ const TableRate = ({ data }) => {
                 </td>
                 <td
                   className={`${getColorBaseOnValue(
-                    item.year
+                    item.ytd
                   )} text-center px-1 py-1 text-[11px]`}
                 >
                   {formatNumber(item.ytd)}
                 </td>
                 <td
                   className={`${getColorBaseOnValue(
-                    item.year
+                    item.yoy
                   )} text-center px-1 py-1 text-[11px]`}
                 >
-                  {formatNumber(item.yty)}
+                  {formatNumber(item.yoy)}
                 </td>
               </tr>
             );
