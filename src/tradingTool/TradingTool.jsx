@@ -41,7 +41,7 @@ const getColor = (item) => {
 
 const getColorTiemNangTangGia = (item, type) => {
   if (item < 0) return "text-red-500";
-  const threshold = type === 2024 ? 12 : 25;
+  const threshold = type === 2025 ? 12 : 25;
   return item >= threshold ? "text-green-500" : "";
 };
 
@@ -105,11 +105,11 @@ const TradingTool = () => {
       Array.isArray(data) &&
       data?.map((item, index) => {
         const closePrice = item.closePrice / 1000;
-        const p_2024 = item.price_2024
-          ? ((item.price_2024 - closePrice) / closePrice) * 100
+        const priceIncCY = item.currPT
+          ? ((item.currPT - closePrice) / closePrice) * 100
           : 0;
-        const p_2025 = item.price_2025
-          ? ((item.price_2025 - closePrice) / closePrice) * 100
+        const priceIncNY = item.nextPT
+          ? ((item.nextPT - closePrice) / closePrice) * 100
           : 0;
 
         return {
@@ -126,10 +126,10 @@ const TradingTool = () => {
               ? "Hold mua"
               : "Hold bán",
           total: item.total * 100,
-          price_2024: item.price_2024,
-          price_2025: item.price_2025,
-          p_2024,
-          p_2025,
+          currPT: item.currPT,
+          nextPT: item.nextPT,
+          priceIncCY,
+          priceIncNY,
           ma: item.ma / 1000,
           change:
             ((item.closePrice - item.closePricePrev) / item.closePricePrev) *
@@ -176,30 +176,30 @@ const TradingTool = () => {
       cellStyle: { fontWeight: "bold", textAlign: "center" },
     },
     {
-      headerName: "Giá mục tiêu 2024",
-      field: "price_2024",
-      width: 190,
-      cellStyle: { textAlign: "center" },
-    },
-    {
-      headerName: "Tiềm năng tăng giá 2024 (%)",
-      field: "p_2024",
-      width: 200,
-      cellClass: (params) => getColorTiemNangTangGia(params.data.p_2024, 2024),
-      valueFormatter: (params) => formatNumberCurrency(params.value),
-      cellStyle: { textAlign: "center" },
-    },
-    {
       headerName: "Giá mục tiêu 2025",
-      field: "price_2025",
+      field: "currPT",
       width: 190,
       cellStyle: { textAlign: "center" },
     },
     {
       headerName: "Tiềm năng tăng giá 2025 (%)",
-      field: "p_2025",
+      field: "priceIncCY",
       width: 200,
-      cellClass: (params) => getColorTiemNangTangGia(params.data.p_2025, 2025),
+      cellClass: (params) => getColorTiemNangTangGia(params.data.priceIncCY, 2025),
+      valueFormatter: (params) => formatNumberCurrency(params.value),
+      cellStyle: { textAlign: "center" },
+    },
+    {
+      headerName: "Giá mục tiêu 2026",
+      field: "nextPT",
+      width: 190,
+      cellStyle: { textAlign: "center" },
+    },
+    {
+      headerName: "Tiềm năng tăng giá 2026 (%)",
+      field: "priceIncNY",
+      width: 200,
+      cellClass: (params) => getColorTiemNangTangGia(params.data.priceIncNY, 2026),
       valueFormatter: (params) => formatNumberCurrency(params.value),
       cellStyle: { textAlign: "center" },
     },
@@ -298,11 +298,11 @@ const TradingTool = () => {
                   : res[0].signal === 2
                   ? "Hold mua"
                   : "Hold bán",
-              p_2024: item.price_2024
-                ? ((item.price_2024 - newClosePrice) / newClosePrice) * 100
+              priceIncCY: item.currPT
+                ? ((item.currPT - newClosePrice) / newClosePrice) * 100
                 : 0,
-              p_2025: item.price_2025
-                ? ((item.price_2025 - newClosePrice) / newClosePrice) * 100
+              priceIncNY: item.nextPT
+                ? ((item.nextPT - newClosePrice) / newClosePrice) * 100
                 : 0,
               total: res[0].total * 100,
               change,
@@ -317,8 +317,8 @@ const TradingTool = () => {
                 "closePrice",
                 "change",
                 "ma",
-                "p_2024",
-                "p_2025",
+                "priceIncCY",
+                "priceIncNY",
                 "total",
               ];
               const className =
@@ -413,20 +413,20 @@ const TradingTool = () => {
     e.preventDefault();
     setLoading(true);
     const code = e.target[0].value.toUpperCase();
-    const price_2024 = e.target[2].value;
-    const price_2025 = e.target[4].value;
+    const currPT = e.target[2].value;
+    const nextPT = e.target[4].value;
     try {
       const res = await postApi("/api/v1/investment/create-beta-watch-list", {
         code,
-        price_2024,
-        price_2025,
+        currPT,
+        nextPT,
         ma: e.target[6]?.value || 0,
         is_beta_page: 1,
       });
 
       const closePrice = res[0].closePrice / 1000;
-      const newP2024 = ((price_2024 - closePrice) / closePrice) * 100;
-      const newP2025 = ((price_2025 - closePrice) / closePrice) * 100;
+      const priceIncCY = ((currPT - closePrice) / closePrice) * 100;
+      const priceIncNY = ((nextPT - closePrice) / closePrice) * 100;
 
       setData((prev) => {
         const newData = [
@@ -438,10 +438,10 @@ const TradingTool = () => {
                 res[0].closePricePrev) *
               100,
             closePrice,
-            price_2024: Number(price_2024),
-            price_2025: Number(price_2025),
-            p_2024: newP2024,
-            p_2025: newP2025,
+            currPT: Number(currPT),
+            nextPT: Number(nextPT),
+            priceIncCY,
+            priceIncNY,
             ma: res[0].ma / 1000,
             total: res[0].total * 100,
             id: code,
@@ -470,10 +470,10 @@ const TradingTool = () => {
     "Mã",
     "Giá",
     "+/-",
-    "Giá mục tiêu 2024",
-    "Tiềm năng tăng giá 2024 (%)",
     "Giá mục tiêu 2025",
     "Tiềm năng tăng giá 2025 (%)",
+    "Giá mục tiêu 2026",
+    "Tiềm năng tăng giá 2026 (%)",
     "MA",
     "Giá trị MA",
     "Hiệu suất sinh lời theo MA (%)",
@@ -484,10 +484,10 @@ const TradingTool = () => {
     item.code,
     item.closePrice,
     item.change,
-    item.price_2024,
-    item.p_2024,
-    item.price_2025,
-    item.p_2025,
+    item.currPT,
+    item.priceIncCY,
+    item.nextPT,
+    item.priceIncNY,
     item.name,
     item.ma,
     item.total,
@@ -593,12 +593,12 @@ const TradingTool = () => {
             <form onSubmit={handleSubmitCreate}>
               <TextField label="Mã" fullWidth className="!mb-[20px]" />
               <TextField
-                label="Giá mục tiêu 2024"
+                label="Giá mục tiêu 2025"
                 fullWidth
                 className="!mb-[20px]"
               />
               <TextField
-                label="Giá mục tiêu 2025"
+                label="Giá mục tiêu 2026"
                 fullWidth
                 className="!mb-[20px]"
               />

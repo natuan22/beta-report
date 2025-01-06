@@ -516,10 +516,8 @@ const BetaSmart = () => {
 
     if (socketConnected && data?.length > 0) {
       socket.on("listen-ma-co-phieu", async (res) => {
-        const isSignalZeroWithConditions =
-          res[0].signal === 0 &&
-          calculatePriceChange(res[0].price_2024, res[0].closePrice) >= 7 &&
-          calculatePriceChange(res[0].price_2025, res[0].closePrice) >= 25;
+        const isSignalZeroWithConditions = res[0].signal === 0 && calculatePriceChange(res[0].nextPT, res[0].closePrice) >= 25;
+          // calculatePriceChange(res[0].price_2024, res[0].closePrice) >= 7 &&
 
         const index = data.findIndex((item) => item.code === res[0].code);
 

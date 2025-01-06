@@ -64,7 +64,7 @@ const SaveFilter = ({ selectedItems, setFilters, filtersActive, isLogin }) => {
   const saveFilter = async () => {
     // Sử dụng SweetAlert để xác nhận việc xóa
     Swal.fire({
-      title: "Bạn chắc chắn muốn xóa bộ lọc này?",
+      title: "Bạn chắc chắn muốn chỉnh sửa bộ lọc này?",
       text: "Thao tác này không thể hoàn tác!",
       icon: "warning",
       showCancelButton: true,

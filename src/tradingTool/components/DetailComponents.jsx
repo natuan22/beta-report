@@ -55,31 +55,31 @@ export default (params) => {
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
-            <p className="m-1 w-[75%]">Giá mục tiêu 2024</p>
-            <p className="m-1">:</p>
-            <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail && formatNumberCurrency(dataDetail?.price_2024)}
-            </p>
-          </div>
-          <div className="flex justify-between items-center text-[16px] py-1 px-3">
-            <p className="m-1 w-[75%]">Tiềm năng tăng giá 2024 (%)</p>
-            <p className="m-1">:</p>
-            <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail && formatNumberCurrency(dataDetail?.p_2024)}
-            </p>
-          </div>
-          <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Giá mục tiêu 2025</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail && formatNumberCurrency(dataDetail?.price_2025)}
+              {dataDetail && formatNumberCurrency(dataDetail?.currPT)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">
             <p className="m-1 w-[75%]">Tiềm năng tăng giá 2025 (%)</p>
             <p className="m-1">:</p>
             <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
-              {dataDetail && formatNumberCurrency(dataDetail?.p_2025)}
+              {dataDetail && formatNumberCurrency(dataDetail?.priceIncCY)}
+            </p>
+          </div>
+          <div className="flex justify-between items-center text-[16px] py-1 px-3">
+            <p className="m-1 w-[75%]">Giá mục tiêu 2026</p>
+            <p className="m-1">:</p>
+            <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+              {dataDetail && formatNumberCurrency(dataDetail?.nextPT)}
+            </p>
+          </div>
+          <div className="flex justify-between items-center text-[16px] py-1 px-3">
+            <p className="m-1 w-[75%]">Tiềm năng tăng giá 2026 (%)</p>
+            <p className="m-1">:</p>
+            <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+              {dataDetail && formatNumberCurrency(dataDetail?.priceIncNY)}
             </p>
           </div>
           <div className="flex justify-between items-center text-[16px] py-1 px-3">

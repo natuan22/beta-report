@@ -79,7 +79,10 @@ const WeekNews = () => {
     const img6 = await generateImage(pageRefs.page6, 1480, 800);
     const img7 = await generateImage(pageRefs.page7, 1480, 800);
     const img8 = await generateImage(pageRefs.page8, 1480, 800);
-    const img9 = await generateImage(pageRefs.page9, 800, 1480);
+    let img9;
+    if(dataPage9?.length > 0) {
+      img9 = await generateImage(pageRefs.page9, 800, 1480);
+    }
     // const img10 = await generateImage(pageRefs.page10, 1480, 800);
     // const img11 = await generateImage(pageRefs.page11, 1480, 800);
     const img12 = await generateImage(pageRefs.page12, 1480, 800);
@@ -99,8 +102,10 @@ const WeekNews = () => {
     pdf.addImage(img7, "JPEG", 0, 0, 210, 391);
     pdf.addPage(null, "p");
     pdf.addImage(img8, "JPEG", 0, 0, 210, 391);
-    pdf.addPage(null, "l");
-    pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
+    if(dataPage9?.length > 0) {
+      pdf.addPage(null, "l");
+      pdf.addImage(img9, "JPEG", 0, 0, 392, 211);
+    }
     pdf.addPage(null, "p");
     // pdf.addImage(img10, "JPEG", 0, 0);
     // pdf.addPage(null, "p");
@@ -112,6 +117,8 @@ const WeekNews = () => {
   };
 
   const downloadImages = async () => {
+    let img9;
+
     const img1 = await generateImage(pageRefs.page1, 1121, 800);
     const img2 = await generateImage(pageRefs.page2, 1121, 800);
     const img3 = await generateImage(pageRefs.page3, 1121, 800);
@@ -120,7 +127,9 @@ const WeekNews = () => {
     const img6 = await generateImage(pageRefs.page6, 1121, 800);
     const img7 = await generateImage(pageRefs.page7, 1121, 800);
     const img8 = await generateImage(pageRefs.page8, 1121, 800);
-    const img9 = await generateImage(pageRefs.page9, 800, 1121);
+    if(dataPage9?.length > 0) {
+      img9 = await generateImage(pageRefs.page9, 800, 1121);
+    }
     const img10 = await generateImage(pageRefs.page12, 1121, 800);
 
     const link1 = document.createElement("a");
@@ -163,14 +172,16 @@ const WeekNews = () => {
     link8.download = "Baocaotuan-Trang8.png";
     link8.click();
 
-    const link9 = document.createElement("a");
-    link9.href = img9;
-    link9.download = "Baocaotuan-Trang9.png";
-    link9.click();
+    if(dataPage9?.length > 0) {
+      const link9 = document.createElement("a");
+      link9.href = img9;
+      link9.download = "Baocaotuan-Trang9.png";
+      link9.click();
+    }
 
     const link10 = document.createElement("a");
     link10.href = img10;
-    link10.download = "Baocaotuan-Trang10.png";
+    link10.download = `Baocaotuan-Trang${dataPage9?.length > 0 ? '10': '9'}.png`;
     link10.click();
   };
 
