@@ -41,7 +41,7 @@ const InterestRateTable = ({ data }) => {
               </td>
               <td
                 className={`${getColorBaseOnValue(
-                  item.year
+                  item.ytd
                 )} text-center px-1 py-3 text-[11px]`}
               >
                 {formatNumber(item.ytd)}
