@@ -8,7 +8,7 @@ import icon_excel from "../app/asset/img/icon_excel.png";
 import NavBar from "../app/component/NavBar";
 import { getApi } from "../helper/getApi";
 import ChartLine from "./components/ChartLine";
-import moment from "moment";
+import ContributePEPB from "./ContributePEPB";
 
 const XLSX = require("xlsx");
 
@@ -24,13 +24,9 @@ const theme = createTheme({
 
 const HistoricalPEPB = () => {
   const dispatch = useDispatch();
-  const [isLogin, setIsLogin] = useState(
-    localStorage.getItem(process.env.REACT_APP_IS_LG)
-  );
+  const [isLogin, setIsLogin] = useState(localStorage.getItem(process.env.REACT_APP_IS_LG));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [role, setRole] = useState(
-    localStorage.getItem(process.env.REACT_APP_USER_ROLE)
-  );
+  const [role, setRole] = useState(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
 
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
@@ -46,10 +42,7 @@ const HistoricalPEPB = () => {
       setRole(null);
       dispatch(userLogoutAction());
       window.location.reload();
-      localStorage.setItem(
-        process.env.REACT_APP_IS_LG,
-        process.env.REACT_APP_LG_F
-      );
+      localStorage.setItem(process.env.REACT_APP_IS_LG, process.env.REACT_APP_LG_F);
       localStorage.removeItem(process.env.REACT_APP_USER_ROLE);
       localStorage.removeItem("user");
     }
@@ -66,9 +59,7 @@ const HistoricalPEPB = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(
-          `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
-        );
+        const data = await getApi(`/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`);
         setData(data);
       } catch (error) {
         console.error(error);
@@ -89,34 +80,13 @@ const HistoricalPEPB = () => {
     fetchDataStock();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [stock, period]);
+  useEffect(() => { fetchData() }, [stock, period]);
+  const filterOption = (input, option) => (option?.value).toLowerCase().includes(input.toLowerCase()) || (option?.label).toLowerCase().includes(input.toLowerCase());
 
-  const filterOption = (input, option) =>
-    (option?.value).toLowerCase().includes(input.toLowerCase()) ||
-    (option?.label).toLowerCase().includes(input.toLowerCase());
+  const onChange = (value) => { setStock(value) };
+  const warning = (type, text) => { messageApi.open({ type, content: text }) };
 
-  const onChange = (value) => {
-    setStock(value);
-  };
-
-  const warning = (type, text) => {
-    messageApi.open({
-      type,
-      content: text,
-    });
-  };
-
-  const sheetTitle = [
-    "Ngày",
-    "PB Vnindex",
-    "PE Vnindex",
-    "PB Ngành",
-    "PE Ngành",
-    "PB",
-    "PE",
-  ];
+  const sheetTitle = ["Ngày", "PB Vnindex", "PE Vnindex", "PB Ngành", "PE Ngành", "PB", "PE"];
 
   const prepareData = (item) => [
     new Date(item.from),
@@ -135,28 +105,13 @@ const HistoricalPEPB = () => {
       try {
         setLoadingExcel(true);
 
-        const data = await getApi(
-          `/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`
-        );
+        const data = await getApi(`/api/v1/tcbs/historical-pe-pb?stock=${stock}&period=${period}`);
 
-        //Xử lý dữ liệu đưa vào sheet
         const sheet1Data = data.data.map(prepareData);
-
-        // Tạo workbook và thêm các sheet
         const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet([sheetTitle, ...sheet1Data]), "Historical PE PB");
 
-        // Tạo sheet 1
-        XLSX.utils.book_append_sheet(
-          workbook,
-          XLSX.utils.aoa_to_sheet([sheetTitle, ...sheet1Data]),
-          "Historical PE PB"
-        );
-
-        // Xuất workbook thành file Excel
-        XLSX.writeFile(
-          workbook,
-          `historical-pe-pb-${stock}-${period}year.xlsx`
-        );
+        XLSX.writeFile(workbook, `historical-pe-pb-${stock}-${period}year.xlsx`);
       } catch (error) {
         console.error("Có lỗi xảy ra:", error);
       } finally {
@@ -183,46 +138,51 @@ const HistoricalPEPB = () => {
           <div className="bg-gradient-to-r from-[#0669fcff] to-[#011e48ff] md:w-[410px] sm:w-[345px] h-[40px] rounded-[20px] uppercase text-[#ffba07] font-bold text-[20px] flex flex-col text-center items-center justify-center">
             Lịch sử P/E, P/B
           </div>
-          <div className="md:flex sm:block items-center">
-            <div className="code-select mr-5">
-              <div className="mb-[3px] font-medium">Mã</div>
-              <Select
-                style={{ width: 222, height: 40 }}
-                defaultValue={stock}
-                showSearch
-                onChange={onChange}
-                filterOption={filterOption}
-                options={dataStocks.map((code) => ({ value: code, label: code }))}
-              />
-            </div>
+          <div>
+            <div className="md:flex sm:block items-center">
+              <div className="code-select mr-5">
+                <div className="mb-[3px] font-medium">Mã</div>
+                <Select
+                  style={{ width: 222, height: 40 }}
+                  defaultValue={stock}
+                  showSearch
+                  onChange={onChange}
+                  filterOption={filterOption}
+                  options={dataStocks.map((code) => ({ value: code, label: code }))}
+                />
+              </div>
 
-            <div className="mr-5">
-              <div className="mb-[3px] font-medium">Thời gian</div>
-              <button className={`custom-btn ${period === "1" ? "active-btn" : "btn-2"} xs:inline xxs:block`} onClick={() => { setPeriod("1"); }}>1Y</button>
-              <button className={`custom-btn ${period === "3" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("3"); }}>3Y</button>
-              <button className={`custom-btn ${period === "5" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("5"); }}>5Y</button>
-            </div>
+              <div className="mr-5">
+                <div className="mb-[3px] font-medium">Thời gian</div>
+                <button className={`custom-btn ${period === "1" ? "active-btn" : "btn-2"} xs:inline xxs:block`} onClick={() => { setPeriod("1"); }}>1Y</button>
+                <button className={`custom-btn ${period === "3" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("3"); }}>3Y</button>
+                <button className={`custom-btn ${period === "5" ? "active-btn" : "btn-2"} xs:inline xxs:block xs:ml-2 xxs:ml-0 xs:mt-0 xxs:mt-2`} onClick={() => { setPeriod("5"); }}>5Y</button>
+              </div>
 
-            <div className="mt-[22px]">
-              <LoadingButton
-                variant="contained"
-                color="test"
-                sx={{ padding: "0px", "& .MuiLoadingButton-loadingIndicator": { color: "#FC9433" }}}
-                loading={loadingExcel}
-                onClick={downloadExcel}
-              >
-                <div className="flex items-center p-[7.5px]">
-                  <img src={icon_excel} alt="icon_excel" />
-                  <span className="normal-case pl-1 text-[14px]  font-semibold text-white">
-                    Tải Excel
-                  </span>
-                </div>
-              </LoadingButton>
+              <div className="mt-[22px]">
+                <LoadingButton
+                  variant="contained"
+                  color="test"
+                  sx={{ padding: "0px", "& .MuiLoadingButton-loadingIndicator": { color: "#FC9433" }}}
+                  loading={loadingExcel}
+                  onClick={downloadExcel}
+                >
+                  <div className="flex items-center p-[7.5px]">
+                    <img src={icon_excel} alt="icon_excel" />
+                    <span className="normal-case pl-1 text-[14px]  font-semibold text-white">
+                      Tải Excel
+                    </span>
+                  </div>
+                </LoadingButton>
+              </div>
+            </div>
+            <div className="grid xl:grid-cols-2 lg:grid-cols-none">
+              <ChartLine stock={stock} data={data} chartKey="P/E" />
+              <ChartLine stock={stock} data={data} chartKey="P/B" />
             </div>
           </div>
-          <div className="mt-5 grid xl:grid-cols-2 lg:grid-cols-none">
-            <ChartLine stock={stock} data={data} chartKey="P/E" />
-            <ChartLine stock={stock} data={data} chartKey="P/B" />
+          <div>
+            <ContributePEPB />
           </div>
         </div>
       </div>

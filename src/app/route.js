@@ -1,5 +1,4 @@
 import Home from "../Home";
-import NavBar3 from "../NavBarTest/NavBar3";
 import AdminBlogs from "../admin-blogs/AdminBlogs";
 import AddPost from "../admin-blogs/components/Post/AddPost";
 import EditPost from "../admin-blogs/components/Post/EditPost";
@@ -14,6 +13,7 @@ import BuySellActive from "../buySellActive/BuySellActive";
 import Filter from "../filter/Filter";
 import HistoricalPEPB from "../historicalPEPB/HistoricalPEPB";
 import ReportAfternoon from "../report/ReportAfternoon";
+import SignalWarning from "../signal-warning/SignalWarning";
 import TradingStrategies from "../tradingStrategies/TradingStrategies";
 import TradingTool from "../tradingTool/TradingTool";
 import WatchList from "../watchlist/WatchList";
@@ -33,7 +33,7 @@ export const routes = [
   // Công cụ đầu tư
   { path: "/danh-muc-theo-doi", title: 'Danh mục theo dõi', component: WatchList, role: process.env.REACT_APP_BASE_USER },
   { path: "/bo-loc", title: 'Bộ lọc', component: Filter, role: process.env.REACT_APP_BASE_USER },
-  { path: "/canh-bao-tin-hieu", title: 'Cảnh báo tín hiệu', component: NavBar3, role: process.env.REACT_APP_BASE_USER },
+  { path: "/canh-bao-tin-hieu", title: 'Cảnh báo tín hiệu', component: SignalWarning, role: process.env.REACT_APP_BASE_USER },
   { path: "/chien-luoc-giao-dich", title: 'Chiến lược giao dịch', component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
   { path: "/beta-smart", title: 'BETA SMART', component: BetaSmart, role: process.env.REACT_APP_PREMIUM_USER },
   { path: "/trading-tool", title: 'Trading Tool', component: TradingTool, role: process.env.REACT_APP_PREMIUM_USER },
