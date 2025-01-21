@@ -1,0 +1,82 @@
+.dialog_setting_signal .ant-modal-content {
+  padding: 20px 19px 20px 24px;
+  border-radius: 0px;
+  border: 4px solid #ffba07;
+}
+
+.dialog_delete_signal .ant-modal-content {
+  padding: 34px 19px 20px 24px;
+  border-radius: 10px;
+  border: 4px solid #0E48DD;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-setting-signal.ant-btn-default:disabled {
+  background: #fff;
+  border: 2px solid #ffba07;
+}
+
+
+.signal_input.ant-input-number {
+  border-radius: 0px;
+}
+
+.signal_input.ant-input-number-outlined {
+  border: 2px solid #ffba07;
+  background: #fff;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) !important;
+}
+
+.signal_input.ant-input-number-outlined:focus-within {
+  background: #fff;
+}
+
+.signal_input.ant-input-number-outlined:hover {
+  border-color: #ffba07;
+  background: #fff;
+}
+
+.signal_input.ant-input-number-outlined .ant-input-number-handler-wrap {
+  background: #fff;
+}
+
+.signal_input.ant-input-number .ant-input-number-handler {
+  border-inline-start: 2px solid #ffba07;
+}
+
+.signal_input.ant-input-number-outlined .ant-input-number-handler-wrap .ant-input-number-handler-down {
+  border-block-start: 2px solid #ffba07;
+}
+
+.signal_input.ant-input-number .ant-input-number-input {
+  color: #000;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 2px 11px;
+}
+
+.signal_input.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled):focus-within{
+  background-color: #fff;
+}
+
+.signal_input.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled) {
+  background: #fff;
+}
+
+.signal_input.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled):hover {
+  background: #fff;
+}
+
+.signal_input.ant-input-number.ant-input-number-status-error .ant-input-number-handler {
+  border-inline-start: 2px solid #ffa39e;
+}
+
+.signal_input.ant-input-number-outlined.ant-input-number-status-error .ant-input-number-handler-wrap .ant-input-number-handler-down {
+  border-block-start: 2px solid #ffa39e;
+}
+
+.signal_input.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled) {
+  border-width: 2px;
+}

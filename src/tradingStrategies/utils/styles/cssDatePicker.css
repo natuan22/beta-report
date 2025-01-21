@@ -15,6 +15,18 @@
     background: #0050AD;
 }
 
+.code-select .ant-select-selection-placeholder {
+    color: white;
+}
+
+.code-select.multiple-select .ant-select-selector {
+    min-height: 40px;
+}
+
+.code-select .ant-select-multiple .ant-select-selection-item-remove {
+    color: rgb(255 255 255 / 70%);
+}
+
 /* table antd TradingStrategies*/
 .table-data-trading-strategies .ant-table-thead .ant-table-cell {
     background-color: #0050AD !important;

@@ -41,7 +41,7 @@ const getColor = (item) => {
 
 const getColorTiemNangTangGia = (item, type) => {
   if (item < 0) return "text-red-500";
-  const threshold = type === 2025 ? 12 : 25;
+  const threshold = type === 2025 ? 25 : 25;
   return item >= threshold ? "text-green-500" : "";
 };
 

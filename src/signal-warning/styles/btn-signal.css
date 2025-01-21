@@ -1,0 +1,14 @@
+.btn_signal.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    background: transparent;
+}
+
+.dialog_delete_signal .btn_cancel.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    background: #0669FCB2;
+    color:#000;
+}
+
+
+.dialog_delete_signal .btn_acpect.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    background: #F44136B2;
+    color:#000;
+}
