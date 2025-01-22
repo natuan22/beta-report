@@ -18,10 +18,10 @@ const ContributePEPB = () => {
   const [industry, setIndustry] = useState();
 
   const [dataStocks, setDataStocks] = useState([]);
-  const [stock, setStock] = useState();
+  const [stock, setStock] = useState([]);
   const [period, setPeriod] = useState("1");
 
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [socketConnected, setSocketConnected] = useState(false);
 
   useEffect(() => {
@@ -44,6 +44,8 @@ const ContributePEPB = () => {
       );
 
       setDataStocks(data);
+      setStock([]);
+      setData([]);
     } catch (error) {
       console.error(error);
     }
@@ -68,7 +70,7 @@ const ContributePEPB = () => {
       fetchDataStockByIndustry();
     }
   }, [industry]);
-
+  
   useEffect(() => {
     if (stock?.length > 0) {
       fetchDataContributePEPB();
@@ -78,6 +80,7 @@ const ContributePEPB = () => {
   const onChange = (value) => {
     setIndustry(value);
   };
+  
   const onChangeStock = (value) => {
     setStock(value);
   };
@@ -124,7 +127,7 @@ const ContributePEPB = () => {
           <div className="code-select">
             <Select
               style={{ width: 222, height: 40 }}
-              defaultValue={industry}
+              value={industry}
               allowClear
               showSearch
               onChange={onChange}
@@ -140,7 +143,7 @@ const ContributePEPB = () => {
             <Select
               mode="multiple"
               style={{ width: 222 }}
-              defaultValue={stock}
+              value={stock}
               allowClear
               showSearch
               onChange={onChangeStock}
