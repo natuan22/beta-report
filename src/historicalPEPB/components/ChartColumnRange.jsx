@@ -78,14 +78,14 @@ const ChartColumnRange = ({ data, chartKey }) => {
           symbol: "diamond", // Chọn biểu tượng của marker (có thể là circle, square, triangle, etc.)
           radius: 6, // Kích thước của marker
           fillColor: chartKey === "P/E" ? "#ffff00" : "#00b050", // Màu sắc bên trong của marker
-          lineColor: "#ea7233", // Màu sắc đường viền của marker
+          lineColor: "null", // Màu sắc đường viền của marker
           lineWidth: 1, // Độ rộng của đường viền của marker
         },
         lineWidth: 0,
         dataLabels: {
           enabled: true,
           backgroundColor: chartKey === "P/E" ? "#ffff00" : "#00b050",
-          style: { color: "#002060" },
+          style: { color: "#002060", fontSize: "9.5px" },
           x: -30,
           y: 11,
         },
@@ -100,8 +100,8 @@ const ChartColumnRange = ({ data, chartKey }) => {
         dataLabels: {
           enabled: true,
           backgroundColor: "#76badb",
-          style: { color: "#000" },
-          x: 35,
+          style: { color: "#000", fontSize: "9.5px" },
+          x: 30,
           y: 11,
         },
       },
