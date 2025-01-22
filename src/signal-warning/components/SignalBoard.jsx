@@ -1,6 +1,6 @@
 import { Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { getApi } from "../../helper/getApi";
+import { stockGr } from "../../app/utils/stock-gr";
 import { getModifiedSignalName, getModifiedSignalNameRsiOrMA, getSignalNameByKey } from "../../helper/modifiedSignalName";
 import { specificKeys, specificKeysV2 } from "../utils/hashTb";
 
@@ -20,28 +20,20 @@ const SignalBoard = ({ data, yourSignalWarnings }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [dataRender, setDataRender] = useState([]);
 
-  const fetchStockGroup = async (group) => {
-    try {
-      const response = await getApi(`/api/v1/signal-warning/stock-group/${group}`);
-      return response.data || [];
-    } catch (error) {
-      console.error(`Error fetching stock group for ${group}:`, error);
-      return [];
-    }
+  const fetchStockGroup = (group) => {
+    const groupData = stockGr.find((item) => item.name === group);
+    return groupData ? groupData.data : [];
   };
 
-  const prepareValidCodes = async (scopes) => {
-    try {
-      const relevantScopes = scopes.filter((scope) => ["VNDIAMOND", "VNFINLEAD"].includes(scope));
-      if (relevantScopes.length > 0) {
-        const codesArray = await Promise.all(relevantScopes.map(fetchStockGroup));
-        return codesArray.flat();
-      }
-      return [];
-    } catch (error) {
-      console.error("Error preparing valid codes:", error);
-      return [];
+  const prepareValidCodes = (scopes) => {
+    const relevantScopes = scopes.filter((scope) =>
+      ["VNDIAMOND", "VNFINLEAD"].includes(scope)
+    );
+    if (relevantScopes.length > 0) {
+      const codesArray = relevantScopes.map(fetchStockGroup);
+      return codesArray.flat();
     }
+    return [];
   };
 
   const filterDataBySignalWarnings = async (data, yourSignalWarnings) => {
