@@ -23,7 +23,7 @@ import TableSignalWarning from "./TableSignalWarning";
 import TableStatistical from "./TableStatistical";
 import TableTechnique from "./TableTechnique";
 
-const HomeWatchList = ({ watchlists, catchWatchlists }) => {
+const HomeWatchList = ({ loadingSignal, yourSignalWarnings, dataSignal, watchlists, catchWatchlists }) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
@@ -700,8 +700,11 @@ const HomeWatchList = ({ watchlists, catchWatchlists }) => {
       label: "Tín hiệu cảnh báo",
       children: (
         <TableSignalWarning
+          yourSignalWarnings={yourSignalWarnings}
+          dataSignal={dataSignal}
           loading={loading}
           loadingTb={loadingTb}
+          loadingSignal={loadingSignal}
           data={data}
           handleDelCodeInWatchlist={handleDelCodeInWatchlist}
         />

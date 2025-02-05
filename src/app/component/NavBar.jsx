@@ -254,7 +254,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
   };
 
   useEffect(() => {
-    if (location.pathname === "/canh-bao-tin-hieu" || !socketConnected || yourSignalWarningsPopup?.length === 0) {
+    if (location.pathname === "/danh-muc-theo-doi" || location.pathname === "/canh-bao-tin-hieu" || !socketConnected || yourSignalWarningsPopup?.length === 0) {
       return;
     }
 
@@ -307,7 +307,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
       socket.off("signal-warning-response", initialHandler);
       socket.off("signal-warning-response", handleSignalWarning);
     };
-  }, [socketConnected, yourSignalWarningsPopup, data, location.pathname]);
+  }, [socketConnected, yourSignalWarningsPopup, location.pathname]);
 
   return (
     <div className="flex flex-col relative w-screen">
