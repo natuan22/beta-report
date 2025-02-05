@@ -322,7 +322,7 @@ const SignalWarning = () => {
       socket.off("signal-warning-response", initialHandler);
       socket.off("signal-warning-response", handleSignalWarning);
     };
-  }, [socketConnected, data, yourSignalWarningsPopup, yourSignalWarnings, dataForFilter]);
+  }, [socketConnected, yourSignalWarningsPopup, yourSignalWarnings]);
 
   return (
     <div className="relative">
