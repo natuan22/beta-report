@@ -177,8 +177,8 @@ const HistoricalPEPB = () => {
               </div>
             </div>
             <div className="grid xl:grid-cols-2 lg:grid-cols-none">
-              <ChartLine stock={stock} data={data} chartKey="P/E" />
-              <ChartLine stock={stock} data={data} chartKey="P/B" />
+              <ChartLine stock={stock} data={data} chartKey="P/E" period={period}/>
+              <ChartLine stock={stock} data={data} chartKey="P/B" period={period}/>
             </div>
           </div>
           <div>

@@ -269,7 +269,7 @@ const WatchList = () => {
   
   useEffect(() => {
     if (!socketConnectedSignal || !dataSignal?.length) return;
-
+    
     const initialHandler = (response) => {
       if (response?.message === "Client registered for signal-warning.") {
         socket.on("signal-warning-response", handleSignalWarning);
@@ -278,46 +278,38 @@ const WatchList = () => {
 
     // Xử lý dữ liệu khi có tín hiệu từ server
     const handleSignalWarning = (receivedData) => {
-      const updatedData = receivedData?.data?.[0];
-      if (!updatedData) return;
-
-      const { code } = updatedData;
-
-      // Cập nhật dataForFilter nếu có code phù hợp
-      setDataSignal((prevData) =>
-        prevData.map((item) =>
-          item.code === code ? { ...item, ...updatedData } : item
-        )
-      );
-
-      const result = filterDataBySignalWarnings(updatedData, yourSignalWarningsPopup);
+      const result = filterDataBySignalWarnings(receivedData?.data?.[0], yourSignalWarningsPopup);
       if (result.length === 0) return;
-
-      const updatedItem = result[0];
-      const findData = dataSignal.find((item) => item.code === updatedItem.code);
-      if (!findData) return;
-
-      const { key, value } = updatedItem.value;
-
-      // Xác định giá trị cũ và mới dựa trên key
-      const getValue = (dataItem) =>
-        specificKeysV2.includes(key)
-          ? specificKeys.includes(key)
-            ? dataItem?.[`${key}${value}`]
-            : dataItem?.[key]?.[value]
-          : dataItem?.[key];
-
-      const oldValue = getValue(findData);
-      const newValue = getValue(updatedItem);
-      
-      if (oldValue === 0 && newValue === 1) {
-        openNotification(updatedItem);
-      }
+  
+      setDataSignal((prevData) => {
+        const newData = prevData.map((item) => {
+          if (item.code !== result[0].code) return item;
+  
+          const { key, value } = result[0].value;
+          const getValue = (dataItem) =>
+            specificKeysV2.includes(key)
+              ? specificKeys.includes(key)
+                ? dataItem?.[`${key}${value}`]
+                : dataItem?.[key]?.[value]
+              : dataItem?.[key];
+  
+          const oldValue = getValue(item);
+          const newValue = getValue(result[0]);
+  
+          if (oldValue === 0 && newValue === 1) {
+            openNotification(result[0]);
+          }
+  
+          return { ...item, ...result[0] };
+        });
+  
+        return newData;
+      });
     };
-
+  
     socket.on("signal-warning-response", initialHandler);
     socket.emit("signal-warning", { message: "signal-emit" });
-
+  
     return () => {
       socket.off("signal-warning-response", initialHandler);
       socket.off("signal-warning-response", handleSignalWarning);
