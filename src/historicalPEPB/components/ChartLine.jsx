@@ -2,10 +2,11 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import "../styles/average-legend.css";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
+import "../styles/average-legend.css";
+import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 
-const ChartLine = ({ stock, data, chartKey }) => {
+const ChartLine = ({ stock, data, chartKey, period }) => {
   const [timeLine, setTimeLine] = useState();
   const [dataChart, setDataChart] = useState([]);
   const [dataAverage, setDataAverage] = useState([]);
@@ -293,7 +294,7 @@ const ChartLine = ({ stock, data, chartKey }) => {
         setDataAverage(pbAverageData);
       }
     }
-  }, [data]);
+  }, [data, stock, chartKey]);
 
   const options = {
     accessibility: {
@@ -404,12 +405,45 @@ const ChartLine = ({ stock, data, chartKey }) => {
   };
 
   return (
-    <div className="historical-pe-pb h-[500px]">
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        containerProps={{ style: { height: "100%", width: "100%" } }}
-      />
+    <div>
+      <div className="historical-pe-pb h-[500px]">
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+          containerProps={{ style: { height: "100%", width: "100%" } }}
+        />
+      </div>
+      <div className="mx-[40px]">
+          {chartKey} của {stock} ({formatNumberCurrency(data?.data?.length ? data.data[data.data.length - 1]?.[chartKey.replace(/\//g, "").toLowerCase()] || 0 : 0)} lần) đang:
+          <ul>
+            {(() => {
+              const key = chartKey.replace(/\//g, "").toLowerCase();
+              const latestValue = data?.data?.[data.data.length - 1]?.[key] || 0;
+              const stockAvg = dataAverage?.[0]?.data?.[dataAverage[0].data.length - 1] || 0;
+              const industryAvg = dataAverage?.[1]?.data?.[dataAverage[1].data.length - 1] || 0;
+              
+              const perChangeStock = stockAvg ? ((latestValue - stockAvg) / stockAvg) * 100 : 0;
+              const perChangeIndustry = industryAvg ? ((latestValue - industryAvg) / industryAvg) * 100 : 0;
+
+              const textChange = (value) => {
+                if (value > 0) {
+                  return <span><span className="text-green-500 font-semibold">Cao</span> hơn</span>;
+                } else if (value < 0) {
+                  return <span><span className="text-red-500 font-semibold">Thấp</span> hơn</span>;
+                } else {
+                  return <span className="text-yellow-500 font-semibold">Bằng</span>;
+                }
+              }
+
+              return (
+                <>
+                  <li>{textChange(perChangeStock)} {chartKey} trung bình {period}Y của {stock} ({formatNumberCurrency(stockAvg)} lần) khoảng <span className={`${getColorBaseOnValue(perChangeStock)} font-semibold`}>{stockAvg ? formatNumberCurrency(perChangeStock) : 0}%</span></li>
+                  <li>{textChange(perChangeIndustry)} {chartKey} trung bình {period}Y của ngành {data?.industry || "N/A"} ({formatNumberCurrency(industryAvg)} lần) khoảng <span className={`${getColorBaseOnValue(perChangeIndustry)} font-semibold`}>{industryAvg ? formatNumberCurrency(perChangeIndustry) : 0}%</span></li>
+                </>
+              );
+            })()}
+          </ul>
+      </div>
     </div>
   );
 };
