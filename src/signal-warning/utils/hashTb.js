@@ -69,8 +69,8 @@ export const hashTbScopeLiquidityMarketCap = [
 
 export const customLiquidity = [
   {value: "0", label: "Không giới hạn thanh khoản" },
-  {value: "avg_totalVol_5d", label: "KLTB 5 phiên tối thiểu" },
-  {value: "avg_totalVol_20d", label: "KLTB 20 phiên tối thiểu" },
+  {value: "avg_totalVal_5d", label: "GTTB 5 phiên tối thiểu" },
+  {value: "avg_totalVal_20d", label: "GTTB 20 phiên tối thiểu" },
 ];
 
 export const customMarketCap = [

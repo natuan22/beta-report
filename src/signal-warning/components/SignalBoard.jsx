@@ -16,7 +16,7 @@ const rowClassName = (record, index) => {
 
 const SignalBoard = ({ data, yourSignalWarnings }) => {
   const rowHeight = 39;
-  const maxHeight = 683;
+  const maxHeight = 659;
   const [filteredData, setFilteredData] = useState([]);
   const [dataRender, setDataRender] = useState([]);
 
@@ -128,8 +128,15 @@ const SignalBoard = ({ data, yourSignalWarnings }) => {
       align: "center",
       render: (_, record) => {
         return (
-          <div className="text-black text-center text-lg font-semibold">
-            {record.code}
+          <div className="text-center text-lg font-semibold">
+            <a
+              className="text-black cursor-pointer no-underline hover:underline"
+              href={`/phan-tich-ky-thuat-tu-dong/${record.code}`}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {record.code}
+            </a>
           </div>
         );
       },
