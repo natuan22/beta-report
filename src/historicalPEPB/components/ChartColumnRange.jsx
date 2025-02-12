@@ -46,8 +46,8 @@ const ChartColumnRange = ({ data, chartKey }) => {
         type: "columnrange",
         name: `Vùng biến động ${chartKey}`,
         data: data?.map((item) => [
-          item[`min_${chartKey.replace(/\//g, "")}`],
-          item[`max_${chartKey.replace(/\//g, "")}`],
+          +item[`min_${chartKey.replace(/\//g, "")}`].toFixed(1),
+          +item[`max_${chartKey.replace(/\//g, "")}`].toFixed(1),
         ]),
         color: chartKey === "P/E" ? {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },

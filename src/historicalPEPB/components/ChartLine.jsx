@@ -4,7 +4,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import "../styles/average-legend.css";
-import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 
 const ChartLine = ({ stock, data, chartKey, period }) => {
   const [timeLine, setTimeLine] = useState();
@@ -427,18 +426,28 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
 
               const textChange = (value) => {
                 if (value > 0) {
-                  return <span><span className="text-green-500 font-semibold">Cao</span> hơn</span>;
+                  return <span><span className="text-red-500 font-semibold">Cao</span> hơn</span>;
                 } else if (value < 0) {
-                  return <span><span className="text-red-500 font-semibold">Thấp</span> hơn</span>;
+                  return <span><span className="text-green-500 font-semibold">Thấp</span> hơn</span>;
                 } else {
                   return <span className="text-yellow-500 font-semibold">Bằng</span>;
                 }
               }
 
+              const getColor = (value) => {
+                if (value > 0) {
+                  return "text-red-500";
+                } else if (value < 0) {
+                  return "text-green-500";
+                } else {
+                  return "text-yellow-500";
+                }
+              }
+
               return (
                 <>
-                  <li>{textChange(perChangeStock)} {chartKey} trung bình {period}Y của {stock} ({formatNumberCurrency(stockAvg)} lần) khoảng <span className={`${getColorBaseOnValue(perChangeStock)} font-semibold`}>{stockAvg ? formatNumberCurrency(perChangeStock) : 0}%</span></li>
-                  <li>{textChange(perChangeIndustry)} {chartKey} trung bình {period}Y của ngành {data?.industry || "N/A"} ({formatNumberCurrency(industryAvg)} lần) khoảng <span className={`${getColorBaseOnValue(perChangeIndustry)} font-semibold`}>{industryAvg ? formatNumberCurrency(perChangeIndustry) : 0}%</span></li>
+                  <li>{textChange(perChangeStock)} {chartKey} trung bình {period}Y của {stock} ({formatNumberCurrency(stockAvg)} lần) khoảng <span className={`${getColor(perChangeStock)} font-semibold`}>{stockAvg ? formatNumberCurrency(Math.abs(perChangeStock)) : 0}%</span></li>
+                  <li>{textChange(perChangeIndustry)} {chartKey} trung bình {period}Y của ngành {data?.industry || "N/A"} ({formatNumberCurrency(industryAvg)} lần) khoảng <span className={`${getColor(perChangeIndustry)} font-semibold`}>{industryAvg ? formatNumberCurrency(Math.abs(perChangeIndustry)) : 0}%</span></li>
                 </>
               );
             })()}
