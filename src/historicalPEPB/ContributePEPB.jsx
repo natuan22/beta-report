@@ -40,7 +40,9 @@ const ContributePEPB = () => {
   const fetchDataStockByIndustry = async () => {
     try {
       const data = await getApi(
-        `api/v1/investment/stock-by-industry?industry=${industry}`
+        `api/v1/investment/stock-by-industry?industry=${encodeURIComponent(
+          industry
+        )}`
       );
 
       setDataStocks(data);
@@ -70,7 +72,7 @@ const ContributePEPB = () => {
       fetchDataStockByIndustry();
     }
   }, [industry]);
-  
+
   useEffect(() => {
     if (stock?.length > 0) {
       fetchDataContributePEPB();
@@ -80,7 +82,7 @@ const ContributePEPB = () => {
   const onChange = (value) => {
     setIndustry(value);
   };
-  
+
   const onChangeStock = (value) => {
     setStock(value);
   };
@@ -103,7 +105,15 @@ const ContributePEPB = () => {
       setData((prevData) =>
         prevData?.map((item) =>
           item.code === code
-            ? { ...item, latest_PB: newData.pb, latest_PE: newData.pe }
+            ? {
+                ...item,
+                latest_PB: newData.pb,
+                latest_PE: newData.pe,
+                min_PE: Math.min(item?.min_PE, newData.pe),
+                max_PE: Math.max(item?.max_PE, newData.pe),
+                min_PB: Math.min(item?.min_PB, newData.pb),
+                max_PB: Math.max(item?.max_PB, newData.pb)
+              }
             : item
         )
       );
