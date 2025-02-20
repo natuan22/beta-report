@@ -92,7 +92,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
                 // Nếu không có series nào là " (Trung bình)", hiển thị giá trị cuối luôn
                 if (!hasAverageSeries) {
                   return this.point.index === this.series.data.length - 1
-                    ? this.point.y.toFixed(1)
+                    ? this.point.y.toFixed(2)
                     : null;
                 }
 
@@ -115,7 +115,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
                 // Hiển thị nhãn chỉ khi tất cả các series có cùng tên cơ bản
                 if (isAllBaseNamesSame) {
                   return this.point.index === this.series.data.length - 1
-                    ? this.point.y.toFixed(1) // Hiển thị giá trị cuối cùng
+                    ? this.point.y.toFixed(2) // Hiển thị giá trị cuối cùng
                     : null;
                 }
 
@@ -180,7 +180,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
                 // Nếu không có series nào là " (Trung bình)", hiển thị giá trị cuối luôn
                 if (!hasAverageSeries) {
                   return this.point.index === this.series.data.length - 1
-                    ? this.point.y.toFixed(1)
+                    ? this.point.y.toFixed(2)
                     : null;
                 }
 
@@ -203,7 +203,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
                 // Hiển thị nhãn chỉ khi tất cả các series có cùng tên cơ bản
                 if (isAllBaseNamesSame) {
                   return this.point.index === this.series.data.length - 1
-                    ? this.point.y.toFixed(1) // Hiển thị giá trị cuối cùng
+                    ? this.point.y.toFixed(2) // Hiển thị giá trị cuối cùng
                     : null;
                 }
 
@@ -237,7 +237,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
       const peAverageData = peData.map((series) => ({
         name: `${series.name} (Trung bình)`,
         data: Array(uniqueDates.length).fill(
-          +calculateAverage(series.data, true).toFixed(1)
+          +calculateAverage(series.data, true).toFixed(2)
         ),
         color: series.color,
         dashStyle: "dot",
@@ -247,7 +247,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
           formatter: function () {
             // Display data labels only for the last point in the series
             return this.point.index === this.series.data.length - 1
-              ? this.point.y.toFixed(1)
+              ? this.point.y.toFixed(2)
               : null; // Return null to hide the label
           },
           style: {
@@ -263,7 +263,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
       const pbAverageData = pbData.map((series) => ({
         name: `${series.name} (Trung bình)`,
         data: Array(uniqueDates.length).fill(
-          +calculateAverage(series.data).toFixed(1)
+          +calculateAverage(series.data).toFixed(2)
         ),
         color: series.color,
         dashStyle: "dot",
@@ -273,7 +273,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
           formatter: function () {
             // Display data labels only for the last point in the series
             return this.point.index === this.series.data.length - 1
-              ? this.point.y.toFixed(1)
+              ? this.point.y.toFixed(2)
               : null; // Return null to hide the label
           },
           style: {
