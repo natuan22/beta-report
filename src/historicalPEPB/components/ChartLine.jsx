@@ -14,7 +14,7 @@ const ChartLine = ({ stock, data, chartKey, period }) => {
     if (data?.data?.length > 0) {
       const uniqueDates = [
         ...new Set(
-          data.data.map((item) => moment(item.from).format("DD/MM/YYYY"))
+          data.data.map((item) => moment(item.date).format("DD/MM/YYYY"))
         ),
       ];
       setTimeLine(uniqueDates);
