@@ -89,7 +89,7 @@ const HistoricalPEPB = () => {
   const sheetTitle = ["Ngày", "PB Vnindex", "PE Vnindex", "PB Ngành", "PE Ngành", "PB", "PE"];
 
   const prepareData = (item) => [
-    new Date(item.from),
+    new Date(item.date),
     item.indexPb,
     item.indexPe,
     item.industryPb,
