@@ -78,9 +78,6 @@ const Page9Week = ({data}) => {
                 <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
                   Thời gian nắm giữ{" "}
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[85px]">
-                  Ghi chú
-                </th>
               </tr>
             </thead>
             <tbody className="border border-[#0155B7] border-solid border-collapse">
@@ -137,7 +134,6 @@ const Page9Week = ({data}) => {
                         {percentIcon(item.ty_suat_sinh_loi_lo)}{" "}
                       </td>
                       <td className="py-1 px-1">{item.thoi_gian_nam_giu}</td>
-                      <td className="py-1 px-1">{item.ghi_chu_2}</td>
                     </tr>
                   );
                 })
