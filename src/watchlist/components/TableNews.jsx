@@ -8,6 +8,7 @@ import { getColorBaseOnValue } from "../../helper/getColorBaseOnValue";
 import Loading from "../../loading/Loading";
 import "./styles/closeButton.css";
 import "./styles/selectCodeNews.css";
+import { apiUrl } from "../../services/configService";
 
 const TableNews = ({ data, loading }) => {
   const [clickItem, setClickItem] = useState(null);
@@ -149,7 +150,7 @@ const TableNews = ({ data, loading }) => {
                 onClick={handleCloseIframe}
               />
               <iframe
-                src={clickItem.href}
+                src={apiUrl + '/api/v1/news/proxy?url=' + clickItem.href}
                 title={clickItem.title}
                 className="h-[623px] 2xl:w-[800px] xl:w-[650px] lg:w-[540px] md:w-[530px]"
               />

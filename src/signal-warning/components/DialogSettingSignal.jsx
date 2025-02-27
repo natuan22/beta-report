@@ -43,6 +43,9 @@ const DialogSettingSignal = ({ loading, type, dataForFilter, watchlists, fetchDa
         color: "black",
         textTransform: "none",
         fontSize: "15px",
+        '&:hover': {
+          backgroundImage:'linear-gradient(180deg, rgba(157, 196, 255, 0.70) 0%, rgba(6, 105, 252, 0.70) 100%)'
+        }
       };
     }
   };
