@@ -124,7 +124,7 @@ const AlertManagement = ({ dataForFilter, watchlists, yourSignalWarnings, fetchD
             <div className="text-black text-center text-base font-semibold mx-auto">
               {record.scopeOfApplication}, {record.liquidityText}, {record.marketCapText}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-0.5">
               <Button 
                 className="btn_signal bg-transparent border-none p-0 h-fit leading-none"
                 onClick={() => { 
@@ -132,9 +132,11 @@ const AlertManagement = ({ dataForFilter, watchlists, yourSignalWarnings, fetchD
                   toggleModalEdit(true);
                 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M16.4142 2.75736L15.2426 1.58579C14.4616 0.804738 13.1953 0.804738 12.4142 1.58579L11 3L14.999 6.999L16.4142 5.58579C17.1953 4.80474 17.1953 3.53841 16.4142 2.75736ZM13.585 8.414L9.585 4.414L1 13V17H5L13.585 8.414Z" fill="#0E48DD"/>
-                </svg>
+                <div className="hover:bg-[#0e48dd]/20 px-1.5 py-1 rounded-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M16.4142 2.75736L15.2426 1.58579C14.4616 0.804738 13.1953 0.804738 12.4142 1.58579L11 3L14.999 6.999L16.4142 5.58579C17.1953 4.80474 17.1953 3.53841 16.4142 2.75736ZM13.585 8.414L9.585 4.414L1 13V17H5L13.585 8.414Z" fill="#0E48DD"/>
+                  </svg>
+                </div>
               </Button>
               <Button 
                 className="btn_signal bg-transparent border-none p-0 h-fit leading-none" 
@@ -143,10 +145,12 @@ const AlertManagement = ({ dataForFilter, watchlists, yourSignalWarnings, fetchD
                   toggleModalDelete(true);
                 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M11 0H7V2H2V4H16V2H11V0ZM14 18L15 6H3L4 18H14Z" fill="#F00E0E"/>
-                </svg>
-              </Button>
+                <div className="hover:bg-[#d32f2f]/20 px-1.5 py-1 rounded-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M11 0H7V2H2V4H16V2H11V0ZM14 18L15 6H3L4 18H14Z" fill="#F00E0E"/>
+                  </svg>
+                </div>
+                </Button>
             </div>
           </div>
         );

@@ -303,7 +303,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
         <div className="overflow-x-auto h-full">
           <div
             id="nav"
-            className="w-full px-3 overflow-y-auto 2xl:h-[825px] xl:h-[750px] lg:h-[780px] md:h-[1070px] no-scrollbar"
+            className="w-full px-3 overflow-y-auto h-[calc(100%-99px)] no-scrollbar"
           >
             {role === process.env.REACT_APP_ADMIN_BLOGS && (
               <div>
@@ -541,6 +541,9 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   borderRadius: "0.375rem",
                   width: "244px",
                   fontWeight: 600,
+                  '&:hover': {
+                    backgroundColor: 'rgba(211, 47, 47, 0.09)'
+                  }
                 }}
               >
                 Đăng xuất
