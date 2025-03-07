@@ -60,22 +60,22 @@ const Page9Week = ({data}) => {
                 <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Thời gian nắm giữ dự kiến (tháng)
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[100px]">
+                {/* <th className="font-semibold px-1 py-1 text-[11px] w-[100px]">
                   Ghi chú
-                </th>
+                </th> */}
                 <th className="font-semibold px-1 py-1 text-[11px]">
                   Giá thị trường
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Tỷ suất lợi nhuận
                 </th>
                 <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Giá bán
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Tỷ suất sinh lời/lỗ
                 </th>
-                <th className="font-semibold px-1 py-1 text-[11px] w-[60px]">
+                <th className="font-semibold px-1 py-1 text-[11px] w-[80px]">
                   Thời gian nắm giữ{" "}
                 </th>
               </tr>
@@ -110,7 +110,7 @@ const Page9Week = ({data}) => {
                       <td className="py-1 px-1">
                         {item.thoi_gian_nam_giu_du_kien}
                       </td>
-                      <td className="py-1 px-1">{item.ghi_chu}</td>
+                      {/* <td className="py-1 px-1">{item.ghi_chu}</td> */}
                       <td className="py-1 px-1">
                         {formatNumberWeek(Math.ceil(item.gia_thi_truong))}
                       </td>
