@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
@@ -12,6 +12,8 @@ import AfternoonPage3 from "./page3/AfternoonPage3";
 import AfternoonPage4 from "./page4/AfternoonPage4";
 import AfternoonPage5 from "./page5/AfternoonPage5";
 import AfternoonPage6 from "./page6/AfternoonPage6";
+import AfternoonPage7 from "./page7/AfternoonPage7";
+import AfternoonPage8 from "./page8/AfternoonPage8";
 
 const ReportAfternoon = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ const ReportAfternoon = () => {
     page4: useRef(null),
     page5: useRef(null),
     page6: useRef(null),
+    page7: useRef(null),
+    page8: useRef(null),
   };
 
   const generateImage = async (pageRefs, height) => {
@@ -65,8 +69,11 @@ const ReportAfternoon = () => {
     const img2 = await generateImage(pageRefs.page2, 1121);
     const img3 = await generateImage(pageRefs.page3, 1121);
     const img4 = await generateImage(pageRefs.page4, 1121);
-    const img6 = await generateImage(pageRefs.page6, 1121);
-    const img5 = await generateImage(pageRefs.page5, 1121);
+    const img5 = await generateImage(pageRefs.page5, 1089);
+    const img6 = await generateImage(pageRefs.page6, 1089);
+    const img7 = await generateImage(pageRefs.page7, 1098);
+    const img8 = await generateImage(pageRefs.page8, 1121);
+
     const link1 = document.createElement("a");
     link1.href = img1;
     link1.download = "BetaAfternoonNews-Trang1.png";
@@ -86,14 +93,26 @@ const ReportAfternoon = () => {
     link4.href = img4;
     link4.download = "BetaAfternoonNews-Trang4.png";
     link4.click();
+
     const link5 = document.createElement("a");
     link5.href = img5;
-    link5.download = "BetaAfternoonNews-Trang6.png";
+    link5.download = "BetaAfternoonNews-Trang5.png";
     link5.click();
+
     const link6 = document.createElement("a");
     link6.href = img6;
-    link6.download = "BetaAfternoonNews-Trang5.png";
+    link6.download = "BetaAfternoonNews-Trang6.png";
     link6.click();
+
+    const link7 = document.createElement("a");
+    link7.href = img7;
+    link7.download = "BetaAfternoonNews-Trang7.png";
+    link7.click();
+
+    const link8 = document.createElement("a");
+    link8.href = img8;
+    link8.download = "BetaAfternoonNews-Trang8.png";
+    link8.click();
   };
 
   const generatePDF = async () => {
@@ -102,8 +121,10 @@ const ReportAfternoon = () => {
     const img2 = await generateImage(pageRefs.page2, 1480);
     const img3 = await generateImage(pageRefs.page3, 1480);
     const img4 = await generateImage(pageRefs.page4, 1480);
-    const img6 = await generateImage(pageRefs.page6, 1480);
     const img5 = await generateImage(pageRefs.page5, 1480);
+    const img6 = await generateImage(pageRefs.page6, 1480);
+    const img7 = await generateImage(pageRefs.page7, 1480);
+    const img8 = await generateImage(pageRefs.page8, 1480);
 
     pdf.addImage(img1, "PNG", 0, 0, 210, 392); //385
     pdf.addPage();
@@ -113,9 +134,13 @@ const ReportAfternoon = () => {
     pdf.addPage();
     pdf.addImage(img4, "PNG", 0, 0, 210, 392);
     pdf.addPage();
+    pdf.addImage(img5, "PNG", 0, 0, 210, 404);
+    pdf.addPage();
     pdf.addImage(img6, "PNG", 0, 0, 210, 404);
     pdf.addPage();
-    pdf.addImage(img5, "PNG", 0, 0, 210, 392);
+    pdf.addImage(img7, "PNG", 0, 0, 210, 400);
+    pdf.addPage();
+    pdf.addImage(img8, "PNG", 0, 0, 210, 392);
 
     pdf.save(`${formattedDate}.dailyreport.pdf`);
   };
@@ -173,10 +198,16 @@ const ReportAfternoon = () => {
         <div ref={pageRefs.page4}>
           <AfternoonPage4 role={role} />
         </div>
-        <div ref={pageRefs.page6}>
+        <div ref={pageRefs.page5}>
           <AfternoonPage6 />
         </div>
-        <div ref={pageRefs.page5}>
+        <div ref={pageRefs.page6}>
+          <AfternoonPage7 />
+        </div>
+        <div ref={pageRefs.page7}>
+          <AfternoonPage8 />
+        </div>
+        <div ref={pageRefs.page8}>
           <AfternoonPage5 />
         </div>
       </div>
