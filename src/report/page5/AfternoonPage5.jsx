@@ -91,7 +91,7 @@ const AfternoonPage5 = () => {
       </div>
 
       <div className="mt-[3px]">
-        <FooterAfternoon pageNum={6} />
+        <FooterAfternoon pageNum={8} />
       </div>
     </div>
   );

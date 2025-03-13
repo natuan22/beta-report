@@ -118,19 +118,11 @@ const AfternoonPage4 = ({ role }) => {
                 <table className="bg-transparent border-collapse h-[297px] mt-2   ">
                   <thead className="bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse">
                     <tr className="text-white ">
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        Ngoại tệ
-                      </th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        Thị giá
-                      </th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">%D</th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        %1M
-                      </th>
-                      <th className="font-semibold px-1 py-1  text-[px]">
-                        %YtD
-                      </th>
+                      <th className="font-semibold px-1 py-1 ">Ngoại tệ</th>
+                      <th className="font-semibold px-1 py-1 ">Thị giá</th>
+                      <th className="font-semibold px-1 py-1 ">%D</th>
+                      <th className="font-semibold px-1 py-1 ">%1M</th>
+                      <th className="font-semibold px-1 py-1 ">%YtD</th>
                     </tr>
                   </thead>
                   <tbody className="border border-[#0155B7] border-solid border-collapse ">
@@ -276,16 +268,10 @@ const AfternoonPage4 = ({ role }) => {
                 <table className="bg-transparent border-collapse  mt-2 h-[297px] ">
                   <thead className="bg-[#0155B7]  text-[12px]  border border-[#0155B7] border-solid border-collapse">
                     <tr className="text-white ">
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        Hàng hóa
-                      </th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        Thị giá
-                      </th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">%D</th>
-                      <th className="font-semibold px-1 py-1 text-[px] ">
-                        %1M
-                      </th>
+                      <th className="font-semibold px-1 py-1 ">Hàng hóa</th>
+                      <th className="font-semibold px-1 py-1 ">Thị giá</th>
+                      <th className="font-semibold px-1 py-1 ">%D</th>
+                      <th className="font-semibold px-1 py-1 ">%1M</th>
                       <th className="font-semibold px-1 py-1  text-[px]">
                         %YtD
                       </th>
