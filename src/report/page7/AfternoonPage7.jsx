@@ -89,7 +89,7 @@ const AfternoonPage7 = () => {
         </div>
 
         <div className="">
-          <TableAndTitle name="Top bán chủ động sàn HOSE" headerTB="Tỷ lệ B/M" noteTB="2" data={topBuySellActive?.BM}/>
+          <TableAndTitle name="Top bán chủ động sàn HOSE" headerTB="Tỷ lệ B/M" noteTB="2" data={topBuySellActive?.BM} type="BM"/>
         </div>
       </div>
 

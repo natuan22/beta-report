@@ -72,11 +72,11 @@ const AfternoonPage8 = () => {
             </div>
 
             <div className="">
-                <TableAndTitle name="Top bán chủ động sàn HNX" headerTB="Tỷ lệ B/M" noteTB="2" data={topBuySellActive?.BM}/>
+                <TableAndTitle name="Top bán chủ động sàn HNX" headerTB="Tỷ lệ B/M" noteTB="2" data={topBuySellActive?.BM} type="BM"/>
             </div>
         </div>
         <i className="ml-[46px] mr-[36px] text-[13px] font-semibold mt-7 flex flex-col gap-y-2">
-            <span>(1) Được tính bằng cách lấy KLGD của ngày hiện tại chia cho KLGD trung bình 20 phiên gần nhất.</span>
+            <span>(1) Được tính bằng cách lấy KLGD của ngày hiện tại chia cho KLGD trung bình 20 phiên gần nhất (chỉ lấy những mã có KLGD trong phiên trên 200.000 cổ phiếu)</span>
             <span>(2) Thể hiện top cổ phiếu có tỷ lệ <span className="text-green-500 font-bold">M</span>ua (<span className="text-red-500 font-bold">B</span>án) / <span className="text-red-500 font-bold">B</span>án (<span className="text-green-500 font-bold">M</span>ua) chủ động mạnh trên thị trường (chỉ lấy những mã có KLGD trong phiên trên 200.000 cổ phiếu)</span>
             <span>(3) Số được thể hiện là dữ liệu của ngày <span className="font-bold">{currentDateTransaction}</span></span>
         </i>

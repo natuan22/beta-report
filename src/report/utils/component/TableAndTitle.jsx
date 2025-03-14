@@ -3,7 +3,7 @@ import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 import { getColorBaseOnValue } from "../../../helper/getColorBaseOnValue";
 import formatNumber from "../../../helper/formatNumber";
 
-const TableAndTitle = ({ name, headerTB, noteTitle, noteTB, data }) => {
+const TableAndTitle = ({ name, headerTB, noteTitle, noteTB, data, type }) => {
   
   return (
     <div>
@@ -49,7 +49,7 @@ const TableAndTitle = ({ name, headerTB, noteTitle, noteTB, data }) => {
                 <td className={`${getColorBaseOnValue(item.day)} text-[12px] text-center px-2.5 py-1.5`}>
                   {formatNumber(item.day)}
                 </td>
-                <td className={`${getColorBaseOnValue(item.point)} text-[12px] text-center px-2.5 py-1.5`}>
+                <td className={`${type === 'BM' ? 'text-red-500' : getColorBaseOnValue(item.point)} text-[12px] text-center px-2.5 py-1.5`}>
                   {formatNumber(item.point)}
                 </td>
                 <td className="text-center text-[12px] px-2.5 py-1.5">
