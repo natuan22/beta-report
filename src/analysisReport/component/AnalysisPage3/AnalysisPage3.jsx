@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../../../app/asset/img/bannerPTKT.png";
+import banner from "../../../app/asset/img/banner.png";
 import FooterAnalysis from "../utils/FooterAnalysis";
 import HeaderAnalysis from "../utils/HeaderAnalysis";
 
