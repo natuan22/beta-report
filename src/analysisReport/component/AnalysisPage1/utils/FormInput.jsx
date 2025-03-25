@@ -3,6 +3,7 @@ import { Form, Input, InputNumber } from "antd";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { postApi } from "../../../../helper/postApi";
+import { resourceURL } from "../../../../services/configService";
 
 const { TextArea } = Input;
 
@@ -39,10 +40,7 @@ const FormInput = ({
     formData.append("img", img);
 
     // Gửi yêu cầu POST
-    await postApi(
-      `/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`,
-      formData
-    );
+    await postApi(`/api/v1/report/luu-thong-tin-bao-cao-ky-thuat`, formData);
   };
 
   const [imgSrc, setImgSrc] = useState(null);
@@ -290,18 +288,35 @@ const FormInput = ({
           </Form.Item>
           <Form.Item label="Content">
             <Editor
-              tinymceScriptSrc={`/assets/tinymce/js/tinymce/tinymce.min.js`}
-              licenseKey='gpl'
+              tinymceScriptSrc={`${resourceURL}/resources/tinymce/js/tinymce/tinymce.min.js`}
+              licenseKey="gpl"
               init={{
                 height: 302,
                 resize: false,
                 menubar: false,
                 branding: false,
                 plugins: [
-                  "advlist", "autolink", "lists", "link", "image", "charmap", "preview", "anchor", "searchreplace",
-                  "visualblocks", "fullscreen", "insertdatetime", "media", "table", "help", "wordcount", "emoticons", 'image'
+                  "advlist",
+                  "autolink",
+                  "lists",
+                  "link",
+                  "image",
+                  "charmap",
+                  "preview",
+                  "anchor",
+                  "searchreplace",
+                  "visualblocks",
+                  "fullscreen",
+                  "insertdatetime",
+                  "media",
+                  "table",
+                  "help",
+                  "wordcount",
+                  "emoticons",
+                  "image",
                 ],
-                toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link table | align lineheight | bullist numlist outdent indent | emoticons charmap removeformat | fullscreen",
+                toolbar:
+                  "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link table | align lineheight | bullist numlist outdent indent | emoticons charmap removeformat | fullscreen",
                 image_title: false,
                 automatic_uploads: false,
                 file_picker_types: "image",

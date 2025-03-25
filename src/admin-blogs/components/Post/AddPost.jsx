@@ -345,7 +345,7 @@ const AddPost = () => {
                   >
                     <Editor
                       value={content}
-                      tinymceScriptSrc={`/assets/tinymce/js/tinymce/tinymce.min.js`}
+                      tinymceScriptSrc={`${resourceURL}/resources/tinymce/js/tinymce/tinymce.min.js`}
                       licenseKey="gpl"
                       init={{
                         height: 400,
