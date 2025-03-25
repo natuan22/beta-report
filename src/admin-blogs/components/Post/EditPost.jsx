@@ -201,7 +201,10 @@ const EditPost = () => {
           const payload = { ...values, published: checked ? 1 : 0 };
           const editPost = await saveDataAndFile(payload);
           if (editPost.id) {
-            warning(`Chỉnh sửa bài viết ${editPost.title} thành công`, "success");
+            warning(
+              `Chỉnh sửa bài viết ${editPost.title} thành công`,
+              "success"
+            );
             setSubmitted(true);
             openModal();
           } else {
@@ -461,7 +464,7 @@ const EditPost = () => {
                   >
                     <Editor
                       value={content}
-                      tinymceScriptSrc={`/assets/tinymce/js/tinymce/tinymce.min.js`}
+                      tinymceScriptSrc={`${resourceURL}/resources/tinymce/js/tinymce/tinymce.min.js`}
                       licenseKey="gpl"
                       init={{
                         height: 400,
