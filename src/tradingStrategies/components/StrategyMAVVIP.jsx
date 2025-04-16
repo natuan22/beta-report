@@ -57,7 +57,7 @@ const StrategyMAVVIP = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(`/api/v1/investment/test?stock=${stock}&from=${dayjs(fromDate).format("YYYY-MM-DD")}&to=${dayjs(toDate).format("YYYY-MM-DD")}`);
+        const data = await getApi(`/api/v1/investment/trading-strategies?indicator=ma&stock=${stock}&from=${dayjs(fromDate).format("YYYY-MM-DD")}&to=${dayjs(toDate).format("YYYY-MM-DD")}`);
         setData(data);
       } catch (error) {
         console.error(error);
@@ -398,7 +398,7 @@ const StrategyMAVVIP = () => {
           </div>
         </div>
         <div className="mt-2">
-          <ListResults data={data?.data} />
+          <ListResults data={data?.data} strategy='ma'/>
         </div>
       </div>
     </div>

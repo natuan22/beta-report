@@ -8,8 +8,11 @@ import { userLogoutAction } from "../Auth/thunk";
 import NavBar from "../app/component/NavBar";
 import StrategyMA from "./components/StrategyMA";
 import StrategyMAVVIP from "./components/StrategyMAVVIP";
+import StrategySAR from "./components/StrategySAR";
 import { selectTradingStrategy } from "./utils/hashTb";
 import "./utils/styles/cssDatePicker.css";
+import StrategyMACDSignal from "./components/StrategyMACDSignal";
+import StrategyMAShortCutLong from "./components/StrategyMAShortCutLong";
 
 const theme = createTheme({
   palette: {
@@ -64,7 +67,7 @@ const TradingStrategies = () => {
     setRole(localStorage.getItem(process.env.REACT_APP_USER_ROLE));
     setUser(JSON.parse(localStorage.getItem("user")));
   };
-
+  
   return (
     <ThemeProvider theme={theme}>
       <div className="relative">
@@ -98,26 +101,31 @@ const TradingStrategies = () => {
                     </Checkbox>
                     {selectedMainCategory === key &&
                       selectTradingStrategy[key].filter((strategy) => {
-                        if (role === process.env.REACT_APP_ADMIN || role === process.env.REACT_APP_PREMIUM_USER || role === process.env.REACT_APP_ADMIN_BLOGS) {
-                          // Show both "MA VVIP" and "MA đại pháp"
-                          return true;
-                        } else {
-                          // Show only "MA đại pháp"
-                          return strategy.name !== "MA VVIP";
-                        }
-                      }).map((strategy, strategyIndex) => (
-                        <div key={strategyIndex} className="pl-4">
-                          <Checkbox
-                            checked={selectedStrategy === strategy.key}
-                            value={strategy.key}
-                            onChange={() =>
-                              handleStrategyChange(strategy.key)
-                            }
-                          >
-                            {strategy.name === "MA VVIP" ? "MA VVIP" : strategy.name}
-                          </Checkbox>
-                        </div>
-                      ))}
+                          if (
+                            role === process.env.REACT_APP_ADMIN ||
+                            role === process.env.REACT_APP_PREMIUM_USER ||
+                            role === process.env.REACT_APP_ADMIN_BLOGS
+                          ) {
+                            // Show both "MA VVIP" and "MA đại pháp"
+                            return true;
+                          } else {
+                            // Show only "MA đại pháp"
+                            return strategy.name !== "MA VVIP";
+                          }
+                        })
+                        .map((strategy, strategyIndex) => (
+                          <div key={strategyIndex} className="pl-4">
+                            <Checkbox
+                              checked={selectedStrategy === strategy.key}
+                              value={strategy.key}
+                              onChange={() =>
+                                handleStrategyChange(strategy.key)
+                              }
+                            >
+                              {strategy.name === "MA VVIP" ? "MA VVIP" : strategy.name}
+                            </Checkbox>
+                          </div>
+                        ))}
                   </div>
                 ))}
               </div>
@@ -162,84 +170,44 @@ const TradingStrategies = () => {
                     <StrategyMA />
                   </motion.div>
                 )}
-                {selectedStrategy === "2" && (
+                {selectedStrategy === "StrategySAR" && (
                   <motion.div
-                    key="2"
+                    key="StrategySAR"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    2
+                    <StrategySAR />
                   </motion.div>
                 )}
-                {selectedStrategy === "3" && (
+                {selectedStrategy === "StrategyMAShortCutLong" && (
                   <motion.div
-                    key="3"
+                    key="StrategyMAShortCutLong"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    3
+                    <StrategyMAShortCutLong />
                   </motion.div>
                 )}
-                {selectedStrategy === "4" && (
+                {selectedStrategy === "StrategyMACDSignal" && (
                   <motion.div
-                    key="4"
+                    key="StrategyMACDSignal"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    4
+                    <StrategyMACDSignal select={selectedStrategy} />
                   </motion.div>
                 )}
-                {selectedStrategy === "5" && (
+                {selectedStrategy === "StrategyMACDHistogram" && (
                   <motion.div
-                    key="5"
+                    key="StrategyMACDHistogram"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                   >
-                    5
-                  </motion.div>
-                )}
-                {selectedStrategy === "6" && (
-                  <motion.div
-                    key="6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  >
-                    6
-                  </motion.div>
-                )}
-                {selectedStrategy === "7" && (
-                  <motion.div
-                    key="7"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  >
-                    7
-                  </motion.div>
-                )}
-                {selectedStrategy === "8" && (
-                  <motion.div
-                    key="8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  >
-                    8
-                  </motion.div>
-                )}
-                {selectedStrategy === "9" && (
-                  <motion.div
-                    key="9"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1 }}
-                  >
-                    9
+                    <StrategyMACDSignal select={selectedStrategy} />
                   </motion.div>
                 )}
               </AnimatePresence>

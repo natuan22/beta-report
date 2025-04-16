@@ -1,0 +1,16 @@
+.stock-valuation.ant-input-number .ant-input-number-input {
+    color: #099E24;
+    font-weight: 700;
+    text-align: center;
+    padding: 1.5px 11px;
+}
+
+.stock-valuation-2.ant-input-number .ant-input-number-input {
+    font-weight: 700;
+    text-align: center;
+    padding: 4.5px 11px;
+}
+
+.stock-valuation-2.ant-input-number .ant-input-number-handler-wrap {
+    border-radius: 0;
+}

@@ -9,9 +9,8 @@ import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import { getApi } from "../../helper/getApi";
 import "../utils/styles/cssDatePicker.css";
 import ListResults from "./StrategyMA/ListResults";
-import ScatterChart from "./StrategyMA/ScatterChart";
 
-const StrategyMA = () => {
+const StrategySAR = () => {
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("");
@@ -57,7 +56,7 @@ const StrategyMA = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(`/api/v1/investment/trading-strategies?indicator=ma&stock=${stock}&from=${dayjs(fromDate).format("YYYY-MM-DD")}&to=${dayjs(toDate).format("YYYY-MM-DD")}`, 1);
+        const data = await getApi(`/api/v1/investment/trading-strategies?indicator=sar&stock=${stock}&from=${dayjs(fromDate).format("YYYY-MM-DD")}&to=${dayjs(toDate).format("YYYY-MM-DD")}`);
         setData(data);
       } catch (error) {
         console.error(error);
@@ -280,7 +279,7 @@ const StrategyMA = () => {
             {data ? (
               <div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">MA</p>
+                  <p className="m-1 w-[75%]">Chỉ báo</p>
                   <p className="m-1">:</p>
                   <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
                     <Tooltip
@@ -363,7 +362,7 @@ const StrategyMA = () => {
             ) : (
               <div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">MA</p>
+                  <p className="m-1 w-[75%]">Chỉ báo</p>
                   <p className="m-1">:</p>
                   <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
@@ -397,16 +396,16 @@ const StrategyMA = () => {
               </div>
             )}
           </div>
-          <div className="xl:w-[70%] lg:w-full m-1 border-dashed border-[2px] border-[#0050AD]">
+          {/* <div className="xl:w-[70%] lg:w-full m-1 border-dashed border-[2px] border-[#0050AD]">
             <ScatterChart data={data?.data} />
-          </div>
+          </div> */}
         </div>
         <div className="mt-2">
-          <ListResults data={data?.data} strategy='ma'/>
+          <ListResults data={data?.data} />
         </div>
       </div>
     </div>
   );
 };
 
-export default StrategyMA;
+export default StrategySAR;

@@ -2,7 +2,7 @@ import { Modal, Table, Tooltip } from "antd";
 import React, { useState } from "react";
 import formatNumberCurrency from "../../../helper/formatNumberCurrency";
 
-const ListResults = ({ data }) => {
+const ListResults = ({ data, strategy }) => {
   const [isModalDetailOpen, setIsModalDetailOpen] = useState(false);
   const [details, setDetails] = useState([]);
 
@@ -31,12 +31,12 @@ const ListResults = ({ data }) => {
 
   const columns = [
     {
-      title: "Đường MA",
+      title: strategy === 'ma' ? "Đường MA" : 'Chỉ báo',
       dataindex: "name",
       align: "center",
       width: 150,
       render: (_, record) => (
-        <div className="text-black text-right">
+        <div className="text-black text-right text-[13px]">
           <Tooltip
             placement="right"
             title={<span className="">Xem chi tiết</span>}

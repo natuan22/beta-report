@@ -9,9 +9,8 @@ import formatNumberCurrency from "../../helper/formatNumberCurrency";
 import { getApi } from "../../helper/getApi";
 import "../utils/styles/cssDatePicker.css";
 import ListResults from "./StrategyMA/ListResults";
-import ScatterChart from "./StrategyMA/ScatterChart";
 
-const StrategyMA = () => {
+const StrategyMAShortCutLong = () => {
   const [data, setData] = useState();
   const [dataStocks, setDataStocks] = useState([]);
   const [stock, setStock] = useState("");
@@ -46,10 +45,7 @@ const StrategyMA = () => {
   };
 
   const warning = (type, text) => {
-    messageApi.open({
-      type,
-      content: text,
-    });
+    messageApi.open({ type, content: text });
   };
 
   const fetchData = async () => {
@@ -57,7 +53,13 @@ const StrategyMA = () => {
       warning("warning", "Hãy nhập mã cổ phiếu");
     } else {
       try {
-        const data = await getApi(`/api/v1/investment/trading-strategies?indicator=ma&stock=${stock}&from=${dayjs(fromDate).format("YYYY-MM-DD")}&to=${dayjs(toDate).format("YYYY-MM-DD")}`, 1);
+        const data = await getApi(
+          `/api/v1/investment/trading-strategies?indicator=maShortCutLong&stock=${stock}&from=${dayjs(
+            fromDate
+          ).format("YYYY-MM-DD")}&to=${dayjs(toDate).format(
+            "YYYY-MM-DD"
+          )}&maShort=${maShort}&maLong=${maLong}`
+        );
         setData(data);
       } catch (error) {
         console.error(error);
@@ -142,6 +144,22 @@ const StrategyMA = () => {
       sorter: (a, b) => a.profit - b.profit,
     },
   ];
+
+  const [maShort, setMaShort] = useState(5);
+  const [maLong, setMaLong] = useState(10);
+
+  const handleMaShortChange = (value) => {
+    if (value !== maLong) {
+      setMaShort(value);
+    }
+  };
+
+  const handleMaLongChange = (value) => {
+    if (value !== maShort) {
+      setMaLong(value);
+    }
+  };
+
   return (
     <div>
       {contextHolder}
@@ -191,6 +209,37 @@ const StrategyMA = () => {
                 value: code,
                 label: code,
               }))}
+            />
+          </div>
+          <div className="code-select mr-5">
+            <div className="mb-[3px] font-medium">MA ngắn</div>
+            <Select
+              style={{
+                width: 222,
+                height: 40,
+              }}
+              defaultValue={maShort}
+              onChange={handleMaShortChange}
+              options={[
+                { value: 5, label: "MA5", disabled: maLong === 5 },
+                { value: 10, label: "MA10", disabled: maLong === 10 },
+              ]}
+            />
+          </div>
+          <div className="code-select mr-10">
+            <div className="mb-[3px] font-medium">MA dài</div>
+            <Select
+              style={{
+                width: 222,
+                height: 40,
+              }}
+              defaultValue={maLong}
+              onChange={handleMaLongChange}
+              options={[
+                { value: 10, label: "MA10", disabled: maShort === 10 },
+                { value: 15, label: "MA15", disabled: maShort === 15 },
+                { value: 20, label: "MA20", disabled: maShort === 20 },
+              ]}
             />
           </div>
           <div className="md:flex sm:block">
@@ -280,9 +329,9 @@ const StrategyMA = () => {
             {data ? (
               <div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">MA</p>
+                  <p className="m-1 w-[65%]">Chỉ báo</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     <Tooltip
                       placement="right"
                       title={<span className="">Xem chi tiết</span>}
@@ -298,39 +347,39 @@ const StrategyMA = () => {
                   </p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Tổng hiệu suất sinh lời (%)</p>
+                  <p className="m-1 w-[65%]">Tổng hiệu suất sinh lời (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     {formatNumberCurrency(data.max?.total * 100)}
                   </p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Tổng số lượng lệnh</p>
+                  <p className="m-1 w-[65%]">Tổng số lượng lệnh</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     {data.max?.count}
                   </p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Hiệu suất sinh lời max (%)</p>
+                  <p className="m-1 w-[65%]">Hiệu suất sinh lời max (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     {formatNumberCurrency(data.max?.max * 100)}
                   </p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Hiệu suất sinh lời min (%)</p>
+                  <p className="m-1 w-[65%]">Hiệu suất sinh lời min (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     {formatNumberCurrency(data.max?.min * 100)}
                   </p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">
+                  <p className="m-1 w-[65%]">
                     Hiệu suất sinh lời trung bình (%)
                   </p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]">
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]">
                     {formatNumberCurrency(
                       (data.max?.total / data.max?.count) * 100
                     )}
@@ -363,50 +412,50 @@ const StrategyMA = () => {
             ) : (
               <div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">MA</p>
+                  <p className="m-1 w-[65%]">Chỉ báo</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Tổng hiệu suất sinh lời (%)</p>
+                  <p className="m-1 w-[65%]">Tổng hiệu suất sinh lời (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Tổng số lượng lệnh</p>
+                  <p className="m-1 w-[65%]">Tổng số lượng lệnh</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Hiệu suất sinh lời max (%)</p>
+                  <p className="m-1 w-[65%]">Hiệu suất sinh lời max (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">Hiệu suất sinh lời min (%)</p>
+                  <p className="m-1 w-[65%]">Hiệu suất sinh lời min (%)</p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
                 <div className="flex justify-between items-center text-[16px] py-1 px-3">
-                  <p className="m-1 w-[75%]">
+                  <p className="m-1 w-[65%]">
                     Hiệu suất sinh lời trung bình (%)
                   </p>
                   <p className="m-1">:</p>
-                  <p className="m-1 w-[25%] text-end font-semibold text-[#0050AD]"></p>
+                  <p className="m-1 w-[35%] text-end font-semibold text-[#0050AD]"></p>
                 </div>
               </div>
             )}
           </div>
-          <div className="xl:w-[70%] lg:w-full m-1 border-dashed border-[2px] border-[#0050AD]">
+          {/* <div className="xl:w-[70%] lg:w-full m-1 border-dashed border-[2px] border-[#0050AD]">
             <ScatterChart data={data?.data} />
-          </div>
+          </div> */}
         </div>
         <div className="mt-2">
-          <ListResults data={data?.data} strategy='ma'/>
+          <ListResults data={data?.data} />
         </div>
       </div>
     </div>
   );
 };
 
-export default StrategyMA;
+export default StrategyMAShortCutLong;
