@@ -81,7 +81,6 @@ const StockValuation = () => {
   const [reasonablePriceIndus, setReasonablePriceIndus] = useState();
   const [estimatedPriceStock, setEstimatedPriceStock] = useState();
   const [estimatedPriceIndus, setEstimatedPriceIndus] = useState();
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Temporary state for debounced inputs
   const [tempGrowthValue, setTempGrowthValue] = useState(null);
@@ -203,10 +202,10 @@ const StockValuation = () => {
       const data = await getApi(url);
       if (data) {
         setClosePrice(data.closePrice);
-        // Only set averageGrowthLNST if it's the initial load or if the user has changed it
-        if (isInitialLoad) {
+        // Chỉ cập nhật averageGrowthLNST từ API khi không có sự thay đổi thủ công
+        if (!isGrowthChanged) {
           setAverageGrowthLNST(data.averageGrowthLNST.toFixed(2));
-          setIsInitialLoad(false);
+          setTempGrowthValue(data.averageGrowthLNST.toFixed(2));
         }
         setReasonablePriceStock(data.reasonablePriceStock);
         setReasonablePriceIndus(data.reasonablePriceIndus);
@@ -218,15 +217,16 @@ const StockValuation = () => {
       console.error(error);
       warning("error", "Không thể tải dữ liệu định giá cổ phiếu");
     }
-  }, [stock, period, welfareFund, averageGrowthLNST, isGrowthChanged, warning, isInitialLoad]);
+  }, [stock, period, welfareFund, averageGrowthLNST, isGrowthChanged, warning]);
 
   useEffect(() => {
     fetchDataStockValuation();
   }, [fetchDataStockValuation]);
 
-  // Reset isInitialLoad when stock changes
+  // Reset states when stock changes
   useEffect(() => {
-    setIsInitialLoad(true);
+    setIsGrowthChanged(false); // Reset isGrowthChanged when stock changes
+    setTempGrowthValue(null); // Reset temporary value
     fetchStockData();
   }, [stock]);
 
@@ -251,7 +251,7 @@ const StockValuation = () => {
         label: "",
         price: estimatedPrice,
         percentChange: ((estimatedPrice / 1000 - closePrice) / closePrice) * 100,
-        color: "#D510FD",
+        color: "#0AE444",
       }] : []),
     ];
 
@@ -261,7 +261,7 @@ const StockValuation = () => {
         label: "Trung bình",
         price: averageTarget * 1000,
         percentChange: ((averageTarget - closePrice) / closePrice) * 100,
-        color: "#FD9A10",
+        color: "#034D11",
       });
     }
 
