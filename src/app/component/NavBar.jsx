@@ -8,7 +8,7 @@ import { CiFilter } from "react-icons/ci";
 import { FiChevronsLeft, FiChevronsRight, FiSunset } from "react-icons/fi";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { MdOutlineAutoGraph, MdQueryStats } from "react-icons/md";
+import { MdOutlineAutoGraph, MdOutlinePriceChange, MdQueryStats } from "react-icons/md";
 import {
   PiPresentationChartLight,
   PiProjectorScreenChartLight,
@@ -519,6 +519,7 @@ const NavBar = ({ isLogin, handleUserLogout, onSubmitSuccess, user, role }) => {
                   )}
                 </div>
               )}
+              {buttonNavLink("/dinh-gia-co-phieu", <MdOutlinePriceChange />, "Định giá cổ phiếu")}
             </div>
           </div>
         </div>

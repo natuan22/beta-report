@@ -15,6 +15,7 @@ module.exports = {
     },
     container: { screens: { xs: "425px", md: "768px", lg: "768px", xl: "1024px", "2xl": "1440px" }},
     extend: {
+      boxShadow: { custom: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' },
       colors: {
         gray:   { 50: "#F9FAFB", 100: "#F3F4F6", 200: "#E5E7EB", 300: "#BFC4CD", 400: "#9CA3AF", 500: "#6B7280", 600: "#4B5563", 700: "#374151", 800: "#1F2937", 900: "#111827", 950: "#030712" },
         violet: { 50: "#F1EEFF", 100: "#E6E1FF", 200: "#D2CBFF", 300: "#B7ACFF", 400: "#9C8CFF", 500: "#8470FF", 600: "#755FF8", 700: "#5D47DE", 800: "#4634B1", 900: "#2F227C", 950: "#1C1357" },

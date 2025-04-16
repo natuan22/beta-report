@@ -14,6 +14,7 @@ import Filter from "../filter/Filter";
 import HistoricalPEPB from "../historicalPEPB/HistoricalPEPB";
 import ReportAfternoon from "../report/ReportAfternoon";
 import SignalWarning from "../signal-warning/SignalWarning";
+import StockValuation from "../stock-valuation/StockValuation";
 import TradingStrategies from "../tradingStrategies/TradingStrategies";
 import TradingTool from "../tradingTool/TradingTool";
 import WatchList from "../watchlist/WatchList";
@@ -37,6 +38,7 @@ export const routes = [
   { path: "/chien-luoc-giao-dich", title: 'Chiến lược giao dịch', component: TradingStrategies, role: process.env.REACT_APP_BASE_USER },
   { path: "/beta-smart", title: 'BETA SMART', component: BetaSmart, role: process.env.REACT_APP_PREMIUM_USER },
   { path: "/trading-tool", title: 'Trading Tool', component: TradingTool, role: process.env.REACT_APP_PREMIUM_USER },
+  { path: "/dinh-gia-co-phieu", title: 'Định giá cổ phiếu', component: StockValuation, role: process.env.REACT_APP_BASE_USER },
   { path: "/historical-pe-pb", title: 'Lịch sử P/E P/B', component: HistoricalPEPB, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
   { path: "/mua-ban-chu-dong", title: 'Mua bán chủ động', component: BuySellActive, role: process.env.REACT_APP_BASE_USER, requiresLogin: true },
 ];

@@ -4,7 +4,7 @@ import Highcharts from "highcharts/highstock";
 import React, { useState } from "react";
 import { MdOutlineZoomOutMap } from "react-icons/md";
 
-const Candlestick = ({ data }) => {
+const Candlestick = ({ data, heightChart, position }) => {
   const maxVolume = Math.max(...data.map((item) => item.volume));
   const maxNet = Math.max(...data.map((item) => item.net));
   const [isModalZoomOpen, setIsModalZoomOpen] = useState(false);
@@ -256,11 +256,11 @@ const Candlestick = ({ data }) => {
 
   return (
     <div>
-      <div className="h-[365px] -translate-y-[8px]">
-        <div className="relative left-[66px] z-10 top-[27px] w-[8px] h-[8px]">
+      <div className={`h-[${heightChart}px] -translate-y-[8px]`}>
+        <div className={`relative z-10 top-[27px] w-[8px] h-[8px]`} style={{ left: `${position.left}px` }}>
           <div className="absolute" id="triangle-topright"></div>
           <div id="triangle-bottomleft"></div>
-          <div className="ml-[22.5rem] absolute -top-[4.8px] opacity-[45%] hover:opacity-[80%] hover:bg-black hover:bg-opacity-10 rounded-sm h-[18px]">
+          <div className={`absolute -top-[4.8px] opacity-[45%] hover:opacity-[80%] hover:bg-black hover:bg-opacity-10 rounded-sm h-[18px]`} style={{ marginLeft: `${position.marginLeft}rem`}}>
             <MdOutlineZoomOutMap
               className="cursor-pointer w-[16px] h-[16px]"
               onClick={showModalZoom}

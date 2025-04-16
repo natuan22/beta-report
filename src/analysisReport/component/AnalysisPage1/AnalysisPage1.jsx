@@ -482,7 +482,7 @@ const AnalysisPage1 = ({ stock, type, role }) => {
               ) : (
                 <div>
                   {dataAnalysis ? (
-                    <Candlestick data={dataAnalysis.chart} />
+                    <Candlestick data={dataAnalysis.chart} heightChart="365" position={{left: '66', marginLeft: '22.5'}}/>
                   ) : (
                     <div>Loading...</div>
                   )}
