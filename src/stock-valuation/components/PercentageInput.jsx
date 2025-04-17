@@ -8,20 +8,39 @@ const PercentageInput = ({ className, value, onChange, error }) => {
       value={value}
       status={error ? "error" : ""}
       formatter={(value) => {
-        // Convert to string and split by decimal point
-        const parts = `${value}`.split(".");
-        // Add thousand separators (dots) to the integer part
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        // Join back with comma for decimal point and add percentage
-        return parts.join(",") + "%";
+        if (value == null || value === "") return "";
+      
+        const strValue = String(value);
+        const [intPart, decimalPart] = strValue.split(".");
+        const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      
+        return decimalPart !== undefined ? `${formattedInt},${decimalPart}%` : `${formattedInt}%`;
       }}
-      parser={(value) => value.replace(/\./g, "").replace(/,/g, ".").replace(/%/g, "")}
+      parser={(value) => {
+        if (!value) return "";
+      
+        // Xóa dấu %, khoảng trắng, giữ dấu âm nếu có
+        let cleaned = value.replace(/\s/g, "").replace(/%/g, "");
+        const isNegative = cleaned.startsWith("-");
+
+        cleaned = cleaned.replace(/-/g, ""); // Xóa dấu trừ để xử lý số
+        // Chuyển về dạng số chấm thập phân chuẩn
+        if (cleaned.includes(",") && cleaned.includes(".")) {
+          cleaned = cleaned.replace(/\./g, "").replace(",", ".");
+        } else if (cleaned.includes(",") && !cleaned.includes(".")) {
+          cleaned = cleaned.replace(",", ".");
+        }
+      
+        return isNegative ? `-${cleaned}` : cleaned;
+      }}
       onChange={onChange}
       onKeyDown={(e) => {
-        if (e.ctrlKey && (e.key === "a" || e.key === "x" || e.key === "c" || e.key === "v")) {
+        if (e.ctrlKey && ["a", "x", "c", "v"].includes(e.key.toLowerCase())) {
           return;
         }
-        if (!((e.key >= "0" && e.key <= "9") || e.key === "Backspace" || e.key === "Tab" || e.key === ",")) {
+
+        const allowedKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", "Home", "End", ",", ".", "-"];
+        if (!((e.key >= "0" && e.key <= "9") || allowedKeys.includes(e.key))) {
           e.preventDefault();
         }
       }}
