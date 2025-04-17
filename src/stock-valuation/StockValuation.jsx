@@ -111,7 +111,7 @@ const StockValuation = () => {
     growthTimeoutRef.current = setTimeout(() => {
       setAverageGrowthLNST(value);
       setIsGrowthChanged(true);
-    }, 1500); // 500ms delay
+    }, 2000); // 2000ms delay
   };
 
   const handleWelfareFundChange = (value) => {
@@ -126,7 +126,7 @@ const StockValuation = () => {
     // Set a new timeout to update the actual value after the user stops typing
     welfareFundTimeoutRef.current = setTimeout(() => {
       setWelfareFund(value);
-    }, 1500); // 500ms delay
+    }, 2000); // 2000ms delay
   };
 
   const [stockPEReasonable, setStockPEReasonable] = useState(25);
@@ -231,7 +231,7 @@ const StockValuation = () => {
   }, [stock]);
 
   const formattedData = useMemo(() => {
-    if (!dataPriceRecommendations || !closePrice) return [];
+    if (!dataPriceRecommendations || !closePrice || !isTotalValidEstimated) return [];
 
     const mappedData = dataPriceRecommendations.map((item) => ({
       label: item.company,
@@ -240,23 +240,27 @@ const StockValuation = () => {
       color: item.percentChange > 0 ? "#099E24" : item.percentChange < 0 ? "#F51111" : "#FD9A10",
     }));
 
-    const averageTarget =
-      dataPriceRecommendations.length > 0
-        ? dataPriceRecommendations.reduce((acc, item) => acc + item.targetPrice, 0) / dataPriceRecommendations.length
-        : 0;
+    const prices = dataPriceRecommendations.map((item) => item.targetPrice);
+    if (isTotalValidEstimated) {
+      prices.push(estimatedPrice / 1000);
+    }
 
+    // 3. Tính trung bình
+    const averageTarget = prices.length > 0 ? prices.reduce((acc, val) => acc + val, 0) / prices.length : 0;
+
+    const perChangeBeta = ((estimatedPrice / 1000 - closePrice) / closePrice) * 100;
     const result = [
       ...mappedData,
       ...(isTotalValidEstimated ? [{
         label: "",
         price: estimatedPrice,
-        percentChange: ((estimatedPrice / 1000 - closePrice) / closePrice) * 100,
-        color: "#0AE444",
+        percentChange: perChangeBeta,
+        color: perChangeBeta > 0 ? "#0AE444" : perChangeBeta < 0 ? "#CD1F08" : "#FD9A10",
       }] : []),
     ];
 
     // Chỉ thêm trung bình nếu có dữ liệu
-    if (dataPriceRecommendations.length > 0) {
+    if (prices.length > 0) {
       result.push({
         label: "Trung bình",
         price: averageTarget * 1000,
